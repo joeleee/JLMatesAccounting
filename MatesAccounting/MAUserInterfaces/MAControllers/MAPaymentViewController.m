@@ -31,6 +31,11 @@
 {
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"结算"];
+
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:rightBarItem animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

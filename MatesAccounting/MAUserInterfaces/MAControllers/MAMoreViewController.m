@@ -31,6 +31,8 @@
 {
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"更多"];
+    [self.tabBarController.navigationItem setRightBarButtonItem:nil animated:YES];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:nil animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

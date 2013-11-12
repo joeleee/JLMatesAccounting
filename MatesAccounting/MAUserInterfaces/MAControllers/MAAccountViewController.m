@@ -31,6 +31,11 @@
 {
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"账目"];
+
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:rightBarItem animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
