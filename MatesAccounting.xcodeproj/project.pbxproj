@@ -22,6 +22,13 @@
 		9BCAC04618322997000417FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02A18322997000417FD /* CoreData.framework */; };
 		9BCAC04E18322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC04C18322997000417FD /* InfoPlist.strings */; };
 		9BCAC05018322997000417FD /* MatesAccountingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC04F18322997000417FD /* MatesAccountingTests.m */; };
+		9BCAC06818326EE4000417FD /* MARootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06718326EE4000417FD /* MARootNavigationController.m */; };
+		9BCAC06B18326F0C000417FD /* MARootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06A18326F0C000417FD /* MARootTabBarController.m */; };
+		9BCAC06E18326F48000417FD /* MAAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06D18326F48000417FD /* MAAccountViewController.m */; };
+		9BCAC07118327033000417FD /* MAPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC07018327033000417FD /* MAPaymentViewController.m */; };
+		9BCAC0741832704A000417FD /* MAMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC0731832704A000417FD /* MAMemberViewController.m */; };
+		9BCAC0771832705A000417FD /* MAMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC0761832705A000417FD /* MAMoreViewController.m */; };
+		9BCAC07918327097000417FD /* MAInit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC07818327097000417FD /* MAInit.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +60,19 @@
 		9BCAC04B18322997000417FD /* MatesAccountingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatesAccountingTests-Info.plist"; sourceTree = "<group>"; };
 		9BCAC04D18322997000417FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BCAC04F18322997000417FD /* MatesAccountingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatesAccountingTests.m; sourceTree = "<group>"; };
+		9BCAC06618326EE4000417FD /* MARootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MARootNavigationController.h; path = MAUserInterfaces/MAControllers/MARootNavigationController.h; sourceTree = "<group>"; };
+		9BCAC06718326EE4000417FD /* MARootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootNavigationController.m; path = MAUserInterfaces/MAControllers/MARootNavigationController.m; sourceTree = "<group>"; };
+		9BCAC06918326F0C000417FD /* MARootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MARootTabBarController.h; path = MAUserInterfaces/MAControllers/MARootTabBarController.h; sourceTree = "<group>"; };
+		9BCAC06A18326F0C000417FD /* MARootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootTabBarController.m; path = MAUserInterfaces/MAControllers/MARootTabBarController.m; sourceTree = "<group>"; };
+		9BCAC06C18326F48000417FD /* MAAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountViewController.h; path = MAUserInterfaces/MAControllers/MAAccountViewController.h; sourceTree = "<group>"; };
+		9BCAC06D18326F48000417FD /* MAAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountViewController.m; path = MAUserInterfaces/MAControllers/MAAccountViewController.m; sourceTree = "<group>"; };
+		9BCAC06F18327033000417FD /* MAPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPaymentViewController.h; path = MAUserInterfaces/MAControllers/MAPaymentViewController.h; sourceTree = "<group>"; };
+		9BCAC07018327033000417FD /* MAPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPaymentViewController.m; path = MAUserInterfaces/MAControllers/MAPaymentViewController.m; sourceTree = "<group>"; };
+		9BCAC0721832704A000417FD /* MAMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberViewController.h; path = MAUserInterfaces/MAControllers/MAMemberViewController.h; sourceTree = "<group>"; };
+		9BCAC0731832704A000417FD /* MAMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberViewController.m; path = MAUserInterfaces/MAControllers/MAMemberViewController.m; sourceTree = "<group>"; };
+		9BCAC0751832705A000417FD /* MAMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMoreViewController.h; path = MAUserInterfaces/MAControllers/MAMoreViewController.h; sourceTree = "<group>"; };
+		9BCAC0761832705A000417FD /* MAMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMoreViewController.m; path = MAUserInterfaces/MAControllers/MAMoreViewController.m; sourceTree = "<group>"; };
+		9BCAC07818327097000417FD /* MAInit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MAInit.storyboard; path = MAUserInterfaces/MAInit.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +137,11 @@
 			children = (
 				9BCAC03518322997000417FD /* MAAppDelegate.h */,
 				9BCAC03618322997000417FD /* MAAppDelegate.m */,
+				9BCAC06118326E52000417FD /* MAUserInterfaces */,
+				9BCAC05E1832636C000417FD /* MAMember */,
+				9BCAC05D18326355000417FD /* MAGroup */,
+				9BCAC05A183262E0000417FD /* MAAccount */,
+				9BCAC059183262BC000417FD /* MADataPersistent */,
 				9BCAC03B18322997000417FD /* Images.xcassets */,
 				9BCAC03818322997000417FD /* MatesAccounting.xcdatamodeld */,
 				9BCAC02D18322997000417FD /* Supporting Files */,
@@ -151,6 +176,62 @@
 				9BCAC04C18322997000417FD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9BCAC059183262BC000417FD /* MADataPersistent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MADataPersistent;
+			sourceTree = "<group>";
+		};
+		9BCAC05A183262E0000417FD /* MAAccount */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MAAccount;
+			sourceTree = "<group>";
+		};
+		9BCAC05D18326355000417FD /* MAGroup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MAGroup;
+			sourceTree = "<group>";
+		};
+		9BCAC05E1832636C000417FD /* MAMember */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MAMember;
+			sourceTree = "<group>";
+		};
+		9BCAC06118326E52000417FD /* MAUserInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAC07818327097000417FD /* MAInit.storyboard */,
+				9BCAC06518326EB2000417FD /* MAControllers */,
+			);
+			name = MAUserInterfaces;
+			sourceTree = "<group>";
+		};
+		9BCAC06518326EB2000417FD /* MAControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9BCAC06618326EE4000417FD /* MARootNavigationController.h */,
+				9BCAC06718326EE4000417FD /* MARootNavigationController.m */,
+				9BCAC06918326F0C000417FD /* MARootTabBarController.h */,
+				9BCAC06A18326F0C000417FD /* MARootTabBarController.m */,
+				9BCAC06C18326F48000417FD /* MAAccountViewController.h */,
+				9BCAC06D18326F48000417FD /* MAAccountViewController.m */,
+				9BCAC06F18327033000417FD /* MAPaymentViewController.h */,
+				9BCAC07018327033000417FD /* MAPaymentViewController.m */,
+				9BCAC0721832704A000417FD /* MAMemberViewController.h */,
+				9BCAC0731832704A000417FD /* MAMemberViewController.m */,
+				9BCAC0751832705A000417FD /* MAMoreViewController.h */,
+				9BCAC0761832705A000417FD /* MAMoreViewController.m */,
+			);
+			name = MAControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BCAC07918327097000417FD /* MAInit.storyboard in Resources */,
 				9BCAC03118322997000417FD /* InfoPlist.strings in Resources */,
 				9BCAC03C18322997000417FD /* Images.xcassets in Resources */,
 			);
@@ -249,9 +331,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BCAC0741832704A000417FD /* MAMemberViewController.m in Sources */,
+				9BCAC06B18326F0C000417FD /* MARootTabBarController.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
+				9BCAC06818326EE4000417FD /* MARootNavigationController.m in Sources */,
 				9BCAC03A18322997000417FD /* MatesAccounting.xcdatamodeld in Sources */,
+				9BCAC07118327033000417FD /* MAPaymentViewController.m in Sources */,
+				9BCAC06E18326F48000417FD /* MAAccountViewController.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
+				9BCAC0771832705A000417FD /* MAMoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
