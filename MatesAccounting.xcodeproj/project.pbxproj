@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */; };
+		9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6D183527CE0025A2FB /* MARootNavigationController.m */; };
+		9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6F183527CE0025A2FB /* MARootTabBarController.m */; };
+		9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C72183527CE0025A2FB /* MATabAccountViewController.m */; };
+		9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C75183527CE0025A2FB /* MATabMemberViewController.m */; };
+		9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C78183527CE0025A2FB /* MATabMoreViewController.m */; };
+		9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */; };
+		9B605F111835246700890C4F /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B605F101835246700890C4F /* MGroup.m */; };
+		9B605F171835246800890C4F /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B605F161835246800890C4F /* MMember.m */; };
+		9B605F1A1835246800890C4F /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B605F191835246800890C4F /* MAccount.m */; };
+		9B605F1D1835250200890C4F /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B605F1C1835250200890C4F /* RMemberToAccount.m */; };
+		9B605F201835252100890C4F /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B605F1F1835252100890C4F /* RMemberToGroup.m */; };
 		9BCAC02518322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
 		9BCAC02718322997000417FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02618322997000417FD /* CoreGraphics.framework */; };
 		9BCAC02918322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
@@ -14,7 +26,6 @@
 		9BCAC03118322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC02F18322997000417FD /* InfoPlist.strings */; };
 		9BCAC03318322997000417FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03218322997000417FD /* main.m */; };
 		9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03618322997000417FD /* MAAppDelegate.m */; };
-		9BCAC03A18322997000417FD /* MatesAccounting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03818322997000417FD /* MatesAccounting.xcdatamodeld */; };
 		9BCAC03C18322997000417FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC03B18322997000417FD /* Images.xcassets */; };
 		9BCAC04318322997000417FD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC04218322997000417FD /* XCTest.framework */; };
 		9BCAC04418322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
@@ -22,12 +33,6 @@
 		9BCAC04618322997000417FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02A18322997000417FD /* CoreData.framework */; };
 		9BCAC04E18322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC04C18322997000417FD /* InfoPlist.strings */; };
 		9BCAC05018322997000417FD /* MatesAccountingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC04F18322997000417FD /* MatesAccountingTests.m */; };
-		9BCAC06818326EE4000417FD /* MARootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06718326EE4000417FD /* MARootNavigationController.m */; };
-		9BCAC06B18326F0C000417FD /* MARootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06A18326F0C000417FD /* MARootTabBarController.m */; };
-		9BCAC06E18326F48000417FD /* MAAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC06D18326F48000417FD /* MAAccountViewController.m */; };
-		9BCAC07118327033000417FD /* MAPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC07018327033000417FD /* MAPaymentViewController.m */; };
-		9BCAC0741832704A000417FD /* MAMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC0731832704A000417FD /* MAMemberViewController.m */; };
-		9BCAC0771832705A000417FD /* MAMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC0761832705A000417FD /* MAMoreViewController.m */; };
 		9BCAC07918327097000417FD /* MAInit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC07818327097000417FD /* MAInit.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +47,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatesAccounting.xcdatamodel; sourceTree = "<group>"; };
+		9B391C6C183527CE0025A2FB /* MARootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARootNavigationController.h; sourceTree = "<group>"; };
+		9B391C6D183527CE0025A2FB /* MARootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARootNavigationController.m; sourceTree = "<group>"; };
+		9B391C6E183527CE0025A2FB /* MARootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARootTabBarController.h; sourceTree = "<group>"; };
+		9B391C6F183527CE0025A2FB /* MARootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARootTabBarController.m; sourceTree = "<group>"; };
+		9B391C71183527CE0025A2FB /* MATabAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabAccountViewController.h; sourceTree = "<group>"; };
+		9B391C72183527CE0025A2FB /* MATabAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabAccountViewController.m; sourceTree = "<group>"; };
+		9B391C74183527CE0025A2FB /* MATabMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabMemberViewController.h; sourceTree = "<group>"; };
+		9B391C75183527CE0025A2FB /* MATabMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabMemberViewController.m; sourceTree = "<group>"; };
+		9B391C77183527CE0025A2FB /* MATabMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabMoreViewController.h; sourceTree = "<group>"; };
+		9B391C78183527CE0025A2FB /* MATabMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabMoreViewController.m; sourceTree = "<group>"; };
+		9B391C7A183527CE0025A2FB /* MATabPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabPaymentViewController.h; sourceTree = "<group>"; };
+		9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabPaymentViewController.m; sourceTree = "<group>"; };
+		9B605F0F1835246700890C4F /* MGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGroup.h; path = MAModels/MGroup.h; sourceTree = "<group>"; };
+		9B605F101835246700890C4F /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/MGroup.m; sourceTree = "<group>"; };
+		9B605F151835246700890C4F /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/MMember.h; sourceTree = "<group>"; };
+		9B605F161835246800890C4F /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/MMember.m; sourceTree = "<group>"; };
+		9B605F181835246800890C4F /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/MAccount.h; sourceTree = "<group>"; };
+		9B605F191835246800890C4F /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/MAccount.m; sourceTree = "<group>"; };
+		9B605F1B1835250200890C4F /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/RMemberToAccount.h; sourceTree = "<group>"; };
+		9B605F1C1835250200890C4F /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/RMemberToAccount.m; sourceTree = "<group>"; };
+		9B605F1E1835252100890C4F /* RMemberToGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToGroup.h; path = MAModels/RMemberToGroup.h; sourceTree = "<group>"; };
+		9B605F1F1835252100890C4F /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/RMemberToGroup.m; sourceTree = "<group>"; };
 		9BCAC02118322997000417FD /* MatesAccounting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatesAccounting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAC02418322997000417FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BCAC02618322997000417FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,25 +81,12 @@
 		9BCAC03418322997000417FD /* MatesAccounting-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MatesAccounting-Prefix.pch"; sourceTree = "<group>"; };
 		9BCAC03518322997000417FD /* MAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAppDelegate.h; sourceTree = "<group>"; };
 		9BCAC03618322997000417FD /* MAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAppDelegate.m; sourceTree = "<group>"; };
-		9BCAC03918322997000417FD /* MatesAccounting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatesAccounting.xcdatamodel; sourceTree = "<group>"; };
 		9BCAC03B18322997000417FD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9BCAC04118322997000417FD /* MatesAccountingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatesAccountingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAC04218322997000417FD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9BCAC04B18322997000417FD /* MatesAccountingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatesAccountingTests-Info.plist"; sourceTree = "<group>"; };
 		9BCAC04D18322997000417FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BCAC04F18322997000417FD /* MatesAccountingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatesAccountingTests.m; sourceTree = "<group>"; };
-		9BCAC06618326EE4000417FD /* MARootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MARootNavigationController.h; path = MAUserInterfaces/MAControllers/MARootNavigationController.h; sourceTree = "<group>"; };
-		9BCAC06718326EE4000417FD /* MARootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootNavigationController.m; path = MAUserInterfaces/MAControllers/MARootNavigationController.m; sourceTree = "<group>"; };
-		9BCAC06918326F0C000417FD /* MARootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MARootTabBarController.h; path = MAUserInterfaces/MAControllers/MARootTabBarController.h; sourceTree = "<group>"; };
-		9BCAC06A18326F0C000417FD /* MARootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootTabBarController.m; path = MAUserInterfaces/MAControllers/MARootTabBarController.m; sourceTree = "<group>"; };
-		9BCAC06C18326F48000417FD /* MAAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountViewController.h; path = MAUserInterfaces/MAControllers/MAAccountViewController.h; sourceTree = "<group>"; };
-		9BCAC06D18326F48000417FD /* MAAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountViewController.m; path = MAUserInterfaces/MAControllers/MAAccountViewController.m; sourceTree = "<group>"; };
-		9BCAC06F18327033000417FD /* MAPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPaymentViewController.h; path = MAUserInterfaces/MAControllers/MAPaymentViewController.h; sourceTree = "<group>"; };
-		9BCAC07018327033000417FD /* MAPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPaymentViewController.m; path = MAUserInterfaces/MAControllers/MAPaymentViewController.m; sourceTree = "<group>"; };
-		9BCAC0721832704A000417FD /* MAMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberViewController.h; path = MAUserInterfaces/MAControllers/MAMemberViewController.h; sourceTree = "<group>"; };
-		9BCAC0731832704A000417FD /* MAMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberViewController.m; path = MAUserInterfaces/MAControllers/MAMemberViewController.m; sourceTree = "<group>"; };
-		9BCAC0751832705A000417FD /* MAMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMoreViewController.h; path = MAUserInterfaces/MAControllers/MAMoreViewController.h; sourceTree = "<group>"; };
-		9BCAC0761832705A000417FD /* MAMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMoreViewController.m; path = MAUserInterfaces/MAControllers/MAMoreViewController.m; sourceTree = "<group>"; };
 		9BCAC07818327097000417FD /* MAInit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MAInit.storyboard; path = MAUserInterfaces/MAInit.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +116,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B391C6B183527CE0025A2FB /* MARootController */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C6C183527CE0025A2FB /* MARootNavigationController.h */,
+				9B391C6D183527CE0025A2FB /* MARootNavigationController.m */,
+				9B391C6E183527CE0025A2FB /* MARootTabBarController.h */,
+				9B391C6F183527CE0025A2FB /* MARootTabBarController.m */,
+			);
+			name = MARootController;
+			path = MAUserInterfaces/MARootController;
+			sourceTree = "<group>";
+		};
+		9B391C70183527CE0025A2FB /* MATabAccount */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C71183527CE0025A2FB /* MATabAccountViewController.h */,
+				9B391C72183527CE0025A2FB /* MATabAccountViewController.m */,
+			);
+			name = MATabAccount;
+			path = MAUserInterfaces/MATabAccount;
+			sourceTree = "<group>";
+		};
+		9B391C73183527CE0025A2FB /* MATabMember */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C74183527CE0025A2FB /* MATabMemberViewController.h */,
+				9B391C75183527CE0025A2FB /* MATabMemberViewController.m */,
+			);
+			name = MATabMember;
+			path = MAUserInterfaces/MATabMember;
+			sourceTree = "<group>";
+		};
+		9B391C76183527CE0025A2FB /* MATabMore */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C77183527CE0025A2FB /* MATabMoreViewController.h */,
+				9B391C78183527CE0025A2FB /* MATabMoreViewController.m */,
+			);
+			name = MATabMore;
+			path = MAUserInterfaces/MATabMore;
+			sourceTree = "<group>";
+		};
+		9B391C79183527CE0025A2FB /* MATabPayment */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C7A183527CE0025A2FB /* MATabPaymentViewController.h */,
+				9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */,
+			);
+			name = MATabPayment;
+			path = MAUserInterfaces/MATabPayment;
+			sourceTree = "<group>";
+		};
+		9B605F0B183523F300890C4F /* MAModels */ = {
+			isa = PBXGroup;
+			children = (
+				9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */,
+				9B605F181835246800890C4F /* MAccount.h */,
+				9B605F191835246800890C4F /* MAccount.m */,
+				9B605F151835246700890C4F /* MMember.h */,
+				9B605F161835246800890C4F /* MMember.m */,
+				9B605F0F1835246700890C4F /* MGroup.h */,
+				9B605F101835246700890C4F /* MGroup.m */,
+				9B605F1B1835250200890C4F /* RMemberToAccount.h */,
+				9B605F1C1835250200890C4F /* RMemberToAccount.m */,
+				9B605F1E1835252100890C4F /* RMemberToGroup.h */,
+				9B605F1F1835252100890C4F /* RMemberToGroup.m */,
+			);
+			name = MAModels;
+			sourceTree = "<group>";
+		};
 		9BCAC01818322997000417FD = {
 			isa = PBXGroup;
 			children = (
@@ -137,13 +222,10 @@
 			children = (
 				9BCAC03518322997000417FD /* MAAppDelegate.h */,
 				9BCAC03618322997000417FD /* MAAppDelegate.m */,
+				9B605F0B183523F300890C4F /* MAModels */,
 				9BCAC06118326E52000417FD /* MAUserInterfaces */,
-				9BCAC05E1832636C000417FD /* MAMember */,
-				9BCAC05D18326355000417FD /* MAGroup */,
-				9BCAC05A183262E0000417FD /* MAAccount */,
 				9BCAC059183262BC000417FD /* MADataPersistent */,
 				9BCAC03B18322997000417FD /* Images.xcassets */,
-				9BCAC03818322997000417FD /* MatesAccounting.xcdatamodeld */,
 				9BCAC02D18322997000417FD /* Supporting Files */,
 			);
 			path = MatesAccounting;
@@ -185,53 +267,17 @@
 			name = MADataPersistent;
 			sourceTree = "<group>";
 		};
-		9BCAC05A183262E0000417FD /* MAAccount */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MAAccount;
-			sourceTree = "<group>";
-		};
-		9BCAC05D18326355000417FD /* MAGroup */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MAGroup;
-			sourceTree = "<group>";
-		};
-		9BCAC05E1832636C000417FD /* MAMember */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MAMember;
-			sourceTree = "<group>";
-		};
 		9BCAC06118326E52000417FD /* MAUserInterfaces */ = {
 			isa = PBXGroup;
 			children = (
 				9BCAC07818327097000417FD /* MAInit.storyboard */,
-				9BCAC06518326EB2000417FD /* MAControllers */,
+				9B391C6B183527CE0025A2FB /* MARootController */,
+				9B391C70183527CE0025A2FB /* MATabAccount */,
+				9B391C73183527CE0025A2FB /* MATabMember */,
+				9B391C76183527CE0025A2FB /* MATabMore */,
+				9B391C79183527CE0025A2FB /* MATabPayment */,
 			);
 			name = MAUserInterfaces;
-			sourceTree = "<group>";
-		};
-		9BCAC06518326EB2000417FD /* MAControllers */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC06618326EE4000417FD /* MARootNavigationController.h */,
-				9BCAC06718326EE4000417FD /* MARootNavigationController.m */,
-				9BCAC06918326F0C000417FD /* MARootTabBarController.h */,
-				9BCAC06A18326F0C000417FD /* MARootTabBarController.m */,
-				9BCAC06C18326F48000417FD /* MAAccountViewController.h */,
-				9BCAC06D18326F48000417FD /* MAAccountViewController.m */,
-				9BCAC06F18327033000417FD /* MAPaymentViewController.h */,
-				9BCAC07018327033000417FD /* MAPaymentViewController.m */,
-				9BCAC0721832704A000417FD /* MAMemberViewController.h */,
-				9BCAC0731832704A000417FD /* MAMemberViewController.m */,
-				9BCAC0751832705A000417FD /* MAMoreViewController.h */,
-				9BCAC0761832705A000417FD /* MAMoreViewController.m */,
-			);
-			name = MAControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,15 +377,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BCAC0741832704A000417FD /* MAMemberViewController.m in Sources */,
-				9BCAC06B18326F0C000417FD /* MARootTabBarController.m in Sources */,
+				9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */,
+				9B605F1D1835250200890C4F /* RMemberToAccount.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
-				9BCAC06818326EE4000417FD /* MARootNavigationController.m in Sources */,
-				9BCAC03A18322997000417FD /* MatesAccounting.xcdatamodeld in Sources */,
-				9BCAC07118327033000417FD /* MAPaymentViewController.m in Sources */,
-				9BCAC06E18326F48000417FD /* MAAccountViewController.m in Sources */,
+				9B605F111835246700890C4F /* MGroup.m in Sources */,
+				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
+				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
+				9B605F171835246800890C4F /* MMember.m in Sources */,
+				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
+				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
-				9BCAC0771832705A000417FD /* MAMoreViewController.m in Sources */,
+				9B605F1A1835246800890C4F /* MAccount.m in Sources */,
+				9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */,
+				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
+				9B605F201835252100890C4F /* RMemberToGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +593,7 @@
 				9BCAC05518322997000417FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BCAC05618322997000417FD /* Build configuration list for PBXNativeTarget "MatesAccountingTests" */ = {
 			isa = XCConfigurationList;
@@ -550,17 +602,19 @@
 				9BCAC05818322997000417FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9BCAC03818322997000417FD /* MatesAccounting.xcdatamodeld */ = {
+		9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9BCAC03918322997000417FD /* MatesAccounting.xcdatamodel */,
+				9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */,
 			);
-			currentVersion = 9BCAC03918322997000417FD /* MatesAccounting.xcdatamodel */;
-			path = MatesAccounting.xcdatamodeld;
+			currentVersion = 9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */;
+			name = MatesAccounting.xcdatamodeld;
+			path = MAModels/MatesAccounting.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

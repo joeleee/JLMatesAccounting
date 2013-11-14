@@ -1,5 +1,5 @@
 //
-//  MAMemberViewController.h
+//  MATabMoreViewController.h
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MAMemberViewController : UIViewController
+@interface MATabMoreViewController : UIViewController
 
 @end

@@ -1,18 +1,18 @@
 //
-//  MAMemberViewController.m
+//  MATabPaymentViewController.m
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-12.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MAMemberViewController.h"
+#import "MATabPaymentViewController.h"
 
-@interface MAMemberViewController ()
+@interface MATabPaymentViewController ()
 
 @end
 
-@implementation MAMemberViewController
+@implementation MATabPaymentViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,10 +30,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tabBarController setTitle:@"成员"];
+    [self.tabBarController setTitle:@"结算"];
 
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
     [self.tabBarController.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:rightBarItem animated:YES];
 }

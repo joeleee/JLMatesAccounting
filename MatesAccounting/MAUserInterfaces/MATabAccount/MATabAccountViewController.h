@@ -1,5 +1,5 @@
 //
-//  MAPaymentViewController.h
+//  MATabAccountViewController.h
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MAPaymentViewController : UIViewController
+@interface MATabAccountViewController : UIViewController
 
 @end

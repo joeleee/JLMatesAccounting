@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-1330" y="379"/>
         </scene>
-        <!--Member View Controller - 成员-->
+        <!--Tab Member View Controller - 成员-->
         <scene sceneID="w9M-nf-Acx">
             <objects>
-                <viewController storyboardIdentifier="MAMemberViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4cy-Pp-Usj" customClass="MAMemberViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAMemberViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4cy-Pp-Usj" customClass="MATabMemberViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lge-jq-KBC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="-377" y="717"/>
         </scene>
-        <!--Account View Controller - 账目-->
+        <!--Tab Account View Controller - 账目-->
         <scene sceneID="Y6g-XU-yTH">
             <objects>
-                <viewController storyboardIdentifier="MAAccountViewController" title="账目" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wXF-C5-3XM" customClass="MAAccountViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAAccountViewController" title="账目" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wXF-C5-3XM" customClass="MATabAccountViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZL-Mj-zKv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="-911" y="379"/>
         </scene>
-        <!--More View Controller - 更多-->
+        <!--Tab More View Controller - 更多-->
         <scene sceneID="9go-ln-AYR">
             <objects>
-                <viewController storyboardIdentifier="MAMoreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dU0-en-Ffa" customClass="MAMoreViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAMoreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dU0-en-Ffa" customClass="MATabMoreViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ygg-hk-fAL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="-377" y="1452"/>
         </scene>
-        <!--Payment View Controller - 结算-->
+        <!--Tab Payment View Controller - 结算-->
         <scene sceneID="u2S-qF-NH9">
             <objects>
-                <viewController storyboardIdentifier="MAPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AQN-iO-c0f" customClass="MAPaymentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AQN-iO-c0f" customClass="MATabPaymentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bEn-I4-vHM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

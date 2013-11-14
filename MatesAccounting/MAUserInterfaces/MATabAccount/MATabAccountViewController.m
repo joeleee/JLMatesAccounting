@@ -1,18 +1,18 @@
 //
-//  MAAccountViewController.m
+//  MATabAccountViewController.m
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-12.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MAAccountViewController.h"
+#import "MATabAccountViewController.h"
 
-@interface MAAccountViewController ()
+@interface MATabAccountViewController ()
 
 @end
 
-@implementation MAAccountViewController
+@implementation MATabAccountViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

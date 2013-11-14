@@ -1,18 +1,18 @@
 //
-//  MAMoreViewController.m
+//  MATabMoreViewController.m
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-12.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MAMoreViewController.h"
+#import "MATabMoreViewController.h"
 
-@interface MAMoreViewController ()
+@interface MATabMoreViewController ()
 
 @end
 
-@implementation MAMoreViewController
+@implementation MATabMoreViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
