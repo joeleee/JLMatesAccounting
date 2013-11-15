@@ -16,7 +16,7 @@
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MAccount" inverseName="group" inverseEntity="MAccount" syncable="YES"/>
         <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToGroup" inverseName="group" inverseEntity="RMemberToGroup" syncable="YES"/>
     </entity>
@@ -43,10 +43,10 @@
         <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMember" inverseName="relationshipToGroup" inverseEntity="MMember" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MGroup" positionX="772" positionY="-216" width="128" height="133"/>
-        <element name="MMember" positionX="234" positionY="-258" width="128" height="193"/>
-        <element name="MAccount" positionX="585" positionY="-306" width="128" height="193"/>
-        <element name="RMemberToAccount" positionX="414" positionY="-261" width="128" height="88"/>
-        <element name="RMemberToGroup" positionX="414" positionY="-54" width="128" height="88"/>
+        <element name="MAccount" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MGroup" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMember" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="RMemberToAccount" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="RMemberToGroup" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

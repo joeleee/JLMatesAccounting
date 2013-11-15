@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class MMember;
+
 @interface MAMemberPersistent : NSObject
+
+- (MMember *)createMember;
+
+- (BOOL)deleteMember:(MMember *)member;
+
+- (NSArray *)fetchAccount:(NSFetchRequest *)request;
 
 @end
