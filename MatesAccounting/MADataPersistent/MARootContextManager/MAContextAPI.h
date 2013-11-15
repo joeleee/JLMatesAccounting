@@ -1,5 +1,5 @@
 //
-//  MADataPersistentProtocol.h
+//  MAContextAPI.h
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-15.
@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MADataPersistentProtocol <NSObject>
+#import "MADataPersistentProtocols.h"
 
-+ (BOOL)saveContextData;
+@interface MAContextAPI : NSObject <MAContextProtocol>
+
++ (MAContextAPI *)sharedAPI;
 
 @end

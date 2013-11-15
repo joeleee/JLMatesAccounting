@@ -8,13 +8,24 @@
 
 #import "MADataPersistentAPI.h"
 
-#import "MARootContextManager.h"
+#import "MAContextAPI.h"
 
 @implementation MADataPersistentAPI
 
-+ (BOOL)saveContextData
++ (MADataPersistentAPI *)sharedAPI
 {
-    return [[MARootContextManager sharedInstance] saveContext];
+    static MADataPersistentAPI *sharedInstance;
+    static dispatch_once_t      onceToken;
+
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (BOOL)saveAllContext
+{
+    return [[MAContextAPI sharedAPI] saveContextData];
 }
 
 @end

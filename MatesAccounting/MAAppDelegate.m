@@ -43,7 +43,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [MADataPersistentAPI saveContextData];
+    [[MADataPersistentAPI sharedAPI] saveAllContext];
 }
 
 @end

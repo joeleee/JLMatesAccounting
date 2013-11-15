@@ -14,8 +14,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-+ (MARootContextManager *)sharedInstance;
-
++ (MARootContextManager *)sharedManager;
 - (BOOL)saveContext;
 
 @end

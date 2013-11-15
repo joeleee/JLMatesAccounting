@@ -6,8 +6,12 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MADataPersistentProtocol.h"
+#import "MADataPersistentProtocols.h"
 
-@interface MADataPersistentAPI : NSObject <MADataPersistentProtocol>
+@interface MADataPersistentAPI : NSObject
+
++ (MADataPersistentAPI *)sharedAPI;
+
+- (BOOL)saveAllContext;
 
 @end

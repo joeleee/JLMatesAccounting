@@ -14,7 +14,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (MARootContextManager *)sharedInstance
++ (MARootContextManager *)sharedManager
 {
     static MARootContextManager *sharedInstance;
     static dispatch_once_t      onceToken;
