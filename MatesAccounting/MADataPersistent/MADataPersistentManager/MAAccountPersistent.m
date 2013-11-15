@@ -10,29 +10,57 @@
 
 #import "MAccount.h"
 #import "MGroup.h"
-#import "RMemberToAccount.h"
+#import "MACommonPersistent.h"
 #import "MAContextAPI.h"
 
 @implementation MAAccountPersistent
 
 - (MAccount *)createAccount
 {
-    NSManagedObjectModel   *moModel = [[MAContextAPI sharedAPI] managedObjectModel];
     NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
+    NSManagedObjectModel   *moModel = [[MAContextAPI sharedAPI] managedObjectModel];
     NSEntityDescription    *entity = [[moModel entitiesByName] objectForKey:NSStringFromClass([MAccount class])];
 
     MAccount *account = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:moContext];
 
-    if (account) {
-        account.createDate = [NSDate date];
+    [[MAContextAPI sharedAPI] saveContextData];
 
-        // TODO: 存储处理
-        if ([[MAContextAPI sharedAPI] saveContextData]) {
-        } else {
-        }
+    if (account) {
+        NSDate *currentData = [NSDate date];
+        account.createDate = currentData;
+        account.updateDate = currentData;
+        account.accountID = @([currentData timeIntervalSince1970]);
     }
 
     return account;
+}
+
+- (BOOL)deleteAccount:(MAccount *)account
+{
+    BOOL isSucceed = NO;
+
+    if (!account) {
+        return isSucceed;
+    }
+
+    NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
+    [moContext deleteObject:account];
+    isSucceed = [[MAContextAPI sharedAPI] saveContextData];
+
+    return isSucceed;
+}
+
+- (NSArray *)fetchAccount:(NSFetchRequest *)request
+{
+    NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
+    NSEntityDescription    *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([MAccount class]) inManagedObjectContext:moContext];
+
+    [request setEntity:entityDescription];
+
+    NSError *error = nil;
+    NSArray *result = [moContext executeFetchRequest:request error:&error];
+
+    return result;
 }
 
 @end

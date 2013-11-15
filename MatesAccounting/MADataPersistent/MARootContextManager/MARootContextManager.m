@@ -32,7 +32,11 @@
     NSError                *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
 
-    if ([managedObjectContext hasChanges]) {
+    if (!managedObjectContext) {
+        isSucceed = NO;
+    } else if (![managedObjectContext hasChanges]) {
+        isSucceed = YES;
+    } else {
         isSucceed = [managedObjectContext save:&error];
 
         if (!isSucceed) {
@@ -42,8 +46,6 @@
             abort();
         }
 
-    } else {
-        isSucceed = YES;
     }
 
     return isSucceed;

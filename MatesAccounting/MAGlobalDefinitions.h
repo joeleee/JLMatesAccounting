@@ -7,3 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#ifndef MAGLOBALDEFINITIONS_H
+  #define MAGLOBALDEFINITIONS_H
+
+  #define EXECUTE_BLOCK_SAFELY(block, ...) { \
+        if (block) {                         \
+            block(__VA_ARGS__);              \
+        }                                    \
+}
+#endif /* ifndef MAGLOBALDEFINITIONS_H */
+
+#pragma mark - definition blocks
+typedef void (^ PersistentBlock) (BOOL isSucceed, id data, NSError *error, NSDictionary *userInfo);
