@@ -10,10 +10,36 @@
 
 #import "MAccount.h"
 #import "MACommonPersistent.h"
+#import "RMemberToAccount.h"
+#import "MAContextAPI.h"
 
 @implementation MAAccountPersistent
 
-- (MAccount *)createAccount
+- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account
+{
+    RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
+
+    if (memberToAccount) {
+        NSDate *currentData = [NSDate date];
+        memberToAccount.createDate = currentData;
+        memberToAccount.member = member;
+        memberToAccount.account = account;
+        return [[MAContextAPI sharedAPI] saveContextData];
+    }
+
+    return NO;
+}
+
+- (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account
+{
+    // TODO: 移除成员
+    return NO;
+}
+
+- (MAccount *)createAccountInGroup:(MGroup *)group
+                               fee:(NSNumber *)fee
+                            detail:(NSString *)detail
+                             place:(MPlace *)place
 {
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
 
@@ -22,7 +48,23 @@
         account.createDate = currentData;
         account.updateDate = currentData;
         account.accountID = @([currentData timeIntervalSince1970]);
+        account.group = group;
+        account.fee = fee;
+        account.detail = detail;
+        account.place = place;
     }
+    [[MAContextAPI sharedAPI] saveContextData];
+
+    return account;
+}
+
+- (MAccount *)updateAccountInGroup:(MAccount *)account
+{
+    if (account) {
+        NSDate *currentData = [NSDate date];
+        account.updateDate = currentData;
+    }
+    [[MAContextAPI sharedAPI] saveContextData];
 
     return account;
 }

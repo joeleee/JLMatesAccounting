@@ -2,26 +2,25 @@
 //  MAccount.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-14.
+//  Created by Lee on 13-11-18.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
 #import "MAccount.h"
 #import "MGroup.h"
+#import "MPlace.h"
 #import "RMemberToAccount.h"
 
 
 @implementation MAccount
 
 @dynamic accountID;
-@dynamic fee;
 @dynamic createDate;
-@dynamic updateDate;
 @dynamic detail;
-@dynamic placeDescription;
-@dynamic placeLatitude;
-@dynamic placeLongitude;
+@dynamic fee;
+@dynamic updateDate;
 @dynamic group;
 @dynamic relationshipToMember;
+@dynamic place;
 
 @end

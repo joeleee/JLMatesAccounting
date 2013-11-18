@@ -2,7 +2,7 @@
 //  MMember.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-14.
+//  Created by Lee on 13-11-18.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -13,13 +13,13 @@
 
 @interface MMember : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * age;
+@property (nonatomic, retain) NSDate * createDate;
+@property (nonatomic, retain) NSString * eMail;
 @property (nonatomic, retain) NSNumber * memberID;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * sex;
 @property (nonatomic, retain) NSNumber * telephoneNumber;
-@property (nonatomic, retain) NSString * eMail;
-@property (nonatomic, retain) NSNumber * age;
-@property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSOrderedSet *relationshipToAccount;
 @property (nonatomic, retain) NSOrderedSet *relationshipToGroup;

@@ -20,8 +20,6 @@
 
     id object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:moContext];
 
-    [[MAContextAPI sharedAPI] saveContextData];
-
     return object;
 }
 

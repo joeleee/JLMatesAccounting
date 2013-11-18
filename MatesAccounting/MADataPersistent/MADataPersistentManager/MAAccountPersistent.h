@@ -8,14 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class MAccount;
+@class MAccount, MMember;
 
 @interface MAAccountPersistent : NSObject
-
-- (MAccount *)createAccount;
-
-- (BOOL)deleteAccount:(MAccount *)account;
-
-- (NSArray *)fetchAccount:(NSFetchRequest *)request;
 
 @end

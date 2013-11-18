@@ -2,7 +2,7 @@
 //  MGroup.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-16.
+//  Created by Lee on 13-11-18.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 

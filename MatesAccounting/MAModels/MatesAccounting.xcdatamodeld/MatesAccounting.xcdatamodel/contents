@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MAccount" representedClassName="MAccount" syncable="YES">
         <attribute name="accountID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fee" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="placeDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="placeLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="placeLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MGroup" inverseName="accounts" inverseEntity="MGroup" syncable="YES"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MPlace" inverseName="account" inverseEntity="MPlace" syncable="YES"/>
         <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="account" inverseEntity="RMemberToAccount" syncable="YES"/>
     </entity>
     <entity name="MGroup" representedClassName="MGroup" syncable="YES">
@@ -32,6 +30,14 @@
         <relationship name="relationshipToAccount" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="member" inverseEntity="RMemberToAccount" syncable="YES"/>
         <relationship name="relationshipToGroup" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToGroup" inverseName="member" inverseEntity="RMemberToGroup" syncable="YES"/>
     </entity>
+    <entity name="MPlace" representedClassName="MPlace" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="merchantName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="placeName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MAccount" inverseName="place" inverseEntity="MAccount" syncable="YES"/>
+    </entity>
     <entity name="RMemberToAccount" representedClassName="RMemberToAccount" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MAccount" inverseName="relationshipToMember" inverseEntity="MAccount" syncable="YES"/>
@@ -48,5 +54,6 @@
         <element name="MMember" positionX="0" positionY="0" width="0" height="0"/>
         <element name="RMemberToAccount" positionX="0" positionY="0" width="0" height="0"/>
         <element name="RMemberToGroup" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MPlace" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

@@ -2,7 +2,7 @@
 //  RMemberToGroup.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-14.
+//  Created by Lee on 13-11-18.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 @implementation RMemberToGroup
 
 @dynamic createDate;
-@dynamic member;
 @dynamic group;
+@dynamic member;
 
 @end
