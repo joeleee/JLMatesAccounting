@@ -14,6 +14,7 @@
 @implementation RMemberToAccount
 
 @dynamic createDate;
+@dynamic fee;
 @dynamic account;
 @dynamic member;
 

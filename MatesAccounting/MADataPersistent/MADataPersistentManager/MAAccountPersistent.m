@@ -15,7 +15,7 @@
 
 @implementation MAAccountPersistent
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account
+- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee
 {
     RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
 
@@ -23,6 +23,7 @@
         NSDate *currentData = [NSDate date];
         memberToAccount.createDate = currentData;
         memberToAccount.member = member;
+        memberToAccount.fee = fee;
         memberToAccount.account = account;
         return [[MAContextAPI sharedAPI] saveContextData];
     }
@@ -37,7 +38,6 @@
 }
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
-                               fee:(NSNumber *)fee
                             detail:(NSString *)detail
                              place:(MPlace *)place
 {
@@ -49,29 +49,29 @@
         account.updateDate = currentData;
         account.accountID = @([currentData timeIntervalSince1970]);
         account.group = group;
-        account.fee = fee;
         account.detail = detail;
         account.place = place;
+        [[MAContextAPI sharedAPI] saveContextData];
     }
-    [[MAContextAPI sharedAPI] saveContextData];
 
     return account;
 }
 
-- (MAccount *)updateAccountInGroup:(MAccount *)account
+- (BOOL)updateAccount:(MAccount *)account
 {
+    BOOL isSucceed = NO;
     if (account) {
         NSDate *currentData = [NSDate date];
         account.updateDate = currentData;
+        isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     }
-    [[MAContextAPI sharedAPI] saveContextData];
 
-    return account;
+    return isSucceed;
 }
 
 - (BOOL)deleteAccount:(MAccount *)account
 {
-    BOOL isSucceed = [MACommonPersistent deleteAccount:account];
+    BOOL isSucceed = [MACommonPersistent deleteObject:account];
 
     return isSucceed;
 }

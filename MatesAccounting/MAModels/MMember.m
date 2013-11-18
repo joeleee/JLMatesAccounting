@@ -7,6 +7,7 @@
 //
 
 #import "MMember.h"
+#import "MAccount.h"
 #import "RMemberToAccount.h"
 #import "RMemberToGroup.h"
 
@@ -23,5 +24,6 @@
 @dynamic updateDate;
 @dynamic relationshipToAccount;
 @dynamic relationshipToGroup;
+@dynamic payAccounts;
 
 @end

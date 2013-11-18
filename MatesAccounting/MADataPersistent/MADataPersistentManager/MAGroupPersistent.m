@@ -29,7 +29,7 @@
 
 - (BOOL)deleteGroup:(MGroup *)group
 {
-    BOOL isSucceed = [MACommonPersistent deleteAccount:group];
+    BOOL isSucceed = [MACommonPersistent deleteObject:group];
 
     return isSucceed;
 }

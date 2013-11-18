@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MGroup, MPlace, RMemberToAccount;
+@class MGroup, MMember, MPlace, RMemberToAccount;
 
 @interface MAccount : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * accountID;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSString * detail;
-@property (nonatomic, retain) NSNumber * fee;
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) MGroup *group;
 @property (nonatomic, retain) NSOrderedSet *relationshipToMember;
 @property (nonatomic, retain) MPlace *place;
+@property (nonatomic, retain) MMember *payer;
 @end
 
 @interface MAccount (CoreDataGeneratedAccessors)

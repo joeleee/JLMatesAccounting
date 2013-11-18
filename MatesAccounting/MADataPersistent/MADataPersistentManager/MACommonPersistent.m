@@ -23,7 +23,7 @@
     return object;
 }
 
-+ (BOOL)deleteAccount:(id)object
++ (BOOL)deleteObject:(id)object
 {
     BOOL isSucceed = NO;
 

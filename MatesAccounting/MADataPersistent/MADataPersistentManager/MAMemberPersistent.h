@@ -12,7 +12,9 @@
 
 @interface MAMemberPersistent : NSObject
 
-- (MMember *)createMember;
+- (MMember *)createMemberWithName:(NSString *)name;
+
+- (BOOL)updateMember:(MMember *)member;
 
 - (BOOL)deleteMember:(MMember *)member;
 

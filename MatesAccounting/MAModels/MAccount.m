@@ -8,6 +8,7 @@
 
 #import "MAccount.h"
 #import "MGroup.h"
+#import "MMember.h"
 #import "MPlace.h"
 #import "RMemberToAccount.h"
 
@@ -17,10 +18,10 @@
 @dynamic accountID;
 @dynamic createDate;
 @dynamic detail;
-@dynamic fee;
 @dynamic updateDate;
 @dynamic group;
 @dynamic relationshipToMember;
 @dynamic place;
+@dynamic payer;
 
 @end

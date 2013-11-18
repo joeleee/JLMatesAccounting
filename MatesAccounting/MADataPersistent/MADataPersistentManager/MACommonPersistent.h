@@ -12,7 +12,7 @@
 
 + (id)createObject:(NSString *)entityName;
 
-+ (BOOL)deleteAccount:(id)object;
++ (BOOL)deleteObject:(id)object;
 
 + (NSArray *)fetchObjects:(NSFetchRequest *)request entityName:(NSString *)entityName;
 
