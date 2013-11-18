@@ -8,8 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class MGroup;
+@class MGroup, MMember;
 
 @interface MAGroupPersistent : NSObject
+
+- (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group;
+
+- (MGroup *)createGroupWithGroupName:(NSString *)groupName;
+
+- (BOOL)updateGroup:(MGroup *)group;
+
+- (BOOL)deleteGroup:(MGroup *)group;
+
+- (NSArray *)fetchAccount:(NSFetchRequest *)request;
 
 @end

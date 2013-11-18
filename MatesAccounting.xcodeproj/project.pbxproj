@@ -339,9 +339,9 @@
 		9BCAC059183262BC000417FD /* MADataPersistent */ = {
 			isa = PBXGroup;
 			children = (
+				9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */,
 				9B391C8B183530BC0025A2FB /* MADataPersistentAPI.h */,
 				9B391C8C183530BC0025A2FB /* MADataPersistentAPI.m */,
-				9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */,
 				9B391C8F1835EE130025A2FB /* MADataPersistentManager */,
 				9B391C8218352C0A0025A2FB /* MARootContextManager */,
 			);

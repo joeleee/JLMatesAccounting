@@ -10,10 +10,27 @@
 
 #import "MACommonPersistent.h"
 #import "MGroup.h"
+#import "MAContextAPI.h"
+#import "RMemberToGroup.h"
 
 @implementation MAGroupPersistent
 
-- (MGroup *)createGroup
+- (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group
+{
+    RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];
+
+    if (memberToGroup) {
+        NSDate *currentData = [NSDate date];
+        memberToGroup.createDate = currentData;
+        memberToGroup.member = member;
+        memberToGroup.group = group;
+        return [[MAContextAPI sharedAPI] saveContextData];
+    }
+
+    return NO;
+}
+
+- (MGroup *)createGroupWithGroupName:(NSString *)groupName
 {
     MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];
 
@@ -21,10 +38,24 @@
         NSDate *currentData = [NSDate date];
         group.createDate = currentData;
         group.updateDate = currentData;
+        group.groupName = groupName;
         group.groupID = @([currentData timeIntervalSince1970]);
+        [[MAContextAPI sharedAPI] saveContextData];
     }
 
     return group;
+}
+
+- (BOOL)updateGroup:(MGroup *)group
+{
+    BOOL isSucceed = NO;
+    if (group) {
+        NSDate *currentData = [NSDate date];
+        group.updateDate = currentData;
+        isSucceed = [[MAContextAPI sharedAPI] saveContextData];
+    }
+
+    return isSucceed;
 }
 
 - (BOOL)deleteGroup:(MGroup *)group
