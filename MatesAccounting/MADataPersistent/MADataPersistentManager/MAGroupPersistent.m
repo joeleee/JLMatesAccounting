@@ -15,6 +15,17 @@
 
 @implementation MAGroupPersistent
 
++ (MAGroupPersistent *)instance
+{
+    static MAGroupPersistent     *sharedInstance;
+    static dispatch_once_t       onceToken;
+
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group
 {
     RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];

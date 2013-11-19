@@ -2,7 +2,7 @@
 //  MPlace.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * merchantName;
+@property (nonatomic, retain) NSNumber * placeID;
+@property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSOrderedSet *account;
 @end
 

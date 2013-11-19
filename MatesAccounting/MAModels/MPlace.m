@@ -2,7 +2,7 @@
 //  MPlace.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -17,6 +17,8 @@
 @dynamic longitude;
 @dynamic address;
 @dynamic merchantName;
+@dynamic placeID;
+@dynamic createDate;
 @dynamic account;
 
 @end

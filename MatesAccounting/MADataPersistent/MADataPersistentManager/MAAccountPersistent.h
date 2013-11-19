@@ -12,13 +12,15 @@
 
 @interface MAAccountPersistent : NSObject
 
++ (MAAccountPersistent *)instance;
+
 - (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee;
 
 - (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account;
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
-                            detail:(NSString *)detail
-                             place:(MPlace *)place;
+                              date:(NSDate *)date
+                             payer:(MMember *)payer;
 
 - (BOOL)updateAccount:(MAccount *)account;
 

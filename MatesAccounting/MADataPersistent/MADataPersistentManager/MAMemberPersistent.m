@@ -14,6 +14,17 @@
 
 @implementation MAMemberPersistent
 
++ (MAMemberPersistent *)instance
+{
+    static MAMemberPersistent     *sharedInstance;
+    static dispatch_once_t        onceToken;
+
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (MMember *)createMemberWithName:(NSString *)name
 {
     MMember *member = [MACommonPersistent createObject:NSStringFromClass([MMember class])];

@@ -2,7 +2,7 @@
 //  MAccount.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSString * detail;
 @property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) NSDate * accountDate;
 @property (nonatomic, retain) MGroup *group;
 @property (nonatomic, retain) NSOrderedSet *relationshipToMember;
 @property (nonatomic, retain) MPlace *place;

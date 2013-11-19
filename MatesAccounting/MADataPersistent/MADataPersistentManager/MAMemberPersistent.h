@@ -12,6 +12,8 @@
 
 @interface MAMemberPersistent : NSObject
 
++ (MAMemberPersistent *)instance;
+
 - (MMember *)createMemberWithName:(NSString *)name;
 
 - (BOOL)updateMember:(MMember *)member;

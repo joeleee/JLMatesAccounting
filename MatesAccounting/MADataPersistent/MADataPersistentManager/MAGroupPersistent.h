@@ -12,6 +12,8 @@
 
 @interface MAGroupPersistent : NSObject
 
++ (MAGroupPersistent *)instance;
+
 - (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group;
 
 - (BOOL)removeMember:(MMember *)member fromGroup:(MGroup *)group;

@@ -2,7 +2,7 @@
 //  MAccount.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -19,6 +19,7 @@
 @dynamic createDate;
 @dynamic detail;
 @dynamic updateDate;
+@dynamic accountDate;
 @dynamic group;
 @dynamic relationshipToMember;
 @dynamic place;

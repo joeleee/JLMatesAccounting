@@ -15,6 +15,17 @@
 
 @implementation MAAccountPersistent
 
++ (MAAccountPersistent *)instance
+{
+    static MAAccountPersistent     *sharedInstance;
+    static dispatch_once_t         onceToken;
+
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee
 {
     RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
@@ -54,8 +65,8 @@
 }
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
-                            detail:(NSString *)detail
-                             place:(MPlace *)place
+                              date:(NSDate *)date
+                             payer:(MMember *)payer
 {
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
 
@@ -65,8 +76,8 @@
         account.updateDate = currentData;
         account.accountID = @([currentData timeIntervalSince1970]);
         account.group = group;
-        account.detail = detail;
-        account.place = place;
+        account.accountDate = date;
+        account.payer = payer;
         [[MAContextAPI sharedAPI] saveContextData];
     }
 
