@@ -8,9 +8,6 @@
 
 #import "MADataPersistentManager.h"
 
-#import "MMember.h"
-#import "MGroup.h"
-#import "MAccount.h"
 #import "MAAccountPersistent.h"
 #import "MAMemberPersistent.h"
 #import "MAGroupPersistent.h"
@@ -83,7 +80,7 @@
     return isSucceed;
 }
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee
+- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee
 {
     BOOL isSucceed = NO;
     if (!account || !member) {

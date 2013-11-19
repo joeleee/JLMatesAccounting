@@ -28,6 +28,7 @@
 - (MMember *)createMemberWithName:(NSString *)name
 {
     MMember *member = [MACommonPersistent createObject:NSStringFromClass([MMember class])];
+    NSAssert(member, @"Assert member == nil");
 
     if (member) {
         NSDate *currentData = [NSDate date];
@@ -44,6 +45,7 @@
 - (BOOL)updateMember:(MMember *)member
 {
     BOOL isSucceed = NO;
+
     if (member) {
         NSDate *currentData = [NSDate date];
         member.updateDate = currentData;

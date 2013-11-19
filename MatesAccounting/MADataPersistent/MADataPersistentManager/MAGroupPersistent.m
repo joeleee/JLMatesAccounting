@@ -28,7 +28,14 @@
 
 - (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group
 {
+    for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
+        if (memberToGroup.member == member) {
+            return NO;
+        }
+    }
+
     RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];
+    NSAssert(memberToGroup, @"Assert memberToGroup == nil");
 
     if (memberToGroup) {
         NSDate *currentData = [NSDate date];
@@ -45,27 +52,24 @@
 {
     BOOL isSucceed = NO;
 
-    NSString *memberToGroupClass = NSStringFromClass([RMemberToGroup class]);
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:memberToGroupClass];
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        RMemberToGroup *relationship = evaluatedObject;
-        return (relationship.member == member && relationship.group == group);
-    }];
-    [fetchRequest setPredicate:predicate];
-
-    NSArray *relationships = [MACommonPersistent fetchObjects:fetchRequest entityName:memberToGroupClass];
-    if (0 >= relationships.count) {
-        return isSucceed;
+    RMemberToGroup *memberToGroup = nil;
+    for (RMemberToGroup *relationship in group.relationshipToMember) {
+        if (memberToGroup.member == member) {
+            memberToGroup = relationship;
+            break;
+        }
     }
+    NSAssert(memberToGroup, @"Assert memberToGroup == nil");
 
-    RMemberToGroup *relationship = relationships[0];
-    isSucceed = [MACommonPersistent deleteObject:relationship];
+    isSucceed = [MACommonPersistent deleteObject:memberToGroup];
+
     return isSucceed;
 }
 
 - (MGroup *)createGroupWithGroupName:(NSString *)groupName
 {
     MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];
+    NSAssert(group, @"Assert group == nil");
 
     if (group) {
         NSDate *currentData = [NSDate date];

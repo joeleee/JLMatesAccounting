@@ -28,6 +28,7 @@
 - (MPlace *)createPlaceWithCoordinate:(CLLocationCoordinate2D)coordinate name:(NSString *)name
 {
     MPlace *place = [MACommonPersistent createObject:NSStringFromClass([MPlace class])];
+    NSAssert(place, @"Assert place == nil");
 
     if (place) {
         NSDate *currentData = [NSDate date];

@@ -20,6 +20,7 @@
 @dynamic detail;
 @dynamic updateDate;
 @dynamic accountDate;
+@dynamic totalFee;
 @dynamic group;
 @dynamic relationshipToMember;
 @dynamic place;

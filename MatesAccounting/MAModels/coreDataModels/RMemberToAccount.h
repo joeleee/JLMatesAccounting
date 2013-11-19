@@ -2,7 +2,7 @@
 //  RMemberToAccount.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 @interface RMemberToAccount : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSNumber *fee;
+@property (nonatomic, retain) NSNumber * fee;
 @property (nonatomic, retain) MAccount *account;
 @property (nonatomic, retain) MMember *member;
 

@@ -20,6 +20,8 @@
 
     id object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:moContext];
 
+    NSAssert(object, @"Assert object == nil");
+
     return object;
 }
 
@@ -41,9 +43,12 @@
 + (NSArray *)fetchObjects:(NSFetchRequest *)request entityName:(NSString *)entityName
 {
     NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
-    NSEntityDescription    *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:moContext];
 
-    [request setEntity:entityDescription];
+    if (entityName) {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:moContext];
+        NSAssert(entityDescription, @"Assert object == nil");
+        [request setEntity:entityDescription];
+    }
 
     NSError *error = nil;
     NSArray *result = [moContext executeFetchRequest:request error:&error];

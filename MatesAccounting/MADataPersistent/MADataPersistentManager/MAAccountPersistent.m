@@ -8,7 +8,7 @@
 
 #import "MAAccountPersistent.h"
 
-#import "MAccount.h"
+#import "MAccount+expand.h"
 #import "MACommonPersistent.h"
 #import "RMemberToAccount.h"
 #import "MAContextAPI.h"
@@ -26,16 +26,24 @@
     return sharedInstance;
 }
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee
+- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee
 {
+    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
+        if (memberToAccount.member == member) {
+            return NO;
+        }
+    }
+
     RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
+    NSAssert(memberToAccount, @"Assert memberToAccount == nil");
 
     if (memberToAccount) {
         NSDate *currentData = [NSDate date];
         memberToAccount.createDate = currentData;
         memberToAccount.member = member;
-        memberToAccount.fee = fee;
+        memberToAccount.fee = @(fee);
         memberToAccount.account = account;
+        [account refreshAccountTotalFee];
         return [[MAContextAPI sharedAPI] saveContextData];
     }
 
@@ -46,21 +54,18 @@
 {
     BOOL isSucceed = NO;
 
-    NSString *memberToAccountClass = NSStringFromClass([RMemberToAccount class]);
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:memberToAccountClass];
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        RMemberToAccount *relationship = evaluatedObject;
-        return (relationship.member == member && relationship.account == account);
-    }];
-    [fetchRequest setPredicate:predicate];
-
-    NSArray *relationships = [MACommonPersistent fetchObjects:fetchRequest entityName:memberToAccountClass];
-    if (0 >= relationships.count) {
-        return isSucceed;
+    RMemberToAccount *memberToAccount = nil;
+    for (RMemberToAccount *relationship in account.relationshipToMember) {
+        if (relationship.member == member) {
+            memberToAccount = relationship;
+            break;
+        }
     }
 
-    RMemberToAccount *relationship = relationships[0];
-    isSucceed = [MACommonPersistent deleteObject:relationship];
+    NSAssert(memberToAccount, @"Assert memberToAccount == nil");
+    isSucceed = [MACommonPersistent deleteObject:memberToAccount];
+    [account refreshAccountTotalFee];
+
     return isSucceed;
 }
 
@@ -69,6 +74,7 @@
                              payer:(MMember *)payer
 {
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
+    NSAssert(account, @"Assert account == nil");
 
     if (account) {
         NSDate *currentData = [NSDate date];

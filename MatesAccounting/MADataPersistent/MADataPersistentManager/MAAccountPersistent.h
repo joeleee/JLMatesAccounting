@@ -14,7 +14,7 @@
 
 + (MAAccountPersistent *)instance;
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(NSNumber *)fee;
+- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee;
 
 - (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account;
 

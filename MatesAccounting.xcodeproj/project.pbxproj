@@ -24,14 +24,15 @@
 		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
 		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
 		9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA3183611070025A2FB /* MACommonPersistent.m */; };
-		9BB0743C1839BE6F0023B728 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0743B1839BE6F0023B728 /* MGroup.m */; };
-		9BB074451839BE6F0023B728 /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074441839BE6F0023B728 /* RMemberToGroup.m */; };
-		9BB0748B1839E03D0023B728 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0748A1839E03D0023B728 /* RMemberToAccount.m */; };
-		9BB074A7183B0BB30023B728 /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074A6183B0BB30023B728 /* MMember.m */; };
-		9BB074AA183B37C00023B728 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074A9183B37C00023B728 /* MAccount.m */; };
 		9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */; };
-		9BB074B3183B3E1A0023B728 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B2183B3E1A0023B728 /* MPlace.m */; };
 		9BB074B6183B4B950023B728 /* MADataPersistentSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */; };
+		9BB074BA183B7C200023B728 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B9183B7C200023B728 /* MGroup.m */; };
+		9BB074BD183B7C210023B728 /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074BC183B7C210023B728 /* RMemberToGroup.m */; };
+		9BB074C0183B7C210023B728 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074BF183B7C210023B728 /* MAccount.m */; };
+		9BB074C3183B7C210023B728 /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C2183B7C210023B728 /* MMember.m */; };
+		9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C5183B7C210023B728 /* RMemberToAccount.m */; };
+		9BB074C9183B7C210023B728 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C8183B7C210023B728 /* MPlace.m */; };
+		9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074CB183B7C950023B728 /* MAccount+expand.m */; };
 		9BCAC02518322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
 		9BCAC02718322997000417FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02618322997000417FD /* CoreGraphics.framework */; };
 		9BCAC02918322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
@@ -94,22 +95,24 @@
 		9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGlobalDefinitions.m; sourceTree = "<group>"; };
 		9B391CA2183611070025A2FB /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.h; sourceTree = "<group>"; };
 		9B391CA3183611070025A2FB /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.m; sourceTree = "<group>"; };
-		9BB0743A1839BE6F0023B728 /* MGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGroup.h; path = MAModels/MGroup.h; sourceTree = "<group>"; };
-		9BB0743B1839BE6F0023B728 /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/MGroup.m; sourceTree = "<group>"; };
-		9BB074431839BE6F0023B728 /* RMemberToGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToGroup.h; path = MAModels/RMemberToGroup.h; sourceTree = "<group>"; };
-		9BB074441839BE6F0023B728 /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/RMemberToGroup.m; sourceTree = "<group>"; };
-		9BB074891839E03D0023B728 /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/RMemberToAccount.h; sourceTree = "<group>"; };
-		9BB0748A1839E03D0023B728 /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/RMemberToAccount.m; sourceTree = "<group>"; };
-		9BB074A5183B0BB30023B728 /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/MMember.h; sourceTree = "<group>"; };
-		9BB074A6183B0BB30023B728 /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/MMember.m; sourceTree = "<group>"; };
-		9BB074A8183B37C00023B728 /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/MAccount.h; sourceTree = "<group>"; };
-		9BB074A9183B37C00023B728 /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/MAccount.m; sourceTree = "<group>"; };
 		9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPlacePersistent.h; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.h; sourceTree = "<group>"; };
 		9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPlacePersistent.m; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.m; sourceTree = "<group>"; };
-		9BB074B1183B3E1A0023B728 /* MPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPlace.h; path = MAModels/MPlace.h; sourceTree = "<group>"; };
-		9BB074B2183B3E1A0023B728 /* MPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPlace.m; path = MAModels/MPlace.m; sourceTree = "<group>"; };
 		9BB074B4183B4B950023B728 /* MADataPersistentSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentSearchManager.h; path = MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.h; sourceTree = "<group>"; };
 		9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MADataPersistentSearchManager.m; path = MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.m; sourceTree = "<group>"; };
+		9BB074B8183B7C200023B728 /* MGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGroup.h; path = MAModels/coreDataModels/MGroup.h; sourceTree = "<group>"; };
+		9BB074B9183B7C200023B728 /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/coreDataModels/MGroup.m; sourceTree = "<group>"; };
+		9BB074BB183B7C210023B728 /* RMemberToGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToGroup.h; path = MAModels/coreDataModels/RMemberToGroup.h; sourceTree = "<group>"; };
+		9BB074BC183B7C210023B728 /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/coreDataModels/RMemberToGroup.m; sourceTree = "<group>"; };
+		9BB074BE183B7C210023B728 /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/coreDataModels/MAccount.h; sourceTree = "<group>"; };
+		9BB074BF183B7C210023B728 /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/coreDataModels/MAccount.m; sourceTree = "<group>"; };
+		9BB074C1183B7C210023B728 /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/coreDataModels/MMember.h; sourceTree = "<group>"; };
+		9BB074C2183B7C210023B728 /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/coreDataModels/MMember.m; sourceTree = "<group>"; };
+		9BB074C4183B7C210023B728 /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/coreDataModels/RMemberToAccount.h; sourceTree = "<group>"; };
+		9BB074C5183B7C210023B728 /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/coreDataModels/RMemberToAccount.m; sourceTree = "<group>"; };
+		9BB074C7183B7C210023B728 /* MPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPlace.h; path = MAModels/coreDataModels/MPlace.h; sourceTree = "<group>"; };
+		9BB074C8183B7C210023B728 /* MPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPlace.m; path = MAModels/coreDataModels/MPlace.m; sourceTree = "<group>"; };
+		9BB074CA183B7C950023B728 /* MAccount+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MAccount+expand.h"; path = "MAModels/MAccount+expand.h"; sourceTree = "<group>"; };
+		9BB074CB183B7C950023B728 /* MAccount+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MAccount+expand.m"; path = "MAModels/MAccount+expand.m"; sourceTree = "<group>"; };
 		9BCAC02118322997000417FD /* MatesAccounting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatesAccounting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAC02418322997000417FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BCAC02618322997000417FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -253,20 +256,30 @@
 			isa = PBXGroup;
 			children = (
 				9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */,
-				9BB0743A1839BE6F0023B728 /* MGroup.h */,
-				9BB0743B1839BE6F0023B728 /* MGroup.m */,
-				9BB074431839BE6F0023B728 /* RMemberToGroup.h */,
-				9BB074441839BE6F0023B728 /* RMemberToGroup.m */,
-				9BB074891839E03D0023B728 /* RMemberToAccount.h */,
-				9BB0748A1839E03D0023B728 /* RMemberToAccount.m */,
-				9BB074A5183B0BB30023B728 /* MMember.h */,
-				9BB074A6183B0BB30023B728 /* MMember.m */,
-				9BB074A8183B37C00023B728 /* MAccount.h */,
-				9BB074A9183B37C00023B728 /* MAccount.m */,
-				9BB074B1183B3E1A0023B728 /* MPlace.h */,
-				9BB074B2183B3E1A0023B728 /* MPlace.m */,
+				9BB074CA183B7C950023B728 /* MAccount+expand.h */,
+				9BB074CB183B7C950023B728 /* MAccount+expand.m */,
+				9BB074B7183B7C0A0023B728 /* coreDataModels */,
 			);
 			name = MAModels;
+			sourceTree = "<group>";
+		};
+		9BB074B7183B7C0A0023B728 /* coreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				9BB074C7183B7C210023B728 /* MPlace.h */,
+				9BB074C8183B7C210023B728 /* MPlace.m */,
+				9BB074C4183B7C210023B728 /* RMemberToAccount.h */,
+				9BB074C5183B7C210023B728 /* RMemberToAccount.m */,
+				9BB074C1183B7C210023B728 /* MMember.h */,
+				9BB074C2183B7C210023B728 /* MMember.m */,
+				9BB074BE183B7C210023B728 /* MAccount.h */,
+				9BB074BF183B7C210023B728 /* MAccount.m */,
+				9BB074BB183B7C210023B728 /* RMemberToGroup.h */,
+				9BB074BC183B7C210023B728 /* RMemberToGroup.m */,
+				9BB074B8183B7C200023B728 /* MGroup.h */,
+				9BB074B9183B7C200023B728 /* MGroup.m */,
+			);
+			name = coreDataModels;
 			sourceTree = "<group>";
 		};
 		9BCAC01818322997000417FD = {
@@ -469,32 +482,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */,
-				9BB074B3183B3E1A0023B728 /* MPlace.m in Sources */,
 				9BB074B6183B4B950023B728 /* MADataPersistentSearchManager.m in Sources */,
 				9B391C921835EE410025A2FB /* MADataPersistentManager.m in Sources */,
+				9BB074BA183B7C200023B728 /* MGroup.m in Sources */,
 				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
+				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
 				9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */,
-				9BB074AA183B37C00023B728 /* MAccount.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
+				9BB074BD183B7C210023B728 /* RMemberToGroup.m in Sources */,
 				9B391C8D183530BC0025A2FB /* MADataPersistentAPI.m in Sources */,
 				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
 				9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */,
-				9BB0748B1839E03D0023B728 /* RMemberToAccount.m in Sources */,
 				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
 				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
+				9BB074C3183B7C210023B728 /* MMember.m in Sources */,
 				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
-				9BB074A7183B0BB30023B728 /* MMember.m in Sources */,
 				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
+				9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */,
 				9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */,
 				9B391C8518352C670025A2FB /* MARootContextManager.m in Sources */,
 				9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */,
-				9BB074451839BE6F0023B728 /* RMemberToGroup.m in Sources */,
+				9BB074C9183B7C210023B728 /* MPlace.m in Sources */,
 				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
 				9B391C8918352F580025A2FB /* MAUtilityTools.m in Sources */,
 				9B391C981835EF210025A2FB /* MAMemberPersistent.m in Sources */,
 				9B391C9B1835EF3A0025A2FB /* MAGroupPersistent.m in Sources */,
-				9BB0743C1839BE6F0023B728 /* MGroup.m in Sources */,
+				9BB074C0183B7C210023B728 /* MAccount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

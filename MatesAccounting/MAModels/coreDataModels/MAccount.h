@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * detail;
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSDate * accountDate;
+@property (nonatomic, retain) NSNumber * totalFee;
 @property (nonatomic, retain) MGroup *group;
 @property (nonatomic, retain) NSOrderedSet *relationshipToMember;
 @property (nonatomic, retain) MPlace *place;
