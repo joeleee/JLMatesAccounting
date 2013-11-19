@@ -20,3 +20,9 @@
 
 #pragma mark - definition blocks
 typedef void (^ PersistentBlock) (BOOL isSucceed, id data, NSError *error, NSDictionary *userInfo);
+
+typedef enum {
+    UnknowSex = 0,
+    FemaleEnum = 1,
+    MaleEnum = 2
+} MASexEnum;

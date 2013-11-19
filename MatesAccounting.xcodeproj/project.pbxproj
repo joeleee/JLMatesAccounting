@@ -29,7 +29,7 @@
 		9BB074451839BE6F0023B728 /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074441839BE6F0023B728 /* RMemberToGroup.m */; };
 		9BB0748B1839E03D0023B728 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0748A1839E03D0023B728 /* RMemberToAccount.m */; };
 		9BB0749D1839E5CB0023B728 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0749C1839E5CB0023B728 /* MAccount.m */; };
-		9BB074A01839E5F20023B728 /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0749F1839E5F20023B728 /* MMember.m */; };
+		9BB074A7183B0BB30023B728 /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074A6183B0BB30023B728 /* MMember.m */; };
 		9BCAC02518322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
 		9BCAC02718322997000417FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02618322997000417FD /* CoreGraphics.framework */; };
 		9BCAC02918322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
@@ -102,8 +102,8 @@
 		9BB0748A1839E03D0023B728 /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/RMemberToAccount.m; sourceTree = "<group>"; };
 		9BB0749B1839E5CB0023B728 /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/MAccount.h; sourceTree = "<group>"; };
 		9BB0749C1839E5CB0023B728 /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/MAccount.m; sourceTree = "<group>"; };
-		9BB0749E1839E5F20023B728 /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/MMember.h; sourceTree = "<group>"; };
-		9BB0749F1839E5F20023B728 /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/MMember.m; sourceTree = "<group>"; };
+		9BB074A5183B0BB30023B728 /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/MMember.h; sourceTree = "<group>"; };
+		9BB074A6183B0BB30023B728 /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/MMember.m; sourceTree = "<group>"; };
 		9BCAC02118322997000417FD /* MatesAccounting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatesAccounting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCAC02418322997000417FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BCAC02618322997000417FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -253,8 +253,8 @@
 				9BB0748A1839E03D0023B728 /* RMemberToAccount.m */,
 				9BB0749B1839E5CB0023B728 /* MAccount.h */,
 				9BB0749C1839E5CB0023B728 /* MAccount.m */,
-				9BB0749E1839E5F20023B728 /* MMember.h */,
-				9BB0749F1839E5F20023B728 /* MMember.m */,
+				9BB074A5183B0BB30023B728 /* MMember.h */,
+				9BB074A6183B0BB30023B728 /* MMember.m */,
 			);
 			name = MAModels;
 			sourceTree = "<group>";
@@ -471,7 +471,7 @@
 				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
 				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
 				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
-				9BB074A01839E5F20023B728 /* MMember.m in Sources */,
+				9BB074A7183B0BB30023B728 /* MMember.m in Sources */,
 				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
 				9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */,

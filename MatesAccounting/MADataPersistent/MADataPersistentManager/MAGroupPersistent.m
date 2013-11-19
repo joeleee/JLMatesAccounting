@@ -30,6 +30,28 @@
     return NO;
 }
 
+- (BOOL)removeMember:(MMember *)member fromGroup:(MGroup *)group
+{
+    BOOL isSucceed = NO;
+
+    NSString *memberToGroupClass = NSStringFromClass([RMemberToGroup class]);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:memberToGroupClass];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        RMemberToGroup *relationship = evaluatedObject;
+        return (relationship.member == member && relationship.group == group);
+    }];
+    [fetchRequest setPredicate:predicate];
+
+    NSArray *relationships = [MACommonPersistent fetchObjects:fetchRequest entityName:memberToGroupClass];
+    if (0 >= relationships.count) {
+        return isSucceed;
+    }
+
+    RMemberToGroup *relationship = relationships[0];
+    isSucceed = [MACommonPersistent deleteObject:relationship];
+    return isSucceed;
+}
+
 - (MGroup *)createGroupWithGroupName:(NSString *)groupName
 {
     MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];

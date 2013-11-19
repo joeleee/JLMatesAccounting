@@ -33,8 +33,24 @@
 
 - (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account
 {
-    // TODO: 移除成员
-    return NO;
+    BOOL isSucceed = NO;
+
+    NSString *memberToAccountClass = NSStringFromClass([RMemberToAccount class]);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:memberToAccountClass];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        RMemberToAccount *relationship = evaluatedObject;
+        return (relationship.member == member && relationship.account == account);
+    }];
+    [fetchRequest setPredicate:predicate];
+
+    NSArray *relationships = [MACommonPersistent fetchObjects:fetchRequest entityName:memberToAccountClass];
+    if (0 >= relationships.count) {
+        return isSucceed;
+    }
+
+    RMemberToAccount *relationship = relationships[0];
+    isSucceed = [MACommonPersistent deleteObject:relationship];
+    return isSucceed;
 }
 
 - (MAccount *)createAccountInGroup:(MGroup *)group

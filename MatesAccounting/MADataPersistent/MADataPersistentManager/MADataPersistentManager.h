@@ -10,4 +10,6 @@
 
 @interface MADataPersistentManager : NSObject
 
++ (MADataPersistentManager *)sharedManager;
+
 @end

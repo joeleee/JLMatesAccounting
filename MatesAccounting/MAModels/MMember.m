@@ -2,7 +2,7 @@
 //  MMember.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-18.
+//  Created by Lee on 13-11-19.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 
 @implementation MMember
 
-@dynamic age;
+@dynamic birthday;
 @dynamic createDate;
 @dynamic eMail;
 @dynamic memberID;

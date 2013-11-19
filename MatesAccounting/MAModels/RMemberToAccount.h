@@ -14,7 +14,7 @@
 @interface RMemberToAccount : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSNumber * fee;
+@property (nonatomic, retain) NSNumber *fee;
 @property (nonatomic, retain) MAccount *account;
 @property (nonatomic, retain) MMember *member;
 

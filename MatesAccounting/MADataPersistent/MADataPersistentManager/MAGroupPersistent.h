@@ -14,6 +14,8 @@
 
 - (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group;
 
+- (BOOL)removeMember:(MMember *)member fromGroup:(MGroup *)group;
+
 - (MGroup *)createGroupWithGroupName:(NSString *)groupName;
 
 - (BOOL)updateGroup:(MGroup *)group;
