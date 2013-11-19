@@ -84,6 +84,7 @@
         account.group = group;
         account.accountDate = date;
         account.payer = payer;
+        account.totalFee = @(0);
         [[MAContextAPI sharedAPI] saveContextData];
     }
 

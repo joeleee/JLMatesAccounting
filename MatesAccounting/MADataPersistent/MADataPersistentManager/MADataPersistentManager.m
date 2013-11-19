@@ -34,6 +34,7 @@
 #pragma mark - 持久化操作
 
 #pragma mark member相关
+
 - (MMember *)createMemberWithName:(NSString *)name
                     setValueBlock:(PersistentBlock)setValueBlock
 {
@@ -104,6 +105,7 @@
 }
 
 #pragma mark group相关
+
 - (MGroup *)createGroupWithName:(NSString *)name
                   setValueBlock:(PersistentBlock)setValueBlock
 {
@@ -127,6 +129,7 @@
 }
 
 #pragma mark account相关
+
 - (MAccount *)createAccountToGroup:(MGroup *)group
                               date:(NSDate *)date
                              payer:(MMember *)payer
@@ -152,6 +155,7 @@
 }
 
 #pragma mark place相关
+
 - (MPlace *)createPlaceCoordinate:(CLLocationCoordinate2D)coordinate
                              name:(NSString *)name
                     setValueBlock:(PersistentBlock)setValueBlock

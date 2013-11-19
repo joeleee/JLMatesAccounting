@@ -30,7 +30,11 @@
     return sharedInstance;
 }
 
-- (NSSet *)accountsByMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+#pragma mark - 持久化查询
+
+#pragma mark member相关
+
+- (NSSet *)accountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
     NSMutableSet *accounts = [NSMutableSet setWithSet:[member.payAccounts set]];
 
@@ -46,6 +50,58 @@
     }
 
     return accounts;
+}
+
+- (NSSet *)spendingDetailsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSMutableSet *spendingDetails = [NSMutableSet setWithSet:[member.relationshipToAccount set]];
+
+    if (sortDescriptor) {
+        [spendingDetails sortedArrayUsingDescriptors:@[sortDescriptor]];
+    } else {
+        NSSortDescriptor *defaultSort = [NSSortDescriptor sortDescriptorWithKey:@"account" ascending:NO comparator:^NSComparisonResult(id obj1, id obj2) {
+            MAccount *account1 = obj1;
+            MAccount *account2 = obj2;
+            return [account1.createDate compare:account2.createDate];
+        }];
+        [spendingDetails sortedArrayUsingDescriptors:@[defaultSort]];
+    }
+
+    return spendingDetails;
+}
+
+- (NSSet *)payAccountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSMutableSet *accounts = [NSMutableSet setWithSet:[member.payAccounts set]];
+
+    if (sortDescriptor) {
+        [accounts sortedArrayUsingDescriptors:@[sortDescriptor]];
+    } else {
+        NSSortDescriptor *defaultSort = [NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO];
+        [accounts sortedArrayUsingDescriptors:@[defaultSort]];
+    }
+
+    return accounts;
+}
+
+#pragma mark account相关
+
+- (NSSet *)membersForAccount:(MAccount *)account sortDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSMutableSet *members = [NSMutableSet set];
+
+    for (RMemberToAccount *relationship in account.relationshipToMember) {
+        [members addObject:relationship.member];
+    }
+
+    if (sortDescriptor) {
+        [members sortedArrayUsingDescriptors:@[sortDescriptor]];
+    } else {
+        NSSortDescriptor *defaultSort = [NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:YES];
+        [members sortedArrayUsingDescriptors:@[defaultSort]];
+    }
+
+    return members;
 }
 
 @end
