@@ -14,6 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[MADataPersistentAPI sharedAPI] saveAllContext];
     [self.window makeKeyAndVisible];
     return YES;
 }

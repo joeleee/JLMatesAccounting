@@ -1,742 +1,2273 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */; };
-		9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6D183527CE0025A2FB /* MARootNavigationController.m */; };
-		9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6F183527CE0025A2FB /* MARootTabBarController.m */; };
-		9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C72183527CE0025A2FB /* MATabAccountViewController.m */; };
-		9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C75183527CE0025A2FB /* MATabMemberViewController.m */; };
-		9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C78183527CE0025A2FB /* MATabMoreViewController.m */; };
-		9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */; };
-		9B391C8518352C670025A2FB /* MARootContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8418352C670025A2FB /* MARootContextManager.m */; };
-		9B391C8918352F580025A2FB /* MAUtilityTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8818352F580025A2FB /* MAUtilityTools.m */; };
-		9B391C8D183530BC0025A2FB /* MADataPersistentAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8C183530BC0025A2FB /* MADataPersistentAPI.m */; };
-		9B391C921835EE410025A2FB /* MADataPersistentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C911835EE410025A2FB /* MADataPersistentManager.m */; };
-		9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C941835EF040025A2FB /* MAAccountPersistent.m */; };
-		9B391C981835EF210025A2FB /* MAMemberPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C971835EF210025A2FB /* MAMemberPersistent.m */; };
-		9B391C9B1835EF3A0025A2FB /* MAGroupPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */; };
-		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
-		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
-		9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA3183611070025A2FB /* MACommonPersistent.m */; };
-		9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */; };
-		9BB074B6183B4B950023B728 /* MADataPersistentSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */; };
-		9BB074BA183B7C200023B728 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B9183B7C200023B728 /* MGroup.m */; };
-		9BB074BD183B7C210023B728 /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074BC183B7C210023B728 /* RMemberToGroup.m */; };
-		9BB074C0183B7C210023B728 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074BF183B7C210023B728 /* MAccount.m */; };
-		9BB074C3183B7C210023B728 /* MMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C2183B7C210023B728 /* MMember.m */; };
-		9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C5183B7C210023B728 /* RMemberToAccount.m */; };
-		9BB074C9183B7C210023B728 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074C8183B7C210023B728 /* MPlace.m */; };
-		9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074CB183B7C950023B728 /* MAccount+expand.m */; };
-		9BCAC02518322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
-		9BCAC02718322997000417FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02618322997000417FD /* CoreGraphics.framework */; };
-		9BCAC02918322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
-		9BCAC02B18322997000417FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02A18322997000417FD /* CoreData.framework */; };
-		9BCAC03118322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC02F18322997000417FD /* InfoPlist.strings */; };
-		9BCAC03318322997000417FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03218322997000417FD /* main.m */; };
-		9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03618322997000417FD /* MAAppDelegate.m */; };
-		9BCAC03C18322997000417FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC03B18322997000417FD /* Images.xcassets */; };
-		9BCAC04318322997000417FD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC04218322997000417FD /* XCTest.framework */; };
-		9BCAC04418322997000417FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02418322997000417FD /* Foundation.framework */; };
-		9BCAC04518322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
-		9BCAC04618322997000417FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02A18322997000417FD /* CoreData.framework */; };
-		9BCAC04E18322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC04C18322997000417FD /* InfoPlist.strings */; };
-		9BCAC05018322997000417FD /* MatesAccountingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC04F18322997000417FD /* MatesAccountingTests.m */; };
-		9BCAC07918327097000417FD /* MAInit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC07818327097000417FD /* MAInit.storyboard */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9BCAC04718322997000417FD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9BCAC01918322997000417FD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9BCAC02018322997000417FD;
-			remoteInfo = MatesAccounting;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatesAccounting.xcdatamodel; sourceTree = "<group>"; };
-		9B391C6C183527CE0025A2FB /* MARootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARootNavigationController.h; sourceTree = "<group>"; };
-		9B391C6D183527CE0025A2FB /* MARootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARootNavigationController.m; sourceTree = "<group>"; };
-		9B391C6E183527CE0025A2FB /* MARootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARootTabBarController.h; sourceTree = "<group>"; };
-		9B391C6F183527CE0025A2FB /* MARootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARootTabBarController.m; sourceTree = "<group>"; };
-		9B391C71183527CE0025A2FB /* MATabAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabAccountViewController.h; sourceTree = "<group>"; };
-		9B391C72183527CE0025A2FB /* MATabAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabAccountViewController.m; sourceTree = "<group>"; };
-		9B391C74183527CE0025A2FB /* MATabMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabMemberViewController.h; sourceTree = "<group>"; };
-		9B391C75183527CE0025A2FB /* MATabMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabMemberViewController.m; sourceTree = "<group>"; };
-		9B391C77183527CE0025A2FB /* MATabMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabMoreViewController.h; sourceTree = "<group>"; };
-		9B391C78183527CE0025A2FB /* MATabMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabMoreViewController.m; sourceTree = "<group>"; };
-		9B391C7A183527CE0025A2FB /* MATabPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabPaymentViewController.h; sourceTree = "<group>"; };
-		9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabPaymentViewController.m; sourceTree = "<group>"; };
-		9B391C8318352C670025A2FB /* MARootContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MARootContextManager.h; path = MADataPersistent/MARootContextManager/MARootContextManager.h; sourceTree = "<group>"; };
-		9B391C8418352C670025A2FB /* MARootContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootContextManager.m; path = MADataPersistent/MARootContextManager/MARootContextManager.m; sourceTree = "<group>"; };
-		9B391C8718352F580025A2FB /* MAUtilityTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAUtilityTools.h; path = MAUtilities/MAUtilityTools.h; sourceTree = "<group>"; };
-		9B391C8818352F580025A2FB /* MAUtilityTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAUtilityTools.m; path = MAUtilities/MAUtilityTools.m; sourceTree = "<group>"; };
-		9B391C8B183530BC0025A2FB /* MADataPersistentAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentAPI.h; path = MADataPersistent/MADataPersistentAPI.h; sourceTree = "<group>"; };
-		9B391C8C183530BC0025A2FB /* MADataPersistentAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MADataPersistentAPI.m; path = MADataPersistent/MADataPersistentAPI.m; sourceTree = "<group>"; };
-		9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MADataPersistentProtocols.h; path = MADataPersistent/MADataPersistentProtocols.h; sourceTree = "<group>"; };
-		9B391C901835EE410025A2FB /* MADataPersistentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentManager.h; path = MADataPersistent/MADataPersistentManager/MADataPersistentManager.h; sourceTree = "<group>"; };
-		9B391C911835EE410025A2FB /* MADataPersistentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MADataPersistentManager.m; path = MADataPersistent/MADataPersistentManager/MADataPersistentManager.m; sourceTree = "<group>"; };
-		9B391C931835EF040025A2FB /* MAAccountPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountPersistent.h; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.h; sourceTree = "<group>"; };
-		9B391C941835EF040025A2FB /* MAAccountPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountPersistent.m; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.m; sourceTree = "<group>"; };
-		9B391C961835EF210025A2FB /* MAMemberPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberPersistent.h; path = MADataPersistent/MADataPersistentManager/MAMemberPersistent.h; sourceTree = "<group>"; };
-		9B391C971835EF210025A2FB /* MAMemberPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberPersistent.m; path = MADataPersistent/MADataPersistentManager/MAMemberPersistent.m; sourceTree = "<group>"; };
-		9B391C991835EF3A0025A2FB /* MAGroupPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAGroupPersistent.h; path = MADataPersistent/MADataPersistentManager/MAGroupPersistent.h; sourceTree = "<group>"; };
-		9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAGroupPersistent.m; path = MADataPersistent/MADataPersistentManager/MAGroupPersistent.m; sourceTree = "<group>"; };
-		9B391C9C1835F0D40025A2FB /* MAContextAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAContextAPI.h; path = MADataPersistent/MARootContextManager/MAContextAPI.h; sourceTree = "<group>"; };
-		9B391C9D1835F0D40025A2FB /* MAContextAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAContextAPI.m; path = MADataPersistent/MARootContextManager/MAContextAPI.m; sourceTree = "<group>"; };
-		9B391C9F1835FA370025A2FB /* MAGlobalDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGlobalDefinitions.h; sourceTree = "<group>"; };
-		9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGlobalDefinitions.m; sourceTree = "<group>"; };
-		9B391CA2183611070025A2FB /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.h; sourceTree = "<group>"; };
-		9B391CA3183611070025A2FB /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.m; sourceTree = "<group>"; };
-		9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPlacePersistent.h; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.h; sourceTree = "<group>"; };
-		9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPlacePersistent.m; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.m; sourceTree = "<group>"; };
-		9BB074B4183B4B950023B728 /* MADataPersistentSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentSearchManager.h; path = MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.h; sourceTree = "<group>"; };
-		9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MADataPersistentSearchManager.m; path = MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.m; sourceTree = "<group>"; };
-		9BB074B8183B7C200023B728 /* MGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGroup.h; path = MAModels/coreDataModels/MGroup.h; sourceTree = "<group>"; };
-		9BB074B9183B7C200023B728 /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/coreDataModels/MGroup.m; sourceTree = "<group>"; };
-		9BB074BB183B7C210023B728 /* RMemberToGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToGroup.h; path = MAModels/coreDataModels/RMemberToGroup.h; sourceTree = "<group>"; };
-		9BB074BC183B7C210023B728 /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/coreDataModels/RMemberToGroup.m; sourceTree = "<group>"; };
-		9BB074BE183B7C210023B728 /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/coreDataModels/MAccount.h; sourceTree = "<group>"; };
-		9BB074BF183B7C210023B728 /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/coreDataModels/MAccount.m; sourceTree = "<group>"; };
-		9BB074C1183B7C210023B728 /* MMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMember.h; path = MAModels/coreDataModels/MMember.h; sourceTree = "<group>"; };
-		9BB074C2183B7C210023B728 /* MMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMember.m; path = MAModels/coreDataModels/MMember.m; sourceTree = "<group>"; };
-		9BB074C4183B7C210023B728 /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/coreDataModels/RMemberToAccount.h; sourceTree = "<group>"; };
-		9BB074C5183B7C210023B728 /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/coreDataModels/RMemberToAccount.m; sourceTree = "<group>"; };
-		9BB074C7183B7C210023B728 /* MPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPlace.h; path = MAModels/coreDataModels/MPlace.h; sourceTree = "<group>"; };
-		9BB074C8183B7C210023B728 /* MPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPlace.m; path = MAModels/coreDataModels/MPlace.m; sourceTree = "<group>"; };
-		9BB074CA183B7C950023B728 /* MAccount+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MAccount+expand.h"; path = "MAModels/MAccount+expand.h"; sourceTree = "<group>"; };
-		9BB074CB183B7C950023B728 /* MAccount+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MAccount+expand.m"; path = "MAModels/MAccount+expand.m"; sourceTree = "<group>"; };
-		9BCAC02118322997000417FD /* MatesAccounting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatesAccounting.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BCAC02418322997000417FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9BCAC02618322997000417FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9BCAC02818322997000417FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		9BCAC02A18322997000417FD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9BCAC02E18322997000417FD /* MatesAccounting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatesAccounting-Info.plist"; sourceTree = "<group>"; };
-		9BCAC03018322997000417FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9BCAC03218322997000417FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9BCAC03418322997000417FD /* MatesAccounting-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MatesAccounting-Prefix.pch"; sourceTree = "<group>"; };
-		9BCAC03518322997000417FD /* MAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAppDelegate.h; sourceTree = "<group>"; };
-		9BCAC03618322997000417FD /* MAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAppDelegate.m; sourceTree = "<group>"; };
-		9BCAC03B18322997000417FD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9BCAC04118322997000417FD /* MatesAccountingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatesAccountingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BCAC04218322997000417FD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		9BCAC04B18322997000417FD /* MatesAccountingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatesAccountingTests-Info.plist"; sourceTree = "<group>"; };
-		9BCAC04D18322997000417FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9BCAC04F18322997000417FD /* MatesAccountingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatesAccountingTests.m; sourceTree = "<group>"; };
-		9BCAC07818327097000417FD /* MAInit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MAInit.storyboard; path = MAUserInterfaces/MAInit.storyboard; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		9BCAC01E18322997000417FD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCAC02718322997000417FD /* CoreGraphics.framework in Frameworks */,
-				9BCAC02B18322997000417FD /* CoreData.framework in Frameworks */,
-				9BCAC02918322997000417FD /* UIKit.framework in Frameworks */,
-				9BCAC02518322997000417FD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BCAC03E18322997000417FD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCAC04318322997000417FD /* XCTest.framework in Frameworks */,
-				9BCAC04618322997000417FD /* CoreData.framework in Frameworks */,
-				9BCAC04518322997000417FD /* UIKit.framework in Frameworks */,
-				9BCAC04418322997000417FD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		9B391C6B183527CE0025A2FB /* MARootController */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C6C183527CE0025A2FB /* MARootNavigationController.h */,
-				9B391C6D183527CE0025A2FB /* MARootNavigationController.m */,
-				9B391C6E183527CE0025A2FB /* MARootTabBarController.h */,
-				9B391C6F183527CE0025A2FB /* MARootTabBarController.m */,
-			);
-			name = MARootController;
-			path = MAUserInterfaces/MARootController;
-			sourceTree = "<group>";
-		};
-		9B391C70183527CE0025A2FB /* MATabAccount */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C71183527CE0025A2FB /* MATabAccountViewController.h */,
-				9B391C72183527CE0025A2FB /* MATabAccountViewController.m */,
-			);
-			name = MATabAccount;
-			path = MAUserInterfaces/MATabAccount;
-			sourceTree = "<group>";
-		};
-		9B391C73183527CE0025A2FB /* MATabMember */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C74183527CE0025A2FB /* MATabMemberViewController.h */,
-				9B391C75183527CE0025A2FB /* MATabMemberViewController.m */,
-			);
-			name = MATabMember;
-			path = MAUserInterfaces/MATabMember;
-			sourceTree = "<group>";
-		};
-		9B391C76183527CE0025A2FB /* MATabMore */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C77183527CE0025A2FB /* MATabMoreViewController.h */,
-				9B391C78183527CE0025A2FB /* MATabMoreViewController.m */,
-			);
-			name = MATabMore;
-			path = MAUserInterfaces/MATabMore;
-			sourceTree = "<group>";
-		};
-		9B391C79183527CE0025A2FB /* MATabPayment */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C7A183527CE0025A2FB /* MATabPaymentViewController.h */,
-				9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */,
-			);
-			name = MATabPayment;
-			path = MAUserInterfaces/MATabPayment;
-			sourceTree = "<group>";
-		};
-		9B391C8218352C0A0025A2FB /* MARootContextManager */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C9C1835F0D40025A2FB /* MAContextAPI.h */,
-				9B391C9D1835F0D40025A2FB /* MAContextAPI.m */,
-				9B391C8318352C670025A2FB /* MARootContextManager.h */,
-				9B391C8418352C670025A2FB /* MARootContextManager.m */,
-			);
-			name = MARootContextManager;
-			sourceTree = "<group>";
-		};
-		9B391C8618352ED80025A2FB /* MAUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C8718352F580025A2FB /* MAUtilityTools.h */,
-				9B391C8818352F580025A2FB /* MAUtilityTools.m */,
-			);
-			name = MAUtilities;
-			sourceTree = "<group>";
-		};
-		9B391C8F1835EE130025A2FB /* MADataPersistentManager */ = {
-			isa = PBXGroup;
-			children = (
-				9BB074B4183B4B950023B728 /* MADataPersistentSearchManager.h */,
-				9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */,
-				9B391C901835EE410025A2FB /* MADataPersistentManager.h */,
-				9B391C911835EE410025A2FB /* MADataPersistentManager.m */,
-				9B391C931835EF040025A2FB /* MAAccountPersistent.h */,
-				9B391C941835EF040025A2FB /* MAAccountPersistent.m */,
-				9B391C961835EF210025A2FB /* MAMemberPersistent.h */,
-				9B391C971835EF210025A2FB /* MAMemberPersistent.m */,
-				9B391C991835EF3A0025A2FB /* MAGroupPersistent.h */,
-				9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */,
-				9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */,
-				9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */,
-				9B391CA2183611070025A2FB /* MACommonPersistent.h */,
-				9B391CA3183611070025A2FB /* MACommonPersistent.m */,
-			);
-			name = MADataPersistentManager;
-			sourceTree = "<group>";
-		};
-		9B605F0B183523F300890C4F /* MAModels */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */,
-				9BB074CA183B7C950023B728 /* MAccount+expand.h */,
-				9BB074CB183B7C950023B728 /* MAccount+expand.m */,
-				9BB074B7183B7C0A0023B728 /* coreDataModels */,
-			);
-			name = MAModels;
-			sourceTree = "<group>";
-		};
-		9BB074B7183B7C0A0023B728 /* coreDataModels */ = {
-			isa = PBXGroup;
-			children = (
-				9BB074C7183B7C210023B728 /* MPlace.h */,
-				9BB074C8183B7C210023B728 /* MPlace.m */,
-				9BB074C4183B7C210023B728 /* RMemberToAccount.h */,
-				9BB074C5183B7C210023B728 /* RMemberToAccount.m */,
-				9BB074C1183B7C210023B728 /* MMember.h */,
-				9BB074C2183B7C210023B728 /* MMember.m */,
-				9BB074BE183B7C210023B728 /* MAccount.h */,
-				9BB074BF183B7C210023B728 /* MAccount.m */,
-				9BB074BB183B7C210023B728 /* RMemberToGroup.h */,
-				9BB074BC183B7C210023B728 /* RMemberToGroup.m */,
-				9BB074B8183B7C200023B728 /* MGroup.h */,
-				9BB074B9183B7C200023B728 /* MGroup.m */,
-			);
-			name = coreDataModels;
-			sourceTree = "<group>";
-		};
-		9BCAC01818322997000417FD = {
-			isa = PBXGroup;
-			children = (
-				9BCAC02C18322997000417FD /* MatesAccounting */,
-				9BCAC04918322997000417FD /* MatesAccountingTests */,
-				9BCAC02318322997000417FD /* Frameworks */,
-				9BCAC02218322997000417FD /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		9BCAC02218322997000417FD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC02118322997000417FD /* MatesAccounting.app */,
-				9BCAC04118322997000417FD /* MatesAccountingTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		9BCAC02318322997000417FD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC02418322997000417FD /* Foundation.framework */,
-				9BCAC02618322997000417FD /* CoreGraphics.framework */,
-				9BCAC02818322997000417FD /* UIKit.framework */,
-				9BCAC02A18322997000417FD /* CoreData.framework */,
-				9BCAC04218322997000417FD /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9BCAC02C18322997000417FD /* MatesAccounting */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C9F1835FA370025A2FB /* MAGlobalDefinitions.h */,
-				9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */,
-				9BCAC03518322997000417FD /* MAAppDelegate.h */,
-				9BCAC03618322997000417FD /* MAAppDelegate.m */,
-				9B605F0B183523F300890C4F /* MAModels */,
-				9BCAC06118326E52000417FD /* MAUserInterfaces */,
-				9BCAC059183262BC000417FD /* MADataPersistent */,
-				9BCAC03B18322997000417FD /* Images.xcassets */,
-				9B391C8618352ED80025A2FB /* MAUtilities */,
-				9BCAC02D18322997000417FD /* Supporting Files */,
-			);
-			path = MatesAccounting;
-			sourceTree = "<group>";
-		};
-		9BCAC02D18322997000417FD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC02E18322997000417FD /* MatesAccounting-Info.plist */,
-				9BCAC02F18322997000417FD /* InfoPlist.strings */,
-				9BCAC03218322997000417FD /* main.m */,
-				9BCAC03418322997000417FD /* MatesAccounting-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9BCAC04918322997000417FD /* MatesAccountingTests */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC04F18322997000417FD /* MatesAccountingTests.m */,
-				9BCAC04A18322997000417FD /* Supporting Files */,
-			);
-			path = MatesAccountingTests;
-			sourceTree = "<group>";
-		};
-		9BCAC04A18322997000417FD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC04B18322997000417FD /* MatesAccountingTests-Info.plist */,
-				9BCAC04C18322997000417FD /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9BCAC059183262BC000417FD /* MADataPersistent */ = {
-			isa = PBXGroup;
-			children = (
-				9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */,
-				9B391C8B183530BC0025A2FB /* MADataPersistentAPI.h */,
-				9B391C8C183530BC0025A2FB /* MADataPersistentAPI.m */,
-				9B391C8F1835EE130025A2FB /* MADataPersistentManager */,
-				9B391C8218352C0A0025A2FB /* MARootContextManager */,
-			);
-			name = MADataPersistent;
-			sourceTree = "<group>";
-		};
-		9BCAC06118326E52000417FD /* MAUserInterfaces */ = {
-			isa = PBXGroup;
-			children = (
-				9BCAC07818327097000417FD /* MAInit.storyboard */,
-				9B391C6B183527CE0025A2FB /* MARootController */,
-				9B391C70183527CE0025A2FB /* MATabAccount */,
-				9B391C73183527CE0025A2FB /* MATabMember */,
-				9B391C76183527CE0025A2FB /* MATabMore */,
-				9B391C79183527CE0025A2FB /* MATabPayment */,
-			);
-			name = MAUserInterfaces;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		9BCAC02018322997000417FD /* MatesAccounting */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9BCAC05318322997000417FD /* Build configuration list for PBXNativeTarget "MatesAccounting" */;
-			buildPhases = (
-				9BCAC01D18322997000417FD /* Sources */,
-				9BCAC01E18322997000417FD /* Frameworks */,
-				9BCAC01F18322997000417FD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MatesAccounting;
-			productName = MatesAccounting;
-			productReference = 9BCAC02118322997000417FD /* MatesAccounting.app */;
-			productType = "com.apple.product-type.application";
-		};
-		9BCAC04018322997000417FD /* MatesAccountingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9BCAC05618322997000417FD /* Build configuration list for PBXNativeTarget "MatesAccountingTests" */;
-			buildPhases = (
-				9BCAC03D18322997000417FD /* Sources */,
-				9BCAC03E18322997000417FD /* Frameworks */,
-				9BCAC03F18322997000417FD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9BCAC04818322997000417FD /* PBXTargetDependency */,
-			);
-			name = MatesAccountingTests;
-			productName = MatesAccountingTests;
-			productReference = 9BCAC04118322997000417FD /* MatesAccountingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		9BCAC01918322997000417FD /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				CLASSPREFIX = MA;
-				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = Lee;
-				TargetAttributes = {
-					9BCAC04018322997000417FD = {
-						TestTargetID = 9BCAC02018322997000417FD;
-					};
-				};
-			};
-			buildConfigurationList = 9BCAC01C18322997000417FD /* Build configuration list for PBXProject "MatesAccounting" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 9BCAC01818322997000417FD;
-			productRefGroup = 9BCAC02218322997000417FD /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				9BCAC02018322997000417FD /* MatesAccounting */,
-				9BCAC04018322997000417FD /* MatesAccountingTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		9BCAC01F18322997000417FD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCAC07918327097000417FD /* MAInit.storyboard in Resources */,
-				9BCAC03118322997000417FD /* InfoPlist.strings in Resources */,
-				9BCAC03C18322997000417FD /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BCAC03F18322997000417FD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCAC04E18322997000417FD /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		9BCAC01D18322997000417FD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */,
-				9BB074B6183B4B950023B728 /* MADataPersistentSearchManager.m in Sources */,
-				9B391C921835EE410025A2FB /* MADataPersistentManager.m in Sources */,
-				9BB074BA183B7C200023B728 /* MGroup.m in Sources */,
-				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
-				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
-				9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */,
-				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
-				9BB074BD183B7C210023B728 /* RMemberToGroup.m in Sources */,
-				9B391C8D183530BC0025A2FB /* MADataPersistentAPI.m in Sources */,
-				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
-				9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */,
-				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
-				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
-				9BB074C3183B7C210023B728 /* MMember.m in Sources */,
-				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
-				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
-				9BCAC03318322997000417FD /* main.m in Sources */,
-				9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */,
-				9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */,
-				9B391C8518352C670025A2FB /* MARootContextManager.m in Sources */,
-				9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */,
-				9BB074C9183B7C210023B728 /* MPlace.m in Sources */,
-				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
-				9B391C8918352F580025A2FB /* MAUtilityTools.m in Sources */,
-				9B391C981835EF210025A2FB /* MAMemberPersistent.m in Sources */,
-				9B391C9B1835EF3A0025A2FB /* MAGroupPersistent.m in Sources */,
-				9BB074C0183B7C210023B728 /* MAccount.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BCAC03D18322997000417FD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCAC05018322997000417FD /* MatesAccountingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9BCAC04818322997000417FD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9BCAC02018322997000417FD /* MatesAccounting */;
-			targetProxy = 9BCAC04718322997000417FD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		9BCAC02F18322997000417FD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BCAC03018322997000417FD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9BCAC04C18322997000417FD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BCAC04D18322997000417FD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		9BCAC05118322997000417FD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		9BCAC05218322997000417FD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		9BCAC05418322997000417FD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "MatesAccounting/MatesAccounting-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		9BCAC05518322997000417FD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "MatesAccounting/MatesAccounting-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		9BCAC05718322997000417FD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		9BCAC05818322997000417FD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
-				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		9BCAC01C18322997000417FD /* Build configuration list for PBXProject "MatesAccounting" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9BCAC05118322997000417FD /* Debug */,
-				9BCAC05218322997000417FD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9BCAC05318322997000417FD /* Build configuration list for PBXNativeTarget "MatesAccounting" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9BCAC05418322997000417FD /* Debug */,
-				9BCAC05518322997000417FD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9BCAC05618322997000417FD /* Build configuration list for PBXNativeTarget "MatesAccountingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9BCAC05718322997000417FD /* Debug */,
-				9BCAC05818322997000417FD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */,
-			);
-			currentVersion = 9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */;
-			name = MatesAccounting.xcdatamodeld;
-			path = MAModels/MatesAccounting.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
-	};
-	rootObject = 9BCAC01918322997000417FD /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>116B641519E74F93A42087E8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>83474B4A132942CA88A28906</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>83474B4A132942CA88A28906</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-MatesAccounting.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>8FFF3602C8194670ABDD387F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Pods-MatesAccounting-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>9B391C68183525940025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C69183525940025A2FB</string>
+			</array>
+			<key>currentVersion</key>
+			<string>9B391C69183525940025A2FB</string>
+			<key>isa</key>
+			<string>XCVersionGroup</string>
+			<key>name</key>
+			<string>MatesAccounting.xcdatamodeld</string>
+			<key>path</key>
+			<string>MAModels/MatesAccounting.xcdatamodeld</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+			<key>versionGroupType</key>
+			<string>wrapper.xcdatamodel</string>
+		</dict>
+		<key>9B391C69183525940025A2FB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.xcdatamodel</string>
+			<key>path</key>
+			<string>MatesAccounting.xcdatamodel</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C6A183525940025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C68183525940025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C6B183527CE0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C6C183527CE0025A2FB</string>
+				<string>9B391C6D183527CE0025A2FB</string>
+				<string>9B391C6E183527CE0025A2FB</string>
+				<string>9B391C6F183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MARootController</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MARootController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C6C183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MARootNavigationController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C6D183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MARootNavigationController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C6E183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MARootTabBarController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C6F183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MARootTabBarController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C70183527CE0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C71183527CE0025A2FB</string>
+				<string>9B391C72183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MATabAccount</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MATabAccount</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C71183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MATabAccountViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C72183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MATabAccountViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C73183527CE0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C74183527CE0025A2FB</string>
+				<string>9B391C75183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MATabMember</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MATabMember</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C74183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MATabMemberViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C75183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MATabMemberViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C76183527CE0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C77183527CE0025A2FB</string>
+				<string>9B391C78183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MATabMore</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MATabMore</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C77183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MATabMoreViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C78183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MATabMoreViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C79183527CE0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C7A183527CE0025A2FB</string>
+				<string>9B391C7B183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MATabPayment</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MATabPayment</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C7A183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MATabPaymentViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C7B183527CE0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MATabPaymentViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C7C183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C6D183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C7D183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C6F183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C7E183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C72183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C7F183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C75183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C80183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C78183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C81183527CE0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C7B183527CE0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C8218352C0A0025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C9C1835F0D40025A2FB</string>
+				<string>9B391C9D1835F0D40025A2FB</string>
+				<string>9B391C8318352C670025A2FB</string>
+				<string>9B391C8418352C670025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MARootContextManager</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8318352C670025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MARootContextManager.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MARootContextManager/MARootContextManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8418352C670025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MARootContextManager.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MARootContextManager/MARootContextManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8518352C670025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C8418352C670025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C8618352ED80025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C8718352F580025A2FB</string>
+				<string>9B391C8818352F580025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MAUtilities</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8718352F580025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAUtilityTools.h</string>
+			<key>path</key>
+			<string>MAUtilities/MAUtilityTools.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8818352F580025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAUtilityTools.m</string>
+			<key>path</key>
+			<string>MAUtilities/MAUtilityTools.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8918352F580025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C8818352F580025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C8B183530BC0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MADataPersistentAPI.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentAPI.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8C183530BC0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MADataPersistentAPI.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentAPI.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8D183530BC0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C8C183530BC0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C8E183530E10025A2FB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MADataPersistentProtocols.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentProtocols.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C8F1835EE130025A2FB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BB074B4183B4B950023B728</string>
+				<string>9BB074B5183B4B950023B728</string>
+				<string>9B391C901835EE410025A2FB</string>
+				<string>9B391C911835EE410025A2FB</string>
+				<string>9B391C931835EF040025A2FB</string>
+				<string>9B391C941835EF040025A2FB</string>
+				<string>9B391C961835EF210025A2FB</string>
+				<string>9B391C971835EF210025A2FB</string>
+				<string>9B391C991835EF3A0025A2FB</string>
+				<string>9B391C9A1835EF3A0025A2FB</string>
+				<string>9BB074AB183B3AD60023B728</string>
+				<string>9BB074AC183B3AD60023B728</string>
+				<string>9B391CA2183611070025A2FB</string>
+				<string>9B391CA3183611070025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MADataPersistentManager</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C901835EE410025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MADataPersistentManager.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MADataPersistentManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C911835EE410025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MADataPersistentManager.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MADataPersistentManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C921835EE410025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C911835EE410025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C931835EF040025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAAccountPersistent.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAAccountPersistent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C941835EF040025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAAccountPersistent.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAAccountPersistent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C951835EF040025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C941835EF040025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C961835EF210025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAMemberPersistent.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAMemberPersistent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C971835EF210025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAMemberPersistent.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAMemberPersistent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C981835EF210025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C971835EF210025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C991835EF3A0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAGroupPersistent.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAGroupPersistent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C9A1835EF3A0025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAGroupPersistent.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAGroupPersistent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C9B1835EF3A0025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C9A1835EF3A0025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C9C1835F0D40025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAContextAPI.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MARootContextManager/MAContextAPI.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C9D1835F0D40025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAContextAPI.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MARootContextManager/MAContextAPI.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391C9E1835F0D40025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391C9D1835F0D40025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391C9F1835FA370025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MAGlobalDefinitions.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391CA01835FA370025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MAGlobalDefinitions.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391CA11835FA370025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391CA01835FA370025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B391CA2183611070025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MACommonPersistent.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MACommonPersistent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391CA3183611070025A2FB</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MACommonPersistent.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MACommonPersistent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B391CA4183611070025A2FB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9B391CA3183611070025A2FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B605F0B183523F300890C4F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C68183525940025A2FB</string>
+				<string>9BB074CA183B7C950023B728</string>
+				<string>9BB074CB183B7C950023B728</string>
+				<string>9BB074B7183B7C0A0023B728</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MAModels</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074AB183B3AD60023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAPlacePersistent.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAPlacePersistent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074AC183B3AD60023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAPlacePersistent.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MAPlacePersistent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074AD183B3AD60023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074AC183B3AD60023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074B4183B4B950023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MADataPersistentSearchManager.h</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074B5183B4B950023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MADataPersistentSearchManager.m</string>
+			<key>path</key>
+			<string>MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074B6183B4B950023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074B5183B4B950023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074B7183B7C0A0023B728</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BB074C7183B7C210023B728</string>
+				<string>9BB074C8183B7C210023B728</string>
+				<string>9BB074C4183B7C210023B728</string>
+				<string>9BB074C5183B7C210023B728</string>
+				<string>9BB074C1183B7C210023B728</string>
+				<string>9BB074C2183B7C210023B728</string>
+				<string>9BB074BE183B7C210023B728</string>
+				<string>9BB074BF183B7C210023B728</string>
+				<string>9BB074BB183B7C210023B728</string>
+				<string>9BB074BC183B7C210023B728</string>
+				<string>9BB074B8183B7C200023B728</string>
+				<string>9BB074B9183B7C200023B728</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>coreDataModels</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074B8183B7C200023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MGroup.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MGroup.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074B9183B7C200023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MGroup.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MGroup.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074BA183B7C200023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074B9183B7C200023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074BB183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RMemberToGroup.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/RMemberToGroup.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074BC183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RMemberToGroup.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/RMemberToGroup.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074BD183B7C210023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074BC183B7C210023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074BE183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAccount.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MAccount.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074BF183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAccount.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MAccount.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C0183B7C210023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074BF183B7C210023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074C1183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMember.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MMember.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C2183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMember.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MMember.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C3183B7C210023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074C2183B7C210023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074C4183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RMemberToAccount.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/RMemberToAccount.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C5183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RMemberToAccount.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/RMemberToAccount.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C6183B7C210023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074C5183B7C210023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074C7183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MPlace.h</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MPlace.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C8183B7C210023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MPlace.m</string>
+			<key>path</key>
+			<string>MAModels/coreDataModels/MPlace.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074C9183B7C210023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074C8183B7C210023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BB074CA183B7C950023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MAccount+expand.h</string>
+			<key>path</key>
+			<string>MAModels/MAccount+expand.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074CB183B7C950023B728</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MAccount+expand.m</string>
+			<key>path</key>
+			<string>MAModels/MAccount+expand.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BB074CC183B7C950023B728</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB074CB183B7C950023B728</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC01818322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC02C18322997000417FD</string>
+				<string>9BCAC04918322997000417FD</string>
+				<string>9BCAC02318322997000417FD</string>
+				<string>9BCAC02218322997000417FD</string>
+				<string>EF02035F8D744C878C1ED891</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC01918322997000417FD</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>CLASSPREFIX</key>
+				<string>MA</string>
+				<key>LastUpgradeCheck</key>
+				<string>0500</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Lee</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>9BCAC04018322997000417FD</key>
+					<dict>
+						<key>TestTargetID</key>
+						<string>9BCAC02018322997000417FD</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>9BCAC01C18322997000417FD</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>9BCAC01818322997000417FD</string>
+			<key>productRefGroup</key>
+			<string>9BCAC02218322997000417FD</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>9BCAC02018322997000417FD</string>
+				<string>9BCAC04018322997000417FD</string>
+			</array>
+		</dict>
+		<key>9BCAC01C18322997000417FD</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>9BCAC05118322997000417FD</string>
+				<string>9BCAC05218322997000417FD</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>9BCAC01D18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9B391C951835EF040025A2FB</string>
+				<string>9BB074B6183B4B950023B728</string>
+				<string>9B391C921835EE410025A2FB</string>
+				<string>9BB074BA183B7C200023B728</string>
+				<string>9B391CA11835FA370025A2FB</string>
+				<string>9BB074CC183B7C950023B728</string>
+				<string>9B391C7F183527CE0025A2FB</string>
+				<string>9BCAC03718322997000417FD</string>
+				<string>9BB074BD183B7C210023B728</string>
+				<string>9B391C8D183530BC0025A2FB</string>
+				<string>9B391C6A183525940025A2FB</string>
+				<string>9BB074AD183B3AD60023B728</string>
+				<string>9B391C80183527CE0025A2FB</string>
+				<string>9B391C7D183527CE0025A2FB</string>
+				<string>9BB074C3183B7C210023B728</string>
+				<string>9B391C7E183527CE0025A2FB</string>
+				<string>9B391C9E1835F0D40025A2FB</string>
+				<string>9BCAC03318322997000417FD</string>
+				<string>9BB074C6183B7C210023B728</string>
+				<string>9B391CA4183611070025A2FB</string>
+				<string>9B391C8518352C670025A2FB</string>
+				<string>9B391C81183527CE0025A2FB</string>
+				<string>9BB074C9183B7C210023B728</string>
+				<string>9B391C7C183527CE0025A2FB</string>
+				<string>9B391C8918352F580025A2FB</string>
+				<string>9B391C981835EF210025A2FB</string>
+				<string>9B391C9B1835EF3A0025A2FB</string>
+				<string>9BB074C0183B7C210023B728</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC01E18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9BCAC02718322997000417FD</string>
+				<string>9BCAC02B18322997000417FD</string>
+				<string>9BCAC02918322997000417FD</string>
+				<string>9BCAC02518322997000417FD</string>
+				<string>116B641519E74F93A42087E8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC01F18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9BCAC07918327097000417FD</string>
+				<string>9BCAC03118322997000417FD</string>
+				<string>9BCAC03C18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC02018322997000417FD</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>9BCAC05318322997000417FD</string>
+			<key>buildPhases</key>
+			<array>
+				<string>EAD424FBA7A84CFDB97CB8BB</string>
+				<string>9BCAC01D18322997000417FD</string>
+				<string>9BCAC01E18322997000417FD</string>
+				<string>9BCAC01F18322997000417FD</string>
+				<string>8FFF3602C8194670ABDD387F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MatesAccounting</string>
+			<key>productName</key>
+			<string>MatesAccounting</string>
+			<key>productReference</key>
+			<string>9BCAC02118322997000417FD</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>9BCAC02118322997000417FD</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MatesAccounting.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>9BCAC02218322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC02118322997000417FD</string>
+				<string>9BCAC04118322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC02318322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC02418322997000417FD</string>
+				<string>9BCAC02618322997000417FD</string>
+				<string>9BCAC02818322997000417FD</string>
+				<string>9BCAC02A18322997000417FD</string>
+				<string>9BCAC04218322997000417FD</string>
+				<string>83474B4A132942CA88A28906</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC02418322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>9BCAC02518322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02418322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC02618322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>9BCAC02718322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02618322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC02818322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>9BCAC02918322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02818322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC02A18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreData.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreData.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>9BCAC02B18322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02A18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC02C18322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C9F1835FA370025A2FB</string>
+				<string>9B391CA01835FA370025A2FB</string>
+				<string>9BCAC03518322997000417FD</string>
+				<string>9BCAC03618322997000417FD</string>
+				<string>9B605F0B183523F300890C4F</string>
+				<string>9BCAC06118326E52000417FD</string>
+				<string>9BCAC059183262BC000417FD</string>
+				<string>9BCAC03B18322997000417FD</string>
+				<string>9B391C8618352ED80025A2FB</string>
+				<string>9BCAC02D18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>MatesAccounting</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC02D18322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC02E18322997000417FD</string>
+				<string>9BCAC02F18322997000417FD</string>
+				<string>9BCAC03218322997000417FD</string>
+				<string>9BCAC03418322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC02E18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>MatesAccounting-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC02F18322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC03018322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03018322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03118322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02F18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC03218322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03318322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC03218322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC03418322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MatesAccounting-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03518322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MAAppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03618322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MAAppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03718322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC03618322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC03B18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC03C18322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC03B18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC03D18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9BCAC05018322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC03E18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9BCAC04318322997000417FD</string>
+				<string>9BCAC04618322997000417FD</string>
+				<string>9BCAC04518322997000417FD</string>
+				<string>9BCAC04418322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC03F18322997000417FD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9BCAC04E18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9BCAC04018322997000417FD</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>9BCAC05618322997000417FD</string>
+			<key>buildPhases</key>
+			<array>
+				<string>9BCAC03D18322997000417FD</string>
+				<string>9BCAC03E18322997000417FD</string>
+				<string>9BCAC03F18322997000417FD</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>9BCAC04818322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MatesAccountingTests</string>
+			<key>productName</key>
+			<string>MatesAccountingTests</string>
+			<key>productReference</key>
+			<string>9BCAC04118322997000417FD</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>9BCAC04118322997000417FD</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MatesAccountingTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>9BCAC04218322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>9BCAC04318322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC04218322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC04418322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02418322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC04518322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02818322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC04618322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC02A18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC04718322997000417FD</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>9BCAC01918322997000417FD</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>9BCAC02018322997000417FD</string>
+			<key>remoteInfo</key>
+			<string>MatesAccounting</string>
+		</dict>
+		<key>9BCAC04818322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>9BCAC02018322997000417FD</string>
+			<key>targetProxy</key>
+			<string>9BCAC04718322997000417FD</string>
+		</dict>
+		<key>9BCAC04918322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC04F18322997000417FD</string>
+				<string>9BCAC04A18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>MatesAccountingTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC04A18322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC04B18322997000417FD</string>
+				<string>9BCAC04C18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC04B18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>MatesAccountingTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC04C18322997000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC04D18322997000417FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC04D18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC04E18322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC04C18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC04F18322997000417FD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MatesAccountingTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC05018322997000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC04F18322997000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9BCAC05118322997000417FD</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>9BCAC05218322997000417FD</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>9BCAC05318322997000417FD</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>9BCAC05418322997000417FD</string>
+				<string>9BCAC05518322997000417FD</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>9BCAC05418322997000417FD</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>EF02035F8D744C878C1ED891</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MatesAccounting/MatesAccounting-Prefix.pch</string>
+				<key>GCC_TREAT_WARNINGS_AS_ERRORS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MatesAccounting/MatesAccounting-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>9BCAC05518322997000417FD</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>EF02035F8D744C878C1ED891</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MatesAccounting/MatesAccounting-Prefix.pch</string>
+				<key>GCC_TREAT_WARNINGS_AS_ERRORS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MatesAccounting/MatesAccounting-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>9BCAC05618322997000417FD</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>9BCAC05718322997000417FD</string>
+				<string>9BCAC05818322997000417FD</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>9BCAC05718322997000417FD</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MatesAccounting/MatesAccounting-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>MatesAccountingTests/MatesAccountingTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>9BCAC05818322997000417FD</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MatesAccounting/MatesAccounting-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MatesAccountingTests/MatesAccountingTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>9BCAC059183262BC000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B391C8E183530E10025A2FB</string>
+				<string>9B391C8B183530BC0025A2FB</string>
+				<string>9B391C8C183530BC0025A2FB</string>
+				<string>9B391C8F1835EE130025A2FB</string>
+				<string>9B391C8218352C0A0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MADataPersistent</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC06118326E52000417FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9BCAC07818327097000417FD</string>
+				<string>9B391C6B183527CE0025A2FB</string>
+				<string>9B391C70183527CE0025A2FB</string>
+				<string>9B391C73183527CE0025A2FB</string>
+				<string>9B391C76183527CE0025A2FB</string>
+				<string>9B391C79183527CE0025A2FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MAUserInterfaces</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC07818327097000417FD</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>MAInit.storyboard</string>
+			<key>path</key>
+			<string>MAUserInterfaces/MAInit.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9BCAC07918327097000417FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BCAC07818327097000417FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>EAD424FBA7A84CFDB97CB8BB</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>EF02035F8D744C878C1ED891</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-MatesAccounting.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Pods-MatesAccounting.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>9BCAC01918322997000417FD</string>
+</dict>
+</plist>
