@@ -11,12 +11,13 @@
 #import "MAGroupManager.h"
 #import "MATabAccountListCell.h"
 #import "MGroup.h"
+#import "MATabAccountListTableHeader.h"
 
 @interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic, strong) MATabAccountListTableHeader *tableHeaderView;
 
 @end
 
@@ -39,6 +40,7 @@
     if (currentGroup) {
         self.tableHeaderView = [self tableHeaderViewWithTitle:currentGroup.groupName];
     }
+    self.tableHeaderView = [self tableHeaderViewWithTitle:@"我的账户组"];
 }
 
 - (void)viewDidLoad
@@ -99,9 +101,15 @@
 #pragma mark private
 
 #pragma mark UI
-- (UIView *)tableHeaderViewWithTitle:(NSString *)title
+- (MATabAccountListTableHeader *)tableHeaderViewWithTitle:(NSString *)title
 {
-    return nil;
+    if (self.tableHeaderView) {
+        [self.tableHeaderView setHeaderTitle:title];
+    } else {
+        self.tableHeaderView = [[MATabAccountListTableHeader alloc] initWithHeaderTitle:title];
+    }
+
+    return self.tableHeaderView;
 }
 
 @end
