@@ -19,4 +19,9 @@
     #import "MAGlobalDefinitions.h"
     #import "MAUtilityTools.h"
 
+    // user interface
+    #import "MACellProtocols.h"
+    #import "UIView+MAAddition.h"
+
+
 #endif
