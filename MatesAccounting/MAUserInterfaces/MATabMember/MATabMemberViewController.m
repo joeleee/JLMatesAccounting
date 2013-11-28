@@ -8,23 +8,23 @@
 
 #import "MATabMemberViewController.h"
 
+#import "MAGroupManager.h"
+
+NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
+
 @interface MATabMemberViewController ()
 
 @end
 
 @implementation MATabMemberViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self loadData];
     }
-    return self;
-}
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+    return self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -32,15 +32,30 @@
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"成员"];
 
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    [self.tabBarController.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
-    [self.tabBarController.navigationItem setRightBarButtonItem:rightBarItem animated:YES];
+    UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
+    UIBarButtonItem *addMemberBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:addMemberBarItem animated:YES];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super didReceiveMemoryWarning];
+    if ([segue.identifier isEqualToString:kSegueTabMemberToGroupList]) {
+    }
+}
+
+#pragma mark - private method
+
+#pragma mark data
+- (void)loadData
+{
+}
+
+#pragma mark action
+
+- (void)viewGroupNavigationButtonTaped:(id)sender
+{
+    [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:[GroupManager currentGroup]];
 }
 
 @end

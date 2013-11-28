@@ -9,9 +9,13 @@
 #import "MATabAccountViewController.h"
 
 #import "MAGroupManager.h"
-#import "MATabAccountListCell.h"
-#import "MGroup.h"
+#import "MAAccountManager.h"
+#import "MATabAccountListSectionHeader.h"
+#import "MAGroupListViewController.h"
 #import "MATabAccountGroupInfoCell.h"
+#import "MATabAccountListCell.h"
+
+NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 
 @interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,20 +28,10 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [[MAGroupManager sharedManager] currentGroup];
+        [self loadData];
     }
 
     return self;
-}
-
-- (void)loadView
-{
-    [super loadView];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -45,15 +39,16 @@
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"账目"];
 
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    [self.tabBarController.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
-    [self.tabBarController.navigationItem setRightBarButtonItem:rightBarItem animated:YES];
+    UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
+    UIBarButtonItem *addAccountBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAccountNavigationButtonTaped:)];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:addAccountBarItem animated:YES];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super didReceiveMemoryWarning];
+    if ([segue.identifier isEqualToString:kSegueTabAccountToGroupList]) {
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -62,8 +57,16 @@
 {
     if (0 == section) {
         return 1;
+    }
+    return 10;
+
+    // TODO:
+    if (0 == section) {
+        return 1;
+    } else if ((section - 1) < [AccountManager sectionedAccountListForCurrentGroup].count) {
+        return [[AccountManager sectionedAccountListForCurrentGroup][section - 1] count];
     } else {
-        return 10;
+        return 0;
     }
 }
 
@@ -72,16 +75,23 @@
     UITableViewCell *cell = nil;
 
     if (0 == indexPath.section) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"MATabAccountGroupInfoCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell className]];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"MATabAccountListCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell className]];
     }
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 5;
+
+    // TODO:
+    if (NO && ![GroupManager currentGroup]) {
+        return 0;
+    } else {
+        return [AccountManager sectionedAccountListForCurrentGroup].count + 1;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,18 +100,40 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-        return 30;
+        return kTabAccountListSectionHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 30)];
-    [header setBackgroundColor:[UIColor redColor]];
-    return header;
+    MATabAccountListSectionHeader *headerView = [[MATabAccountListSectionHeader alloc] initWithHeaderTitle:@"未知错误"];
+    if (0 == section) {
+        [headerView setHeaderTitle:@"账户组信息"];
+    } else if (((section - 1) < [AccountManager sectionedAccountListForCurrentGroup].count)) {
+        [headerView setHeaderTitle:@"2011年11月11日"];
+    }
+    return headerView;
 }
 
-#pragma mark private
+#pragma mark - private method
 
 #pragma mark UI
+
+#pragma mark data
+- (void)loadData
+{
+    [GroupManager currentGroup];
+
+    [AccountManager sectionedAccountListForCurrentGroup];
+}
+
+#pragma mark action
+- (void)addAccountNavigationButtonTaped:(id)sender
+{
+}
+
+- (void)viewGroupNavigationButtonTaped:(id)sender
+{
+    [self performSegueWithIdentifier:kSegueTabAccountToGroupList sender:[GroupManager currentGroup]];
+}
 
 @end

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
+#define GroupManager [MAGroupManager sharedManager]
+
 #import <Foundation/Foundation.h>
 
 @class MGroup;
@@ -15,5 +17,7 @@
 + (MAGroupManager *)sharedManager;
 
 - (MGroup *)currentGroup;
+
+- (NSArray *)myGroups;
 
 @end

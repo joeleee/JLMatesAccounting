@@ -11,6 +11,7 @@
 @interface MAGroupManager ()
 
 @property (nonatomic, strong) MGroup *currentGroup;
+@property (nonatomic, strong) NSArray *myGroups;
 
 @end
 
@@ -34,6 +35,15 @@
     }
 
     return _currentGroup;
+}
+
+- (NSArray *)myGroups
+{
+    if (_myGroups) {
+        return _myGroups;
+    }
+
+    return _myGroups;
 }
 
 @end

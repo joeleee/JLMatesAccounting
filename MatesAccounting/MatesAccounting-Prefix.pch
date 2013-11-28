@@ -22,6 +22,7 @@
     // user interface
     #import "MACellProtocols.h"
     #import "UIView+MAAddition.h"
+    #import "NSObject+MAAddition.h"
 
 
 #endif

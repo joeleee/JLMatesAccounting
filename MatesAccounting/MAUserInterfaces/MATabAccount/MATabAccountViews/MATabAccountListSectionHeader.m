@@ -1,22 +1,24 @@
 //
-//  MATabAccountListTableHeader.m
+//  MATabAccountListSectionHeader.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-27.
+//  Created by Lee on 13-11-28.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MATabAccountListTableHeader.h"
+#import "MATabAccountListSectionHeader.h"
 
-@interface MATabAccountListTableHeader ()
+CGFloat const kTabAccountListSectionHeaderHeight = 20.0f;
+
+@interface MATabAccountListSectionHeader ()
 
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 
 @end
 
-@implementation MATabAccountListTableHeader
+@implementation MATabAccountListSectionHeader
 
-- (MATabAccountListTableHeader *)initWithHeaderTitle:(NSString *)title
+- (MATabAccountListSectionHeader *)initWithHeaderTitle:(NSString *)title
 {
     NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:@"MATabAccountViews" owner:self options:nil];
     self = nibArray[0];
