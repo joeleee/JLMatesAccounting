@@ -52,8 +52,9 @@
 		9BD0E7871845E87600BA9F2E /* MATabAccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E7861845E87600BA9F2E /* MATabAccountListCell.m */; };
 		9BD0E78D1845F82900BA9F2E /* UIView+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E78C1845F82900BA9F2E /* UIView+MAAddition.m */; };
 		9BD0E7911845F9F100BA9F2E /* MAGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E7901845F9F100BA9F2E /* MAGroupManager.m */; };
-		9BD0E7931845FC8A00BA9F2E /* MAViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BD0E7921845FC8A00BA9F2E /* MAViews.xib */; };
 		9BD0E79B184644A600BA9F2E /* MATabAccountListTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E79A184644A600BA9F2E /* MATabAccountListTableHeader.m */; };
+		9BD0E79D18464C0100BA9F2E /* MATabAccountViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BD0E79C18464C0100BA9F2E /* MATabAccountViews.xib */; };
+		9BD0E7A018465AB500BA9F2E /* MATabAccountGroupInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E79F18465AB500BA9F2E /* MATabAccountGroupInfoCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,9 +146,11 @@
 		9BD0E78C1845F82900BA9F2E /* UIView+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+MAAddition.m"; path = "MAAdditions/UIView+MAAddition.m"; sourceTree = "<group>"; };
 		9BD0E78F1845F9F100BA9F2E /* MAGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAGroupManager.h; path = MAManagers/MAGroupManager.h; sourceTree = "<group>"; };
 		9BD0E7901845F9F100BA9F2E /* MAGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAGroupManager.m; path = MAManagers/MAGroupManager.m; sourceTree = "<group>"; };
-		9BD0E7921845FC8A00BA9F2E /* MAViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MAViews.xib; path = MAUserInterfaces/MAViews.xib; sourceTree = "<group>"; };
 		9BD0E799184644A600BA9F2E /* MATabAccountListTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MATabAccountListTableHeader.h; path = MATabAccountViews/MATabAccountListTableHeader.h; sourceTree = "<group>"; };
 		9BD0E79A184644A600BA9F2E /* MATabAccountListTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MATabAccountListTableHeader.m; path = MATabAccountViews/MATabAccountListTableHeader.m; sourceTree = "<group>"; };
+		9BD0E79C18464C0100BA9F2E /* MATabAccountViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MATabAccountViews.xib; path = MATabAccountViews/MATabAccountViews.xib; sourceTree = "<group>"; };
+		9BD0E79E18465AB500BA9F2E /* MATabAccountGroupInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MATabAccountGroupInfoCell.h; path = MATabAccountCells/MATabAccountGroupInfoCell.h; sourceTree = "<group>"; };
+		9BD0E79F18465AB500BA9F2E /* MATabAccountGroupInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MATabAccountGroupInfoCell.m; path = MATabAccountCells/MATabAccountGroupInfoCell.m; sourceTree = "<group>"; };
 		EF02035F8D744C878C1ED891 /* Pods-MatesAccounting.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatesAccounting.xcconfig"; path = "Pods/Pods-MatesAccounting.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -400,7 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				9BCAC07818327097000417FD /* MAInit.storyboard */,
-				9BD0E7921845FC8A00BA9F2E /* MAViews.xib */,
 				9BD0E7881845F24700BA9F2E /* MAUserInterfaceProtocol */,
 				9B391C6B183527CE0025A2FB /* MARootController */,
 				9B391C70183527CE0025A2FB /* MATabAccount */,
@@ -416,6 +418,8 @@
 			children = (
 				9BD0E7851845E87600BA9F2E /* MATabAccountListCell.h */,
 				9BD0E7861845E87600BA9F2E /* MATabAccountListCell.m */,
+				9BD0E79E18465AB500BA9F2E /* MATabAccountGroupInfoCell.h */,
+				9BD0E79F18465AB500BA9F2E /* MATabAccountGroupInfoCell.m */,
 			);
 			name = MATabAccountCells;
 			sourceTree = "<group>";
@@ -449,6 +453,7 @@
 		9BD0E7981846401A00BA9F2E /* MATabAccountViews */ = {
 			isa = PBXGroup;
 			children = (
+				9BD0E79C18464C0100BA9F2E /* MATabAccountViews.xib */,
 				9BD0E799184644A600BA9F2E /* MATabAccountListTableHeader.h */,
 				9BD0E79A184644A600BA9F2E /* MATabAccountListTableHeader.m */,
 			);
@@ -533,7 +538,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD0E7931845FC8A00BA9F2E /* MAViews.xib in Resources */,
+				9BD0E79D18464C0100BA9F2E /* MATabAccountViews.xib in Resources */,
 				9BCAC07918327097000417FD /* MAInit.storyboard in Resources */,
 				9BCAC03118322997000417FD /* InfoPlist.strings in Resources */,
 				9BCAC03C18322997000417FD /* Images.xcassets in Resources */,
@@ -605,6 +610,7 @@
 				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
 				9BB074C3183B7C210023B728 /* MMember.m in Sources */,
 				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
+				9BD0E7A018465AB500BA9F2E /* MATabAccountGroupInfoCell.m in Sources */,
 				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
 				9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */,

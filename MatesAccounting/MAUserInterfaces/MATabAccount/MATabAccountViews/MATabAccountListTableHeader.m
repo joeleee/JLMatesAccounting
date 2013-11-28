@@ -18,10 +18,16 @@
 
 - (MATabAccountListTableHeader *)initWithHeaderTitle:(NSString *)title
 {
-    NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:@"MAViews" owner:self options:nil];
+    NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:@"MATabAccountViews" owner:self options:nil];
     self = nibArray[0];
 
     if (self) {
+        self.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
+                                 UIViewAutoresizingFlexibleHeight |
+                                 UIViewAutoresizingFlexibleLeftMargin |
+                                 UIViewAutoresizingFlexibleRightMargin |
+                                 UIViewAutoresizingFlexibleTopMargin |
+                                 UIViewAutoresizingFlexibleBottomMargin);
         self.headerTitleLabel.text = title;
     }
 
