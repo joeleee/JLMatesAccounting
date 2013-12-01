@@ -71,7 +71,6 @@
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
                               date:(NSDate *)date
-                             payer:(MMember *)payer
 {
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
     NSAssert(account, @"Assert account == nil");
@@ -83,7 +82,6 @@
         account.accountID = @([currentData timeIntervalSince1970]);
         account.group = group;
         account.accountDate = date;
-        account.payer = payer;
         account.totalFee = @(0);
         [[MAContextAPI sharedAPI] saveContextData];
     }

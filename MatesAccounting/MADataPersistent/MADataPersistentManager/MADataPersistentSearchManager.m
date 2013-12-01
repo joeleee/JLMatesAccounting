@@ -36,7 +36,7 @@
 
 - (NSSet *)accountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSMutableSet *accounts = [NSMutableSet setWithSet:[member.payAccounts set]];
+    NSMutableSet *accounts = [NSMutableSet set];
 
     for (RMemberToAccount *relationship in member.relationshipToAccount) {
         [accounts addObject:relationship.account];
@@ -72,7 +72,12 @@
 
 - (NSSet *)payAccountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSMutableSet *accounts = [NSMutableSet setWithSet:[member.payAccounts set]];
+    NSMutableSet *accounts = [NSMutableSet set];
+    for (RMemberToAccount *relationship in member.relationshipToAccount) {
+        if (0 < [relationship.fee doubleValue]) {
+            [accounts addObject:relationship.account];
+        }
+    }
 
     if (sortDescriptor) {
         [accounts sortedArrayUsingDescriptors:@[sortDescriptor]];

@@ -132,10 +132,9 @@
 
 - (MAccount *)createAccountToGroup:(MGroup *)group
                               date:(NSDate *)date
-                             payer:(MMember *)payer
                      setValueBlock:(PersistentBlock)setValueBlock
 {
-    MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date payer:payer];
+    MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date];
     EXECUTE_BLOCK_SAFELY(setValueBlock, account ? YES : NO, account, nil, nil);
     [[MAContextAPI sharedAPI] saveContextData];
 

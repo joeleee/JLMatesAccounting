@@ -2,12 +2,11 @@
 //  MMember.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-19.
+//  Created by Lee on 13-12-1.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
 #import "MMember.h"
-#import "MAccount.h"
 #import "RMemberToAccount.h"
 #import "RMemberToGroup.h"
 
@@ -24,6 +23,5 @@
 @dynamic updateDate;
 @dynamic relationshipToAccount;
 @dynamic relationshipToGroup;
-@dynamic payAccounts;
 
 @end

@@ -30,6 +30,11 @@
     return self.frame.size.height;
 }
 
+- (CGFloat)bottom
+{
+    return self.y + self.height;
+}
+
 - (void)setX:(CGFloat)x
 {
     CGRect frame = self.frame;

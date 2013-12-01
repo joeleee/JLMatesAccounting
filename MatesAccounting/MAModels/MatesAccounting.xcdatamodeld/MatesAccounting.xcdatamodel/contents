@@ -8,7 +8,6 @@
         <attribute name="totalFee" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MGroup" inverseName="accounts" inverseEntity="MGroup" syncable="YES"/>
-        <relationship name="payer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMember" inverseName="payAccounts" inverseEntity="MMember" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MPlace" inverseName="account" inverseEntity="MPlace" syncable="YES"/>
         <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="account" inverseEntity="RMemberToAccount" syncable="YES"/>
     </entity>
@@ -29,7 +28,6 @@
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="telephoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="payAccounts" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MAccount" inverseName="payer" inverseEntity="MAccount" syncable="YES"/>
         <relationship name="relationshipToAccount" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="member" inverseEntity="RMemberToAccount" syncable="YES"/>
         <relationship name="relationshipToGroup" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToGroup" inverseName="member" inverseEntity="RMemberToGroup" syncable="YES"/>
     </entity>
@@ -58,8 +56,8 @@
         <element name="MAccount" positionX="0" positionY="0" width="0" height="0"/>
         <element name="MGroup" positionX="0" positionY="0" width="0" height="0"/>
         <element name="MMember" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MPlace" positionX="0" positionY="0" width="0" height="0"/>
         <element name="RMemberToAccount" positionX="0" positionY="0" width="0" height="0"/>
         <element name="RMemberToGroup" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MPlace" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

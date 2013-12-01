@@ -11,6 +11,8 @@
 #import "MAGroupManager.h"
 #import "MAGroupListCell.h"
 
+NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
+
 @interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,7 +33,15 @@
 - (void)loadView
 {
     [super loadView];
-    [self setTitle:@"账小组"];
+
+    UIBarButtonItem *addGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroupNavigationButtonTaped:)];
+    [self.navigationItem setRightBarButtonItem:addGroupBarItem animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kSegueGroupListToGroupDetail]) {
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -50,12 +60,23 @@
     return cell;
 }
 
-#pragma mark private
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
+}
+
+#pragma mark - private
 
 #pragma mark data
 - (void)loadData
 {
     [GroupManager myGroups];
+}
+
+#pragma mark action
+- (void)addGroupNavigationButtonTaped:(id)sender
+{
+    [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
 }
 
 @end

@@ -14,6 +14,7 @@
 - (CGFloat)y;
 - (CGFloat)width;
 - (CGFloat)height;
+- (CGFloat)bottom;
 
 - (void)setX:(CGFloat)x;
 - (void)setY:(CGFloat)y;

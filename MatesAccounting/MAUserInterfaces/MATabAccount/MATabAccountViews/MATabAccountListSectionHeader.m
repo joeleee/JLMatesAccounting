@@ -24,12 +24,6 @@ CGFloat const kTabAccountListSectionHeaderHeight = 20.0f;
     self = nibArray[0];
 
     if (self) {
-        self.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
-                                 UIViewAutoresizingFlexibleHeight |
-                                 UIViewAutoresizingFlexibleLeftMargin |
-                                 UIViewAutoresizingFlexibleRightMargin |
-                                 UIViewAutoresizingFlexibleTopMargin |
-                                 UIViewAutoresizingFlexibleBottomMargin);
         self.headerTitleLabel.text = title;
     }
 

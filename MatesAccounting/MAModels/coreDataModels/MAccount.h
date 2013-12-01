@@ -2,27 +2,26 @@
 //  MAccount.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-19.
+//  Created by Lee on 13-12-1.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MGroup, MMember, MPlace, RMemberToAccount;
+@class MGroup, MPlace, RMemberToAccount;
 
 @interface MAccount : NSManagedObject
 
+@property (nonatomic, retain) NSDate * accountDate;
 @property (nonatomic, retain) NSNumber * accountID;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSString * detail;
-@property (nonatomic, retain) NSDate * updateDate;
-@property (nonatomic, retain) NSDate * accountDate;
 @property (nonatomic, retain) NSNumber * totalFee;
+@property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) MGroup *group;
-@property (nonatomic, retain) NSOrderedSet *relationshipToMember;
 @property (nonatomic, retain) MPlace *place;
-@property (nonatomic, retain) MMember *payer;
+@property (nonatomic, retain) NSOrderedSet *relationshipToMember;
 @end
 
 @interface MAccount (CoreDataGeneratedAccessors)

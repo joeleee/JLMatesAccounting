@@ -19,8 +19,7 @@
 - (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account;
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
-                              date:(NSDate *)date
-                             payer:(MMember *)payer;
+                              date:(NSDate *)date;
 
 - (BOOL)updateAccount:(MAccount *)account;
 

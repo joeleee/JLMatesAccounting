@@ -2,14 +2,14 @@
 //  MMember.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-19.
+//  Created by Lee on 13-12-1.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MAccount, RMemberToAccount, RMemberToGroup;
+@class RMemberToAccount, RMemberToGroup;
 
 @interface MMember : NSManagedObject
 
@@ -23,7 +23,6 @@
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSOrderedSet *relationshipToAccount;
 @property (nonatomic, retain) NSOrderedSet *relationshipToGroup;
-@property (nonatomic, retain) NSOrderedSet *payAccounts;
 @end
 
 @interface MMember (CoreDataGeneratedAccessors)
@@ -48,14 +47,4 @@
 - (void)removeRelationshipToGroupObject:(RMemberToGroup *)value;
 - (void)addRelationshipToGroup:(NSOrderedSet *)values;
 - (void)removeRelationshipToGroup:(NSOrderedSet *)values;
-- (void)insertObject:(MAccount *)value inPayAccountsAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromPayAccountsAtIndex:(NSUInteger)idx;
-- (void)insertPayAccounts:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removePayAccountsAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInPayAccountsAtIndex:(NSUInteger)idx withObject:(MAccount *)value;
-- (void)replacePayAccountsAtIndexes:(NSIndexSet *)indexes withPayAccounts:(NSArray *)values;
-- (void)addPayAccountsObject:(MAccount *)value;
-- (void)removePayAccountsObject:(MAccount *)value;
-- (void)addPayAccounts:(NSOrderedSet *)values;
-- (void)removePayAccounts:(NSOrderedSet *)values;
 @end
