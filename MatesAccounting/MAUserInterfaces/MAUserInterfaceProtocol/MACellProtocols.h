@@ -12,5 +12,6 @@
 
 @required
 - (void)reuseCellWithData:(id)data;
++ (CGFloat)cellHeight:(id)data;
 
 @end

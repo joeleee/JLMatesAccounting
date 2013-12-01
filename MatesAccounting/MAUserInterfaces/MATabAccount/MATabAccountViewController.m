@@ -16,6 +16,8 @@
 #import "MATabAccountListCell.h"
 
 NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
+NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
+NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 @interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -48,6 +50,10 @@ NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueTabAccountToGroupList]) {
+    } else if ([segue.identifier isEqualToString:kSegueTabAccountToAccountDetail]) {
+    } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
+    } else {
+        NSAssert(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }
 }
 
@@ -96,6 +102,8 @@ NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO:
+    [self performSegueWithIdentifier:kSegueTabAccountToAccountDetail sender:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -129,6 +137,7 @@ NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 #pragma mark action
 - (void)addAccountNavigationButtonTaped:(id)sender
 {
+    [self performSegueWithIdentifier:kSegueTabAccountToNewAccount sender:nil];
 }
 
 - (void)viewGroupNavigationButtonTaped:(id)sender

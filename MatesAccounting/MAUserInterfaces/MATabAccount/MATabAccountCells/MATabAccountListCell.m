@@ -32,4 +32,9 @@
 {
 }
 
++ (CGFloat)cellHeight:(id)data
+{
+    return 0.0f;
+}
+
 @end
