@@ -10,4 +10,6 @@
 
 @interface MAAccountDetailViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isCreateMode;
+
 @end

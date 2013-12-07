@@ -14,6 +14,7 @@
 #import "MAGroupListViewController.h"
 #import "MATabAccountGroupInfoCell.h"
 #import "MATabAccountListCell.h"
+#import "MAAccountDetailViewController.h"
 
 NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
@@ -52,6 +53,9 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     if ([segue.identifier isEqualToString:kSegueTabAccountToGroupList]) {
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToAccountDetail]) {
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
+        NSAssert(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MAAccountDetailViewController *accountDetail = [segue.destinationViewController viewControllers][0];
+        [accountDetail setIsCreateMode:YES];
     } else {
         NSAssert(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }

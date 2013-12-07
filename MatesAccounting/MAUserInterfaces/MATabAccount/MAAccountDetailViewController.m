@@ -39,8 +39,6 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 
-@property (nonatomic, assign) BOOL isCreateMode;
-
 @end
 
 @implementation MAAccountDetailViewController
@@ -58,10 +56,13 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 {
     [super viewDidLoad];
 
-    [self.navigationItem setLeftBarButtonItem:self.cancelBarItem];
-    [self.navigationItem setRightBarButtonItem:self.editButtonItem];
+    [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];
     if (self.isCreateMode) {
         [self setEditing:YES animated:NO];
+        self.title = @"创建账目";
+    } else {
+        [self setEditing:NO animated:NO];
+        self.title = @"账目详情";
     }
     [self.datePicker setHidden:YES];
 }
@@ -247,6 +248,17 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    if (editing) {
+        [self.navigationItem setHidesBackButton:YES animated:YES];
+        [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
+    } else {
+        if (self.isCreateMode) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self.navigationItem setHidesBackButton:NO animated:YES];
+            [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        }
+    }
     [self.tableView reloadData];
 }
 

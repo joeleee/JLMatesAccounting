@@ -467,8 +467,8 @@
                     <connections>
                         <outlet property="tableView" destination="MU9-RW-sll" id="NY4-A3-XSg"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabAccountToGroupList" id="f34-mq-Bgm"/>
-                        <segue destination="voC-ae-Zpm" kind="push" identifier="kSegueTabAccountToNewAccount" id="ZMe-Ch-sex"/>
-                        <segue destination="bVg-Iz-XI5" kind="modal" identifier="kSegueTabAccountToAccountDetail" id="dD3-jw-1Pf"/>
+                        <segue destination="voC-ae-Zpm" kind="push" identifier="kSegueTabAccountToAccountDetail" id="ZMe-Ch-sex"/>
+                        <segue destination="bVg-Iz-XI5" kind="modal" identifier="kSegueTabAccountToNewAccount" id="dD3-jw-1Pf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAT-dC-s3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,11 +725,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="281" y="-695"/>
         </scene>
-        <!--Root Tab Bar Controller - mate accounting-->
+        <!--Root Tab Bar Controller -  -->
         <scene sceneID="DoU-Ma-v8A">
             <objects>
                 <tabBarController storyboardIdentifier="MARootTabBarController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jw5-bt-JrX" customClass="MARootTabBarController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="mate accounting" id="KcY-hC-zhe"/>
+                    <navigationItem key="navigationItem" title=" " id="KcY-hC-zhe"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DuC-cH-ukr">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
