@@ -81,9 +81,9 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     UITableViewCell *cell = nil;
 
     if (0 == indexPath.section) {
-        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell className]];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell reuseIdentifier]];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell className]];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell reuseIdentifier]];
     }
     return cell;
 }

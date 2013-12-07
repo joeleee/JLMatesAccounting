@@ -24,6 +24,8 @@ typedef enum {
     AccountDescriptionSectionType = 3
 } AccountDetailTableViewSectionType;
 
+NSString * const kSegueAccountDetailToMemberList = @"kSegueAccountDetailToMemberList";
+
 NSUInteger const kNumberOfSections = 4;
 NSString * const kTableInfoRowCount = @"kTableInfoRowCount";
 NSString * const kTableInfoSectionType = @"kTableInfoSectionType";
@@ -35,6 +37,9 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
+
+@property (nonatomic, assign) BOOL isCreateMode;
 
 @end
 
@@ -43,6 +48,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        self.isCreateMode = NO;
     }
 
     return self;
@@ -52,7 +58,16 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 {
     [super viewDidLoad];
 
+    [self.navigationItem setLeftBarButtonItem:self.cancelBarItem];
+    [self.navigationItem setRightBarButtonItem:self.editButtonItem];
+    if (self.isCreateMode) {
+        [self setEditing:YES animated:NO];
+    }
     [self.datePicker setHidden:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -103,6 +118,11 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
     return headerView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
+}
+
 #pragma mark - private
 
 #pragma mark table view control
@@ -119,7 +139,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
             headerTitle = @"消费金额";
             sectionType = FeeSectionType;
             rowCount = 1;
-            cellIdentifier = [MAAccountDetailFeeCell className];
+            cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
             cellHeight = [MAAccountDetailFeeCell cellHeight:nil];
             break;
         }
@@ -130,22 +150,22 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 
             switch (row) {
                 case 0: {
-                    cellIdentifier = [MAAccountDetailDateCell className];
+                    cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
                     cellHeight = [MAAccountDetailDateCell cellHeight:nil];
                     break;
                 }
                 case 1: {
-                    cellIdentifier = [MAAccountDetailPayersCell className];
+                    cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
                     cellHeight = [MAAccountDetailPayersCell cellHeight:nil];
                     break;
                 }
                 case 2: {
-                    cellIdentifier = [MAAccountDetailConsumersCell className];
+                    cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
                     cellHeight = [MAAccountDetailConsumersCell cellHeight:nil];
                     break;
                 }
                 case 3: {
-                    cellIdentifier = [MAAccountDetailLocationCell className];
+                    cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
                     cellHeight = [MAAccountDetailLocationCell cellHeight:nil];
                     break;
                 }
@@ -159,7 +179,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
             sectionType = MembersSectionType;
             // TODO:
             rowCount = 7;
-            cellIdentifier = [MAAccountDetailConsumerDetailCell className];
+            cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
             cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
             break;
         }
@@ -167,7 +187,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
             headerTitle = @"消费描述";
             sectionType = AccountDescriptionSectionType;
             rowCount = 1;
-            cellIdentifier = [MAAccountDetailDescriptionCell className];
+            cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
             cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
             break;
         }
@@ -181,6 +201,53 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
                            kTableInfoCellHeight : @(cellHeight),
                            kTableInfoHeaderTitle : headerTitle};
     return info;
+}
+
+#pragma mark property method
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (_cancelBarItem) {
+        return _cancelBarItem;
+    }
+
+    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
+    return _cancelBarItem;
+}
+
+#pragma mark UI action
+- (void)didCancelButtonTaped:(UIBarButtonItem *)sender
+{
+    if (self.editing) {
+        MAAlertView *alert = nil;
+        if (self.isCreateMode) {
+            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
+                                        message:nil
+                                   buttonTitle1:@"放弃创建"
+                                   buttonBlock1:^{
+                                       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                   }
+                                   buttonTitle2:@"点错了~"
+                                   buttonBlock2:nil];
+        } else {
+            alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
+                                        message:nil
+                                   buttonTitle1:@"放弃更改"
+                                   buttonBlock1:^{
+                                       [self setEditing:NO animated:YES];
+                                   }
+                                   buttonTitle2:@"点错了~"
+                                   buttonBlock2:nil];
+        }
+        [alert show];
+    } else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.tableView reloadData];
 }
 
 @end

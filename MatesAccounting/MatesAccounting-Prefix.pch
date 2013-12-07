@@ -11,6 +11,7 @@
 #endif
 
 #ifdef __OBJC__
+
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
@@ -23,6 +24,7 @@
     #import "MACellProtocols.h"
     #import "UIView+MAAddition.h"
     #import "NSObject+MAAddition.h"
-
+    #import "UIColor+MAAddition.h"
+    #import "MAAlertView.h"
 
 #endif

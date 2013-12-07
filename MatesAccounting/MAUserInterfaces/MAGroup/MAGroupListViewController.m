@@ -55,7 +55,7 @@ NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell className]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell reuseIdentifier]];
 
     return cell;
 }

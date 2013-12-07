@@ -27,4 +27,9 @@
     return 60.0f;
 }
 
++ (NSString *)reuseIdentifier
+{
+    return [self className];
+}
+
 @end

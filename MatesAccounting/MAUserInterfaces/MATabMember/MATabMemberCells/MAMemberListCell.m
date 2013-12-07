@@ -1,14 +1,18 @@
 //
-//  MAAccountDetailLocationCell.m
+//  MAMemberListCell.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-12-1.
+//  Created by Lee on 13-12-7.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MAAccountDetailLocationCell.h"
+#import "MAMemberListCell.h"
 
-@implementation MAAccountDetailLocationCell
+@interface MAMemberListCell ()
+
+@end
+
+@implementation MAMemberListCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -24,7 +28,7 @@
 
 + (CGFloat)cellHeight:(id)data
 {
-    return 40.0f;
+    return 65.0f;
 }
 
 + (NSString *)reuseIdentifier
