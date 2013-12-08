@@ -10,4 +10,6 @@
 
 @interface MAMemberListCell : UITableViewCell <MACellReuseProtocol>
 
+@property (nonatomic, weak) id<MACellActionDelegate> actionDelegate;
+
 @end

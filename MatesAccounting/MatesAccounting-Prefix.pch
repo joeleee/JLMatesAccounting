@@ -26,5 +26,6 @@
     #import "NSObject+MAAddition.h"
     #import "UIColor+MAAddition.h"
     #import "MAAlertView.h"
+    #import "NSDate+MAAddition.h"
 
 #endif

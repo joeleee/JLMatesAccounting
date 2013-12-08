@@ -9,8 +9,11 @@
 #import "MATabMemberViewController.h"
 
 #import "MAGroupManager.h"
+#import "MAMemberDetailViewController.h"
 
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
+NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
+NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember";
 
 @interface MATabMemberViewController ()
 
@@ -32,8 +35,8 @@ NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
     [super viewDidAppear:animated];
     [self.tabBarController setTitle:@"成员"];
 
-    UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
-    UIBarButtonItem *addMemberBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didGroupNavigationButtonTaped:)];
+    UIBarButtonItem *addMemberBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddMemberNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:addMemberBarItem animated:YES];
 }
@@ -41,6 +44,13 @@ NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueTabMemberToGroupList]) {
+    } else if ([segue.identifier isEqualToString:kSegueTabMemberToMemberDetail]) {
+    } else if ([segue.identifier isEqualToString:kSegueTabMemberToCreateMember]) {
+        NSAssert(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
+        [memberDetail setIsCreateMode:YES];
+    } else {
+        NSAssert(NO, @"Wrong segue! (MATabMemberViewController)");
     }
 }
 
@@ -53,9 +63,14 @@ NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 
 #pragma mark action
 
-- (void)viewGroupNavigationButtonTaped:(id)sender
+- (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
     [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:[GroupManager currentGroup]];
+}
+
+- (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)sender
+{
+    [self performSegueWithIdentifier:kSegueTabMemberToCreateMember sender:nil];
 }
 
 @end

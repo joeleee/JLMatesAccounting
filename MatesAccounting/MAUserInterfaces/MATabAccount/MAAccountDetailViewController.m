@@ -26,12 +26,12 @@ typedef enum {
 
 NSString * const kSegueAccountDetailToMemberList = @"kSegueAccountDetailToMemberList";
 
-NSUInteger const kNumberOfSections = 4;
-NSString * const kTableInfoRowCount = @"kTableInfoRowCount";
-NSString * const kTableInfoSectionType = @"kTableInfoSectionType";
-NSString * const kTableInfoCellIdentifier = @"kTableInfoCellIdentifier";
-NSString * const kTableInfoCellHeight = @"kTableInfoCellHeight";
-NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
+NSUInteger const kAccountDetailNumberOfSections = 4;
+NSString * const kAccountDetailRowCount = @"kAccountDetailRowCount";
+NSString * const kAccountDetailSectionType = @"kAccountDetailSectionType";
+NSString * const kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
+NSString * const kAccountDetailCellHeight = @"kAccountDetailCellHeight";
+NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 @interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -75,9 +75,9 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *sectionInfo = [self tableView:tableView InfoOfSection:indexPath.section row:indexPath.row];
+    NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
 
-    NSString *cellIdentifier = [sectionInfo objectForKey:kTableInfoCellIdentifier];
+    NSString *cellIdentifier = [sectionInfo objectForKey:kAccountDetailCellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     return cell;
@@ -85,21 +85,21 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSDictionary *sectionInfo = [self tableView:tableView InfoOfSection:section row:0];
-    NSInteger rowCount = [[sectionInfo objectForKey:kTableInfoRowCount] integerValue];
+    NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:section row:0];
+    NSInteger rowCount = [[sectionInfo objectForKey:kAccountDetailRowCount] integerValue];
 
     return rowCount;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return kNumberOfSections;
+    return kAccountDetailNumberOfSections;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *sectionInfo = [self tableView:tableView InfoOfSection:indexPath.section row:indexPath.row];
-    CGFloat rowHeight = [[sectionInfo objectForKey:kTableInfoCellHeight] floatValue];
+    NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
+    CGFloat rowHeight = [[sectionInfo objectForKey:kAccountDetailCellHeight] floatValue];
 
     return rowHeight;
 }
@@ -113,8 +113,8 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 {
     MAAccountDetailSectionHeader *headerView = [[MAAccountDetailSectionHeader alloc] initWithHeaderTitle:@"未知错误"];
 
-    NSDictionary *sectionInfo = [self tableView:tableView InfoOfSection:section row:0];
-    [headerView setHeaderTitle:[sectionInfo objectForKey:kTableInfoHeaderTitle]];
+    NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:section row:0];
+    [headerView setHeaderTitle:[sectionInfo objectForKey:kAccountDetailHeaderTitle]];
 
     return headerView;
 }
@@ -127,7 +127,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
 #pragma mark - private
 
 #pragma mark table view control
-- (NSDictionary *)tableView:(UITableView *)tableView InfoOfSection:(NSInteger)section row:(NSInteger)row
+- (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
 {
     AccountDetailTableViewSectionType sectionType = 0;
     NSInteger rowCount = 0;
@@ -196,11 +196,11 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
             break;
     }
 
-    NSDictionary *info = @{kTableInfoSectionType : @(sectionType),
-                           kTableInfoRowCount : @(rowCount),
-                           kTableInfoCellIdentifier : cellIdentifier,
-                           kTableInfoCellHeight : @(cellHeight),
-                           kTableInfoHeaderTitle : headerTitle};
+    NSDictionary *info = @{kAccountDetailSectionType : @(sectionType),
+                           kAccountDetailRowCount : @(rowCount),
+                           kAccountDetailCellIdentifier : cellIdentifier,
+                           kAccountDetailCellHeight : @(cellHeight),
+                           kAccountDetailHeaderTitle : headerTitle};
     return info;
 }
 
@@ -225,7 +225,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
                                         message:nil
                                    buttonTitle1:@"放弃创建"
                                    buttonBlock1:^{
-                                       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                       [self dismissViewControllerAnimated:YES completion:nil];
                                    }
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
@@ -241,7 +241,7 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
         }
         [alert show];
     } else {
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -253,13 +253,12 @@ NSString * const kTableInfoHeaderTitle = @"kTableInfoHeaderTitle";
         [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
     } else {
         if (self.isCreateMode) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [self.navigationItem setHidesBackButton:NO animated:YES];
             [self.navigationItem setLeftBarButtonItem:nil animated:YES];
         }
     }
-    [self.tableView reloadData];
 }
 
 @end

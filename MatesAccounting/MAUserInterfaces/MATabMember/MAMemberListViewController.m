@@ -13,12 +13,14 @@
 #import "MAMemberListCell.h"
 #import "MMember.h"
 
+NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
+
 typedef enum {
     MemberListSectionOfSelected = 0,
     MemberListSectionOfUnselected = 1
 } MAMemberListSectionType;
 
-@interface MAMemberListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MAMemberListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -46,6 +48,10 @@ typedef enum {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:kSegueMemberListToMemberDetail]) {
+    } else {
+        NSAssert(NO, @"Wrong segue identifier! (MAMemberListViewController)");
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -58,9 +64,14 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *sectionArray = [self arrayInSection:indexPath.section];
-    UITableViewCell *cell = nil;
+    id cell = nil;
     if (0 < sectionArray.count) {
-        cell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListCell className]];
+        MAMemberListCell *memberCell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListCell className]];
+        if ([memberCell respondsToSelector:@selector(actionDelegate)]) {
+            memberCell.actionDelegate = self;
+        }
+        cell = memberCell;
+
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListSectionEmptyCell className]];
     }
@@ -123,6 +134,15 @@ typedef enum {
     }
 
     return headerView;
+}
+
+#pragma mark MACellActionDelegate
+- (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
+{
+    if ([cell isKindOfClass:[MAMemberListCell class]]) {
+        [self performSegueWithIdentifier:kSegueMemberListToMemberDetail sender:data];
+    }
+    return YES;
 }
 
 #pragma mark - private

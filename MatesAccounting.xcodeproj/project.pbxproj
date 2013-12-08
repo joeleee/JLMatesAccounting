@@ -32,6 +32,11 @@
 		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
 		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
 		9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA3183611070025A2FB /* MACommonPersistent.m */; };
+		9B889393185446B4003A9DCB /* MAMemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */; };
+		9B88939618545A60003A9DCB /* MAMemberDetailCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939518545A60003A9DCB /* MAMemberDetailCommonCell.m */; };
+		9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */; };
+		9B88939C1854ABF7003A9DCB /* MAMemberDetailGenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */; };
+		9B88939F1854C7F8003A9DCB /* NSDate+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */; };
 		9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */; };
 		9BB074B6183B4B950023B728 /* MADataPersistentSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B5183B4B950023B728 /* MADataPersistentSearchManager.m */; };
 		9BB074BA183B7C200023B728 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074B9183B7C200023B728 /* MGroup.m */; };
@@ -137,6 +142,16 @@
 		9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGlobalDefinitions.m; sourceTree = "<group>"; };
 		9B391CA2183611070025A2FB /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.h; sourceTree = "<group>"; };
 		9B391CA3183611070025A2FB /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.m; sourceTree = "<group>"; };
+		9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMemberDetailViewController.h; sourceTree = "<group>"; };
+		9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMemberDetailViewController.m; sourceTree = "<group>"; };
+		9B88939418545A60003A9DCB /* MAMemberDetailCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberDetailCommonCell.h; path = MATabMemberCells/MAMemberDetailCommonCell.h; sourceTree = "<group>"; };
+		9B88939518545A60003A9DCB /* MAMemberDetailCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberDetailCommonCell.m; path = MATabMemberCells/MAMemberDetailCommonCell.m; sourceTree = "<group>"; };
+		9B8893971854AA43003A9DCB /* MAMemberDetailBirthdayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberDetailBirthdayCell.h; path = MATabMemberCells/MAMemberDetailBirthdayCell.h; sourceTree = "<group>"; };
+		9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberDetailBirthdayCell.m; path = MATabMemberCells/MAMemberDetailBirthdayCell.m; sourceTree = "<group>"; };
+		9B88939A1854ABF7003A9DCB /* MAMemberDetailGenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberDetailGenderCell.h; path = MATabMemberCells/MAMemberDetailGenderCell.h; sourceTree = "<group>"; };
+		9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberDetailGenderCell.m; path = MATabMemberCells/MAMemberDetailGenderCell.m; sourceTree = "<group>"; };
+		9B88939D1854C7F8003A9DCB /* NSDate+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MAAddition.h"; path = "MAAdditions/NSDate+MAAddition.h"; sourceTree = "<group>"; };
+		9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MAAddition.m"; path = "MAAdditions/NSDate+MAAddition.m"; sourceTree = "<group>"; };
 		9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPlacePersistent.h; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.h; sourceTree = "<group>"; };
 		9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPlacePersistent.m; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.m; sourceTree = "<group>"; };
 		9BB074B4183B4B950023B728 /* MADataPersistentSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentSearchManager.h; path = MADataPersistent/MADataPersistentManager/MADataPersistentSearchManager.h; sourceTree = "<group>"; };
@@ -158,7 +173,7 @@
 		9BC230FF184B1AEC005ADD59 /* MAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAccount.h; path = MAModels/coreDataModels/MAccount.h; sourceTree = "<group>"; };
 		9BC23100184B1AEC005ADD59 /* MAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAccount.m; path = MAModels/coreDataModels/MAccount.m; sourceTree = "<group>"; };
 		9BC23102184B1F11005ADD59 /* MAAccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountDetailViewController.h; sourceTree = "<group>"; };
-		9BC23103184B1F11005ADD59 /* MAAccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountDetailViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
+		9BC23103184B1F11005ADD59 /* MAAccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountDetailViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		9BC23105184B274F005ADD59 /* MAAccountDetailFeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountDetailFeeCell.h; path = MATabAccountCells/MAAccountDetailFeeCell.h; sourceTree = "<group>"; };
 		9BC23106184B274F005ADD59 /* MAAccountDetailFeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountDetailFeeCell.m; path = MATabAccountCells/MAAccountDetailFeeCell.m; sourceTree = "<group>"; };
 		9BC23108184B2776005ADD59 /* MAAccountDetailDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountDetailDateCell.h; path = MATabAccountCells/MAAccountDetailDateCell.h; sourceTree = "<group>"; };
@@ -260,6 +275,12 @@
 				9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */,
 				9B25AA1A1853472C008D79B7 /* MAMemberListSectionEmptyCell.h */,
 				9B25AA1B1853472C008D79B7 /* MAMemberListSectionEmptyCell.m */,
+				9B88939418545A60003A9DCB /* MAMemberDetailCommonCell.h */,
+				9B88939518545A60003A9DCB /* MAMemberDetailCommonCell.m */,
+				9B8893971854AA43003A9DCB /* MAMemberDetailBirthdayCell.h */,
+				9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */,
+				9B88939A1854ABF7003A9DCB /* MAMemberDetailGenderCell.h */,
+				9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */,
 			);
 			name = MATabMemberCells;
 			sourceTree = "<group>";
@@ -299,6 +320,8 @@
 				9B391C75183527CE0025A2FB /* MATabMemberViewController.m */,
 				9B25AA0D18532E41008D79B7 /* MAMemberListViewController.h */,
 				9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */,
+				9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */,
+				9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */,
 			);
 			name = MATabMember;
 			path = MAUserInterfaces/MATabMember;
@@ -547,6 +570,8 @@
 				9BD0E7B01847AC9F00BA9F2E /* NSObject+MAAddition.m */,
 				9B25AA1D185350FE008D79B7 /* UIColor+MAAddition.h */,
 				9B25AA1E185350FE008D79B7 /* UIColor+MAAddition.m */,
+				9B88939D1854C7F8003A9DCB /* NSDate+MAAddition.h */,
+				9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */,
 			);
 			name = MAAdditions;
 			sourceTree = "<group>";
@@ -736,10 +761,13 @@
 				9BB074BA183B7C200023B728 /* MGroup.m in Sources */,
 				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
 				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
+				9B88939C1854ABF7003A9DCB /* MAMemberDetailGenderCell.m in Sources */,
 				9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */,
 				9BC2311C184B2EC1005ADD59 /* MAAccountDetailSectionHeader.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
 				9BC23116184B27FD005ADD59 /* MAAccountDetailConsumerDetailCell.m in Sources */,
+				9B88939F1854C7F8003A9DCB /* NSDate+MAAddition.m in Sources */,
+				9B889393185446B4003A9DCB /* MAMemberDetailViewController.m in Sources */,
 				9BC2310D184B2799005ADD59 /* MAAccountDetailPayersCell.m in Sources */,
 				9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */,
 				9BD0E7871845E87600BA9F2E /* MATabAccountListCell.m in Sources */,
@@ -766,7 +794,9 @@
 				9BC2310A184B2776005ADD59 /* MAAccountDetailDateCell.m in Sources */,
 				9BCAC03318322997000417FD /* main.m in Sources */,
 				9BB074C6183B7C210023B728 /* RMemberToAccount.m in Sources */,
+				9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */,
 				9BC23104184B1F11005ADD59 /* MAAccountDetailViewController.m in Sources */,
+				9B88939618545A60003A9DCB /* MAMemberDetailCommonCell.m in Sources */,
 				9BD0E7911845F9F100BA9F2E /* MAGroupManager.m in Sources */,
 				9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */,
 				9B391C8518352C670025A2FB /* MARootContextManager.m in Sources */,
