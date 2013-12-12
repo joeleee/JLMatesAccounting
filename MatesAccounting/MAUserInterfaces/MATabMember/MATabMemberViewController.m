@@ -10,12 +10,16 @@
 
 #import "MAGroupManager.h"
 #import "MAMemberDetailViewController.h"
+#import "MATabMemberListCell.h"
+#import "MAMemberManager.h"
 
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
 NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember";
 
-@interface MATabMemberViewController ()
+@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -28,6 +32,15 @@ NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember
     }
 
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.tableView.contentOffset = CGPointMake(0, -64);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,11 +67,36 @@ NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember
     }
 }
 
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MATabMemberListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MATabMemberListCell className]];
+
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSUInteger rowCount = [memberManager currentGroupMembers].count;
+
+    // TODO: test data
+    rowCount = 18;
+
+    return rowCount;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:kSegueTabMemberToMemberDetail sender:nil];
+}
+
 #pragma mark - private method
 
 #pragma mark data
 - (void)loadData
 {
+    [memberManager currentGroupMembers];
 }
 
 #pragma mark action

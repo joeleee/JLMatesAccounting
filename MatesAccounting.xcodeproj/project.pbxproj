@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		116B641519E74F93A42087E8 /* libPods-MatesAccounting.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83474B4A132942CA88A28906 /* libPods-MatesAccounting.a */; };
+		9B079B72185A0B26003C654B /* MATabMemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B71185A0B26003C654B /* MATabMemberListCell.m */; };
+		9B079B75185A0E03003C654B /* MAMemberManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B74185A0E03003C654B /* MAMemberManager.m */; };
 		9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2085BC1853760C009C03BD /* MAAlertView.m */; };
 		9B25AA0F18532E41008D79B7 /* MAMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */; };
 		9B25AA1418533DBC008D79B7 /* MAMemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */; };
@@ -95,6 +97,10 @@
 
 /* Begin PBXFileReference section */
 		83474B4A132942CA88A28906 /* libPods-MatesAccounting.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MatesAccounting.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B079B70185A0B26003C654B /* MATabMemberListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MATabMemberListCell.h; path = MATabMemberCells/MATabMemberListCell.h; sourceTree = "<group>"; };
+		9B079B71185A0B26003C654B /* MATabMemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MATabMemberListCell.m; path = MATabMemberCells/MATabMemberListCell.m; sourceTree = "<group>"; };
+		9B079B73185A0E03003C654B /* MAMemberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberManager.h; path = MAManagers/MAMemberManager.h; sourceTree = "<group>"; };
+		9B079B74185A0E03003C654B /* MAMemberManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberManager.m; path = MAManagers/MAMemberManager.m; sourceTree = "<group>"; };
 		9B2085BB1853760C009C03BD /* MAAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAlertView.h; path = MAUtilities/MAAlertView.h; sourceTree = "<group>"; };
 		9B2085BC1853760C009C03BD /* MAAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAlertView.m; path = MAUtilities/MAAlertView.m; sourceTree = "<group>"; };
 		9B25AA0D18532E41008D79B7 /* MAMemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMemberListViewController.h; sourceTree = "<group>"; };
@@ -271,6 +277,8 @@
 		9B25AA1118533D32008D79B7 /* MATabMemberCells */ = {
 			isa = PBXGroup;
 			children = (
+				9B079B70185A0B26003C654B /* MATabMemberListCell.h */,
+				9B079B71185A0B26003C654B /* MATabMemberListCell.m */,
 				9B25AA1218533DBC008D79B7 /* MAMemberListCell.h */,
 				9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */,
 				9B25AA1A1853472C008D79B7 /* MAMemberListSectionEmptyCell.h */,
@@ -583,6 +591,8 @@
 				9BD0E7901845F9F100BA9F2E /* MAGroupManager.m */,
 				9BD0E7B21847ADB100BA9F2E /* MAAccountManager.h */,
 				9BD0E7B31847ADB100BA9F2E /* MAAccountManager.m */,
+				9B079B73185A0E03003C654B /* MAMemberManager.h */,
+				9B079B74185A0E03003C654B /* MAMemberManager.m */,
 			);
 			name = MAManagers;
 			sourceTree = "<group>";
@@ -767,6 +777,7 @@
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
 				9BC23116184B27FD005ADD59 /* MAAccountDetailConsumerDetailCell.m in Sources */,
 				9B88939F1854C7F8003A9DCB /* NSDate+MAAddition.m in Sources */,
+				9B079B75185A0E03003C654B /* MAMemberManager.m in Sources */,
 				9B889393185446B4003A9DCB /* MAMemberDetailViewController.m in Sources */,
 				9BC2310D184B2799005ADD59 /* MAAccountDetailPayersCell.m in Sources */,
 				9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */,
@@ -803,6 +814,7 @@
 				9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */,
 				9BD0E7A6184796FF00BA9F2E /* MATabAccountListSectionHeader.m in Sources */,
 				9BB074C9183B7C210023B728 /* MPlace.m in Sources */,
+				9B079B72185A0B26003C654B /* MATabMemberListCell.m in Sources */,
 				9BC23107184B274F005ADD59 /* MAAccountDetailFeeCell.m in Sources */,
 				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
 				9B25AA1F185350FE008D79B7 /* UIColor+MAAddition.m in Sources */,

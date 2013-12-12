@@ -31,11 +31,75 @@
                     <view key="view" contentMode="scaleToFill" id="Lge-jq-KBC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="30" sectionFooterHeight="1" id="wTx-39-uXO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MATabMemberListCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MATabMemberListCell" id="oIe-aK-eu6" customClass="MATabMemberListCell">
+                                        <rect key="frame" x="0.0" y="94" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oIe-aK-eu6" id="rEv-ZY-ezc">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="gyl-fI-tNb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="287" height="79"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李某某" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="Cad-uB-tqe">
+                                                            <rect key="frame" x="20" y="15" width="131" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8612345678901" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="2G0-Vv-wLx">
+                                                            <rect key="frame" x="159" y="30" width="128" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VNl-wj-NC4">
+                                                            <rect key="frame" x="20" y="40" width="40" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="312412.1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="e14-he-rhx">
+                                                            <rect key="frame" x="61" y="40" width="90" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="memberFeeLabel" destination="e14-he-rhx" id="Jt1-tG-Sfs"/>
+                                            <outlet property="memberFeeTitleLabel" destination="VNl-wj-NC4" id="G2u-vh-bDH"/>
+                                            <outlet property="memberNameLabel" destination="Cad-uB-tqe" id="MS2-A4-U1V"/>
+                                            <outlet property="memberTelphoneLabel" destination="2G0-Vv-wLx" id="ARR-Ff-Yl9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4cy-Pp-Usj" id="dGG-q1-SR0"/>
+                                    <outlet property="delegate" destination="4cy-Pp-Usj" id="7L7-ah-IaY"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" systemItem="contacts" id="ELa-oR-qlG"/>
                     <navigationItem key="navigationItem" title="成员" id="WbJ-Ka-1qu"/>
                     <connections>
+                        <outlet property="tableView" destination="wTx-39-uXO" id="r7f-iz-Vod"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabMemberToGroupList" id="trI-uf-AKA"/>
                         <segue destination="9Mr-cM-xIL" kind="push" identifier="kSegueTabMemberToMemberDetail" id="Qp4-1k-UgR"/>
                         <segue destination="aQK-tv-AIo" kind="modal" identifier="kSegueTabMemberToCreateMember" modalTransitionStyle="coverVertical" id="llC-v5-bXO"/>
@@ -310,7 +374,7 @@
                                                                 <!--1949-10-01 10:30:00 +0000-->
                                                             </date>
                                                             <timeZone key="timeZone" name="America/Los_Angeles">
-                                                                <mutableData key="data">
+                                                                <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -328,7 +392,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                                             </timeZone>
                                                             <connections>
                                                                 <action selector="didBirthdayDatePickerValueChanged:" destination="l20-lu-mY2" eventType="valueChanged" id="qhZ-BI-ydo"/>
@@ -511,7 +575,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="30" sectionFooterHeight="1" id="MU9-RW-sll">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MATabAccountGroupInfoCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MATabAccountGroupInfoCell" id="lq0-cM-SW4" customClass="MATabAccountGroupInfoCell">
@@ -674,7 +738,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" systemItem="mostViewed" id="vCq-zP-JxM"/>
                     <navigationItem key="navigationItem" title="账目" id="obn-s3-ydX">
@@ -859,7 +923,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1231.12" placeholder="金额" textAlignment="right" minimumFontSize="12" id="nyJ-v6-Qyd">
-                                                    <rect key="frame" x="200.00000059604645" y="5" width="100" height="30"/>
+                                                    <rect key="frame" x="200.00000123182929" y="5" width="100" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1112,8 +1176,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="ZMe-Ch-sex"/>
         <segue reference="trI-uf-AKA"/>
-        <segue reference="paX-30-ImT"/>
-        <segue reference="Bvd-iw-5bp"/>
+        <segue reference="Qp4-1k-UgR"/>
     </inferredMetricsTieBreakers>
 </document>
