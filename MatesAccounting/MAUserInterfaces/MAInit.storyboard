@@ -97,19 +97,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" systemItem="contacts" id="ELa-oR-qlG"/>
-                    <navigationItem key="navigationItem" title="成员" id="WbJ-Ka-1qu"/>
+                    <navigationItem key="navigationItem" title="账组成员" id="WbJ-Ka-1qu"/>
                     <connections>
                         <outlet property="tableView" destination="wTx-39-uXO" id="r7f-iz-Vod"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabMemberToGroupList" id="trI-uf-AKA"/>
                         <segue destination="9Mr-cM-xIL" kind="push" identifier="kSegueTabMemberToMemberDetail" id="Qp4-1k-UgR"/>
                         <segue destination="aQK-tv-AIo" kind="modal" identifier="kSegueTabMemberToCreateMember" modalTransitionStyle="coverVertical" id="llC-v5-bXO"/>
+                        <segue destination="1H3-fR-Ewz" kind="push" identifier="kSegueTabMemberToFriendList" id="H6b-eb-bSk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aem-P8-gDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-377" y="681"/>
         </scene>
-        <!--Group List View Controller - 账小组-->
+        <!--Group List View Controller - 账组-->
         <scene sceneID="s2c-hm-FEw">
             <objects>
                 <viewController storyboardIdentifier="MAGroupListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D4S-IT-cSI" customClass="MAGroupListViewController" sceneMemberID="viewController">
@@ -135,15 +136,15 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建于" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iit-fb-Lok" userLabel="timeTitle">
-                                                            <rect key="frame" x="30" y="50" width="40" height="20"/>
+                                                            <rect key="frame" x="20" y="50" width="40" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                             <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2011年11月11日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ibK-MK-KYs" userLabel="time">
-                                                            <rect key="frame" x="71" y="50" width="98" height="20"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2011-11-11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ibK-MK-KYs" userLabel="time">
+                                                            <rect key="frame" x="68" y="50" width="75" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -151,7 +152,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="134134" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dMq-Hu-rrg" userLabel="member">
-                                                            <rect key="frame" x="235" y="8" width="65" height="20"/>
+                                                            <rect key="frame" x="205" y="8" width="65" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -159,7 +160,7 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="134134" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wMc-sE-Fh3" userLabel="count">
-                                                            <rect key="frame" x="235" y="31" width="65" height="20"/>
+                                                            <rect key="frame" x="205" y="31" width="65" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -167,7 +168,7 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="134134" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="csX-nd-ym2" userLabel="fee">
-                                                            <rect key="frame" x="235" y="54" width="65" height="20"/>
+                                                            <rect key="frame" x="205" y="54" width="65" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -175,7 +176,7 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成员数:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iMd-GK-7fG" userLabel="memberTitle">
-                                                            <rect key="frame" x="181" y="8" width="50" height="20"/>
+                                                            <rect key="frame" x="151" y="8" width="50" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -183,7 +184,7 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账目数:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2KH-ZY-atx" userLabel="countTitle">
-                                                            <rect key="frame" x="181" y="31" width="50" height="20"/>
+                                                            <rect key="frame" x="151" y="31" width="50" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -191,7 +192,7 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总金额:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7sZ-2z-7HK" userLabel="feeTitle">
-                                                            <rect key="frame" x="181" y="54" width="50" height="20"/>
+                                                            <rect key="frame" x="151" y="54" width="50" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -199,13 +200,24 @@
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="groupName" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" id="ZnK-Nr-Emx" userLabel="groupName">
-                                                            <rect key="frame" x="20" y="3" width="158" height="44"/>
+                                                            <rect key="frame" x="20" y="3" width="123" height="44"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <color key="textColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="RqK-Wy-VRf">
+                                                            <rect key="frame" x="278" y="29" width="22" height="22"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <state key="normal">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="didGroupDetailButtonTaped:" destination="oxT-V5-fRl" eventType="touchUpInside" id="ucT-0u-m4n"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -216,6 +228,7 @@
                                         <connections>
                                             <outlet property="groupAccountCountLabel" destination="wMc-sE-Fh3" id="DGK-JA-ale"/>
                                             <outlet property="groupCreateDataLabel" destination="ibK-MK-KYs" id="INL-uq-4vN"/>
+                                            <outlet property="groupDetailButton" destination="RqK-Wy-VRf" id="jbc-R5-sjN"/>
                                             <outlet property="groupMemberCountLabel" destination="dMq-Hu-rrg" id="2oS-HR-OFf"/>
                                             <outlet property="groupNameLabel" destination="ZnK-Nr-Emx" id="3PC-aY-tnF"/>
                                             <outlet property="groupTotalFeeLabel" destination="csX-nd-ym2" id="XFI-6g-adD"/>
@@ -231,10 +244,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="账小组" id="MMp-5H-wtH"/>
+                    <navigationItem key="navigationItem" title="账组" id="MMp-5H-wtH"/>
                     <connections>
                         <outlet property="tableView" destination="4BX-dR-NDR" id="aod-gn-jyj"/>
                         <segue destination="fQb-uw-6sn" kind="modal" identifier="kSegueGroupListToGroupDetail" modalTransitionStyle="partialCurl" id="GEV-e9-Uno"/>
+                        <segue destination="fQb-uw-6sn" kind="modal" identifier="kSegueGroupListToCreateGroup" id="NzF-kh-GnM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-nq-l6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -429,6 +443,82 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="113" y="681"/>
         </scene>
+        <!--Friend List View Controller - 好友-->
+        <scene sceneID="TJp-xV-lbR">
+            <objects>
+                <viewController storyboardIdentifier="MAFriendListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1H3-fR-Ewz" customClass="MAFriendListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PD8-0w-ELu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="35m-X8-bKi">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAFriendListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MAFriendListCell" rowHeight="80" id="mMp-j1-GMG" customClass="MAFriendListCell">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mMp-j1-GMG" id="woD-PL-cxJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="dky-4H-3KL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李某某" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0j6-Yp-z4l">
+                                                            <rect key="frame" x="20" y="25" width="147" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="RGE-e4-quk">
+                                                            <rect key="frame" x="175" y="20" width="125" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zhuocheng.lee@gmail.com" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dy2-Jh-6sk">
+                                                            <rect key="frame" x="175" y="49" width="125" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="eMailLabel" destination="dy2-Jh-6sk" id="q8w-SI-LMT"/>
+                                            <outlet property="friendNameLabel" destination="0j6-Yp-z4l" id="pBL-Ol-zdV"/>
+                                            <outlet property="phoneNumberLabel" destination="RGE-e4-quk" id="1Fq-pb-fqi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1H3-fR-Ewz" id="9PW-ad-1eK"/>
+                                    <outlet property="delegate" destination="1H3-fR-Ewz" id="iw9-oM-lk8"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="好友" id="NIz-IA-Egk"/>
+                    <connections>
+                        <outlet property="tableView" destination="35m-X8-bKi" id="tsc-cc-0jn"/>
+                        <segue destination="aQK-tv-AIo" kind="modal" identifier="kSegueFriendListToCreateMember" id="atx-wc-fRM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jxm-fE-Drh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1043" y="681"/>
+        </scene>
         <!--Member List View Controller - 成员-->
         <scene sceneID="iwk-xv-FK1">
             <objects>
@@ -539,10 +629,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="成员" id="uA9-pa-Lam"/>
+                    <navigationItem key="navigationItem" title="账组成员" id="uA9-pa-Lam"/>
                     <connections>
                         <outlet property="tableView" destination="FJh-1W-erC" id="RvR-rl-IoP"/>
                         <segue destination="9Mr-cM-xIL" kind="push" identifier="kSegueMemberListToMemberDetail" id="Bvd-iw-5bp"/>
+                        <segue destination="1H3-fR-Ewz" kind="push" identifier="kSegueMemberListToFriendList" id="J0d-fi-SkM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWy-9W-UJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1071,7 +1162,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" id="rgE-e3-IC2">
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" id="rgE-e3-IC2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -1176,8 +1267,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="llC-v5-bXO"/>
         <segue reference="ZMe-Ch-sex"/>
-        <segue reference="trI-uf-AKA"/>
         <segue reference="Qp4-1k-UgR"/>
+        <segue reference="trI-uf-AKA"/>
+        <segue reference="H6b-eb-bSk"/>
+        <segue reference="NzF-kh-GnM"/>
     </inferredMetricsTieBreakers>
 </document>

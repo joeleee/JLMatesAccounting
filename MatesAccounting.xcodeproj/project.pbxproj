@@ -10,6 +10,8 @@
 		116B641519E74F93A42087E8 /* libPods-MatesAccounting.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83474B4A132942CA88A28906 /* libPods-MatesAccounting.a */; };
 		9B079B72185A0B26003C654B /* MATabMemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B71185A0B26003C654B /* MATabMemberListCell.m */; };
 		9B079B75185A0E03003C654B /* MAMemberManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B74185A0E03003C654B /* MAMemberManager.m */; };
+		9B079B7E185C8B17003C654B /* MAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B7D185C8B17003C654B /* MAFriendListViewController.m */; };
+		9B079B81185C8BE5003C654B /* MAFriendListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B079B80185C8BE5003C654B /* MAFriendListCell.m */; };
 		9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2085BC1853760C009C03BD /* MAAlertView.m */; };
 		9B25AA0F18532E41008D79B7 /* MAMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */; };
 		9B25AA1418533DBC008D79B7 /* MAMemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */; };
@@ -101,6 +103,10 @@
 		9B079B71185A0B26003C654B /* MATabMemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MATabMemberListCell.m; path = MATabMemberCells/MATabMemberListCell.m; sourceTree = "<group>"; };
 		9B079B73185A0E03003C654B /* MAMemberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberManager.h; path = MAManagers/MAMemberManager.h; sourceTree = "<group>"; };
 		9B079B74185A0E03003C654B /* MAMemberManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberManager.m; path = MAManagers/MAMemberManager.m; sourceTree = "<group>"; };
+		9B079B7C185C8B17003C654B /* MAFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAFriendListViewController.h; sourceTree = "<group>"; };
+		9B079B7D185C8B17003C654B /* MAFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAFriendListViewController.m; sourceTree = "<group>"; };
+		9B079B7F185C8BE5003C654B /* MAFriendListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAFriendListCell.h; path = MATabMemberCells/MAFriendListCell.h; sourceTree = "<group>"; };
+		9B079B80185C8BE5003C654B /* MAFriendListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAFriendListCell.m; path = MATabMemberCells/MAFriendListCell.m; sourceTree = "<group>"; };
 		9B2085BB1853760C009C03BD /* MAAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAlertView.h; path = MAUtilities/MAAlertView.h; sourceTree = "<group>"; };
 		9B2085BC1853760C009C03BD /* MAAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAlertView.m; path = MAUtilities/MAAlertView.m; sourceTree = "<group>"; };
 		9B25AA0D18532E41008D79B7 /* MAMemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMemberListViewController.h; sourceTree = "<group>"; };
@@ -289,6 +295,8 @@
 				9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */,
 				9B88939A1854ABF7003A9DCB /* MAMemberDetailGenderCell.h */,
 				9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */,
+				9B079B7F185C8BE5003C654B /* MAFriendListCell.h */,
+				9B079B80185C8BE5003C654B /* MAFriendListCell.m */,
 			);
 			name = MATabMemberCells;
 			sourceTree = "<group>";
@@ -330,6 +338,8 @@
 				9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */,
 				9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */,
 				9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */,
+				9B079B7C185C8B17003C654B /* MAFriendListViewController.h */,
+				9B079B7D185C8B17003C654B /* MAFriendListViewController.m */,
 			);
 			name = MATabMember;
 			path = MAUserInterfaces/MATabMember;
@@ -525,9 +535,9 @@
 			isa = PBXGroup;
 			children = (
 				9BCAC07818327097000417FD /* MAInit.storyboard */,
-				9BD0E7A718479D5200BA9F2E /* MAGroup */,
 				9BD0E7881845F24700BA9F2E /* MAUserInterfaceProtocol */,
 				9B391C6B183527CE0025A2FB /* MARootController */,
+				9BD0E7A718479D5200BA9F2E /* MAGroup */,
 				9B391C70183527CE0025A2FB /* MATabAccount */,
 				9B391C73183527CE0025A2FB /* MATabMember */,
 				9B391C76183527CE0025A2FB /* MATabMore */,
@@ -773,6 +783,7 @@
 				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
 				9B88939C1854ABF7003A9DCB /* MAMemberDetailGenderCell.m in Sources */,
 				9B391C7F183527CE0025A2FB /* MATabMemberViewController.m in Sources */,
+				9B079B7E185C8B17003C654B /* MAFriendListViewController.m in Sources */,
 				9BC2311C184B2EC1005ADD59 /* MAAccountDetailSectionHeader.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
 				9BC23116184B27FD005ADD59 /* MAAccountDetailConsumerDetailCell.m in Sources */,
@@ -780,6 +791,7 @@
 				9B079B75185A0E03003C654B /* MAMemberManager.m in Sources */,
 				9B889393185446B4003A9DCB /* MAMemberDetailViewController.m in Sources */,
 				9BC2310D184B2799005ADD59 /* MAAccountDetailPayersCell.m in Sources */,
+				9B079B81185C8BE5003C654B /* MAFriendListCell.m in Sources */,
 				9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */,
 				9BD0E7871845E87600BA9F2E /* MATabAccountListCell.m in Sources */,
 				9BC230FE184B1AEB005ADD59 /* MMember.m in Sources */,

@@ -12,8 +12,9 @@
 #import "MAGroupListCell.h"
 
 NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
+NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
-@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -41,6 +42,9 @@ NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueGroupListToGroupDetail]) {
+    } else if ([segue.identifier isEqualToString:kSegueGroupListToCreateGroup]) {
+    } else {
+        NSAssert(NO, @"Unknow segue ? MAGroupListViewController");
     }
 }
 
@@ -55,14 +59,16 @@ NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell reuseIdentifier]];
+    MAGroupListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell reuseIdentifier]];
+    cell.actionDelegate = self;
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
+    // TODO: change group
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - private
@@ -76,7 +82,19 @@ NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 #pragma mark action
 - (void)addGroupNavigationButtonTaped:(id)sender
 {
-    [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
+    [self performSegueWithIdentifier:kSegueGroupListToCreateGroup sender:nil];
+}
+
+#pragma mark MACellActionDelegate
+- (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
+{
+    if ([cell isKindOfClass:[MAGroupListCell class]]) {
+        [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
+    } else {
+        NSAssert(NO, @"Unknow action? MAGroupListViewController - actionWithData");
+    }
+
+    return YES;
 }
 
 @end

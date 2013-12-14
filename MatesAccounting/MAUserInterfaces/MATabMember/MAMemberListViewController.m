@@ -14,6 +14,7 @@
 #import "MMember.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
+NSString * const kSegueMemberListToFriendList = @"kSegueMemberListToFriendList";
 
 typedef enum {
     MemberListSectionOfSelected = 0,
@@ -44,11 +45,15 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIBarButtonItem *addFriendBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddMemberNavigationButtonTaped:)];
+    [self.navigationItem setRightBarButtonItem:addFriendBarItem animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueMemberListToMemberDetail]) {
+    } else if ([segue.identifier isEqualToString:kSegueMemberListToFriendList]) {
     } else {
         NSAssert(NO, @"Wrong segue identifier! (MAMemberListViewController)");
     }
@@ -199,6 +204,12 @@ typedef enum {
     }
 
     return;
+}
+
+#pragma UI action
+- (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
+{
+    [self performSegueWithIdentifier:kSegueMemberListToFriendList sender:nil];
 }
 
 @end

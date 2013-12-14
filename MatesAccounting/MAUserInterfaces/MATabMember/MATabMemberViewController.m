@@ -16,8 +16,9 @@
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
 NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember";
+NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
-@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -43,15 +44,15 @@ NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember
     self.tableView.contentOffset = CGPointMake(0, -64);
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    [self.tabBarController setTitle:@"成员"];
+    [super viewWillAppear:animated];
+    [self.tabBarController setTitle:@"账组成员"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didGroupNavigationButtonTaped:)];
-    UIBarButtonItem *addMemberBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddMemberNavigationButtonTaped:)];
+    UIBarButtonItem *moreBarItem = [[UIBarButtonItem alloc] initWithTitle:@"•••" style:UIBarButtonItemStyleDone target:self action:@selector(didMoreNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
-    [self.tabBarController.navigationItem setRightBarButtonItem:addMemberBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:moreBarItem animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -62,6 +63,7 @@ NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember
         NSAssert(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
         [memberDetail setIsCreateMode:YES];
+    } else if ([segue.identifier isEqualToString:kSegueTabMemberToFriendList]) {
     } else {
         NSAssert(NO, @"Wrong segue! (MATabMemberViewController)");
     }
@@ -91,24 +93,45 @@ NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember
     [self performSegueWithIdentifier:kSegueTabMemberToMemberDetail sender:nil];
 }
 
-#pragma mark - private method
-
 #pragma mark data
 - (void)loadData
 {
     [memberManager currentGroupMembers];
 }
 
-#pragma mark action
-
+#pragma mark navigation action
 - (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
     [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:[GroupManager currentGroup]];
 }
 
-- (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)sender
+#pragma mark navigation action
+- (void)didMoreNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    [self performSegueWithIdentifier:kSegueTabMemberToCreateMember sender:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"更多操作"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"新建好友", @"添加好友到账组", nil];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0: {
+            [self performSegueWithIdentifier:kSegueTabMemberToCreateMember sender:[GroupManager currentGroup]];
+            break;
+        }
+        case 1: {
+            [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:[GroupManager currentGroup]];
+            break;
+        }
+        case 2:
+        default:
+            break;
+    }
 }
 
 @end
