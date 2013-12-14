@@ -10,6 +10,7 @@
 
 #import "MAAppDelegate.h"
 #import "MAccount+expand.h"
+#import <objc/runtime.h>
 
 @protocol protocol1 <NSObject>
 
@@ -24,6 +25,11 @@
 @property (nonatomic, copy) NSString *s;
 @property (nonatomic, copy) NSNumber *n;
 @property (nonatomic, assign) NSInteger i;
+@property (nonatomic, retain) NSDate *nd;
+@property (nonatomic, retain) id d;
+//@property (nonatomic, assign) NSInteger ni;
+//@property (nonatomic, assign) double d;
+//@property (nonatomic, assign) CGFloat cf;
 
 @end
 
@@ -37,6 +43,22 @@ int main(int argc, char *argv[])
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([MAAppDelegate class]));
     }
 
+
+#pragma mark run time coding
+    testclass *r1 = [[testclass alloc] init];
+    unsigned int propsCount;
+    objc_property_t *propList = class_copyPropertyList([r1 class], &propsCount);
+
+    for (int i = 0; i < propsCount; i++) {
+        objc_property_t oneProp = propList[i];
+        NSString *attrs = [NSString stringWithUTF8String:property_getAttributes(oneProp)];
+        NSArray *attrParts = [attrs componentsSeparatedByString:@","];
+        NSString *stringName = [[attrParts objectAtIndex:0] substringFromIndex:1];
+        NSLog(@"%@", stringName);
+    }
+
+    if (propList)
+        free(propList);
 
 #pragma mark test object key-value-coding
     testclass *c1 = [[testclass alloc] init];
