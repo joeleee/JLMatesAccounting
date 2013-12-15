@@ -37,15 +37,20 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self.tabBarController setTitle:@"账目"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
     UIBarButtonItem *addAccountBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAccountNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:addAccountBarItem animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

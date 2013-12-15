@@ -8,6 +8,12 @@
 
 #import "MAAccountDetailDescriptionCell.h"
 
+@interface MAAccountDetailDescriptionCell ()
+
+@property (weak, nonatomic) IBOutlet UITextView *accountDescriptionTextView;
+
+@end
+
 @implementation MAAccountDetailDescriptionCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -20,6 +26,13 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    if (self.status) {
+        self.accountDescriptionTextView.userInteractionEnabled = YES;
+        self.accountDescriptionTextView.backgroundColor = UIColorFromRGB(222, 222, 222);
+    } else {
+        self.accountDescriptionTextView.userInteractionEnabled = NO;
+        self.accountDescriptionTextView.backgroundColor = [UIColor clearColor];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

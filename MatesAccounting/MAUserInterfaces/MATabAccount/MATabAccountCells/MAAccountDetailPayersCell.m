@@ -8,6 +8,13 @@
 
 #import "MAAccountDetailPayersCell.h"
 
+@interface MAAccountDetailPayersCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *payersTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *payersDescriptionLabel;
+
+@end
+
 @implementation MAAccountDetailPayersCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -20,6 +27,13 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    if (self.status) {
+        [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    } else {
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [self setAccessoryType:UITableViewCellAccessoryNone];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

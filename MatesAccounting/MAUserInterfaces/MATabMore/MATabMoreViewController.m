@@ -27,9 +27,9 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self.tabBarController setTitle:@"更多"];
     [self.tabBarController.navigationItem setRightBarButtonItem:nil animated:YES];
     [self.tabBarController.navigationItem setLeftBarButtonItem:nil animated:YES];

@@ -35,15 +35,6 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
-    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    self.tableView.contentOffset = CGPointMake(0, -64);
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -53,6 +44,20 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     UIBarButtonItem *moreBarItem = [[UIBarButtonItem alloc] initWithTitle:@"•••" style:UIBarButtonItemStyleDone target:self action:@selector(didMoreNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:moreBarItem animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.tableView.contentOffset = CGPointMake(0, -64);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

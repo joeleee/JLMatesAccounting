@@ -8,6 +8,13 @@
 
 #import "MAAccountDetailLocationCell.h"
 
+@interface MAAccountDetailLocationCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *locationTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
+
+@end
+
 @implementation MAAccountDetailLocationCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -20,6 +27,13 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    if (self.status) {
+        [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    } else {
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [self setAccessoryType:UITableViewCellAccessoryNone];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

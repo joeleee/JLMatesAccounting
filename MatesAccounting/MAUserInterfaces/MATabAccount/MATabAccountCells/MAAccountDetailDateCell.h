@@ -10,4 +10,6 @@
 
 @interface MAAccountDetailDateCell : MABaseCell
 
+@property (nonatomic, assign) BOOL isDatePickerHidden;
+
 @end

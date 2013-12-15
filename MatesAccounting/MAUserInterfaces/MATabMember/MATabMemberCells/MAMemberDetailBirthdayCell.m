@@ -33,7 +33,7 @@
 - (void)reuseCellWithData:(MMember *)member
 {
     self.member = member;
-    if (0 != self.status) {
+    if (self.status) {
         [self.birthdayDatePicker setHidden:NO];
     } else {
         [self.birthdayDatePicker setHidden:YES];

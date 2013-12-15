@@ -33,7 +33,7 @@
 - (void)reuseCellWithData:(MMember *)member
 {
     self.member = member;
-    if (self.isEditing) {
+    if (self.status) {
         [self.genderSwitch setHidden:NO];
     } else {
         [self.genderSwitch setHidden:YES];

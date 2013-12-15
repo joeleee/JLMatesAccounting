@@ -16,6 +16,7 @@
 #import "MAAccountDetailConsumerDetailCell.h"
 #import "MAAccountDetailDescriptionCell.h"
 #import "MAAccountDetailSectionHeader.h"
+#import "MAccount+expand.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -42,8 +43,10 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 @interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
+
+@property (nonatomic, assign) BOOL isShowDateCellPicker;
+@property (nonatomic, strong) MAccount *account;
 
 @end
 
@@ -53,9 +56,15 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.isCreateMode = NO;
+        self.isShowDateCellPicker = NO;
     }
 
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)viewDidLoad
@@ -70,7 +79,6 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         [self setEditing:NO animated:NO];
         self.title = @"账目详情";
     }
-    [self.datePicker setHidden:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -93,6 +101,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         case FeeSectionType: {
             MAAccountDetailFeeCell *detailCell = cell;
             detailCell.status = self.isEditing;
+            [detailCell reuseCellWithData:self.account];
             break;
         }
         case AccountDetailSectionType: {
@@ -100,21 +109,26 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 case DetailDateType: {
                     MAAccountDetailDateCell *detailCell = cell;
                     detailCell.status = self.isEditing;
+                    detailCell.isDatePickerHidden = !self.isShowDateCellPicker;
+                    [detailCell reuseCellWithData:self.account];
                     break;
                 }
                 case DetailPayerType: {
                     MAAccountDetailPayersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
+                    [detailCell reuseCellWithData:self.account];
                     break;
                 }
                 case DetailConsumerType: {
                     MAAccountDetailConsumersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
+                    [detailCell reuseCellWithData:self.account];
                     break;
                 }
                 case DetailLocationType: {
                     MAAccountDetailLocationCell *detailCell = cell;
                     detailCell.status = self.isEditing;
+                    [detailCell reuseCellWithData:self.account];
                     break;
                 }
                 default:
@@ -125,11 +139,13 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         case MembersSectionType: {
             MAAccountDetailConsumerDetailCell *detailCell = cell;
             detailCell.status = self.isEditing;
+            [detailCell reuseCellWithData:self.account];
             break;
         }
         case AccountDescriptionSectionType: {
             MAAccountDetailDescriptionCell *detailCell = cell;
             detailCell.status = self.isEditing;
+            [detailCell reuseCellWithData:self.account];
             break;
         }
         default:
@@ -178,13 +194,28 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.editing) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
 
     if (AccountDetailSectionType == indexPath.section &&
         (DetailPayerType == indexPath.row || DetailConsumerType == indexPath.row)) {
         [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
+    } else if (AccountDetailSectionType == indexPath.section &&
+               DetailDateType == indexPath.row) {
+        self.isShowDateCellPicker = !self.isShowDateCellPicker;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
+                                               to:nil
+                                             from:nil
+                                         forEvent:nil];
 }
 
 #pragma mark - private
@@ -212,7 +243,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             switch (row) {
                 case DetailDateType: {
                     cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailDateCell cellHeight:@(self.editing)];
+                    cellHeight = [MAAccountDetailDateCell cellHeight:@(self.isShowDateCellPicker)];
                     break;
                 }
                 case DetailPayerType: {
@@ -315,6 +346,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self.navigationItem setHidesBackButton:NO animated:YES];
             [self.navigationItem setLeftBarButtonItem:nil animated:YES];
         }
+        self.isShowDateCellPicker = NO;
     }
 
     NSRange range;

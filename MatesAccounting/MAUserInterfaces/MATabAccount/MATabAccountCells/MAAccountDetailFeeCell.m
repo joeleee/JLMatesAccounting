@@ -8,6 +8,13 @@
 
 #import "MAAccountDetailFeeCell.h"
 
+@interface MAAccountDetailFeeCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *feeTitleLabel;
+@property (weak, nonatomic) IBOutlet UITextField *feeTextField;
+
+@end
+
 @implementation MAAccountDetailFeeCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -20,6 +27,13 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    if (self.status) {
+        self.feeTextField.userInteractionEnabled = YES;
+        self.feeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
+    } else {
+        self.feeTextField.userInteractionEnabled = NO;
+        self.feeTextField.backgroundColor = [UIColor clearColor];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

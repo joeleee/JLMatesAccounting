@@ -8,6 +8,14 @@
 
 #import "MAAccountDetailConsumerDetailCell.h"
 
+@interface MAAccountDetailConsumerDetailCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *consumerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *consumerTypeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *consumerFeeTextField;
+
+@end
+
 @implementation MAAccountDetailConsumerDetailCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -20,6 +28,13 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    if (self.status) {
+        self.consumerFeeTextField.userInteractionEnabled = YES;
+        self.consumerFeeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
+    } else {
+        self.consumerFeeTextField.userInteractionEnabled = NO;
+        self.consumerFeeTextField.backgroundColor = [UIColor clearColor];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

@@ -33,11 +33,12 @@
 {
     self.detailTextField.keyboardType = self.keyboardType;
     self.member = member;
-    if (self.isEditing) {
+    if (self.status) {
         self.detailTextField.userInteractionEnabled = YES;
         self.detailTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
     } else {
         self.detailTextField.userInteractionEnabled = NO;
+        self.detailTextField.backgroundColor = [UIColor clearColor];
     }
 }
 
