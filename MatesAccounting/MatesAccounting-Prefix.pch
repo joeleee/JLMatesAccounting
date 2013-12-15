@@ -21,7 +21,6 @@
     #import "MAUtilityTools.h"
 
     // user interface
-    #import "MACellProtocols.h"
     #import "UIView+MAAddition.h"
     #import "NSObject+MAAddition.h"
     #import "UIColor+MAAddition.h"

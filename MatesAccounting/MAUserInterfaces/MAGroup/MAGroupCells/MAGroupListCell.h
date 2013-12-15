@@ -6,10 +6,8 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MABaseCell.h"
 
-@interface MAGroupListCell : UITableViewCell <MACellReuseProtocol>
-
-@property (nonatomic, weak) id<MACellActionDelegate> actionDelegate;
+@interface MAGroupListCell : MABaseCell
 
 @end

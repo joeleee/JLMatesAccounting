@@ -77,21 +77,21 @@ typedef enum {
         case MAMemberDetailListTypeName: {
             MAMemberDetailCommonCell *detailCell = cell;
             [detailCell setTitle:@"姓名：" detail:@"李某某"];
-            detailCell.isEditing = self.isEditing;
+            detailCell.status = self.isEditing;
             detailCell.keyboardType = UIKeyboardTypeDefault;
             [detailCell reuseCellWithData:self.member];
             break;
         }
         case MAMemberDetailListTypeGender: {
             MAMemberDetailGenderCell *detailCell = cell;
-            detailCell.isEditing = self.isEditing;
+            detailCell.status = self.isEditing;
             [detailCell reuseCellWithData:self.member];
             break;
         }
         case MAMemberDetailListTypeTelephone: {
             MAMemberDetailCommonCell *detailCell = cell;
             [detailCell setTitle:@"电话：" detail:@"12345678901"];
-            detailCell.isEditing = self.isEditing;
+            detailCell.status = self.isEditing;
             detailCell.keyboardType = UIKeyboardTypeNumberPad;
             [detailCell reuseCellWithData:self.member];
             break;
@@ -99,14 +99,14 @@ typedef enum {
         case MAMemberDetailListTypeEMail: {
             MAMemberDetailCommonCell *detailCell = cell;
             [detailCell setTitle:@"邮箱：" detail:@"zhuocheng.lee@gmail.com"];
-            detailCell.isEditing = self.isEditing;
+            detailCell.status = self.isEditing;
             detailCell.keyboardType = UIKeyboardTypeEmailAddress;
             [detailCell reuseCellWithData:self.member];
             break;
         }
         case MAMemberDetailListTypeBirthday: {
             MAMemberDetailBirthdayCell *detailCell = cell;
-            detailCell.isEditing = self.isEditing;
+            detailCell.status = self.isEditing;
             [detailCell reuseCellWithData:self.member];
             break;
         }

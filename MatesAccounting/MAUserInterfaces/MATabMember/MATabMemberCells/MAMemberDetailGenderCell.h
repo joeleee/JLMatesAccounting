@@ -6,10 +6,8 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MABaseCell.h"
 
-@interface MAMemberDetailGenderCell : UITableViewCell <MACellReuseProtocol>
-
-@property (nonatomic, assign) BOOL isEditing;
+@interface MAMemberDetailGenderCell : MABaseCell
 
 @end

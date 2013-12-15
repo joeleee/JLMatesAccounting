@@ -6,12 +6,11 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MABaseCell.h"
 
-@interface MAMemberDetailCommonCell : UITableViewCell <MACellReuseProtocol>
+@interface MAMemberDetailCommonCell : MABaseCell
 
 @property (nonatomic, assign) UIKeyboardType keyboardType;
-@property (nonatomic, assign) BOOL isEditing;
 
 - (void)setTitle:(NSString *)title detail:(NSString *)detail;
 

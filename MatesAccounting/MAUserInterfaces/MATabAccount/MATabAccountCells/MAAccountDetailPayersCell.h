@@ -6,8 +6,8 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MABaseCell.h"
 
-@interface MAAccountDetailPayersCell : UITableViewCell <MACellReuseProtocol>
+@interface MAAccountDetailPayersCell : MABaseCell
 
 @end

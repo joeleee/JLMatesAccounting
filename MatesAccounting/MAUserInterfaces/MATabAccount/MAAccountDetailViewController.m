@@ -24,11 +24,17 @@ typedef enum {
     AccountDescriptionSectionType = 3
 } AccountDetailTableViewSectionType;
 
+typedef enum {
+    DetailDateType = 0,
+    DetailPayerType = 1,
+    DetailConsumerType = 2,
+    DetailLocationType = 3
+} AccountDetailTableViewRowType;
+
 NSString * const kSegueAccountDetailToMemberList = @"kSegueAccountDetailToMemberList";
 
 NSUInteger const kAccountDetailNumberOfSections = 4;
 NSString * const kAccountDetailRowCount = @"kAccountDetailRowCount";
-NSString * const kAccountDetailSectionType = @"kAccountDetailSectionType";
 NSString * const kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
 NSString * const kAccountDetailCellHeight = @"kAccountDetailCellHeight";
 NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
@@ -69,16 +75,66 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:kSegueAccountDetailToMemberList]) {
+    } else {
+        NSAssert(NO, @"Unknow segue - MAAccountDetailViewController");
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
+    NSDictionary *rowInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
+    NSString *cellIdentifier = [rowInfo objectForKey:kAccountDetailCellIdentifier];
+    id cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    NSString *cellIdentifier = [sectionInfo objectForKey:kAccountDetailCellIdentifier];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    switch (indexPath.section) {
+        case FeeSectionType: {
+            MAAccountDetailFeeCell *detailCell = cell;
+            detailCell.status = self.isEditing;
+            break;
+        }
+        case AccountDetailSectionType: {
+            switch (indexPath.row) {
+                case DetailDateType: {
+                    MAAccountDetailDateCell *detailCell = cell;
+                    detailCell.status = self.isEditing;
+                    break;
+                }
+                case DetailPayerType: {
+                    MAAccountDetailPayersCell *detailCell = cell;
+                    detailCell.status = self.isEditing;
+                    break;
+                }
+                case DetailConsumerType: {
+                    MAAccountDetailConsumersCell *detailCell = cell;
+                    detailCell.status = self.isEditing;
+                    break;
+                }
+                case DetailLocationType: {
+                    MAAccountDetailLocationCell *detailCell = cell;
+                    detailCell.status = self.isEditing;
+                    break;
+                }
+                default:
+                    NSAssert(NO, @"Unknow row - MAAccountDetailViewController");
+            }
+            break;
+        }
+        case MembersSectionType: {
+            MAAccountDetailConsumerDetailCell *detailCell = cell;
+            detailCell.status = self.isEditing;
+            break;
+        }
+        case AccountDescriptionSectionType: {
+            MAAccountDetailDescriptionCell *detailCell = cell;
+            detailCell.status = self.isEditing;
+            break;
+        }
+        default:
+            NSAssert(NO, @"Unknow section - MAAccountDetailViewController");
+    }
 
     return cell;
 }
@@ -121,7 +177,14 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
+    if (!self.editing) {
+        return;
+    }
+
+    if (AccountDetailSectionType == indexPath.section &&
+        (DetailPayerType == indexPath.row || DetailConsumerType == indexPath.row)) {
+        [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
+    }
 }
 
 #pragma mark - private
@@ -129,75 +192,69 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 #pragma mark table view control
 - (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
 {
-    AccountDetailTableViewSectionType sectionType = 0;
     NSInteger rowCount = 0;
     NSString *cellIdentifier = @"";
     CGFloat cellHeight = 0.0f;
     NSString *headerTitle = @"";
 
     switch (section) {
-        case 0: {
+        case FeeSectionType: {
             headerTitle = @"消费金额";
-            sectionType = FeeSectionType;
             rowCount = 1;
             cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
-            cellHeight = [MAAccountDetailFeeCell cellHeight:nil];
+            cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
             break;
         }
-        case 1: {
+        case AccountDetailSectionType: {
             headerTitle = @"消费信息";
-            sectionType = AccountDetailSectionType;
             rowCount = 4;
 
             switch (row) {
-                case 0: {
+                case DetailDateType: {
                     cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailDateCell cellHeight:nil];
+                    cellHeight = [MAAccountDetailDateCell cellHeight:@(self.editing)];
                     break;
                 }
-                case 1: {
+                case DetailPayerType: {
                     cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailPayersCell cellHeight:nil];
+                    cellHeight = [MAAccountDetailPayersCell cellHeight:@(self.editing)];
                     break;
                 }
-                case 2: {
+                case DetailConsumerType: {
                     cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailConsumersCell cellHeight:nil];
+                    cellHeight = [MAAccountDetailConsumersCell cellHeight:@(self.editing)];
                     break;
                 }
-                case 3: {
+                case DetailLocationType: {
                     cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailLocationCell cellHeight:nil];
+                    cellHeight = [MAAccountDetailLocationCell cellHeight:@(self.editing)];
                     break;
                 }
                 default:
-                    break;
+                NSAssert(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
-        case 2: {
+        case MembersSectionType: {
             headerTitle = @"消费伙伴";
-            sectionType = MembersSectionType;
             // TODO:
             rowCount = 7;
             cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
             cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
             break;
         }
-        case 3: {
+        case AccountDescriptionSectionType: {
             headerTitle = @"消费描述";
-            sectionType = AccountDescriptionSectionType;
             rowCount = 1;
             cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
             cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
             break;
         }
         default:
-            break;
+            NSAssert(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
-    NSDictionary *info = @{kAccountDetailSectionType : @(sectionType),
-                           kAccountDetailRowCount : @(rowCount),
+    NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),
                            kAccountDetailCellIdentifier : cellIdentifier,
                            kAccountDetailCellHeight : @(cellHeight),
                            kAccountDetailHeaderTitle : headerTitle};
@@ -259,6 +316,11 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self.navigationItem setLeftBarButtonItem:nil animated:YES];
         }
     }
+
+    NSRange range;
+    range.location = 0;
+    range.length = kAccountDetailNumberOfSections;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

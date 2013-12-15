@@ -23,6 +23,7 @@
 + (NSString *)reuseIdentifier;
 
 @optional
+@property (nonatomic, assign) NSInteger status;
 @property (nonatomic, weak) id<MACellActionDelegate> actionDelegate;
 
 @end
