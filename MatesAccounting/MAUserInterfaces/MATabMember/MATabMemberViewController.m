@@ -85,7 +85,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger rowCount = [memberManager currentGroupMembers].count;
+    NSUInteger rowCount = [MemberManager currentGroupMembers].count;
 
     // TODO: test data
     rowCount = 18;
@@ -101,7 +101,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 #pragma mark data
 - (void)loadData
 {
-    [memberManager currentGroupMembers];
+    [MemberManager currentGroupMembers];
 }
 
 #pragma mark navigation action

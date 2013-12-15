@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define memberManager [MAMemberManager sharedManager]
+#define MemberManager [MAMemberManager sharedManager]
 
 @interface MAMemberManager : NSObject
 

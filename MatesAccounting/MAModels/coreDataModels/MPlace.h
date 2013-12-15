@@ -2,7 +2,7 @@
 //  MPlace.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-19.
+//  Created by Lee on 13-12-15.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -13,26 +13,21 @@
 
 @interface MPlace : NSManagedObject
 
-@property (nonatomic, retain) NSString * placeName;
+@property (nonatomic, retain) NSString * address;
+@property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * merchantName;
 @property (nonatomic, retain) NSNumber * placeID;
-@property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSOrderedSet *account;
+@property (nonatomic, retain) NSString * placeName;
+@property (nonatomic, retain) NSSet *account;
 @end
 
 @interface MPlace (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(MAccount *)value inAccountAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromAccountAtIndex:(NSUInteger)idx;
-- (void)insertAccount:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removeAccountAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInAccountAtIndex:(NSUInteger)idx withObject:(MAccount *)value;
-- (void)replaceAccountAtIndexes:(NSIndexSet *)indexes withAccount:(NSArray *)values;
 - (void)addAccountObject:(MAccount *)value;
 - (void)removeAccountObject:(MAccount *)value;
-- (void)addAccount:(NSOrderedSet *)values;
-- (void)removeAccount:(NSOrderedSet *)values;
+- (void)addAccount:(NSSet *)values;
+- (void)removeAccount:(NSSet *)values;
+
 @end

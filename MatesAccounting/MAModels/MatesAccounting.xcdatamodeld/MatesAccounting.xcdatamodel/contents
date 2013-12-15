@@ -9,15 +9,15 @@
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MGroup" inverseName="accounts" inverseEntity="MGroup" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MPlace" inverseName="account" inverseEntity="MPlace" syncable="YES"/>
-        <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="account" inverseEntity="RMemberToAccount" syncable="YES"/>
+        <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RMemberToAccount" inverseName="account" inverseEntity="RMemberToAccount" syncable="YES"/>
     </entity>
     <entity name="MGroup" representedClassName="MGroup" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="MAccount" inverseName="group" inverseEntity="MAccount" syncable="YES"/>
-        <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToGroup" inverseName="group" inverseEntity="RMemberToGroup" syncable="YES"/>
+        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MAccount" inverseName="group" inverseEntity="MAccount" syncable="YES"/>
+        <relationship name="relationshipToMember" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RMemberToGroup" inverseName="group" inverseEntity="RMemberToGroup" syncable="YES"/>
     </entity>
     <entity name="MMember" representedClassName="MMember" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
@@ -28,8 +28,8 @@
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="telephoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="relationshipToAccount" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToAccount" inverseName="member" inverseEntity="RMemberToAccount" syncable="YES"/>
-        <relationship name="relationshipToGroup" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RMemberToGroup" inverseName="member" inverseEntity="RMemberToGroup" syncable="YES"/>
+        <relationship name="relationshipToAccount" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RMemberToAccount" inverseName="member" inverseEntity="RMemberToAccount" syncable="YES"/>
+        <relationship name="relationshipToGroup" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RMemberToGroup" inverseName="member" inverseEntity="RMemberToGroup" syncable="YES"/>
     </entity>
     <entity name="MPlace" representedClassName="MPlace" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,7 +39,7 @@
         <attribute name="merchantName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placeID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="placeName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="account" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MAccount" inverseName="place" inverseEntity="MAccount" syncable="YES"/>
+        <relationship name="account" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MAccount" inverseName="place" inverseEntity="MAccount" syncable="YES"/>
     </entity>
     <entity name="RMemberToAccount" representedClassName="RMemberToAccount" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>

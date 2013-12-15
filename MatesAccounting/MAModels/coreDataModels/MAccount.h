@@ -2,7 +2,7 @@
 //  MAccount.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-12-1.
+//  Created by Lee on 13-12-15.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -21,19 +21,14 @@
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) MGroup *group;
 @property (nonatomic, retain) MPlace *place;
-@property (nonatomic, retain) NSOrderedSet *relationshipToMember;
+@property (nonatomic, retain) NSSet *relationshipToMember;
 @end
 
 @interface MAccount (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(RMemberToAccount *)value inRelationshipToMemberAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromRelationshipToMemberAtIndex:(NSUInteger)idx;
-- (void)insertRelationshipToMember:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removeRelationshipToMemberAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInRelationshipToMemberAtIndex:(NSUInteger)idx withObject:(RMemberToAccount *)value;
-- (void)replaceRelationshipToMemberAtIndexes:(NSIndexSet *)indexes withRelationshipToMember:(NSArray *)values;
 - (void)addRelationshipToMemberObject:(RMemberToAccount *)value;
 - (void)removeRelationshipToMemberObject:(RMemberToAccount *)value;
-- (void)addRelationshipToMember:(NSOrderedSet *)values;
-- (void)removeRelationshipToMember:(NSOrderedSet *)values;
+- (void)addRelationshipToMember:(NSSet *)values;
+- (void)removeRelationshipToMember:(NSSet *)values;
+
 @end

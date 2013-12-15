@@ -54,7 +54,7 @@
 
 - (NSSet *)spendingDetailsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSMutableSet *spendingDetails = [NSMutableSet setWithSet:[member.relationshipToAccount set]];
+    NSMutableSet *spendingDetails = [NSMutableSet setWithSet:member.relationshipToAccount];
 
     if (sortDescriptor) {
         [spendingDetails sortedArrayUsingDescriptors:@[sortDescriptor]];

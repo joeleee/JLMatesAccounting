@@ -2,7 +2,7 @@
 //  RMemberToGroup.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-19.
+//  Created by Lee on 13-12-15.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
