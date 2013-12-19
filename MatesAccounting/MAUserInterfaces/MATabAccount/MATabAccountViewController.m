@@ -50,6 +50,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
 }
 

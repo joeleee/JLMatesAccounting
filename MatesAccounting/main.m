@@ -44,7 +44,28 @@ int main(int argc, char *argv[])
     }
 
 
-#pragma mark run time coding
+#pragma mark test NSString
+    NSString *ts1 = @"http://fmn.rrimg.com/fmn063/gouwu/20131015/1130/original_txLI_557d00000079118e.Gif";
+    NSString *ts2 = @"/p/m3w150h150q85lt_";
+
+    if ([[[ts1 substringFromIndex:ts1.length - 4] lowercaseString] isEqualToString:@".gif"]) {
+        return 0;
+    }
+
+    NSRange range = [ts1 rangeOfString:@"/" options:NSCaseInsensitiveSearch | NSBackwardsSearch];
+    // NSLog(@"location:%u, length:%u", range.location, range.length);
+    // NSRange range;
+    // range.location = 0;
+    // range.length = ts1.length;
+    ts2 = [ts1 stringByReplacingOccurrencesOfString:@"/" withString:ts2 options:NSBackwardsSearch range:range];
+    NSLog(@"\nts1:%@\nts2:%@", ts1, ts2);
+
+    return 0;
+
+#pragma mark test time coding
+    NSLog(@"%f", [[NSDate date] timeIntervalSince1970]);
+    NSLog(@"%f", [[NSDate date] timeIntervalSince1970]);
+    return 0;
     testclass *r1 = [[testclass alloc] init];
     unsigned int propsCount;
     objc_property_t *propList = class_copyPropertyList([r1 class], &propsCount);
@@ -59,6 +80,7 @@ int main(int argc, char *argv[])
 
     if (propList)
         free(propList);
+    return 0;
 
 #pragma mark test object key-value-coding
     testclass *c1 = [[testclass alloc] init];
