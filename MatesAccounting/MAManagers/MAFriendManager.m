@@ -9,6 +9,8 @@
 #import "MAFriendManager.h"
 
 #import "MFriend.h"
+#import "MGroup.h"
+#import "MAGroupManager.h"
 
 @implementation MAFriendManager
 
@@ -26,7 +28,9 @@
 
 - (NSArray *)currentGroupMembers
 {
-    return nil;
+    NSArray *members = [[GroupManager currentGroup].relationshipToMember allObjects];
+
+    return members;
 }
 
 - (NSArray *)allFriends

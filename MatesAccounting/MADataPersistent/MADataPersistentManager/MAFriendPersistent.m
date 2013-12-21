@@ -1,22 +1,22 @@
 //
-//  MAMemberPersistent.m
+//  MAFriendPersistent.m
 //  MatesAccounting
 //
 //  Created by Lee on 13-11-15.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MAMemberPersistent.h"
+#import "MAFriendPersistent.h"
 
 #import "MACommonPersistent.h"
 #import "MFriend.h"
 #import "MAContextAPI.h"
 
-@implementation MAMemberPersistent
+@implementation MAFriendPersistent
 
-+ (MAMemberPersistent *)instance
++ (MAFriendPersistent *)instance
 {
-    static MAMemberPersistent     *sharedInstance;
+    static MAFriendPersistent     *sharedInstance;
     static dispatch_once_t        onceToken;
 
     dispatch_once(&onceToken, ^{
@@ -25,7 +25,7 @@
     return sharedInstance;
 }
 
-- (MFriend *)createMemberWithName:(NSString *)name
+- (MFriend *)createFriendWithName:(NSString *)name
 {
     MFriend *member = [MACommonPersistent createObject:NSStringFromClass([MFriend class])];
     NSAssert(member, @"Assert member == nil");
@@ -42,27 +42,27 @@
     return member;
 }
 
-- (BOOL)updateMember:(MFriend *)member
+- (BOOL)updateFriend:(MFriend *)friend
 {
     BOOL isSucceed = NO;
 
-    if (member) {
+    if (friend) {
         NSDate *currentData = [NSDate date];
-        member.updateDate = currentData;
+        friend.updateDate = currentData;
         isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     }
 
     return isSucceed;
 }
 
-- (BOOL)deleteMember:(MFriend *)member
+- (BOOL)deleteFriend:(MFriend *)friend
 {
-    BOOL isSucceed = [MACommonPersistent deleteObject:member];
+    BOOL isSucceed = [MACommonPersistent deleteObject:friend];
 
     return isSucceed;
 }
 
-- (NSArray *)fetchAccount:(NSFetchRequest *)request
+- (NSArray *)fetchFriends:(NSFetchRequest *)request
 {
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MFriend class])];
 

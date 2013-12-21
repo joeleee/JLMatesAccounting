@@ -50,7 +50,7 @@
     return isSucceed;
 }
 
-- (NSArray *)fetchPlace:(NSFetchRequest *)request
+- (NSArray *)fetchPlaces:(NSFetchRequest *)request
 {
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MPlace class])];
     

@@ -14,9 +14,9 @@
 
 + (MAAccountPersistent *)instance;
 
-- (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee;
+- (BOOL)addFriend:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee;
 
-- (BOOL)removeMember:(MFriend *)member fromAccount:(MAccount *)account;
+- (BOOL)removeFriend:(MFriend *)member fromAccount:(MAccount *)account;
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
                               date:(NSDate *)date;
@@ -25,6 +25,6 @@
 
 - (BOOL)deleteAccount:(MAccount *)account;
 
-- (NSArray *)fetchAccount:(NSFetchRequest *)request;
+- (NSArray *)fetchAccounts:(NSFetchRequest *)request;
 
 @end

@@ -14,9 +14,9 @@
 
 + (MAGroupPersistent *)instance;
 
-- (BOOL)addMember:(MFriend *)member toGroup:(MGroup *)group;
+- (BOOL)addFriend:(MFriend *)member toGroup:(MGroup *)group;
 
-- (BOOL)removeMember:(MFriend *)member fromGroup:(MGroup *)group;
+- (BOOL)removeFriend:(MFriend *)member fromGroup:(MGroup *)group;
 
 - (MGroup *)createGroupWithGroupName:(NSString *)groupName;
 
@@ -24,6 +24,6 @@
 
 - (BOOL)deleteGroup:(MGroup *)group;
 
-- (NSArray *)fetchAccount:(NSFetchRequest *)request;
+- (NSArray *)fetchGroups:(NSFetchRequest *)request;
 
 @end

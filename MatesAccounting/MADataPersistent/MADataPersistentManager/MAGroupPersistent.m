@@ -26,10 +26,10 @@
     return sharedInstance;
 }
 
-- (BOOL)addMember:(MFriend *)member toGroup:(MGroup *)group
+- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
 {
     for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
-        if (memberToGroup.member == member) {
+        if (memberToGroup.member == friend) {
             return NO;
         }
     }
@@ -40,7 +40,7 @@
     if (memberToGroup) {
         NSDate *currentData = [NSDate date];
         memberToGroup.createDate = currentData;
-        memberToGroup.member = member;
+        memberToGroup.member = friend;
         memberToGroup.group = group;
         return [[MAContextAPI sharedAPI] saveContextData];
     }
@@ -48,13 +48,13 @@
     return NO;
 }
 
-- (BOOL)removeMember:(MFriend *)member fromGroup:(MGroup *)group
+- (BOOL)removeFriend:(MFriend *)friend fromGroup:(MGroup *)group
 {
     BOOL isSucceed = NO;
 
     RMemberToGroup *memberToGroup = nil;
     for (RMemberToGroup *relationship in group.relationshipToMember) {
-        if (memberToGroup.member == member) {
+        if (memberToGroup.member == friend) {
             memberToGroup = relationship;
             break;
         }
@@ -102,7 +102,7 @@
     return isSucceed;
 }
 
-- (NSArray *)fetchAccount:(NSFetchRequest *)request
+- (NSArray *)fetchGroups:(NSFetchRequest *)request
 {
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MGroup class])];
 

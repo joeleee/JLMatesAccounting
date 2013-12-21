@@ -12,7 +12,7 @@
 #import "MFriend.h"
 #import "RMemberToAccount.h"
 #import "MAAccountPersistent.h"
-#import "MAMemberPersistent.h"
+#import "MAFriendPersistent.h"
 #import "MAGroupPersistent.h"
 #import "MAPlacePersistent.h"
 #import "MACommonPersistent.h"

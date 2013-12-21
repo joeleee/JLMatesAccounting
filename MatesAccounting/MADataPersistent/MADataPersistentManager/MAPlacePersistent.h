@@ -19,6 +19,6 @@
 
 - (BOOL)deletePlace:(MPlace *)place;
 
-- (NSArray *)fetchPlace:(NSFetchRequest *)request;
+- (NSArray *)fetchPlaces:(NSFetchRequest *)request;
 
 @end

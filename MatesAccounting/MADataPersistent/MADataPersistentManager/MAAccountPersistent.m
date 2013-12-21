@@ -26,10 +26,10 @@
     return sharedInstance;
 }
 
-- (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee
+- (BOOL)addFriend:(MFriend *)friend toAccount:(MAccount *)account fee:(double)fee
 {
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (memberToAccount.member == member) {
+        if (memberToAccount.member == friend) {
             return NO;
         }
     }
@@ -40,7 +40,7 @@
     if (memberToAccount) {
         NSDate *currentData = [NSDate date];
         memberToAccount.createDate = currentData;
-        memberToAccount.member = member;
+        memberToAccount.member = friend;
         memberToAccount.fee = @(fee);
         memberToAccount.account = account;
         [account refreshAccountTotalFee];
@@ -50,13 +50,13 @@
     return NO;
 }
 
-- (BOOL)removeMember:(MFriend *)member fromAccount:(MAccount *)account
+- (BOOL)removeFriend:(MFriend *)friend fromAccount:(MAccount *)account
 {
     BOOL isSucceed = NO;
 
     RMemberToAccount *memberToAccount = nil;
     for (RMemberToAccount *relationship in account.relationshipToMember) {
-        if (relationship.member == member) {
+        if (relationship.member == friend) {
             memberToAccount = relationship;
             break;
         }
@@ -108,7 +108,7 @@
     return isSucceed;
 }
 
-- (NSArray *)fetchAccount:(NSFetchRequest *)request
+- (NSArray *)fetchAccounts:(NSFetchRequest *)request
 {
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MAccount class])];
 

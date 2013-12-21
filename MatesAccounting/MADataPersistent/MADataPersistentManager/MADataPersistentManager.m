@@ -9,7 +9,7 @@
 #import "MADataPersistentManager.h"
 
 #import "MAAccountPersistent.h"
-#import "MAMemberPersistent.h"
+#import "MAFriendPersistent.h"
 #import "MAGroupPersistent.h"
 #import "MAPlacePersistent.h"
 #import "MAContextAPI.h"
@@ -38,7 +38,7 @@
 - (MFriend *)createMemberWithName:(NSString *)name
                     setValueBlock:(PersistentBlock)setValueBlock
 {
-    MFriend *member = [[MAMemberPersistent instance] createMemberWithName:name];
+    MFriend *member = [[MAFriendPersistent instance] createFriendWithName:name];
     EXECUTE_BLOCK_SAFELY(setValueBlock, member ? YES : NO, member, nil, nil);
     [[MAContextAPI sharedAPI] saveContextData];
 
@@ -52,7 +52,7 @@
         return isSucceed;
     }
 
-    isSucceed = [[MAMemberPersistent instance] deleteMember:member];
+    isSucceed = [[MAFriendPersistent instance] deleteFriend:member];
 
     return isSucceed;
 }
@@ -64,7 +64,7 @@
         return isSucceed;
     }
 
-    isSucceed = [[MAGroupPersistent instance] addMember:member toGroup:group];
+    isSucceed = [[MAGroupPersistent instance] addFriend:member toGroup:group];
 
     return isSucceed;
 }
@@ -76,7 +76,7 @@
         return isSucceed;
     }
 
-    isSucceed = [[MAGroupPersistent instance] removeMember:member fromGroup:group];
+    isSucceed = [[MAGroupPersistent instance] removeFriend:member fromGroup:group];
 
     return isSucceed;
 }
@@ -88,7 +88,7 @@
         return isSucceed;
     }
 
-    isSucceed = [[MAAccountPersistent instance] addMember:member toAccount:account fee:fee];
+    isSucceed = [[MAAccountPersistent instance] addFriend:member toAccount:account fee:fee];
     return isSucceed;
 }
 
@@ -99,7 +99,7 @@
         return isSucceed;
     }
 
-    isSucceed = [[MAAccountPersistent instance] removeMember:member fromAccount:account];
+    isSucceed = [[MAAccountPersistent instance] removeFriend:member fromAccount:account];
 
     return isSucceed;
 }

@@ -10,8 +10,7 @@
 
 @interface MAGroupManager ()
 
-@property (nonatomic, strong) MGroup *currentGroup;
-@property (nonatomic, strong) NSArray *myGroups;
+@property (nonatomic, strong) MGroup *selectedGroup;
 
 @end
 
@@ -30,20 +29,12 @@
 
 - (MGroup *)currentGroup
 {
-    if (_currentGroup) {
-        return _currentGroup;
-    }
-
-    return _currentGroup;
+    return self.selectedGroup;
 }
 
 - (NSArray *)myGroups
 {
-    if (_myGroups) {
-        return _myGroups;
-    }
-
-    return _myGroups;
+    return nil;
 }
 
 @end
