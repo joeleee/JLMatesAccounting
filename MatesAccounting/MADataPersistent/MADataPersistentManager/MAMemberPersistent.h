@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class MMember;
+@class MFriend;
 
 @interface MAMemberPersistent : NSObject
 
 + (MAMemberPersistent *)instance;
 
-- (MMember *)createMemberWithName:(NSString *)name;
+- (MFriend *)createMemberWithName:(NSString *)name;
 
-- (BOOL)updateMember:(MMember *)member;
+- (BOOL)updateMember:(MFriend *)member;
 
-- (BOOL)deleteMember:(MMember *)member;
+- (BOOL)deleteMember:(MFriend *)member;
 
 - (NSArray *)fetchAccount:(NSFetchRequest *)request;
 

@@ -8,14 +8,14 @@
 
 #import "MAMemberDetailCommonCell.h"
 
-#import "MMember.h"
+#import "MFriend.h"
 
 @interface MAMemberDetailCommonCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *detailTextField;
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 
 @end
 
@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MMember *)member
+- (void)reuseCellWithData:(MFriend *)member
 {
     self.detailTextField.keyboardType = self.keyboardType;
     self.member = member;

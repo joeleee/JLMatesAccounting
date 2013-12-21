@@ -9,7 +9,7 @@
 #import "MAMemberPersistent.h"
 
 #import "MACommonPersistent.h"
-#import "MMember.h"
+#import "MFriend.h"
 #import "MAContextAPI.h"
 
 @implementation MAMemberPersistent
@@ -25,9 +25,9 @@
     return sharedInstance;
 }
 
-- (MMember *)createMemberWithName:(NSString *)name
+- (MFriend *)createMemberWithName:(NSString *)name
 {
-    MMember *member = [MACommonPersistent createObject:NSStringFromClass([MMember class])];
+    MFriend *member = [MACommonPersistent createObject:NSStringFromClass([MFriend class])];
     NSAssert(member, @"Assert member == nil");
 
     if (member) {
@@ -35,14 +35,14 @@
         member.name = name;
         member.createDate = currentData;
         member.updateDate = currentData;
-        member.memberID = @([currentData timeIntervalSince1970]);
+        member.friendID = @([currentData timeIntervalSince1970]);
         [[MAContextAPI sharedAPI] saveContextData];
     }
 
     return member;
 }
 
-- (BOOL)updateMember:(MMember *)member
+- (BOOL)updateMember:(MFriend *)member
 {
     BOOL isSucceed = NO;
 
@@ -55,7 +55,7 @@
     return isSucceed;
 }
 
-- (BOOL)deleteMember:(MMember *)member
+- (BOOL)deleteMember:(MFriend *)member
 {
     BOOL isSucceed = [MACommonPersistent deleteObject:member];
 
@@ -64,7 +64,7 @@
 
 - (NSArray *)fetchAccount:(NSFetchRequest *)request
 {
-    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MMember class])];
+    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MFriend class])];
 
     return result;
 }

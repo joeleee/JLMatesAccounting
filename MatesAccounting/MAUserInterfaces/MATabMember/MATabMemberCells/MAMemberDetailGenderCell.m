@@ -8,7 +8,7 @@
 
 #import "MAMemberDetailGenderCell.h"
 
-#import "MMember.h"
+#import "MFriend.h"
 
 @interface MAMemberDetailGenderCell ()
 
@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *genderSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 
 @end
 
@@ -30,7 +30,7 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MMember *)member
+- (void)reuseCellWithData:(MFriend *)member
 {
     self.member = member;
     if (self.status) {

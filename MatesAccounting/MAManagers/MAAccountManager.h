@@ -10,14 +10,14 @@
 
 #define AccountManager [MAAccountManager sharedManager]
 
-@class MMember, MAccount, MGroup;
+@class MFriend, MAccount, MGroup;
 
 @interface MAFeeOfMember : NSObject
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 @property (nonatomic, assign) CGFloat fee;
 
-+ (MAFeeOfMember *)feeOfMember:(MMember *)member fee:(CGFloat)fee;
++ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee;
 
 @end
 

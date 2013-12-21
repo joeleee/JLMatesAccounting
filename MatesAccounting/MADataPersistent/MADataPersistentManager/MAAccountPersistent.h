@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class MAccount, MMember, MPlace, MGroup;
+@class MAccount, MFriend, MPlace, MGroup;
 
 @interface MAAccountPersistent : NSObject
 
 + (MAAccountPersistent *)instance;
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee;
+- (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee;
 
-- (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account;
+- (BOOL)removeMember:(MFriend *)member fromAccount:(MAccount *)account;
 
 - (MAccount *)createAccountInGroup:(MGroup *)group
                               date:(NSDate *)date;

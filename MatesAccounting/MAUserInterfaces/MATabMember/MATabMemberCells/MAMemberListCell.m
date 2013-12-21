@@ -8,7 +8,7 @@
 
 #import "MAMemberListCell.h"
 
-#import "MMember.h"
+#import "MFriend.h"
 
 @interface MAMemberListCell ()
 
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalFeeTitle;
 @property (weak, nonatomic) IBOutlet UIButton *memberInfoButton;
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 
 @end
 

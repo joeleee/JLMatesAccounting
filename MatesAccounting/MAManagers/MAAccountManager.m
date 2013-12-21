@@ -10,12 +10,12 @@
 
 #import "MAccount+expand.h"
 #import "MPlace.h"
-#import "MMember.h"
+#import "MFriend.h"
 #import "RMemberToAccount.h"
 
 @implementation MAFeeOfMember
 
-+ (MAFeeOfMember *)feeOfMember:(MMember *)member fee:(CGFloat)fee
++ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee
 {
     NSAssert(member, @"member should not be nil! - MAFeeOfMember");
 
@@ -102,7 +102,7 @@
     return NO;
 }
 
-- (BOOL)addMember:(MMember *)member
+- (BOOL)addMember:(MFriend *)member
         toAccount:(MAccount *)account
           withFee:(CGFloat)fee
 {

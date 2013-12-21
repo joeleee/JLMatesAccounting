@@ -8,7 +8,7 @@
 
 #import "MAMemberDetailBirthdayCell.h"
 
-#import "MMember.h"
+#import "MFriend.h"
 
 @interface MAMemberDetailBirthdayCell ()
 
@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *birthdayDatePicker;
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 
 @end
 
@@ -30,7 +30,7 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MMember *)member
+- (void)reuseCellWithData:(MFriend *)member
 {
     self.member = member;
     if (self.status) {

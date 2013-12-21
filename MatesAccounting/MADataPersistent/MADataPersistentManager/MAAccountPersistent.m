@@ -26,7 +26,7 @@
     return sharedInstance;
 }
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee
+- (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee
 {
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
         if (memberToAccount.member == member) {
@@ -50,7 +50,7 @@
     return NO;
 }
 
-- (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account
+- (BOOL)removeMember:(MFriend *)member fromAccount:(MAccount *)account
 {
     BOOL isSucceed = NO;
 

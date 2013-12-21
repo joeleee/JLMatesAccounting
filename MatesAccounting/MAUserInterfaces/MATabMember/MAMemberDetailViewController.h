@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class MMember;
+@class MFriend;
 
 @interface MAMemberDetailViewController : UIViewController
 
-@property (nonatomic, strong) MMember *member;
+@property (nonatomic, strong) MFriend *member;
 @property (nonatomic, assign) BOOL isCreateMode;
 
 @end

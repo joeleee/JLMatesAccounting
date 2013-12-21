@@ -11,7 +11,7 @@
 #import "MAMemberDetailCommonCell.h"
 #import "MAMemberDetailGenderCell.h"
 #import "MAMemberDetailBirthdayCell.h"
-#import "MMember.h"
+#import "MFriend.h"
 
 NSUInteger const kMemberDetailRowCount = 5;
 NSString * const kMemberDetailRowType = @"kMemberDetailRowType";

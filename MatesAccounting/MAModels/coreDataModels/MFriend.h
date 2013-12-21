@@ -1,8 +1,8 @@
 //
-//  MMember.h
+//  MFriend.h
 //  MatesAccounting
 //
-//  Created by Lee on 13-12-15.
+//  Created by Lee on 13-12-21.
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
@@ -11,12 +11,12 @@
 
 @class RMemberToAccount, RMemberToGroup;
 
-@interface MMember : NSManagedObject
+@interface MFriend : NSManagedObject
 
 @property (nonatomic, retain) NSDate * birthday;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSString * eMail;
-@property (nonatomic, retain) NSNumber * memberID;
+@property (nonatomic, retain) NSNumber * friendID;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * sex;
 @property (nonatomic, retain) NSNumber * telephoneNumber;
@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSSet *relationshipToGroup;
 @end
 
-@interface MMember (CoreDataGeneratedAccessors)
+@interface MFriend (CoreDataGeneratedAccessors)
 
 - (void)addRelationshipToAccountObject:(RMemberToAccount *)value;
 - (void)removeRelationshipToAccountObject:(RMemberToAccount *)value;

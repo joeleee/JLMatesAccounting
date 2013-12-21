@@ -11,7 +11,7 @@
 #import "MAGroupManager.h"
 #import "MAMemberDetailViewController.h"
 #import "MATabMemberListCell.h"
-#import "MAMemberManager.h"
+#import "MAFriendManager.h"
 
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
@@ -86,7 +86,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger rowCount = [MemberManager currentGroupMembers].count;
+    NSUInteger rowCount = [FriendManager currentGroupMembers].count;
 
     // TODO: test data
     rowCount = 18;
@@ -102,7 +102,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 #pragma mark data
 - (void)loadData
 {
-    [MemberManager currentGroupMembers];
+    [FriendManager currentGroupMembers];
 }
 
 #pragma mark navigation action

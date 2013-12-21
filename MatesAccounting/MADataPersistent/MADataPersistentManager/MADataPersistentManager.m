@@ -35,17 +35,17 @@
 
 #pragma mark member相关
 
-- (MMember *)createMemberWithName:(NSString *)name
+- (MFriend *)createMemberWithName:(NSString *)name
                     setValueBlock:(PersistentBlock)setValueBlock
 {
-    MMember *member = [[MAMemberPersistent instance] createMemberWithName:name];
+    MFriend *member = [[MAMemberPersistent instance] createMemberWithName:name];
     EXECUTE_BLOCK_SAFELY(setValueBlock, member ? YES : NO, member, nil, nil);
     [[MAContextAPI sharedAPI] saveContextData];
 
     return member;
 }
 
-- (BOOL)deleteMember:(MMember *)member
+- (BOOL)deleteMember:(MFriend *)member
 {
     BOOL isSucceed = NO;
     if (!member) {
@@ -57,7 +57,7 @@
     return isSucceed;
 }
 
-- (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group
+- (BOOL)addMember:(MFriend *)member toGroup:(MGroup *)group
 {
     BOOL isSucceed = NO;
     if (!group || !member) {
@@ -69,7 +69,7 @@
     return isSucceed;
 }
 
-- (BOOL)removeMember:(MMember *)member fromGroup:(MGroup *)group
+- (BOOL)removeMember:(MFriend *)member fromGroup:(MGroup *)group
 {
     BOOL isSucceed = NO;
     if (!group || !member) {
@@ -81,7 +81,7 @@
     return isSucceed;
 }
 
-- (BOOL)addMember:(MMember *)member toAccount:(MAccount *)account fee:(double)fee
+- (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee
 {
     BOOL isSucceed = NO;
     if (!account || !member) {
@@ -92,7 +92,7 @@
     return isSucceed;
 }
 
-- (BOOL)removeMember:(MMember *)member fromAccount:(MAccount *)account
+- (BOOL)removeMember:(MFriend *)member fromAccount:(MAccount *)account
 {
     BOOL isSucceed = NO;
     if (!account || !member) {

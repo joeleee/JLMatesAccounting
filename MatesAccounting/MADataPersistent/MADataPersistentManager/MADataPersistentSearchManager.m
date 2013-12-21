@@ -9,7 +9,7 @@
 #import "MADataPersistentSearchManager.h"
 
 #import "MAccount.h"
-#import "MMember.h"
+#import "MFriend.h"
 #import "RMemberToAccount.h"
 #import "MAAccountPersistent.h"
 #import "MAMemberPersistent.h"
@@ -34,7 +34,7 @@
 
 #pragma mark member相关
 
-- (NSSet *)accountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+- (NSSet *)accountsForMember:(MFriend *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
     NSMutableSet *accounts = [NSMutableSet set];
 
@@ -52,7 +52,7 @@
     return accounts;
 }
 
-- (NSSet *)spendingDetailsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+- (NSSet *)spendingDetailsForMember:(MFriend *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
     NSMutableSet *spendingDetails = [NSMutableSet setWithSet:member.relationshipToAccount];
 
@@ -70,7 +70,7 @@
     return spendingDetails;
 }
 
-- (NSSet *)payAccountsForMember:(MMember *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
+- (NSSet *)payAccountsForMember:(MFriend *)member sortDescriptor:(NSSortDescriptor *)sortDescriptor
 {
     NSMutableSet *accounts = [NSMutableSet set];
     for (RMemberToAccount *relationship in member.relationshipToAccount) {

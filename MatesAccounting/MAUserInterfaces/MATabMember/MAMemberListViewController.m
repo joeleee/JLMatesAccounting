@@ -11,7 +11,7 @@
 #import "MAMemberListSectionHeader.h"
 #import "MAMemberListSectionEmptyCell.h"
 #import "MAMemberListCell.h"
-#import "MMember.h"
+#import "MFriend.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
 NSString * const kSegueMemberListToFriendList = @"kSegueMemberListToFriendList";
@@ -171,14 +171,14 @@ typedef enum {
     return nil;
 }
 
-- (MMember *)removeMemberAtIndexPath:(NSIndexPath *)indexPath
+- (MFriend *)removeMemberAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *memberList = [self arrayInSection:indexPath.section];
     if (0 > indexPath.row || indexPath.row >= memberList.count) {
         return nil;
     }
 
-    MMember *member = [memberList objectAtIndex:indexPath.row];
+    MFriend *member = [memberList objectAtIndex:indexPath.row];
     [memberList removeObject:member];
     if (0 < memberList.count) {
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -189,7 +189,7 @@ typedef enum {
     return member;
 }
 
-- (void)insertMember:(MMember *)member atIndexPath:(NSIndexPath *)indexPath
+- (void)insertMember:(MFriend *)member atIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *memberList = [self arrayInSection:indexPath.section];
     if (!member || 0 > indexPath.row || indexPath.row > memberList.count) {

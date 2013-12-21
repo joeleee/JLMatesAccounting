@@ -26,7 +26,7 @@
     return sharedInstance;
 }
 
-- (BOOL)addMember:(MMember *)member toGroup:(MGroup *)group
+- (BOOL)addMember:(MFriend *)member toGroup:(MGroup *)group
 {
     for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
         if (memberToGroup.member == member) {
@@ -48,7 +48,7 @@
     return NO;
 }
 
-- (BOOL)removeMember:(MMember *)member fromGroup:(MGroup *)group
+- (BOOL)removeMember:(MFriend *)member fromGroup:(MGroup *)group
 {
     BOOL isSucceed = NO;
 
