@@ -11,7 +11,11 @@
 #import "MGroup.h"
 #import "MAGroupPersistent.h"
 
+NSString * const kCurrentGroupID = @"kCurrentGroupID";
+
 NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGroupChanged";
+NSString * const MAGroupManagerGroupHasCreated = @"MAGroupManagerGroupHasCreated";
+NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModified";
 
 @interface MAGroupManager ()
 
@@ -34,6 +38,11 @@ NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGr
 
 - (MGroup *)currentGroup
 {
+    if (!self.selectedGroup) {
+        NSNumber *groupID = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentGroupID];
+        self.selectedGroup = [[MAGroupPersistent instance] groupByGroupID:groupID];
+    }
+
     return self.selectedGroup;
 }
 
@@ -47,9 +56,15 @@ NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGr
 - (BOOL)changeGroup:(MGroup *)group
 {
     NSAssert(group, @"change new group should not be nil! - changeGroup");
+    if (!group) {
+        return NO;
+    }
+
     self.selectedGroup = group;
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerSelectedGroupChanged object:self];
+    [[NSUserDefaults standardUserDefaults] setObject:self.selectedGroup.groupID forKey:kCurrentGroupID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerSelectedGroupChanged object:self.selectedGroup];
 
     return YES;
 }
@@ -59,6 +74,9 @@ NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGr
     MGroup *group = [[MAGroupPersistent instance] createGroupWithGroupName:name];
     NSAssert(group, @"createGroup result is nil! - createGroup");
 
+    if (group) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasCreated object:group];
+    }
     return group;
 }
 
@@ -69,6 +87,9 @@ NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGr
     BOOL isSucceed = [[MAGroupPersistent instance] updateGroup:group];
     NSAssert(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
 
+    if (isSucceed) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasModified object:group];
+    }
     return group;
 }
 

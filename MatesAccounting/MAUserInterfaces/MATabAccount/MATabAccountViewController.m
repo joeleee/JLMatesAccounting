@@ -31,10 +31,19 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self loadData];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(currentGroupHasChanged:)
+                                                     name:MAGroupManagerSelectedGroupChanged
+                                                   object:nil];
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,6 +101,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
     if (0 == indexPath.section) {
         cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell reuseIdentifier]];
+        [(MATabAccountGroupInfoCell *)cell reuseCellWithData:[GroupManager currentGroup]];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell reuseIdentifier]];
     }
@@ -100,12 +110,12 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
 
-    // TODO:
-    if (NO && ![GroupManager currentGroup]) {
+    if (![GroupManager currentGroup]) {
         return 0;
     } else {
+        // TODO:
+        return 5;
         return [AccountManager sectionedAccountListForCurrentGroup].count + 1;
     }
 }
@@ -113,12 +123,16 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO:
-    [self performSegueWithIdentifier:kSegueTabAccountToAccountDetail sender:nil];
+    if (0 == indexPath.section) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else {
+        [self performSegueWithIdentifier:kSegueTabAccountToAccountDetail sender:nil];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-        return kTabAccountListSectionHeaderHeight;
+    return kTabAccountListSectionHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -132,19 +146,8 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     return headerView;
 }
 
-#pragma mark - private method
+#pragma mark - actions
 
-#pragma mark UI
-
-#pragma mark data
-- (void)loadData
-{
-    [GroupManager currentGroup];
-
-    [AccountManager sectionedAccountListForCurrentGroup];
-}
-
-#pragma mark action
 - (void)addAccountNavigationButtonTaped:(id)sender
 {
     [self performSegueWithIdentifier:kSegueTabAccountToNewAccount sender:nil];
@@ -153,6 +156,13 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
     [self performSegueWithIdentifier:kSegueTabAccountToGroupList sender:[GroupManager currentGroup]];
+}
+
+#pragma mark - notifications
+
+- (void)currentGroupHasChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 @end

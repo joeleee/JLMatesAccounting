@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class MGroup;
+
 @interface MAGroupDetailViewController : UIViewController
+
+@property (nonatomic, strong) MGroup *group;
+@property (nonatomic, assign) BOOL isCreateMode;
 
 @end

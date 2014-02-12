@@ -26,4 +26,6 @@
 
 - (NSArray *)fetchGroups:(NSFetchRequest *)request;
 
+- (MGroup *)groupByGroupID:(NSNumber *)groupID;
+
 @end

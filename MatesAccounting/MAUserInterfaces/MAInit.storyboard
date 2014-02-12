@@ -1273,7 +1273,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="cancelButton" destination="mnc-6q-MBa" id="Onj-8d-uxT"/>
                         <outlet property="detailScrollView" destination="rgE-e3-IC2" id="h2q-ct-9MA"/>
-                        <outlet property="goupCreateTimeLabel" destination="Y3i-Y8-W6d" id="Q0U-e1-BpQ"/>
+                        <outlet property="groupCreateTimeLabel" destination="Y3i-Y8-W6d" id="nje-Wm-IqH"/>
                         <outlet property="groupIDLabel" destination="JT8-tu-gsC" id="R0G-b2-jWP"/>
                         <outlet property="groupNameTextField" destination="kWA-OK-l9B" id="Ikl-pA-Rbz"/>
                         <outlet property="submitButton" destination="j8u-0W-WQz" id="ewN-MC-Trt"/>

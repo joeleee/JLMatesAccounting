@@ -107,9 +107,22 @@
     if (!request) {
         request = [[NSFetchRequest alloc] init];
     }
-    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MGroup class])];
+    NSArray *result = [MACommonPersistent fetchObjects:request entityName:[MGroup className]];
 
     return result;
+}
+
+- (MGroup *)groupByGroupID:(NSNumber *)groupID
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[MGroup className]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"groupID == %@", groupID];
+    NSArray *groupList = [self fetchGroups:fetchRequest];
+
+    MGroup *group = nil;
+    if (0 < groupList.count) {
+        group = groupList[0];
+    }
+    return group;
 }
 
 @end

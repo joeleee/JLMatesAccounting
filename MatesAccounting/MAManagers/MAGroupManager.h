@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const MAGroupManagerSelectedGroupChanged;
+extern NSString * const MAGroupManagerGroupHasCreated;
+extern NSString * const MAGroupManagerGroupHasModified;
 
 @class MGroup;
 

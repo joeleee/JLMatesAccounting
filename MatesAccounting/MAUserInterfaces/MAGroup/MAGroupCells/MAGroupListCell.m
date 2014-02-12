@@ -9,6 +9,7 @@
 #import "MAGroupListCell.h"
 
 #import "MGroup.h"
+#import "MAccount+expand.h"
 
 @interface MAGroupListCell ()
 
@@ -34,13 +35,24 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(MGroup *)data
 {
+    self.group = data;
+
+    [self.groupNameLabel setText:self.group.groupName];
+    [self.groupCreateDataLabel setText:[self.group.createDate description]];
+    [self.groupMemberCountLabel setText:[@([self.group.relationshipToMember count]) stringValue]];
+    [self.groupAccountCountLabel setText:[@([self.group.accounts count]) stringValue]];
+    double totalFee = 0;
+    for (MAccount *account in self.group.accounts) {
+        totalFee += [account.totalFee doubleValue];
+    }
+    [self.groupTotalFeeLabel setText:[@(totalFee) stringValue]];
 }
 
 + (CGFloat)cellHeight:(id)data
 {
-    return 0.0f;
+    return 80.0f;
 }
 
 + (NSString *)reuseIdentifier
