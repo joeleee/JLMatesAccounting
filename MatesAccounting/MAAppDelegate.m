@@ -8,13 +8,29 @@
 
 #import "MAAppDelegate.h"
 
-#import "MADataPersistentAPI.h"
+#import "MAContextAPI.h"
+
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @implementation MAAppDelegate
 
+void uncaughtExceptionHandler(NSException *exception)
+{
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[MADataPersistentAPI sharedAPI] saveAllContext];
+    CTTelephonyNetworkInfo *networkInfo;
+    networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = networkInfo.subscriberCellularProvider;
+    NSLog(@"------%@", carrier.carrierName);
+    NSLog(@"------%@", carrier);
+
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [[MAContextAPI sharedAPI] saveContextData];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -29,6 +45,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[MAContextAPI sharedAPI] saveContextData];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -44,7 +61,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [[MADataPersistentAPI sharedAPI] saveAllContext];
+    [[MAContextAPI sharedAPI] saveContextData];
 }
 
 @end

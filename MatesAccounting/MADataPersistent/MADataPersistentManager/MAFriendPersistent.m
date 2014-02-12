@@ -64,6 +64,9 @@
 
 - (NSArray *)fetchFriends:(NSFetchRequest *)request
 {
+    if (!request) {
+        request = [[NSFetchRequest alloc] init];
+    }
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MFriend class])];
 
     return result;

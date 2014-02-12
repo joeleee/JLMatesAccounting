@@ -10,6 +10,8 @@
 
 #define FriendManager [MAFriendManager sharedManager]
 
+@class MFriend;
+
 typedef enum {
     Unknow = 0,
     Male = 1,
@@ -21,5 +23,20 @@ typedef enum {
 + (MAFriendManager *)sharedManager;
 
 - (NSArray *)currentGroupMembers;
+
+- (NSArray *)allFriends;
+
+- (MFriend *)createFriendWithName:(NSString *)name
+                           gender:(MAFriendGender)gender
+                      phoneNumber:(NSNumber *)phoneNumber
+                            eMail:(NSString *)eMail
+                         birthday:(NSDate *)birthday;
+
+- (MFriend *)editAndSaveFriend:(MFriend *)friend
+                          name:(NSString *)name
+                        gender:(MAFriendGender)gender
+                   phoneNumber:(NSNumber *)phoneNumber
+                         eMail:(NSString *)eMail
+                      birthday:(NSDate *)birthday;
 
 @end

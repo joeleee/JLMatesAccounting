@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const MAGroupManagerSelectedGroupChanged;
+
 @class MGroup;
 
 @interface MAGroupManager : NSObject
@@ -19,5 +21,12 @@
 - (MGroup *)currentGroup;
 
 - (NSArray *)myGroups;
+
+- (BOOL)changeGroup:(MGroup *)group;
+
+- (MGroup *)createGroup:(NSString *)name;
+
+- (MGroup *)editAndSaveGroup:(MGroup *)group
+                        name:(NSString *)name;
 
 @end

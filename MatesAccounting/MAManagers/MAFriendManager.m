@@ -11,6 +11,7 @@
 #import "MFriend.h"
 #import "MGroup.h"
 #import "MAGroupManager.h"
+#import "MAFriendPersistent.h"
 
 @implementation MAFriendManager
 
@@ -35,7 +36,9 @@
 
 - (NSArray *)allFriends
 {
-    return nil;
+    NSArray *friends = [[MAFriendPersistent instance] fetchFriends:nil];
+
+    return friends;
 }
 
 - (MFriend *)createFriendWithName:(NSString *)name
@@ -44,19 +47,44 @@
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday
 {
-    MFriend *member = nil;
+    MFriend *friend = [[MAFriendPersistent instance] createFriendWithName:name];
+    NSAssert(friend, @"Create friend failed~ createFriendWithName");
 
-    return member;
+    friend.sex = @(gender);
+    friend.telephoneNumber = phoneNumber;
+    friend.eMail = eMail;
+    friend.birthday = birthday;
+    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
+    NSAssert(isSucceed, @"Update friend failed~ createFriendWithName");
+
+    return friend;
 }
 
-- (MFriend *)editAndSaveFriend:(MFriend *)member
+- (MFriend *)editAndSaveFriend:(MFriend *)friend
                           name:(NSString *)name
                         gender:(MAFriendGender)gender
                    phoneNumber:(NSNumber *)phoneNumber
                          eMail:(NSString *)eMail
                       birthday:(NSDate *)birthday
 {
-    return member;
+    friend.sex = @(gender);
+    friend.telephoneNumber = phoneNumber;
+    friend.eMail = eMail;
+    friend.birthday = birthday;
+    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
+    NSAssert(isSucceed, @"Update friend failed~ createFriendWithName");
+
+    return friend;
+}
+
+- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
+{
+    NSSet *members = group.relationshipToMember;
+    if ([members containsObject:friend]) {
+        return NO;
+    }
+
+    return YES;
 }
 
 @end

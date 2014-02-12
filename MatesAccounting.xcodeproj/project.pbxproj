@@ -50,7 +50,7 @@
 		9BB88C791865567200C16895 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C781865567200C16895 /* MAccount.m */; };
 		9BB88C7C1865567200C16895 /* MFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C7B1865567200C16895 /* MFriend.m */; };
 		9BB88C7F1865567200C16895 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C7E1865567200C16895 /* RMemberToAccount.m */; };
-		9BB88C8218655C9100C16895 /* MADataPersistentAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C8118655C9100C16895 /* MADataPersistentAPI.m */; };
+		9BB88C851865679500C16895 /* MAManagerPublicDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C841865679500C16895 /* MAManagerPublicDefinitions.m */; };
 		9BC230FB1849FFA6005ADD59 /* MAGroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC230FA1849FFA6005ADD59 /* MAGroupDetailViewController.m */; };
 		9BC23104184B1F11005ADD59 /* MAAccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC23103184B1F11005ADD59 /* MAAccountDetailViewController.m */; };
 		9BC23107184B274F005ADD59 /* MAAccountDetailFeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC23106184B274F005ADD59 /* MAAccountDetailFeeCell.m */; };
@@ -66,7 +66,7 @@
 		9BCAC02918322997000417FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02818322997000417FD /* UIKit.framework */; };
 		9BCAC02B18322997000417FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC02A18322997000417FD /* CoreData.framework */; };
 		9BCAC03118322997000417FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC02F18322997000417FD /* InfoPlist.strings */; };
-		9BCAC03318322997000417FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03218322997000417FD /* main.m */; };
+		9BCAC03318322997000417FD /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03218322997000417FD /* main.mm */; };
 		9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC03618322997000417FD /* MAAppDelegate.m */; };
 		9BCAC03C18322997000417FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC03B18322997000417FD /* Images.xcassets */; };
 		9BCAC04318322997000417FD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCAC04218322997000417FD /* XCTest.framework */; };
@@ -184,8 +184,8 @@
 		9BB88C7B1865567200C16895 /* MFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFriend.m; path = MAModels/coreDataModels/MFriend.m; sourceTree = "<group>"; };
 		9BB88C7D1865567200C16895 /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/coreDataModels/RMemberToAccount.h; sourceTree = "<group>"; };
 		9BB88C7E1865567200C16895 /* RMemberToAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToAccount.m; path = MAModels/coreDataModels/RMemberToAccount.m; sourceTree = "<group>"; };
-		9BB88C8018655C9100C16895 /* MADataPersistentAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MADataPersistentAPI.h; path = MADataPersistent/MADataPersistentAPI.h; sourceTree = "<group>"; };
-		9BB88C8118655C9100C16895 /* MADataPersistentAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MADataPersistentAPI.m; path = MADataPersistent/MADataPersistentAPI.m; sourceTree = "<group>"; };
+		9BB88C831865679500C16895 /* MAManagerPublicDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAManagerPublicDefinitions.h; path = MAManagers/MAManagerPublicDefinitions.h; sourceTree = "<group>"; };
+		9BB88C841865679500C16895 /* MAManagerPublicDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAManagerPublicDefinitions.m; path = MAManagers/MAManagerPublicDefinitions.m; sourceTree = "<group>"; };
 		9BC230F91849FFA6005ADD59 /* MAGroupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAGroupDetailViewController.h; path = MAUserInterfaces/MAGroup/MAGroupDetailViewController.h; sourceTree = "<group>"; };
 		9BC230FA1849FFA6005ADD59 /* MAGroupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAGroupDetailViewController.m; path = MAUserInterfaces/MAGroup/MAGroupDetailViewController.m; sourceTree = "<group>"; };
 		9BC23102184B1F11005ADD59 /* MAAccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountDetailViewController.h; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		9BCAC02A18322997000417FD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9BCAC02E18322997000417FD /* MatesAccounting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatesAccounting-Info.plist"; sourceTree = "<group>"; };
 		9BCAC03018322997000417FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9BCAC03218322997000417FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9BCAC03218322997000417FD /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		9BCAC03418322997000417FD /* MatesAccounting-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MatesAccounting-Prefix.pch"; sourceTree = "<group>"; };
 		9BCAC03518322997000417FD /* MAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAppDelegate.h; sourceTree = "<group>"; };
 		9BCAC03618322997000417FD /* MAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAppDelegate.m; sourceTree = "<group>"; };
@@ -492,9 +492,9 @@
 				9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */,
 				9BCAC03518322997000417FD /* MAAppDelegate.h */,
 				9BCAC03618322997000417FD /* MAAppDelegate.m */,
+				9BCAC06118326E52000417FD /* MAUserInterfaces */,
 				9BD0E78E1845F94900BA9F2E /* MAManagers */,
 				9B605F0B183523F300890C4F /* MAModels */,
-				9BCAC06118326E52000417FD /* MAUserInterfaces */,
 				9BCAC059183262BC000417FD /* MADataPersistent */,
 				9BCAC03B18322997000417FD /* Images.xcassets */,
 				9BD0E78A1845F79A00BA9F2E /* MAAdditions */,
@@ -509,7 +509,7 @@
 			children = (
 				9BCAC02E18322997000417FD /* MatesAccounting-Info.plist */,
 				9BCAC02F18322997000417FD /* InfoPlist.strings */,
-				9BCAC03218322997000417FD /* main.m */,
+				9BCAC03218322997000417FD /* main.mm */,
 				9BCAC03418322997000417FD /* MatesAccounting-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -537,8 +537,6 @@
 			isa = PBXGroup;
 			children = (
 				9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */,
-				9BB88C8018655C9100C16895 /* MADataPersistentAPI.h */,
-				9BB88C8118655C9100C16895 /* MADataPersistentAPI.m */,
 				9B391C8F1835EE130025A2FB /* MADataPersistentManager */,
 				9B391C8218352C0A0025A2FB /* MARootContextManager */,
 			);
@@ -603,6 +601,8 @@
 		9BD0E78E1845F94900BA9F2E /* MAManagers */ = {
 			isa = PBXGroup;
 			children = (
+				9BB88C831865679500C16895 /* MAManagerPublicDefinitions.h */,
+				9BB88C841865679500C16895 /* MAManagerPublicDefinitions.m */,
 				9BD0E78F1845F9F100BA9F2E /* MAGroupManager.h */,
 				9BD0E7901845F9F100BA9F2E /* MAGroupManager.m */,
 				9BD0E7B21847ADB100BA9F2E /* MAAccountManager.h */,
@@ -814,6 +814,7 @@
 				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
 				9B25AA0F18532E41008D79B7 /* MAMemberListViewController.m in Sources */,
 				9BD0E7AE1847A93800BA9F2E /* MAGroupListCell.m in Sources */,
+				9BB88C851865679500C16895 /* MAManagerPublicDefinitions.m in Sources */,
 				9BD0E7A018465AB500BA9F2E /* MATabAccountGroupInfoCell.m in Sources */,
 				9BC23110184B27BA005ADD59 /* MAAccountDetailConsumersCell.m in Sources */,
 				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
@@ -821,11 +822,10 @@
 				9B25AA1C1853472C008D79B7 /* MAMemberListSectionEmptyCell.m in Sources */,
 				9BC2310A184B2776005ADD59 /* MAAccountDetailDateCell.m in Sources */,
 				9BB88C791865567200C16895 /* MAccount.m in Sources */,
-				9BCAC03318322997000417FD /* main.m in Sources */,
+				9BCAC03318322997000417FD /* main.mm in Sources */,
 				9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */,
 				9BC23104184B1F11005ADD59 /* MAAccountDetailViewController.m in Sources */,
 				9B88939618545A60003A9DCB /* MAMemberDetailCommonCell.m in Sources */,
-				9BB88C8218655C9100C16895 /* MADataPersistentAPI.m in Sources */,
 				9BB88C761865567200C16895 /* MGroup.m in Sources */,
 				9BD0E7911845F9F100BA9F2E /* MAGroupManager.m in Sources */,
 				9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */,
