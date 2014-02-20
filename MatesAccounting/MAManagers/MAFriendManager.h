@@ -8,15 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MFriend+expand.h"
+
 #define FriendManager [MAFriendManager sharedManager]
-
-@class MFriend;
-
-typedef enum {
-    Unknow = 0,
-    Male = 1,
-    Female = 2
-} MAFriendGender;
 
 @interface MAFriendManager : NSObject
 
@@ -32,11 +26,11 @@ typedef enum {
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday;
 
-- (MFriend *)editAndSaveFriend:(MFriend *)friend
-                          name:(NSString *)name
-                        gender:(MAFriendGender)gender
-                   phoneNumber:(NSNumber *)phoneNumber
-                         eMail:(NSString *)eMail
-                      birthday:(NSDate *)birthday;
+- (BOOL)editAndSaveFriend:(MFriend *)friend
+                     name:(NSString *)name
+                   gender:(MAFriendGender)gender
+              phoneNumber:(NSNumber *)phoneNumber
+                    eMail:(NSString *)eMail
+                 birthday:(NSDate *)birthday;
 
 @end

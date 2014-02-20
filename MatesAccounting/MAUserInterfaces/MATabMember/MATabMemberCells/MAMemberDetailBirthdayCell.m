@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *birthdayDatePicker;
 
-@property (nonatomic, strong) MFriend *member;
-
 @end
 
 @implementation MAMemberDetailBirthdayCell
@@ -30,9 +28,15 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MFriend *)member
+- (void)reuseCellWithData:(NSDate *)date
 {
-    self.member = member;
+    if (!date) {
+        date = [NSDate dateWithTimeIntervalSince1970:0.0f];
+    }
+
+    [self.birthdayDatePicker setDate:date animated:YES];
+    [self.birthdayLabel setText:[date dateToString:@"yyyy-MM-dd"]];
+
     if (self.status) {
         [self.birthdayDatePicker setHidden:NO];
     } else {
@@ -57,8 +61,8 @@
 
 - (IBAction)didBirthdayDatePickerValueChanged:(UIDatePicker *)sender
 {
-    NSString *birthdayDateString = [sender.date dateToString:@"yyyy-MM-dd"];
-    [self.birthdayLabel setText:birthdayDateString];
+    [self.actionDelegate actionWithData:sender.date cell:self type:self.tag];
+    [self.birthdayLabel setText:[sender.date dateToString:@"yyyy-MM-dd"]];
 }
 
 @end

@@ -10,12 +10,14 @@
 
 #import "MAFriendListCell.h"
 #import "MAMemberDetailViewController.h"
+#import "MAFriendManager.h"
 
 NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMember";
 
 @interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) UIBarButtonItem *createFriendBarItem;
 @property (nonatomic, strong) UIBarButtonItem *selectDoneBarItem;
 
@@ -60,7 +62,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 18;
+    return [FriendManager allFriends].count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

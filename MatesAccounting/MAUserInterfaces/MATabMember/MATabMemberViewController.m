@@ -65,6 +65,8 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 {
     if ([segue.identifier isEqualToString:kSegueTabMemberToGroupList]) {
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToMemberDetail]) {
+        MAMemberDetailViewController *memberDetail = segue.destinationViewController;
+        [memberDetail setMember:nil];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToCreateMember]) {
         NSAssert(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
@@ -87,10 +89,6 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSUInteger rowCount = [FriendManager currentGroupMembers].count;
-
-    // TODO: test data
-    rowCount = 18;
-
     return rowCount;
 }
 

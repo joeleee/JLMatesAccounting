@@ -10,12 +10,14 @@
 
 #import "MFriend.h"
 
+NSString * const kMemberDetailCellTitle = @"kMemberDetailCellTitle";
+NSString * const kMemberDetailCellContent = @"kMemberDetailCellContent";
+NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType";
+
 @interface MAMemberDetailCommonCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *detailTextField;
-
-@property (nonatomic, strong) MFriend *member;
 
 @end
 
@@ -29,10 +31,12 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MFriend *)member
+- (void)reuseCellWithData:(NSDictionary *)info
 {
-    self.detailTextField.keyboardType = self.keyboardType;
-    self.member = member;
+    [self.titleLabel setText:[info objectForKey:kMemberDetailCellTitle]];
+    [self.detailTextField setText:[info objectForKey:kMemberDetailCellContent]];
+    [self.detailTextField setKeyboardType:[[info objectForKey:kMemberDetailCellKeyboardType] integerValue]];
+
     if (self.status) {
         self.detailTextField.userInteractionEnabled = YES;
         self.detailTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
@@ -52,10 +56,14 @@
     return [self className];
 }
 
-- (void)setTitle:(NSString *)title detail:(NSString *)detail
+- (IBAction)didDetailTextEditingChanged:(UITextField *)sender
 {
-    [self.titleLabel setText:title];
-    [self.detailTextField setText:detail];
+    [self.actionDelegate actionWithData:sender.text cell:self type:self.tag];
+}
+
+- (IBAction)didDetailTextValueChanged:(UITextField *)sender
+{
+    [self.actionDelegate actionWithData:sender.text cell:self type:self.tag];
 }
 
 @end

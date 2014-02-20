@@ -8,10 +8,10 @@
 
 #import "MABaseCell.h"
 
+extern NSString * const kMemberDetailCellTitle;
+extern NSString * const kMemberDetailCellContent;
+extern NSString * const kMemberDetailCellKeyboardType;
+
 @interface MAMemberDetailCommonCell : MABaseCell
-
-@property (nonatomic, assign) UIKeyboardType keyboardType;
-
-- (void)setTitle:(NSString *)title detail:(NSString *)detail;
 
 @end

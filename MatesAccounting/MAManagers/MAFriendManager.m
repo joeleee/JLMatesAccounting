@@ -8,7 +8,6 @@
 
 #import "MAFriendManager.h"
 
-#import "MFriend.h"
 #import "MGroup.h"
 #import "MAGroupManager.h"
 #import "MAFriendPersistent.h"
@@ -47,6 +46,10 @@
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday
 {
+    if (0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+        return nil;
+    }
+
     MFriend *friend = [[MAFriendPersistent instance] createFriendWithName:name];
     NSAssert(friend, @"Create friend failed~ createFriendWithName");
 
@@ -60,13 +63,18 @@
     return friend;
 }
 
-- (MFriend *)editAndSaveFriend:(MFriend *)friend
-                          name:(NSString *)name
-                        gender:(MAFriendGender)gender
-                   phoneNumber:(NSNumber *)phoneNumber
-                         eMail:(NSString *)eMail
-                      birthday:(NSDate *)birthday
+- (BOOL)editAndSaveFriend:(MFriend *)friend
+                     name:(NSString *)name
+                   gender:(MAFriendGender)gender
+              phoneNumber:(NSNumber *)phoneNumber
+                    eMail:(NSString *)eMail
+                 birthday:(NSDate *)birthday
 {
+    if (0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+        return NO;
+    }
+
+    friend.name = name;
     friend.sex = @(gender);
     friend.telephoneNumber = phoneNumber;
     friend.eMail = eMail;
@@ -74,7 +82,7 @@
     BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
     NSAssert(isSucceed, @"Update friend failed~ createFriendWithName");
 
-    return friend;
+    return isSucceed;
 }
 
 - (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group

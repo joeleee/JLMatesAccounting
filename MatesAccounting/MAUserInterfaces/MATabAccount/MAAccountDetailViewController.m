@@ -342,6 +342,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
     } else {
         if (self.isCreateMode) {
+            // TODO:
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [self.navigationItem setHidesBackButton:NO animated:YES];

@@ -8,15 +8,13 @@
 
 #import "MAMemberDetailGenderCell.h"
 
-#import "MFriend.h"
+#import "MFriend+expand.h"
 
 @interface MAMemberDetailGenderCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *genderSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
-
-@property (nonatomic, strong) MFriend *member;
 
 @end
 
@@ -30,9 +28,14 @@
     return self;
 }
 
-- (void)reuseCellWithData:(MFriend *)member
+- (void)reuseCellWithData:(NSNumber *)gender
 {
-    self.member = member;
+    if (Female == [gender integerValue]) {
+        [self.genderSwitch setOn:YES animated:YES];
+    } else {
+        [self.genderSwitch setOn:NO animated:YES];
+    }
+
     if (self.status) {
         [self.genderSwitch setHidden:NO];
     } else {
@@ -52,11 +55,15 @@
 
 - (IBAction)didGenderSwitchValueChanged:(UISwitch *)sender
 {
+    MAFriendGender gender = Unknow;
     if (sender.isOn) {
-        [self.genderLabel setText:@"男"];
-    } else {
+        gender = Female;
         [self.genderLabel setText:@"女"];
+    } else {
+        gender = Male;
+        [self.genderLabel setText:@"男"];
     }
+    [self.actionDelegate actionWithData:@(gender) cell:self type:self.tag];
 }
 
 @end

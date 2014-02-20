@@ -97,9 +97,9 @@
     if (self.hasEdited) {
         [[MAAlertView alertWithTitle:@"要放弃已输入的内容么？"
                              message:nil
-                        buttonTitle1:@"点错了~"
+                        buttonTitle1:@"确认放弃"
                         buttonBlock1:nil
-                        buttonTitle2:@"确认放弃"
+                        buttonTitle2:@"点错了~"
                         buttonBlock2:^{
                             [self dismissViewControllerAnimated:YES completion:^{
                             }];

@@ -13,6 +13,6 @@
 @interface MABaseCell : UITableViewCell <MACellReuseProtocol>
 
 @property (nonatomic, assign) NSInteger status;
-@property (nonatomic, weak) id<MACellActionDelegate> actionDelegate;
+@property (nonatomic, weak) id <MACellActionDelegate> actionDelegate;
 
 @end
