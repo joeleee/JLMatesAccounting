@@ -22,7 +22,7 @@
 typedef void (^ PersistentBlock) (BOOL isSucceed, id data, NSError *error, NSDictionary *userInfo);
 
 typedef enum {
-    UnknowSex = 0,
-    FemaleEnum = 1,
-    MaleEnum = 2
-} MASexEnum;
+    MAGenderUnknow = 0,
+    MAGenderFemale = 1,
+    MAGenderMale = 2
+} MAGenderEnum;

@@ -34,7 +34,7 @@ typedef enum {
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 
 @property (nonatomic, copy) NSString *editingName;
-@property (nonatomic, assign) MAFriendGender editingGender;
+@property (nonatomic, assign) MAGenderEnum editingGender;
 @property (nonatomic, copy) NSString *editingPhone;
 @property (nonatomic, copy) NSString *editingMail;
 @property (nonatomic, strong) NSDate *editingBirthday;
@@ -120,7 +120,7 @@ typedef enum {
 - (void)clearEditingData
 {
     self.editingName = nil;
-    self.editingGender = Unknow;
+    self.editingGender = MAGenderUnknow;
     self.editingPhone = nil;
     self.editingMail = nil;
     self.editingBirthday = nil;

@@ -11,6 +11,7 @@
 #import "MGroup.h"
 #import "MAGroupManager.h"
 #import "MAFriendPersistent.h"
+#import "MFriend.h"
 
 @implementation MAFriendManager
 
@@ -41,7 +42,7 @@
 }
 
 - (MFriend *)createFriendWithName:(NSString *)name
-                           gender:(MAFriendGender)gender
+                           gender:(MAGenderEnum)gender
                       phoneNumber:(NSNumber *)phoneNumber
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday
@@ -65,7 +66,7 @@
 
 - (BOOL)editAndSaveFriend:(MFriend *)friend
                      name:(NSString *)name
-                   gender:(MAFriendGender)gender
+                   gender:(MAGenderEnum)gender
               phoneNumber:(NSNumber *)phoneNumber
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday

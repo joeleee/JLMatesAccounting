@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MFriend+expand.h"
+@class MFriend;
 
 #define FriendManager [MAFriendManager sharedManager]
 
@@ -21,14 +21,14 @@
 - (NSArray *)allFriends;
 
 - (MFriend *)createFriendWithName:(NSString *)name
-                           gender:(MAFriendGender)gender
+                           gender:(MAGenderEnum)gender
                       phoneNumber:(NSNumber *)phoneNumber
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday;
 
 - (BOOL)editAndSaveFriend:(MFriend *)friend
                      name:(NSString *)name
-                   gender:(MAFriendGender)gender
+                   gender:(MAGenderEnum)gender
               phoneNumber:(NSNumber *)phoneNumber
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday;

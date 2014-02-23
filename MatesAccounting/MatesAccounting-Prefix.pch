@@ -26,5 +26,6 @@
     #import "UIColor+MAAddition.h"
     #import "MAAlertView.h"
     #import "NSDate+MAAddition.h"
+    #import "MBProgressHUD+MAAddition.h"
 
 #endif
