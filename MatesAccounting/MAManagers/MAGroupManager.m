@@ -55,7 +55,7 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 
 - (BOOL)changeGroup:(MGroup *)group
 {
-    NSAssert(group, @"change new group should not be nil! - changeGroup");
+    MA_QUICK_ASSERT(group, @"change new group should not be nil! - changeGroup");
     if (!group) {
         return NO;
     }
@@ -72,7 +72,7 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 - (MGroup *)createGroup:(NSString *)name
 {
     MGroup *group = [[MAGroupPersistent instance] createGroupWithGroupName:name];
-    NSAssert(group, @"createGroup result is nil! - createGroup");
+    MA_QUICK_ASSERT(group, @"createGroup result is nil! - createGroup");
 
     if (group) {
         [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasCreated object:group];
@@ -85,7 +85,7 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 {
     group.groupName = name;
     BOOL isSucceed = [[MAGroupPersistent instance] updateGroup:group];
-    NSAssert(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
+    MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
 
     if (isSucceed) {
         [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasModified object:group];

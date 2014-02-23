@@ -17,7 +17,7 @@
 
 + (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee
 {
-    NSAssert(member, @"member should not be nil! - MAFeeOfMember");
+    MA_QUICK_ASSERT(member, @"member should not be nil! - MAFeeOfMember");
 
     MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
     feeOfMember.member = member;
@@ -97,7 +97,7 @@
               toAccount:(MAccount *)account
 {
     for (MAFeeOfMember *feeOfMember in feeOfMembers) {
-        NSAssert(feeOfMember.member, @"member should not be nil! - MAAccountManager");
+        MA_QUICK_ASSERT(feeOfMember.member, @"member should not be nil! - MAAccountManager");
     }
     return NO;
 }
@@ -112,9 +112,7 @@
 - (NSUInteger)insertIndexOfRMemberToAccount:(RMemberToAccount *)memberToAccount
                                      inList:(NSArray *)list
 {
-    NSAssert(list, @"list should not be nil - indexOfRMemberToAccount");
-    NSAssert(memberToAccount, @"memberToAccount should not be nil - indexOfRMemberToAccount");
-    NSAssert([list containsObject:memberToAccount], @"list already contained memberToAccount - indexOfRMemberToAccount");
+    MA_QUICK_ASSERT([list containsObject:memberToAccount], @"list already contained memberToAccount - indexOfRMemberToAccount");
 
     if (0 == list.count) {
         return 0;

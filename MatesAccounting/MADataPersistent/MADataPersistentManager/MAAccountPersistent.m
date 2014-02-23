@@ -35,7 +35,7 @@
     }
 
     RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
-    NSAssert(memberToAccount, @"Assert memberToAccount == nil");
+    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
 
     if (memberToAccount) {
         NSDate *currentData = [NSDate date];
@@ -62,7 +62,7 @@
         }
     }
 
-    NSAssert(memberToAccount, @"Assert memberToAccount == nil");
+    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
     isSucceed = [MACommonPersistent deleteObject:memberToAccount];
     [account refreshAccountTotalFee];
 
@@ -73,7 +73,7 @@
                               date:(NSDate *)date
 {
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
-    NSAssert(account, @"Assert account == nil");
+    MA_QUICK_ASSERT(account, @"Assert account == nil");
 
     if (account) {
         NSDate *currentData = [NSDate date];

@@ -28,7 +28,7 @@
 - (MFriend *)createFriendWithName:(NSString *)name
 {
     MFriend *member = [MACommonPersistent createObject:NSStringFromClass([MFriend class])];
-    NSAssert(member, @"Assert member == nil");
+    MA_QUICK_ASSERT(member, @"Assert member == nil");
 
     if (member) {
         NSDate *currentData = [NSDate date];

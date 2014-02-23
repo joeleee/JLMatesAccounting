@@ -16,6 +16,9 @@
             block(__VA_ARGS__);              \
         }                                    \
 }
+
+#define MA_QUICK_ASSERT(value, message) NSAssert(value, @"MA Assert Wrong - %@ : %s %@", message, __FUNCTION__, [self class])
+
 #endif /* ifndef MAGLOBALDEFINITIONS_H */
 
 #pragma mark - definition blocks

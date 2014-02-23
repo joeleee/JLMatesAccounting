@@ -21,18 +21,18 @@
 
 - (void)reuseCellWithData:(id)data
 {
-    NSAssert(NO, @"If you want call this method, you must overwrite it. - reuseCellWithData");
+    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - reuseCellWithData");
 }
 
 + (CGFloat)cellHeight:(id)data
 {
-    NSAssert(NO, @"If you want call this method, you must overwrite it. - cellHeight");
+    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - cellHeight");
     return 0.0f;
 }
 
 + (NSString *)reuseIdentifier
 {
-    NSAssert(NO, @"If you want call this method, you must overwrite it. - reuseIdentifier");
+    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - reuseIdentifier");
     return @"";
 }
 

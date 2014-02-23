@@ -108,7 +108,7 @@ typedef enum {
             break;
         }
         default:
-            NSAssert(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
     }
 
@@ -120,7 +120,7 @@ typedef enum {
 - (void)clearEditingData
 {
     self.editingName = nil;
-    self.editingGender = MAGenderUnknow;
+    self.editingGender = MAGenderMale;
     self.editingPhone = nil;
     self.editingMail = nil;
     self.editingBirthday = nil;
@@ -228,7 +228,7 @@ typedef enum {
         }
 
         default: {
-            NSAssert(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
         }
     }
@@ -288,7 +288,7 @@ typedef enum {
             break;
         }
         default: {
-            NSAssert(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
         }
     }
@@ -393,7 +393,7 @@ typedef enum {
         }
         [alert show];
     } else {
-        NSAssert(NO, @"Wrong state, (didCancelButtonTaped:)");
+        MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
     }
 }
 

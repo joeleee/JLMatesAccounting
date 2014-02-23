@@ -35,7 +35,7 @@
     }
 
     RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];
-    NSAssert(memberToGroup, @"Assert memberToGroup == nil");
+    MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
 
     if (memberToGroup) {
         NSDate *currentData = [NSDate date];
@@ -59,7 +59,7 @@
             break;
         }
     }
-    NSAssert(memberToGroup, @"Assert memberToGroup == nil");
+    MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
 
     isSucceed = [MACommonPersistent deleteObject:memberToGroup];
 
@@ -69,7 +69,7 @@
 - (MGroup *)createGroupWithGroupName:(NSString *)groupName
 {
     MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];
-    NSAssert(group, @"Assert group == nil");
+    MA_QUICK_ASSERT(group, @"Assert group == nil");
 
     if (group) {
         NSDate *currentData = [NSDate date];

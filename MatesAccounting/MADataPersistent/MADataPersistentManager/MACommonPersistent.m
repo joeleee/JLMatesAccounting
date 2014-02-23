@@ -20,7 +20,7 @@
 
     id object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:moContext];
 
-    NSAssert(object, @"Assert object == nil");
+    MA_QUICK_ASSERT(object, @"Assert object == nil");
 
     return object;
 }
@@ -46,7 +46,7 @@
 
     if (entityName) {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:moContext];
-        NSAssert(entityDescription, @"Assert object == nil");
+        MA_QUICK_ASSERT(entityDescription, @"Assert object == nil");
         [request setEntity:entityDescription];
     }
 

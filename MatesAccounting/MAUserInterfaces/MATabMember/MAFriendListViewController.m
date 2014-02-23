@@ -17,9 +17,10 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 @interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) UIBarButtonItem *createFriendBarItem;
 @property (nonatomic, strong) UIBarButtonItem *selectDoneBarItem;
+
+@property (nonatomic, strong) NSArray *friendList;
 
 @end
 
@@ -28,6 +29,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        self.friendList = [FriendManager allFriends];
     }
 
     return self;
@@ -43,11 +45,11 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueFriendListToCreateMember]) {
-        NSAssert(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
         [memberDetail setIsCreateMode:YES];
     } else {
-        NSAssert(NO, @"Unknow segue - MAFriendListViewController");
+        MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
 }
 
@@ -55,14 +57,16 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"%@ %s wrong indexPath.");
     MAFriendListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAFriendListCell className]];
+    [cell reuseCellWithData:self.friendList[indexPath.row]];
 
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [FriendManager allFriends].count;
+    return self.friendList.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -86,7 +86,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if ([segue.identifier isEqualToString:kSegueAccountDetailToMemberList]) {
     } else {
-        NSAssert(NO, @"Unknow segue - MAAccountDetailViewController");
+        MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
 }
 
@@ -133,7 +133,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                     break;
                 }
                 default:
-                    NSAssert(NO, @"Unknow row - MAAccountDetailViewController");
+                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
@@ -150,7 +150,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             break;
         }
         default:
-            NSAssert(NO, @"Unknow section - MAAccountDetailViewController");
+            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     return cell;
@@ -263,7 +263,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                     break;
                 }
                 default:
-                NSAssert(NO, @"Unknow row - MAAccountDetailViewController");
+                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
@@ -283,7 +283,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             break;
         }
         default:
-            NSAssert(NO, @"Unknow section - MAAccountDetailViewController");
+            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),

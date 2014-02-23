@@ -52,14 +52,14 @@
     }
 
     MFriend *friend = [[MAFriendPersistent instance] createFriendWithName:name];
-    NSAssert(friend, @"Create friend failed~ createFriendWithName");
+    MA_QUICK_ASSERT(friend, @"Create friend failed~ createFriendWithName");
 
     friend.sex = @(gender);
     friend.telephoneNumber = phoneNumber;
     friend.eMail = eMail;
     friend.birthday = birthday;
     BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
-    NSAssert(isSucceed, @"Update friend failed~ createFriendWithName");
+    MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
 
     return friend;
 }
@@ -81,7 +81,7 @@
     friend.eMail = eMail;
     friend.birthday = birthday;
     BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
-    NSAssert(isSucceed, @"Update friend failed~ createFriendWithName");
+    MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
 
     return isSucceed;
 }

@@ -55,7 +55,7 @@ typedef enum {
     if ([segue.identifier isEqualToString:kSegueMemberListToMemberDetail]) {
     } else if ([segue.identifier isEqualToString:kSegueMemberListToFriendList]) {
     } else {
-        NSAssert(NO, @"Wrong segue identifier! (MAMemberListViewController)");
+        MA_QUICK_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
     }
 }
 
@@ -110,7 +110,7 @@ typedef enum {
         }
 
         default: {
-            NSAssert(NO, @"MAMemberListViewController unknow section(didSelectRowAtIndexPath)");
+            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(didSelectRowAtIndexPath)");
             break;
         }
     }
@@ -133,7 +133,7 @@ typedef enum {
             break;
         }
         default: {
-            NSAssert(NO, @"MAMemberListViewController unknow section(viewForHeaderInSection)");
+            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(viewForHeaderInSection)");
             break;
         }
     }
@@ -163,7 +163,7 @@ typedef enum {
             return self.unselectedMembers;
         }
         default: {
-            NSAssert(NO, @"MAMemberListViewController unknow section(arrayInSection)");
+            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
             break;
         }
     }
