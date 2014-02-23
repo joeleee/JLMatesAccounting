@@ -18,14 +18,24 @@
     MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
 
     if (hud) {
-        MBProgressHUDCompletionBlock block = [hud.completionBlock copy];
-        hud.completionBlock = ^{
-            [self showTextHUDOnView:view
-                               text:text
-                    completionBlock:completionBlock
-                           animated:animated];
-            EXECUTE_BLOCK_SAFELY(block);
-        };
+        if (MBProgressHUDModeText == hud.mode) {
+            [hud hide:NO];
+            hud = [self hudOnView:view
+                             text:text
+                             mode:MBProgressHUDModeText
+                  completionBlock:completionBlock
+                         animated:animated];
+            [hud show:NO];
+        } else {
+            MBProgressHUDCompletionBlock block = [hud.completionBlock copy];
+            hud.completionBlock = ^{
+                EXECUTE_BLOCK_SAFELY(block);
+                [self showTextHUDOnView:view
+                                   text:text
+                        completionBlock:completionBlock
+                               animated:animated];
+            };
+        }
     } else {
         hud = [self hudOnView:view
                          text:text
@@ -44,12 +54,11 @@
     MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
 
     if (hud && MBProgressHUDModeIndeterminate == hud.mode) {
-        MBProgressHUDCompletionBlock block = [hud.completionBlock copy];
+        EXECUTE_BLOCK_SAFELY(hud.completionBlock);
         hud.completionBlock = completionBlock;
         hud.detailsLabelText = text;
-        EXECUTE_BLOCK_SAFELY(block);
     } else {
-        [hud hide:animated];
+        [hud hide:NO];
         hud = [self hudOnView:view
                          text:text
                          mode:MBProgressHUDModeIndeterminate
@@ -90,7 +99,7 @@
         hud.dimBackground = NO;
         hud.labelText = text;
         hud.detailsLabelText = @"";
-        [hud hide:animated afterDelay:1.5f];
+        [hud hide:animated afterDelay:1.3f];
     } else {
         hud.dimBackground = YES;
         hud.labelText = @"";

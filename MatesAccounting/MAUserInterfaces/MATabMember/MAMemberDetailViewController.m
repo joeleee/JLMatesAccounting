@@ -251,6 +251,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -317,6 +318,14 @@ typedef enum {
 
 - (void)didSaveButtonTaped:(UIBarButtonItem *)sender
 {
+    if (0 >= [self.editingName stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+        [MBProgressHUD showTextHUDOnView:self.view
+                                    text:@"姓名不能为空"
+                         completionBlock:nil
+                                animated:YES];
+        return;
+    }
+
     if (self.isCreateMode) {
         // create mode
         self.member = [FriendManager createFriendWithName:self.editingName
@@ -325,10 +334,18 @@ typedef enum {
                                                     eMail:self.editingMail
                                                  birthday:self.editingBirthday];
         if (self.member) {
-            [self setEditing:NO animated:YES];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建成功"
+                             completionBlock:^{
+                                 [self setEditing:NO animated:YES];
+                                 [self dismissViewControllerAnimated:YES completion:nil];
+                             }
+                                    animated:YES];
         } else {
-            // TODO:
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建失败"
+                             completionBlock:nil
+                                    animated:YES];
         }
     } else {
         // not create mode
@@ -341,7 +358,10 @@ typedef enum {
         if (updated) {
             [self setEditing:NO animated:YES];
         } else {
-            // TODO:
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"更新失败"
+                             completionBlock:nil
+                                    animated:YES];
         }
     }
 }
