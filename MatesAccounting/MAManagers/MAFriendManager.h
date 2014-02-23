@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MFriend;
+@class MFriend, MGroup;
 
 #define FriendManager [MAFriendManager sharedManager]
 
@@ -16,9 +16,9 @@
 
 + (MAFriendManager *)sharedManager;
 
-- (NSArray *)currentGroupMembers;
+- (NSArray *)currentGroupToMembers;
 
-- (NSArray *)allFriends;
+- (NSArray *)allFriendsFilteByGroup:(MGroup *)group;
 
 - (MFriend *)createFriendWithName:(NSString *)name
                            gender:(MAGenderEnum)gender

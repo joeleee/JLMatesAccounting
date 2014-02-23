@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MGroup;
+
 @interface MAFriendListViewController : UIViewController
+
+@property (nonatomic, strong) MGroup *group;
 
 @end

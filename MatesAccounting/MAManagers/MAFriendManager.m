@@ -27,16 +27,24 @@
     return sharedInstance;
 }
 
-- (NSArray *)currentGroupMembers
+- (NSArray *)currentGroupToMembers
 {
-    NSArray *members = [[GroupManager currentGroup].relationshipToMember allObjects];
+    NSArray *relationshipToMember = [[GroupManager currentGroup].relationshipToMember allObjects];
 
-    return members;
+    return relationshipToMember;
 }
 
-- (NSArray *)allFriends
+- (NSArray *)allFriendsFilteByGroup:(MGroup *)group
 {
     NSArray *friends = [[MAFriendPersistent instance] fetchFriends:nil];
+
+    if (group) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            MFriend *friend = evaluatedObject;
+            return ![friend.relationshipToGroup intersectsSet:group.relationshipToMember];
+        }];
+        friends = [friends filteredArrayUsingPredicate:predicate];
+    }
 
     return friends;
 }

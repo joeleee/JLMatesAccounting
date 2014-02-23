@@ -11,6 +11,7 @@
 #import "MAFriendListCell.h"
 #import "MAMemberDetailViewController.h"
 #import "MAFriendManager.h"
+#import "MAGroupManager.h"
 
 NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMember";
 
@@ -29,7 +30,6 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        self.friendList = [FriendManager allFriends];
     }
 
     return self;
@@ -40,6 +40,8 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     [super viewDidLoad];
 
     [self.navigationItem setRightBarButtonItem:self.createFriendBarItem animated:YES];
+
+    self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -112,6 +114,10 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (void)didSelectDoneNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
 {
+    for (NSIndexPath *indexPath in [self.tableView indexPathsForSelectedRows]) {
+        [GroupManager addFriend:self.friendList[indexPath.row] toGroup:self.group];
+    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

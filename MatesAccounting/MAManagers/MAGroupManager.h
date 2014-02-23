@@ -14,7 +14,7 @@ extern NSString * const MAGroupManagerSelectedGroupChanged;
 extern NSString * const MAGroupManagerGroupHasCreated;
 extern NSString * const MAGroupManagerGroupHasModified;
 
-@class MGroup;
+@class MGroup, MFriend;
 
 @interface MAGroupManager : NSObject
 
@@ -30,5 +30,7 @@ extern NSString * const MAGroupManagerGroupHasModified;
 
 - (MGroup *)editAndSaveGroup:(MGroup *)group
                         name:(NSString *)name;
+
+- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group;
 
 @end

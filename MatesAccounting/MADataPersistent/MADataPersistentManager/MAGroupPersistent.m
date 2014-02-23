@@ -12,6 +12,7 @@
 #import "MGroup.h"
 #import "MAContextAPI.h"
 #import "RMemberToGroup.h"
+#import "MFriend.h"
 
 @implementation MAGroupPersistent
 
@@ -28,8 +29,10 @@
 
 - (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
 {
-    for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
-        if (memberToGroup.member == friend) {
+    MA_QUICK_ASSERT(friend && group, @"friend or group should not be nil");
+
+    for (RMemberToGroup *memberToGroup in friend.relationshipToGroup) {
+        if (memberToGroup.group == group) {
             return NO;
         }
     }
@@ -38,8 +41,7 @@
     MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
 
     if (memberToGroup) {
-        NSDate *currentData = [NSDate date];
-        memberToGroup.createDate = currentData;
+        memberToGroup.createDate = [NSDate date];
         memberToGroup.member = friend;
         memberToGroup.group = group;
         return [[MAContextAPI sharedAPI] saveContextData];

@@ -8,12 +8,14 @@
 
 #import "MATabMemberListCell.h"
 
+#import "MFriend.h"
+
 @interface MATabMemberListCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *memberNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memberTelphoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberFeeTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberFeeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *memberTelphoneLabel;
 
 @end
 
@@ -27,8 +29,14 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(MFriend *)data
 {
+    [self.memberNameLabel setText:data.name];
+    if (0 != [data.telephoneNumber integerValue]) {
+        [self.memberTelphoneLabel setText:[data.telephoneNumber stringValue]];
+    } else {
+        [self.memberTelphoneLabel setText:@"暂无号码"];
+    }
 }
 
 + (CGFloat)cellHeight:(id)data

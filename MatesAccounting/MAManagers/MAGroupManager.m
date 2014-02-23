@@ -71,6 +71,10 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 
 - (MGroup *)createGroup:(NSString *)name
 {
+    if ((0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length)) {
+        return nil;
+    }
+
     MGroup *group = [[MAGroupPersistent instance] createGroupWithGroupName:name];
     MA_QUICK_ASSERT(group, @"createGroup result is nil! - createGroup");
 
@@ -83,6 +87,10 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 - (MGroup *)editAndSaveGroup:(MGroup *)group
                         name:(NSString *)name
 {
+    if ((0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length)) {
+        return nil;
+    }
+
     group.groupName = name;
     BOOL isSucceed = [[MAGroupPersistent instance] updateGroup:group];
     MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
@@ -91,6 +99,11 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
         [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasModified object:group];
     }
     return group;
+}
+
+- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
+{
+    return [[MAGroupPersistent instance] addFriend:friend toGroup:group];
 }
 
 @end
