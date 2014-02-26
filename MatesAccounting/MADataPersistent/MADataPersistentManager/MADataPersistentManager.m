@@ -59,26 +59,28 @@
 
 - (BOOL)addMember:(MFriend *)member toGroup:(MGroup *)group
 {
-    BOOL isSucceed = NO;
     if (!group || !member) {
-        return isSucceed;
+        return NO;
     }
 
-    isSucceed = [[MAGroupPersistent instance] addFriend:member toGroup:group];
-
-    return isSucceed;
+    if ([[MAGroupPersistent instance] addFriend:member toGroup:group]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (BOOL)removeMember:(MFriend *)member fromGroup:(MGroup *)group
 {
-    BOOL isSucceed = NO;
     if (!group || !member) {
-        return isSucceed;
+        return NO;
     }
 
-    isSucceed = [[MAGroupPersistent instance] removeFriend:member fromGroup:group];
-
-    return isSucceed;
+    if ([[MAGroupPersistent instance] removeFriend:member fromGroup:group]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (BOOL)addMember:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee

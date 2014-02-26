@@ -10,12 +10,15 @@
 
 #import "MGroup.h"
 #import "MAGroupPersistent.h"
+#import "MACommonManagerBase+private.h"
+#import "RMemberToGroup.h"
 
 NSString * const kCurrentGroupID = @"kCurrentGroupID";
 
-NSString * const MAGroupManagerSelectedGroupChanged = @"MAGroupManagerSelectedGroupChanged";
-NSString * const MAGroupManagerGroupHasCreated = @"MAGroupManagerGroupHasCreated";
-NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModified";
+NSString * const kMAGMGroupHasCreated = @"kMAGMGroupHasCreated";
+NSString * const kMAGMGroupHasModified = @"kMAGMGroupHasModified";
+NSString * const kMAGMGroupMemberHasChanged = @"kMAGMGroupMemberHasChanged";
+NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
 @interface MAGroupManager ()
 
@@ -34,6 +37,34 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
             sharedInstance = [[self alloc] init];
         });
     return sharedInstance;
+}
+
+- (id)init
+{
+    if (self = [super init]) {
+
+        _listeners = @{kMAGMGroupHasCreated:[NSMutableSet set],
+                       kMAGMGroupHasModified:[NSMutableSet set],
+                       kMAGMGroupMemberHasChanged:[NSMutableSet set],
+                       kMAGMCurrentGroupHasChanged:[NSMutableSet set]};
+
+        _listenerKeyToSelector = @{kMAGMGroupHasCreated:NSStringFromSelector(@selector(groupHasCreated:)),
+                                   kMAGMGroupHasModified:NSStringFromSelector(@selector(groupHasModified:)),
+                                   kMAGMGroupMemberHasChanged:NSStringFromSelector(@selector(groupMemberHasChanged:member:isAdd:)),
+                                   kMAGMCurrentGroupHasChanged:NSStringFromSelector(@selector(currentGroupHasChanged:))};
+    }
+
+    return self;
+}
+
+- (BOOL)addListener:(id<MAGroupManagerListenerProtocol>)listener
+{
+    return [self listener:listener isAdd:YES];
+}
+
+- (BOOL)removeListener:(id<MAGroupManagerListenerProtocol>)listener
+{
+    return [self listener:listener isAdd:NO];
 }
 
 - (MGroup *)currentGroup
@@ -64,7 +95,9 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
 
     [[NSUserDefaults standardUserDefaults] setObject:self.selectedGroup.groupID forKey:kCurrentGroupID];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerSelectedGroupChanged object:self.selectedGroup];
+    [self listenersForKey:kMAGMCurrentGroupHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+        [listener currentGroupHasChanged:group];
+    }];
 
     return YES;
 }
@@ -79,7 +112,9 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
     MA_QUICK_ASSERT(group, @"createGroup result is nil! - createGroup");
 
     if (group) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasCreated object:group];
+        [self listenersForKey:kMAGMGroupHasCreated withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+            [listener groupHasCreated:group];
+        }];
     }
     return group;
 }
@@ -96,14 +131,33 @@ NSString * const MAGroupManagerGroupHasModified = @"MAGroupManagerGroupHasModifi
     MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
 
     if (isSucceed) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:MAGroupManagerGroupHasModified object:group];
+        [self listenersForKey:kMAGMGroupHasModified withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+            [listener groupHasModified:group];
+        }];
     }
     return group;
 }
 
-- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
+- (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group
 {
-    return [[MAGroupPersistent instance] addFriend:friend toGroup:group];
+    RMemberToGroup *relationship = [[MAGroupPersistent instance] addFriend:mFriend toGroup:group];
+    if (relationship) {
+        [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+            [listener groupMemberHasChanged:relationship.group member:relationship.member isAdd:YES];
+        }];
+    }
+    return relationship;
+}
+
+- (BOOL)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group
+{
+    BOOL succeed = [[MAGroupPersistent instance] removeFriend:mFriend fromGroup:group];
+    if (succeed) {
+        [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+            [listener groupMemberHasChanged:group member:mFriend isAdd:NO];
+        }];
+    }
+    return succeed;
 }
 
 @end

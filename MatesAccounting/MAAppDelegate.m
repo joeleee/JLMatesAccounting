@@ -10,9 +10,6 @@
 
 #import "MAContextAPI.h"
 
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCarrier.h>
-
 @implementation MAAppDelegate
 
 void uncaughtExceptionHandler(NSException *exception)
@@ -23,12 +20,6 @@ void uncaughtExceptionHandler(NSException *exception)
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    CTTelephonyNetworkInfo *networkInfo;
-    networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = networkInfo.subscriberCellularProvider;
-    NSLog(@"------%@", carrier.carrierName);
-    NSLog(@"------%@", carrier);
-
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [[MAContextAPI sharedAPI] saveContextData];
     [self.window makeKeyAndVisible];

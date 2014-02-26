@@ -26,10 +26,10 @@
     return sharedInstance;
 }
 
-- (BOOL)addFriend:(MFriend *)friend toAccount:(MAccount *)account fee:(double)fee
+- (BOOL)addFriend:(MFriend *)mFriend toAccount:(MAccount *)account fee:(double)fee
 {
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (memberToAccount.member == friend) {
+        if (memberToAccount.member == mFriend) {
             return NO;
         }
     }
@@ -40,7 +40,7 @@
     if (memberToAccount) {
         NSDate *currentData = [NSDate date];
         memberToAccount.createDate = currentData;
-        memberToAccount.member = friend;
+        memberToAccount.member = mFriend;
         memberToAccount.fee = @(fee);
         memberToAccount.account = account;
         [account refreshAccountTotalFee];
@@ -50,13 +50,13 @@
     return NO;
 }
 
-- (BOOL)removeFriend:(MFriend *)friend fromAccount:(MAccount *)account
+- (BOOL)removeFriend:(MFriend *)mFriend fromAccount:(MAccount *)account
 {
     BOOL isSucceed = NO;
 
     RMemberToAccount *memberToAccount = nil;
     for (RMemberToAccount *relationship in account.relationshipToMember) {
-        if (relationship.member == friend) {
+        if (relationship.member == mFriend) {
             memberToAccount = relationship;
             break;
         }

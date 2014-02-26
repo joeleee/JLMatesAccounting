@@ -15,9 +15,11 @@
 NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
-@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
+@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAGroupManagerListenerProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *groupList;
 
 @end
 
@@ -26,24 +28,9 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(groupHasCreated:)
-                                                     name:MAGroupManagerGroupHasCreated
-                                                   object:nil];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(groupHasModified:)
-                                                     name:MAGroupManagerGroupHasModified
-                                                   object:nil];
     }
 
     return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadView
@@ -52,6 +39,21 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
     UIBarButtonItem *addGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroupNavigationButtonTaped:)];
     [self.navigationItem setRightBarButtonItem:addGroupBarItem animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [GroupManager addListener:self];
+    [self loadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [GroupManager removeListener:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -66,6 +68,16 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
         controller.group = nil;
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue ? MAGroupListViewController");
+    }
+}
+
+- (void)loadData
+{
+    self.groupList = [GroupManager myGroups];
+    if (1 == self.tableView.numberOfSections) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [self.tableView reloadData];
     }
 }
 
@@ -125,16 +137,16 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     return YES;
 }
 
-#pragma mark - notifications
+#pragma mark - MAGroupManagerListenerProtocol
 
-- (void)groupHasModified:(NSNotification *)notification
+- (void)groupHasCreated:(MGroup *)group
 {
-    [self.tableView reloadData];
+    [self loadData];
 }
 
-- (void)groupHasCreated:(NSNotification *)notification
+- (void)groupHasModified:(MGroup *)group
 {
-    [self.tableView reloadData];
+    [self loadData];
 }
 
 @end

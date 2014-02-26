@@ -27,7 +27,7 @@ typedef enum {
     MAMemberDetailListTypeBirthday = 4
 } MAMemberDetailListType;
 
-@interface MAMemberDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
+@interface MAMemberDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAFriendManagerListenerProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *accountButton;
@@ -63,6 +63,20 @@ typedef enum {
         [self setEditing:NO animated:NO];
         self.title = @"成员信息";
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [FriendManager addListener:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [FriendManager removeListener:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -128,11 +142,11 @@ typedef enum {
 
 - (void)refreshEditingData
 {
-    self.editingName = self.member.name ? self.member.name : @"";
-    self.editingGender = [self.member.sex integerValue];
-    self.editingPhone = [self.member.telephoneNumber stringValue];
-    self.editingMail = self.member.eMail ? self.member.eMail : @"";
-    self.editingBirthday = self.member.birthday;
+    self.editingName = self.mFriend.name ? self.mFriend.name : @"";
+    self.editingGender = [self.mFriend.sex integerValue];
+    self.editingPhone = [self.mFriend.telephoneNumber stringValue];
+    self.editingMail = self.mFriend.eMail ? self.mFriend.eMail : @"";
+    self.editingBirthday = self.mFriend.birthday;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -156,7 +170,7 @@ typedef enum {
             if (self.isEditing) {
                 name = self.editingName;
             } else {
-                name = self.member.name;
+                name = self.mFriend.name;
             }
             NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"姓名：",
                                        kMemberDetailCellContent:name ? name : @"",
@@ -173,7 +187,7 @@ typedef enum {
             if (self.isEditing) {
                 [detailCell reuseCellWithData:@(self.editingGender)];
             } else {
-                [detailCell reuseCellWithData:self.member.sex];
+                [detailCell reuseCellWithData:self.mFriend.sex];
             }
             break;
         }
@@ -187,7 +201,7 @@ typedef enum {
             if (self.isEditing) {
                 phoneString = self.editingPhone;
             } else {
-                phoneString = [self.member.telephoneNumber stringValue];
+                phoneString = [self.mFriend.telephoneNumber stringValue];
             }
             NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"电话：",
                                        kMemberDetailCellContent:phoneString ? phoneString : @"",
@@ -205,7 +219,7 @@ typedef enum {
             if (self.isEditing) {
                 mail = self.editingMail;
             } else {
-                mail = self.member.eMail;
+                mail = self.mFriend.eMail;
             }
             NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"邮箱：",
                                        kMemberDetailCellContent:mail ? mail : @"",
@@ -222,7 +236,7 @@ typedef enum {
             if (self.isEditing) {
                 [detailCell reuseCellWithData:self.editingBirthday];
             } else {
-                [detailCell reuseCellWithData:self.member.birthday];
+                [detailCell reuseCellWithData:self.mFriend.birthday];
             }
             break;
         }
@@ -326,14 +340,18 @@ typedef enum {
         return;
     }
 
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
+                                               to:nil
+                                             from:nil
+                                         forEvent:nil];
     if (self.isCreateMode) {
         // create mode
-        self.member = [FriendManager createFriendWithName:self.editingName
+        self.mFriend = [FriendManager createFriendWithName:self.editingName
                                                    gender:self.editingGender
                                               phoneNumber:@([self.editingPhone longLongValue])
                                                     eMail:self.editingMail
                                                  birthday:self.editingBirthday];
-        if (self.member) {
+        if (self.mFriend) {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
                                         text:@"创建成功"
                              completionBlock:^{
@@ -349,7 +367,7 @@ typedef enum {
         }
     } else {
         // not create mode
-        BOOL updated = [FriendManager editAndSaveFriend:self.member
+        BOOL updated = [FriendManager editAndSaveFriend:self.mFriend
                                                    name:self.editingName
                                                  gender:self.editingGender
                                             phoneNumber:@([self.editingPhone longLongValue])
@@ -415,6 +433,15 @@ typedef enum {
     }
 
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - MAFriendManagerListenerProtocol
+
+- (void)friendHasModified:(MFriend *)mFriend
+{
+    if (mFriend == self.mFriend) {
+        [self.tableView reloadData];
+    }
 }
 
 @end

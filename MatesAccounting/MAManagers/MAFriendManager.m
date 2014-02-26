@@ -12,6 +12,11 @@
 #import "MAGroupManager.h"
 #import "MAFriendPersistent.h"
 #import "MFriend.h"
+#import "MACommonManagerBase+private.h"
+#import "RMemberToGroup.h"
+
+NSString * const kMAFMFriendHasCreated = @"kMAFMFriendHasCreated";
+NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 @implementation MAFriendManager
 
@@ -27,9 +32,39 @@
     return sharedInstance;
 }
 
-- (NSArray *)currentGroupToMembers
+- (id)init
 {
-    NSArray *relationshipToMember = [[GroupManager currentGroup].relationshipToMember allObjects];
+    if (self = [super init]) {
+
+        _listeners = @{kMAFMFriendHasCreated:[NSMutableSet set],
+                       kMAFMFriendHasModified:[NSMutableSet set]};
+
+        _listenerKeyToSelector = @{kMAFMFriendHasCreated:NSStringFromSelector(@selector(friendHasCreated:)),
+                                   kMAFMFriendHasModified:NSStringFromSelector(@selector(friendHasModified:))};
+    }
+
+    return self;
+}
+
+#pragma mark - public methods
+
+- (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener
+{
+    return [self listener:listener isAdd:YES];
+}
+
+- (BOOL)removeListener:(id<MAFriendManagerListenerProtocol>)listener
+{
+    return [self listener:listener isAdd:NO];
+}
+
+- (NSArray *)currentGroupToMemberRelationships
+{
+    NSArray *relationshipToMember = [[[GroupManager currentGroup].relationshipToMember allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        RMemberToGroup *r1 = obj1;
+        RMemberToGroup *r2 = obj2;
+        return [r1.createDate compare:r2.createDate];
+    }];
 
     return relationshipToMember;
 }
@@ -59,20 +94,23 @@
         return nil;
     }
 
-    MFriend *friend = [[MAFriendPersistent instance] createFriendWithName:name];
-    MA_QUICK_ASSERT(friend, @"Create friend failed~ createFriendWithName");
+    MFriend *mFriend = [[MAFriendPersistent instance] createFriendWithName:name];
+    MA_QUICK_ASSERT(mFriend, @"Create friend failed~ createFriendWithName");
 
-    friend.sex = @(gender);
-    friend.telephoneNumber = phoneNumber;
-    friend.eMail = eMail;
-    friend.birthday = birthday;
-    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
+    mFriend.sex = @(gender);
+    mFriend.telephoneNumber = phoneNumber;
+    mFriend.eMail = eMail;
+    mFriend.birthday = birthday;
+    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:mFriend];
     MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
 
-    return friend;
+    [self listenersForKey:kMAFMFriendHasCreated withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
+        [listener friendHasModified:mFriend];
+    }];
+    return mFriend;
 }
 
-- (BOOL)editAndSaveFriend:(MFriend *)friend
+- (BOOL)editAndSaveFriend:(MFriend *)mFriend
                      name:(NSString *)name
                    gender:(MAGenderEnum)gender
               phoneNumber:(NSNumber *)phoneNumber
@@ -83,25 +121,18 @@
         return NO;
     }
 
-    friend.name = name;
-    friend.sex = @(gender);
-    friend.telephoneNumber = phoneNumber;
-    friend.eMail = eMail;
-    friend.birthday = birthday;
-    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:friend];
+    mFriend.name = name;
+    mFriend.sex = @(gender);
+    mFriend.telephoneNumber = phoneNumber;
+    mFriend.eMail = eMail;
+    mFriend.birthday = birthday;
+    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:mFriend];
     MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
 
+    [self listenersForKey:kMAFMFriendHasModified withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
+        [listener friendHasModified:mFriend];
+    }];
     return isSucceed;
-}
-
-- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
-{
-    NSSet *members = group.relationshipToMember;
-    if ([members containsObject:friend]) {
-        return NO;
-    }
-
-    return YES;
 }
 
 @end

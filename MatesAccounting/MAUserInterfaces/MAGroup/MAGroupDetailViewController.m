@@ -11,7 +11,7 @@
 #import "MGroup.h"
 #import "MAGroupManager.h"
 
-@interface MAGroupDetailViewController () <UIScrollViewDelegate, UITextFieldDelegate>
+@interface MAGroupDetailViewController () <UIScrollViewDelegate, UITextFieldDelegate, MAGroupManagerListenerProtocol>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *detailScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *groupCreateTimeLabel;
@@ -31,19 +31,9 @@
     if (self = [super initWithCoder:aDecoder]) {
 
         self.hasEdited = NO;
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(groupHasModified:)
-                                                     name:MAGroupManagerGroupHasModified
-                                                   object:nil];
     }
 
     return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -51,7 +41,21 @@
     [super viewDidLoad];
 
     self.detailScrollView.contentSize = CGSizeMake(320, self.cancelButton.bottom + 88);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [GroupManager addListener:self];
     [self refreshView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [GroupManager removeListener:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void)refreshView
@@ -126,11 +130,11 @@
     [sender resignFirstResponder];
 }
 
-#pragma mark - notifications
+#pragma mark - MAGroupManagerListenerProtocol
 
-- (void)groupHasModified:(NSNotification *)notification
+- (void)groupHasModified:(MGroup *)group
 {
-    if (notification.object == self.group) {
+    if (group == self.group) {
         [self refreshView];
     }
 }

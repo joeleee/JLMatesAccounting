@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 
 #import "MAccount+expand.h"
 #import <objc/runtime.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 #include <iostream>
 
 using namespace std;
@@ -211,6 +213,14 @@ int main(int argc, char *argv[])
     int z = x ^ y * y;
     NSLog(@"%d",z);
     return 0;
+
+#pragma mark test CTTelephonyNetworkInfo
+    CTTelephonyNetworkInfo *networkInfo;
+    networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = networkInfo.subscriberCellularProvider;
+    NSLog(@"------%@", carrier.carrierName);
+    NSLog(@"------%@", carrier);
+
 #pragma mark test double linked list with only one pointer
     NodePointer head = NULL;
     for (int value = 9; 0 <= value; --value) {

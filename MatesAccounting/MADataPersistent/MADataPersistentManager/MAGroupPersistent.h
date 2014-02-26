@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class MGroup, MFriend;
+@class MGroup, MFriend, RMemberToGroup;
 
 @interface MAGroupPersistent : NSObject
 
 + (MAGroupPersistent *)instance;
 
-- (BOOL)addFriend:(MFriend *)member toGroup:(MGroup *)group;
+- (RMemberToGroup *)addFriend:(MFriend *)member toGroup:(MGroup *)group;
 
 - (BOOL)removeFriend:(MFriend *)member fromGroup:(MGroup *)group;
 

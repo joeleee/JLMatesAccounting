@@ -6,17 +6,28 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#define FriendManager [MAFriendManager sharedManager]
+
+#import "MACommonManagerBase.h"
 
 @class MFriend, MGroup;
 
-#define FriendManager [MAFriendManager sharedManager]
+@protocol MAFriendManagerListenerProtocol <NSObject>
 
-@interface MAFriendManager : NSObject
+@optional
+- (void)friendHasCreated:(MFriend *)mFriend;
+- (void)friendHasModified:(MFriend *)mFriend;
 
-+ (MAFriendManager *)sharedManager;
+@end
 
-- (NSArray *)currentGroupToMembers;
+
+@interface MAFriendManager : MACommonManagerBase
+
+- (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener;
+
+- (BOOL)removeListener:(id<MAFriendManagerListenerProtocol>)listener;
+
+- (NSArray *)currentGroupToMemberRelationships;
 
 - (NSArray *)allFriendsFilteByGroup:(MGroup *)group;
 
@@ -26,7 +37,7 @@
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday;
 
-- (BOOL)editAndSaveFriend:(MFriend *)friend
+- (BOOL)editAndSaveFriend:(MFriend *)mFriend
                      name:(NSString *)name
                    gender:(MAGenderEnum)gender
               phoneNumber:(NSNumber *)phoneNumber

@@ -27,13 +27,13 @@
     return sharedInstance;
 }
 
-- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group
+- (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group
 {
-    MA_QUICK_ASSERT(friend && group, @"friend or group should not be nil");
+    MA_QUICK_ASSERT(mFriend && group, @"friend or group should not be nil");
 
-    for (RMemberToGroup *memberToGroup in friend.relationshipToGroup) {
+    for (RMemberToGroup *memberToGroup in mFriend.relationshipToGroup) {
         if (memberToGroup.group == group) {
-            return NO;
+            return nil;
         }
     }
 
@@ -42,21 +42,28 @@
 
     if (memberToGroup) {
         memberToGroup.createDate = [NSDate date];
-        memberToGroup.member = friend;
+        memberToGroup.member = mFriend;
         memberToGroup.group = group;
-        return [[MAContextAPI sharedAPI] saveContextData];
+        if ([[MAContextAPI sharedAPI] saveContextData]) {
+            return memberToGroup;
+        } else {
+            MA_QUICK_ASSERT(NO, @"Update failed.");
+            [MACommonPersistent deleteObject:memberToGroup];
+            [[MAContextAPI sharedAPI] saveContextData];
+            return nil;
+        }
     }
 
-    return NO;
+    return nil;
 }
 
-- (BOOL)removeFriend:(MFriend *)friend fromGroup:(MGroup *)group
+- (BOOL)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group
 {
     BOOL isSucceed = NO;
 
     RMemberToGroup *memberToGroup = nil;
     for (RMemberToGroup *relationship in group.relationshipToMember) {
-        if (memberToGroup.member == friend) {
+        if (relationship.member == mFriend) {
             memberToGroup = relationship;
             break;
         }

@@ -16,9 +16,9 @@
 
 - (MFriend *)createFriendWithName:(NSString *)name;
 
-- (BOOL)updateFriend:(MFriend *)friend;
+- (BOOL)updateFriend:(MFriend *)mFriend;
 
-- (BOOL)deleteFriend:(MFriend *)friend;
+- (BOOL)deleteFriend:(MFriend *)mFriend;
 
 - (NSArray *)fetchFriends:(NSFetchRequest *)request;
 

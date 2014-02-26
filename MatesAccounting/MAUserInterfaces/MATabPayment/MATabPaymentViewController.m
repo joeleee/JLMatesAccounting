@@ -44,14 +44,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     }
 }
 
-#pragma mark - private method
-
-#pragma mark data
 - (void)loadData
 {
 }
 
-#pragma mark action
+#pragma mark - UI action
 
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {

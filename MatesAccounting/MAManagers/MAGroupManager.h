@@ -8,15 +8,26 @@
 
 #define GroupManager [MAGroupManager sharedManager]
 
-#import <Foundation/Foundation.h>
+#import "MACommonManagerBase.h"
 
-extern NSString * const MAGroupManagerSelectedGroupChanged;
-extern NSString * const MAGroupManagerGroupHasCreated;
-extern NSString * const MAGroupManagerGroupHasModified;
+@class MGroup, MFriend, RMemberToGroup;
 
-@class MGroup, MFriend;
+@protocol MAGroupManagerListenerProtocol <NSObject>
 
-@interface MAGroupManager : NSObject
+@optional
+- (void)groupHasCreated:(MGroup *)group;
+- (void)groupHasModified:(MGroup *)group;
+- (void)groupMemberHasChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd;
+- (void)currentGroupHasChanged:(MGroup *)group;
+
+@end
+
+
+@interface MAGroupManager : MACommonManagerBase
+
+- (BOOL)addListener:(id<MAGroupManagerListenerProtocol>)listener;
+
+- (BOOL)removeListener:(id<MAGroupManagerListenerProtocol>)listener;
 
 + (MAGroupManager *)sharedManager;
 
@@ -31,6 +42,8 @@ extern NSString * const MAGroupManagerGroupHasModified;
 - (MGroup *)editAndSaveGroup:(MGroup *)group
                         name:(NSString *)name;
 
-- (BOOL)addFriend:(MFriend *)friend toGroup:(MGroup *)group;
+- (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group;
+
+- (BOOL)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group;
 
 @end

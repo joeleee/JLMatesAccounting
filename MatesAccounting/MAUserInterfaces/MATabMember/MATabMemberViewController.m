@@ -20,7 +20,7 @@ NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail
 NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember";
 NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
-@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -45,8 +45,6 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
     self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     self.tableView.contentOffset = CGPointMake(0, -64);
-
-    self.groupToMemberList = [FriendManager currentGroupToMembers];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,7 +53,6 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     [self.tabBarController setTitle:@"账组成员"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didGroupNavigationButtonTaped:)];
-    // UIBarButtonItem *moreBarItem = [[UIBarButtonItem alloc] initWithTitle:@"•••" style:UIBarButtonItemStyleDone target:self action:@selector(didMoreNavigationButtonTaped:)];
     UIBarButtonItem *addBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:addBarItem animated:YES];
@@ -65,8 +62,12 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 {
     [super viewDidAppear:animated];
 
-    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
+    [self loadData];
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -74,7 +75,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     if ([segue.identifier isEqualToString:kSegueTabMemberToGroupList]) {
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToMemberDetail]) {
         MAMemberDetailViewController *memberDetail = segue.destinationViewController;
-        [memberDetail setMember:sender];
+        [memberDetail setMFriend:sender];
         [memberDetail setIsCreateMode:NO];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToCreateMember]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
@@ -85,6 +86,25 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
         controller.group = sender;
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue! (MATabMemberViewController)");
+    }
+}
+
+- (void)loadData
+{
+    NSArray *dataList = [FriendManager currentGroupToMemberRelationships];
+
+    if (self.groupToMemberList.count == dataList.count) {
+        self.groupToMemberList = dataList;
+        [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows]
+                              withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+
+    } else {
+        self.groupToMemberList = dataList;
+        if (1 == [self.tableView numberOfSections]) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        [self.tableView reloadData];
     }
 }
 
@@ -102,8 +122,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger rowCount = self.groupToMemberList.count;
-    return rowCount;
+    return self.groupToMemberList.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,42 +132,48 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     [self performSegueWithIdentifier:kSegueTabMemberToMemberDetail sender:memberToGroup.member];
 }
 
-#pragma mark navigation action
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
+        RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
+        if ([GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group]) {
+            self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [MBProgressHUD showTextHUDOnView:self.view
+                                        text:@"报告，移除成员失败了..."
+                             completionBlock:nil
+                                    animated:YES];
+        }
+    }
+}
+
+#pragma mark - UI action
 - (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
     [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:[GroupManager currentGroup]];
 }
 
-#pragma mark navigation action
 - (void)didAddNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:[GroupManager currentGroup]];
-    return;
-
-    // TODO:
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"更多操作"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"新建好友", @"添加好友到账组", nil];
-    [actionSheet showInView:self.view];
-}
-
-#pragma mark UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0: {
-            [self performSegueWithIdentifier:kSegueTabMemberToCreateMember sender:[GroupManager currentGroup]];
-            break;
-        }
-        case 1: {
-            [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:[GroupManager currentGroup]];
-            break;
-        }
-        case 2:
-        default:
-            break;
+    if (![GroupManager currentGroup]) {
+        [MBProgressHUD showTextHUDOnView:self.view
+                                    text:@"还木有选小组，肿么添加成员~"
+                         completionBlock:nil
+                                animated:YES];
+    } else {
+        [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:[GroupManager currentGroup]];
     }
 }
 

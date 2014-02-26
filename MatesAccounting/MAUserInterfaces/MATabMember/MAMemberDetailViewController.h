@@ -12,7 +12,7 @@
 
 @interface MAMemberDetailViewController : UIViewController
 
-@property (nonatomic, strong) MFriend *member;
+@property (nonatomic, strong) MFriend *mFriend;
 @property (nonatomic, assign) BOOL isCreateMode;
 
 @end

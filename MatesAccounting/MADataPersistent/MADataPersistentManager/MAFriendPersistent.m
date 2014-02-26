@@ -42,22 +42,22 @@
     return member;
 }
 
-- (BOOL)updateFriend:(MFriend *)friend
+- (BOOL)updateFriend:(MFriend *)mFriend
 {
     BOOL isSucceed = NO;
 
-    if (friend) {
+    if (mFriend) {
         NSDate *currentData = [NSDate date];
-        friend.updateDate = currentData;
+        mFriend.updateDate = currentData;
         isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     }
 
     return isSucceed;
 }
 
-- (BOOL)deleteFriend:(MFriend *)friend
+- (BOOL)deleteFriend:(MFriend *)mFriend
 {
-    BOOL isSucceed = [MACommonPersistent deleteObject:friend];
+    BOOL isSucceed = [MACommonPersistent deleteObject:mFriend];
 
     return isSucceed;
 }
