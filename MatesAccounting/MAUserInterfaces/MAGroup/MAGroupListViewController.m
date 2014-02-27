@@ -60,12 +60,10 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 {
     if ([segue.identifier isEqualToString:kSegueGroupListToGroupDetail]) {
         MAGroupDetailViewController *controller = segue.destinationViewController;
-        controller.isCreateMode = NO;
-        controller.group = sender;
+        [controller setGroup:sender];
     } else if ([segue.identifier isEqualToString:kSegueGroupListToCreateGroup]) {
         MAGroupDetailViewController *controller = segue.destinationViewController;
-        controller.isCreateMode = YES;
-        controller.group = nil;
+        [controller setGroup:nil];
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue ? MAGroupListViewController");
     }

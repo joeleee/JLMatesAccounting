@@ -11,7 +11,7 @@
 #import "MGroup.h"
 #import "MAGroupManager.h"
 
-@interface MAGroupDetailViewController () <UIScrollViewDelegate, UITextFieldDelegate, MAGroupManagerListenerProtocol>
+@interface MAGroupDetailViewController () <UIScrollViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *detailScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *groupCreateTimeLabel;
@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (nonatomic, assign) BOOL hasEdited;
+@property (nonatomic, strong) MGroup *group;
 
 @end
 
@@ -29,8 +29,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-
-        self.hasEdited = NO;
     }
 
     return self;
@@ -47,28 +45,20 @@
 {
     [super viewWillAppear:animated];
 
-    [GroupManager addListener:self];
     [self refreshView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [GroupManager removeListener:self];
-
-    [super viewWillDisappear:animated];
 }
 
 - (void)refreshView
 {
-    if (self.isCreateMode) {
-        [self.groupCreateTimeLabel setText:[[NSDate date] description]];
-        [self.groupIDLabel setText:@"创建后生成"];
-        [self.submitButton setTitle:@"创建" forState:UIControlStateNormal];
-    } else {
+    if (self.group) {
         [self.groupCreateTimeLabel setText:[self.group.createDate description]];
         [self.groupIDLabel setText:[self.group.groupID stringValue]];
         [self.groupNameTextField setText:self.group.groupName];
         [self.submitButton setTitle:@"修改" forState:UIControlStateNormal];
+    } else {
+        [self.groupCreateTimeLabel setText:[[NSDate date] description]];
+        [self.groupIDLabel setText:@"创建后生成"];
+        [self.submitButton setTitle:@"创建" forState:UIControlStateNormal];
     }
 }
 
@@ -86,10 +76,10 @@
         return;
     }
 
-    if (self.isCreateMode) {
-        [GroupManager createGroup:newGroupName];
-    } else {
+    if (self.group) {
         [GroupManager editAndSaveGroup:self.group name:newGroupName];
+    } else {
+        [GroupManager createGroup:newGroupName];
     }
 
     [self dismissViewControllerAnimated:YES completion:^{
@@ -98,7 +88,6 @@
 
 - (IBAction)cancelButtonTaped:(UIButton *)sender
 {
-    if (self.hasEdited) {
         [[MAAlertView alertWithTitle:@"要放弃已输入的内容么？"
                              message:nil
                         buttonTitle1:@"确认放弃"
@@ -108,16 +97,11 @@
                             [self dismissViewControllerAnimated:YES completion:^{
                             }];
                         }] show];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
-    }
 }
 
 - (IBAction)didGroupNameTextFieldBeginEdit:(UITextField *)sender
 {
     // TODO: 判断textField是否被键盘遮住
-    self.hasEdited = YES;
 }
 
 - (IBAction)didGroupNameTextFieldEndEdit:(UITextField *)sender
@@ -130,13 +114,12 @@
     [sender resignFirstResponder];
 }
 
-#pragma mark - MAGroupManagerListenerProtocol
+#pragma mark - Public Method
 
-- (void)groupHasModified:(MGroup *)group
+- (void)setGroup:(MGroup *)group
 {
-    if (group == self.group) {
-        [self refreshView];
-    }
+    self.group = group;
+    [self refreshView];
 }
 
 @end

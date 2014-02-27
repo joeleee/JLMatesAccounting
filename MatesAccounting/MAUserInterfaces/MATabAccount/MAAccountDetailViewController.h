@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MGroup, MAccount;
+
 @interface MAAccountDetailViewController : UIViewController
 
-@property (nonatomic, assign) BOOL isCreateMode;
+- (void)setGroup:(MGroup *)group account:(MAccount *)account;
 
 @end

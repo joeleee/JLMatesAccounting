@@ -71,7 +71,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAAccountDetailViewController *accountDetail = [segue.destinationViewController viewControllers][0];
-        [accountDetail setIsCreateMode:YES];
+        [accountDetail setGroup:[GroupManager currentGroup] account:nil];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }

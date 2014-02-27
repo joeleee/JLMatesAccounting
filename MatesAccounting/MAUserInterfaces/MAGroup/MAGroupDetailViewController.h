@@ -12,7 +12,6 @@
 
 @interface MAGroupDetailViewController : UIViewController
 
-@property (nonatomic, strong) MGroup *group;
-@property (nonatomic, assign) BOOL isCreateMode;
+- (void)setGroup:(MGroup *)group;
 
 @end

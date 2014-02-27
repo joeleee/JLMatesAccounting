@@ -17,6 +17,8 @@
 #import "MAAccountDetailDescriptionCell.h"
 #import "MAAccountDetailSectionHeader.h"
 #import "MAccount+expand.h"
+#import "UIViewController+MAAddition.h"
+#import "MPlace.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -47,6 +49,14 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 @property (nonatomic, assign) BOOL isShowDateCellPicker;
 @property (nonatomic, strong) MAccount *account;
+@property (nonatomic, strong) MGroup *group;
+@property (nonatomic, assign) CGFloat editingTotalFee;
+@property (nonatomic, strong) NSDate *editingDate;
+@property (nonatomic, assign) CGFloat editingLatitude;
+@property (nonatomic, assign) CGFloat editingLongitude;
+@property (nonatomic, copy) NSString *editingDetail;
+@property (nonatomic, strong) NSArray *editingPayers;
+@property (nonatomic, strong) NSArray *editingConsumers;
 
 @end
 
@@ -55,7 +65,6 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        self.isCreateMode = NO;
         self.isShowDateCellPicker = NO;
     }
 
@@ -66,6 +75,14 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     [super viewDidAppear:animated];
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
+    if (!self.group) {
+        [MBProgressHUD showTextHUDOnView:[[UIApplication sharedApplication].delegate window]
+                                    text:@"无效的小组~"
+                         completionBlock:^{
+                             [self disappear:YES];
+                         }
+                                animated:YES];
+    }
 }
 
 - (void)viewDidLoad
@@ -73,12 +90,12 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     [super viewDidLoad];
 
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];
-    if (self.isCreateMode) {
-        [self setEditing:YES animated:NO];
-        self.title = @"创建账目";
-    } else {
+    if (self.account) {
         [self setEditing:NO animated:NO];
         self.title = @"账目详情";
+    } else {
+        [self setEditing:YES animated:NO];
+        self.title = @"创建账目";
     }
 }
 
@@ -88,6 +105,110 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
+}
+
+- (void)clearEditingData
+{
+    self.editingTotalFee = 0.0f;
+    self.editingDate = nil;
+    self.editingLatitude = 0.0f;
+    self.editingLongitude = 0.0f;
+    self.editingDetail = nil;
+    self.editingPayers = nil;
+    self.editingConsumers = nil;
+}
+
+- (void)refreshEditingData
+{
+    self.editingTotalFee = [self.account.totalFee doubleValue];
+    self.editingDate = self.account.accountDate;
+    self.editingLatitude = [self.account.place.latitude doubleValue];
+    self.editingLongitude = [self.account.place.longitude doubleValue];
+    self.editingDetail = self.account.detail;
+    self.editingPayers = nil;
+    self.editingConsumers = nil;
+}
+
+- (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
+{
+    NSInteger rowCount = 0;
+    NSString *cellIdentifier = @"";
+    CGFloat cellHeight = 0.0f;
+    NSString *headerTitle = @"";
+
+    switch (section) {
+        case FeeSectionType: {
+            headerTitle = @"消费金额";
+            rowCount = 1;
+            cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
+            cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
+            break;
+        }
+        case AccountDetailSectionType: {
+            headerTitle = @"消费信息";
+            rowCount = 4;
+
+            switch (row) {
+                case DetailDateType: {
+                    cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
+                    cellHeight = [MAAccountDetailDateCell cellHeight:@(self.isShowDateCellPicker)];
+                    break;
+                }
+                case DetailPayerType: {
+                    cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
+                    cellHeight = [MAAccountDetailPayersCell cellHeight:@(self.editing)];
+                    break;
+                }
+                case DetailConsumerType: {
+                    cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
+                    cellHeight = [MAAccountDetailConsumersCell cellHeight:@(self.editing)];
+                    break;
+                }
+                case DetailLocationType: {
+                    cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
+                    cellHeight = [MAAccountDetailLocationCell cellHeight:@(self.editing)];
+                    break;
+                }
+                default:
+                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
+            }
+            break;
+        }
+        case MembersSectionType: {
+            headerTitle = @"消费伙伴";
+            // TODO:
+            rowCount = 7;
+            cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
+            cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
+            break;
+        }
+        case AccountDescriptionSectionType: {
+            headerTitle = @"消费描述";
+            rowCount = 1;
+            cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
+            cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
+            break;
+        }
+        default:
+            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
+    }
+
+    NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),
+                           kAccountDetailCellIdentifier : cellIdentifier,
+                           kAccountDetailCellHeight : @(cellHeight),
+                           kAccountDetailHeaderTitle : headerTitle};
+    return info;
+}
+
+#pragma mark property method
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (_cancelBarItem) {
+        return _cancelBarItem;
+    }
+
+    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
+    return _cancelBarItem;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -211,6 +332,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 }
 
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
@@ -219,142 +341,113 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                                          forEvent:nil];
 }
 
-#pragma mark - private
-
-#pragma mark table view control
-- (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
-{
-    NSInteger rowCount = 0;
-    NSString *cellIdentifier = @"";
-    CGFloat cellHeight = 0.0f;
-    NSString *headerTitle = @"";
-
-    switch (section) {
-        case FeeSectionType: {
-            headerTitle = @"消费金额";
-            rowCount = 1;
-            cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
-            cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
-            break;
-        }
-        case AccountDetailSectionType: {
-            headerTitle = @"消费信息";
-            rowCount = 4;
-
-            switch (row) {
-                case DetailDateType: {
-                    cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailDateCell cellHeight:@(self.isShowDateCellPicker)];
-                    break;
-                }
-                case DetailPayerType: {
-                    cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailPayersCell cellHeight:@(self.editing)];
-                    break;
-                }
-                case DetailConsumerType: {
-                    cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailConsumersCell cellHeight:@(self.editing)];
-                    break;
-                }
-                case DetailLocationType: {
-                    cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
-                    cellHeight = [MAAccountDetailLocationCell cellHeight:@(self.editing)];
-                    break;
-                }
-                default:
-                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
-            }
-            break;
-        }
-        case MembersSectionType: {
-            headerTitle = @"消费伙伴";
-            // TODO:
-            rowCount = 7;
-            cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
-            cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
-            break;
-        }
-        case AccountDescriptionSectionType: {
-            headerTitle = @"消费描述";
-            rowCount = 1;
-            cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
-            cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
-            break;
-        }
-        default:
-            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
-    }
-
-    NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),
-                           kAccountDetailCellIdentifier : cellIdentifier,
-                           kAccountDetailCellHeight : @(cellHeight),
-                           kAccountDetailHeaderTitle : headerTitle};
-    return info;
-}
-
-#pragma mark property method
-- (UIBarButtonItem *)cancelBarItem
-{
-    if (_cancelBarItem) {
-        return _cancelBarItem;
-    }
-
-    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
-    return _cancelBarItem;
-}
-
 #pragma mark UI action
+
+- (void)didEditButtonTaped:(UIBarButtonItem *)sender
+{
+    [self refreshEditingData];
+    [self setEditing:YES animated:YES];
+}
+
+- (void)didSaveButtonTaped:(UIBarButtonItem *)sender
+{
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
+                                               to:nil
+                                             from:nil
+                                         forEvent:nil];
+
+    if (self.group) {
+        // not create mode
+        // TODO:
+        BOOL updated = YES;
+        if (updated) {
+            [self setEditing:NO animated:YES];
+        } else {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"更新失败"
+                             completionBlock:nil
+                                    animated:YES];
+        }
+    } else {
+        // create mode
+        // TODO:
+        self.account = nil;
+        if (self.account) {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建成功"
+                             completionBlock:^{
+                                 [self setEditing:NO animated:YES];
+                                 [self disappear:YES];
+                             }
+                                    animated:YES];
+        } else {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建失败"
+                             completionBlock:nil
+                                    animated:YES];
+        }
+    }
+}
+
 - (void)didCancelButtonTaped:(UIBarButtonItem *)sender
 {
     if (self.editing) {
         MAAlertView *alert = nil;
-        if (self.isCreateMode) {
-            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
-                                        message:nil
-                                   buttonTitle1:@"放弃创建"
-                                   buttonBlock1:^{
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   }
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
-        } else {
+        if (self.account) {
             alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
                                         message:nil
                                    buttonTitle1:@"放弃更改"
                                    buttonBlock1:^{
+                                       [self clearEditingData];
                                        [self setEditing:NO animated:YES];
+                                   }
+                                   buttonTitle2:@"点错了~"
+                                   buttonBlock2:nil];
+        } else {
+            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
+                                        message:nil
+                                   buttonTitle1:@"放弃创建"
+                                   buttonBlock1:^{
+                                       [self clearEditingData];
+                                       [self disappear:YES];
                                    }
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
         }
         [alert show];
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
     }
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+
     if (editing) {
         [self.navigationItem setHidesBackButton:YES animated:YES];
         [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSaveButtonTaped:)] animated:YES];
+
     } else {
-        if (self.isCreateMode) {
-            // TODO:
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [self.navigationItem setHidesBackButton:NO animated:YES];
-            [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-        }
         self.isShowDateCellPicker = NO;
+        [self.navigationItem setHidesBackButton:NO animated:YES];
+        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didEditButtonTaped:)] animated:YES];
     }
 
     NSRange range;
     range.location = 0;
     range.length = kAccountDetailNumberOfSections;
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - Public Method
+
+- (void)setGroup:(MGroup *)group account:(MAccount *)account
+{
+    self.group = group;
+    self.account = account;
 }
 
 @end

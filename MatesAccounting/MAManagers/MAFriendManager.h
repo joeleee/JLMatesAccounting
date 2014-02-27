@@ -44,4 +44,6 @@
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday;
 
+- (BOOL)deleteFriend:(MFriend *)mFriend;
+
 @end

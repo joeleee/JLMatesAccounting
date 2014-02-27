@@ -38,6 +38,7 @@
 		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
 		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
 		9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA3183611070025A2FB /* MACommonPersistent.m */; };
+		9B726B0418BF862500ACDD99 /* UIViewController+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B726B0318BF862500ACDD99 /* UIViewController+MAAddition.m */; };
 		9B889393185446B4003A9DCB /* MAMemberDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */; };
 		9B88939618545A60003A9DCB /* MAMemberDetailCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939518545A60003A9DCB /* MAMemberDetailCommonCell.m */; };
 		9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */; };
@@ -163,6 +164,8 @@
 		9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGlobalDefinitions.m; sourceTree = "<group>"; };
 		9B391CA2183611070025A2FB /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.h; sourceTree = "<group>"; };
 		9B391CA3183611070025A2FB /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MADataPersistentManager/MACommonPersistent.m; sourceTree = "<group>"; };
+		9B726B0218BF862500ACDD99 /* UIViewController+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MAAddition.h"; path = "MAAdditions/UIViewController+MAAddition.h"; sourceTree = "<group>"; };
+		9B726B0318BF862500ACDD99 /* UIViewController+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MAAddition.m"; path = "MAAdditions/UIViewController+MAAddition.m"; sourceTree = "<group>"; };
 		9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMemberDetailViewController.h; sourceTree = "<group>"; };
 		9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMemberDetailViewController.m; sourceTree = "<group>"; };
 		9B88939418545A60003A9DCB /* MAMemberDetailCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberDetailCommonCell.h; path = MATabMemberCells/MAMemberDetailCommonCell.h; sourceTree = "<group>"; };
@@ -371,10 +374,10 @@
 				9B391C75183527CE0025A2FB /* MATabMemberViewController.m */,
 				9B25AA0D18532E41008D79B7 /* MAMemberListViewController.h */,
 				9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */,
-				9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */,
-				9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */,
 				9B079B7C185C8B17003C654B /* MAFriendListViewController.h */,
 				9B079B7D185C8B17003C654B /* MAFriendListViewController.m */,
+				9B889391185446B4003A9DCB /* MAMemberDetailViewController.h */,
+				9B889392185446B4003A9DCB /* MAMemberDetailViewController.m */,
 			);
 			name = MATabMember;
 			path = MAUserInterfaces/MATabMember;
@@ -617,6 +620,8 @@
 				9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */,
 				9BE1DBB318B9F022000BE969 /* MBProgressHUD+MAAddition.h */,
 				9BE1DBB418B9F022000BE969 /* MBProgressHUD+MAAddition.m */,
+				9B726B0218BF862500ACDD99 /* UIViewController+MAAddition.h */,
+				9B726B0318BF862500ACDD99 /* UIViewController+MAAddition.m */,
 			);
 			name = MAAdditions;
 			sourceTree = "<group>";
@@ -832,6 +837,7 @@
 				9BC23119184B281D005ADD59 /* MAAccountDetailDescriptionCell.m in Sources */,
 				9BD0E7B41847ADB100BA9F2E /* MAAccountManager.m in Sources */,
 				9BC23113184B27DE005ADD59 /* MAAccountDetailLocationCell.m in Sources */,
+				9B726B0418BF862500ACDD99 /* UIViewController+MAAddition.m in Sources */,
 				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
 				9B26C07418BE22E9004B7E7D /* MACommonManagerBase.m in Sources */,
 				9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */,

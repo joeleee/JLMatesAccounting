@@ -13,6 +13,7 @@
 #import "MAMemberDetailBirthdayCell.h"
 #import "MFriend.h"
 #import "MAFriendManager.h"
+#import "UIViewController+MAAddition.h"
 
 NSUInteger const kMemberDetailRowCount = 5;
 NSString * const kMemberDetailRowType = @"kMemberDetailRowType";
@@ -27,12 +28,13 @@ typedef enum {
     MAMemberDetailListTypeBirthday = 4
 } MAMemberDetailListType;
 
-@interface MAMemberDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAFriendManagerListenerProtocol>
+@interface MAMemberDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *accountButton;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 
+@property (nonatomic, strong) MFriend *mFriend;
 @property (nonatomic, copy) NSString *editingName;
 @property (nonatomic, assign) MAGenderEnum editingGender;
 @property (nonatomic, copy) NSString *editingPhone;
@@ -46,7 +48,6 @@ typedef enum {
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        self.isCreateMode = NO;
     }
 
     return self;
@@ -56,27 +57,13 @@ typedef enum {
 {
     [super viewDidLoad];
 
-    if (self.isCreateMode) {
-        [self setEditing:YES animated:NO];
-        self.title = @"创建新成员";
-    } else {
+    if (self.mFriend) {
         [self setEditing:NO animated:NO];
         self.title = @"成员信息";
+    } else {
+        [self setEditing:YES animated:NO];
+        self.title = @"创建新成员";
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    [FriendManager addListener:self];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [FriendManager removeListener:self];
-
-    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -147,6 +134,18 @@ typedef enum {
     self.editingPhone = [self.mFriend.telephoneNumber stringValue];
     self.editingMail = self.mFriend.eMail ? self.mFriend.eMail : @"";
     self.editingBirthday = self.mFriend.birthday;
+}
+
+#pragma mark - property
+
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (_cancelBarItem) {
+        return _cancelBarItem;
+    }
+
+    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
+    return _cancelBarItem;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -310,18 +309,6 @@ typedef enum {
     return YES;
 }
 
-#pragma mark - property
-
-- (UIBarButtonItem *)cancelBarItem
-{
-    if (_cancelBarItem) {
-        return _cancelBarItem;
-    }
-
-    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
-    return _cancelBarItem;
-}
-
 #pragma mark - action
 
 - (void)didEditButtonTaped:(UIBarButtonItem *)sender
@@ -344,28 +331,7 @@ typedef enum {
                                                to:nil
                                              from:nil
                                          forEvent:nil];
-    if (self.isCreateMode) {
-        // create mode
-        self.mFriend = [FriendManager createFriendWithName:self.editingName
-                                                   gender:self.editingGender
-                                              phoneNumber:@([self.editingPhone longLongValue])
-                                                    eMail:self.editingMail
-                                                 birthday:self.editingBirthday];
-        if (self.mFriend) {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建成功"
-                             completionBlock:^{
-                                 [self setEditing:NO animated:YES];
-                                 [self dismissViewControllerAnimated:YES completion:nil];
-                             }
-                                    animated:YES];
-        } else {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建失败"
-                             completionBlock:nil
-                                    animated:YES];
-        }
-    } else {
+    if (self.mFriend) {
         // not create mode
         BOOL updated = [FriendManager editAndSaveFriend:self.mFriend
                                                    name:self.editingName
@@ -381,6 +347,27 @@ typedef enum {
                              completionBlock:nil
                                     animated:YES];
         }
+    } else {
+        // create mode
+        self.mFriend = [FriendManager createFriendWithName:self.editingName
+                                                    gender:self.editingGender
+                                               phoneNumber:@([self.editingPhone longLongValue])
+                                                     eMail:self.editingMail
+                                                  birthday:self.editingBirthday];
+        if (self.mFriend) {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建成功"
+                             completionBlock:^{
+                                 [self setEditing:NO animated:YES];
+                                 [self disappear:YES];
+                             }
+                                    animated:YES];
+        } else {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"创建失败"
+                             completionBlock:nil
+                                    animated:YES];
+        }
     }
 }
 
@@ -388,23 +375,23 @@ typedef enum {
 {
     if (self.editing) {
         MAAlertView *alert = nil;
-        if (self.isCreateMode) {
-            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
-                                        message:nil
-                                   buttonTitle1:@"放弃创建"
-                                   buttonBlock1:^{
-                                       [self clearEditingData];
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   }
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
-        } else {
+        if (self.mFriend) {
             alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
                                         message:nil
                                    buttonTitle1:@"放弃更改"
                                    buttonBlock1:^{
                                        [self clearEditingData];
                                        [self setEditing:NO animated:YES];
+                                   }
+                                   buttonTitle2:@"点错了~"
+                                   buttonBlock2:nil];
+        } else {
+            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
+                                        message:nil
+                                   buttonTitle1:@"放弃创建"
+                                   buttonBlock1:^{
+                                       [self clearEditingData];
+                                       [self disappear:YES];
                                    }
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
@@ -435,13 +422,11 @@ typedef enum {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
-#pragma mark - MAFriendManagerListenerProtocol
+#pragma mark - Public Method
 
-- (void)friendHasModified:(MFriend *)mFriend
+- (void)setFriend:(MFriend *)mFriend
 {
-    if (mFriend == self.mFriend) {
-        [self.tableView reloadData];
-    }
+    self.mFriend = mFriend;
 }
 
 @end

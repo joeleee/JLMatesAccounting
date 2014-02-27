@@ -15,7 +15,7 @@
 
 NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMember";
 
-@interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate, MAFriendManagerListenerProtocol>
+@interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *createFriendBarItem;
@@ -39,7 +39,6 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 {
     [super viewWillAppear:animated];
 
-    [FriendManager addListener:self];
     [self loadData];
 }
 
@@ -50,19 +49,12 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     [self.navigationItem setRightBarButtonItem:self.createFriendBarItem animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [FriendManager removeListener:self];
-
-    [super viewWillDisappear:animated];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueFriendListToCreateMember]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
-        [memberDetail setIsCreateMode:YES];
+        [memberDetail setFriend:nil];
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
@@ -146,19 +138,30 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     }
 }
 
-#pragma mark - MAFriendManagerListenerProtocol
-
-- (void)friendHasCreated:(MFriend *)mFriend
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![self.friendList containsObject:mFriend]) {
-        [self loadData];
-    }
+    return YES;
 }
 
-- (void)friendHasModified:(MFriend *)mFriend
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.friendList containsObject:mFriend]) {
-        [self loadData];
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
+        MFriend *mFriend = self.friendList[indexPath.row];
+        if ([FriendManager deleteFriend:mFriend]) {
+            self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [MBProgressHUD showTextHUDOnView:self.view
+                                        text:@"报告，删除好友失败了..."
+                             completionBlock:nil
+                                    animated:YES];
+        }
     }
 }
 

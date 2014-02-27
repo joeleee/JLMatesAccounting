@@ -135,4 +135,9 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     return isSucceed;
 }
 
+- (BOOL)deleteFriend:(MFriend *)mFriend
+{
+    return [[MAFriendPersistent instance] deleteFriend:mFriend];
+}
+
 @end

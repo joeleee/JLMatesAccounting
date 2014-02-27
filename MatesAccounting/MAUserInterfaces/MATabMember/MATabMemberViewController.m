@@ -75,12 +75,11 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     if ([segue.identifier isEqualToString:kSegueTabMemberToGroupList]) {
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToMemberDetail]) {
         MAMemberDetailViewController *memberDetail = segue.destinationViewController;
-        [memberDetail setMFriend:sender];
-        [memberDetail setIsCreateMode:NO];
+        [memberDetail setFriend:sender];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToCreateMember]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
-        [memberDetail setIsCreateMode:YES];
+        [memberDetail setFriend:nil];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToFriendList]) {
         MAFriendListViewController *controller = segue.destinationViewController;
         controller.group = sender;
