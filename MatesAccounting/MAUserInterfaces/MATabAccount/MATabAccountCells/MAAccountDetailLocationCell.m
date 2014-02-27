@@ -25,8 +25,9 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(NSString *)data
 {
+    [self.locationDescriptionLabel setText:data];
     if (self.status) {
         [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
         [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

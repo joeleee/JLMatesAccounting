@@ -26,8 +26,15 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(NSDate *)date
 {
+    if (!date) {
+        date = [NSDate dateWithTimeIntervalSince1970:0.0f];
+    }
+
+    [self.datePicker setDate:date animated:YES];
+    [self.dateDescriptionLabel setText:[date dateToString:@"yyyy年MM月dd日 HH:mm"]];
+
     if (self.status) {
         [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
         if (self.datePicker.isHidden) {

@@ -34,29 +34,29 @@ typedef enum {
     DetailLocationType = 3
 } AccountDetailTableViewRowType;
 
-NSString * const kSegueAccountDetailToMemberList = @"kSegueAccountDetailToMemberList";
+NSString *const kSegueAccountDetailToMemberList = @"kSegueAccountDetailToMemberList";
 
 NSUInteger const kAccountDetailNumberOfSections = 4;
-NSString * const kAccountDetailRowCount = @"kAccountDetailRowCount";
-NSString * const kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
-NSString * const kAccountDetailCellHeight = @"kAccountDetailCellHeight";
-NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
+NSString *const  kAccountDetailRowCount = @"kAccountDetailRowCount";
+NSString *const  kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
+NSString *const  kAccountDetailCellHeight = @"kAccountDetailCellHeight";
+NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 @interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
+@property (nonatomic, strong) UIBarButtonItem    *cancelBarItem;
 
-@property (nonatomic, assign) BOOL isShowDateCellPicker;
+@property (nonatomic, assign) BOOL     isShowDateCellPicker;
 @property (nonatomic, strong) MAccount *account;
-@property (nonatomic, strong) MGroup *group;
-@property (nonatomic, assign) CGFloat editingTotalFee;
-@property (nonatomic, strong) NSDate *editingDate;
-@property (nonatomic, assign) CGFloat editingLatitude;
-@property (nonatomic, assign) CGFloat editingLongitude;
-@property (nonatomic, copy) NSString *editingDetail;
-@property (nonatomic, strong) NSArray *editingPayers;
-@property (nonatomic, strong) NSArray *editingConsumers;
+@property (nonatomic, strong) MGroup   *group;
+@property (nonatomic, assign) CGFloat  editingTotalFee;
+@property (nonatomic, strong) NSDate   *editingDate;
+@property (nonatomic, assign) CGFloat  editingLatitude;
+@property (nonatomic, assign) CGFloat  editingLongitude;
+@property (nonatomic, copy) NSString   *editingDetail;
+@property (nonatomic, strong) NSArray  *editingPayers;
+@property (nonatomic, strong) NSArray  *editingConsumers;
 
 @end
 
@@ -75,12 +75,14 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     [super viewDidAppear:animated];
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
+
     if (!self.group) {
         [MBProgressHUD showTextHUDOnView:[[UIApplication sharedApplication].delegate window]
                                     text:@"无效的小组~"
                          completionBlock:^{
-                             [self disappear:YES];
-                         }
+            [self disappear:YES];
+        }
+
                                 animated:YES];
     }
 }
@@ -90,6 +92,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     [super viewDidLoad];
 
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];
+
     if (self.account) {
         [self setEditing:NO animated:NO];
         self.title = @"账目详情";
@@ -132,65 +135,85 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
 {
     NSInteger rowCount = 0;
-    NSString *cellIdentifier = @"";
-    CGFloat cellHeight = 0.0f;
-    NSString *headerTitle = @"";
+    NSString  *cellIdentifier = @"";
+    CGFloat   cellHeight = 0.0f;
+    NSString  *headerTitle = @"";
 
     switch (section) {
-        case FeeSectionType: {
+    case FeeSectionType:
+        {
             headerTitle = @"消费金额";
             rowCount = 1;
             cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
             cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
             break;
         }
-        case AccountDetailSectionType: {
+
+    case AccountDetailSectionType:
+        {
             headerTitle = @"消费信息";
             rowCount = 4;
 
             switch (row) {
-                case DetailDateType: {
+            case DetailDateType:
+                {
                     cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
                     cellHeight = [MAAccountDetailDateCell cellHeight:@(self.isShowDateCellPicker)];
                     break;
                 }
-                case DetailPayerType: {
+
+            case DetailPayerType:
+                {
                     cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
                     cellHeight = [MAAccountDetailPayersCell cellHeight:@(self.editing)];
                     break;
                 }
-                case DetailConsumerType: {
+
+            case DetailConsumerType:
+                {
                     cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
                     cellHeight = [MAAccountDetailConsumersCell cellHeight:@(self.editing)];
                     break;
                 }
-                case DetailLocationType: {
+
+            case DetailLocationType:
+                {
                     cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
                     cellHeight = [MAAccountDetailLocationCell cellHeight:@(self.editing)];
                     break;
                 }
-                default:
-                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
+
+            default:
+                MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
-        case MembersSectionType: {
+
+    case MembersSectionType:
+        {
             headerTitle = @"消费伙伴";
-            // TODO:
-            rowCount = 7;
+            rowCount = self.account.relationshipToMember.count;
+
+            if (0 >= rowCount) {
+                rowCount = 1;
+            }
+
             cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
             cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
             break;
         }
-        case AccountDescriptionSectionType: {
+
+    case AccountDescriptionSectionType:
+        {
             headerTitle = @"消费描述";
             rowCount = 1;
             cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
             cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
             break;
         }
-        default:
-            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
+
+    default:
+        MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),
@@ -200,78 +223,83 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     return info;
 }
 
-#pragma mark property method
-- (UIBarButtonItem *)cancelBarItem
-{
-    if (_cancelBarItem) {
-        return _cancelBarItem;
-    }
-
-    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
-    return _cancelBarItem;
-}
-
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *rowInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
-    NSString *cellIdentifier = [rowInfo objectForKey:kAccountDetailCellIdentifier];
-    id cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString     *cellIdentifier = [rowInfo objectForKey:kAccountDetailCellIdentifier];
+    id           cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     switch (indexPath.section) {
-        case FeeSectionType: {
+    case FeeSectionType:
+        {
             MAAccountDetailFeeCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            [detailCell reuseCellWithData:self.account];
+            [detailCell reuseCellWithData:[self.account.totalFee stringValue]];
             break;
         }
-        case AccountDetailSectionType: {
+
+    case AccountDetailSectionType:
+        {
             switch (indexPath.row) {
-                case DetailDateType: {
+            case DetailDateType:
+                {
                     MAAccountDetailDateCell *detailCell = cell;
                     detailCell.status = self.isEditing;
                     detailCell.isDatePickerHidden = !self.isShowDateCellPicker;
-                    [detailCell reuseCellWithData:self.account];
+                    [detailCell reuseCellWithData:self.account.accountDate];
                     break;
                 }
-                case DetailPayerType: {
+
+            case DetailPayerType:
+                {
                     MAAccountDetailPayersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    [detailCell reuseCellWithData:self.account];
+                    [detailCell reuseCellWithData:@"1000ren"];
                     break;
                 }
-                case DetailConsumerType: {
+
+            case DetailConsumerType:
+                {
                     MAAccountDetailConsumersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    [detailCell reuseCellWithData:self.account];
+                    [detailCell reuseCellWithData:@"1000ren"];
                     break;
                 }
-                case DetailLocationType: {
+
+            case DetailLocationType:
+                {
                     MAAccountDetailLocationCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    [detailCell reuseCellWithData:self.account];
+                    [detailCell reuseCellWithData:@"beijing"];
                     break;
                 }
-                default:
-                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
+
+            default:
+                MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
-        case MembersSectionType: {
+
+    case MembersSectionType:
+        {
             MAAccountDetailConsumerDetailCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            [detailCell reuseCellWithData:self.account];
+            [detailCell reuseCellWithData:nil];
             break;
         }
-        case AccountDescriptionSectionType: {
+
+    case AccountDescriptionSectionType:
+        {
             MAAccountDetailDescriptionCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            [detailCell reuseCellWithData:self.account];
+            [detailCell reuseCellWithData:self.account.detail];
             break;
         }
-        default:
-            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
+
+    default:
+        MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     return cell;
@@ -280,7 +308,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:section row:0];
-    NSInteger rowCount = [[sectionInfo objectForKey:kAccountDetailRowCount] integerValue];
+    NSInteger    rowCount = [[sectionInfo objectForKey:kAccountDetailRowCount] integerValue];
 
     return rowCount;
 }
@@ -293,7 +321,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:indexPath.section row:indexPath.row];
-    CGFloat rowHeight = [[sectionInfo objectForKey:kAccountDetailCellHeight] floatValue];
+    CGFloat      rowHeight = [[sectionInfo objectForKey:kAccountDetailCellHeight] floatValue];
 
     return rowHeight;
 }
@@ -308,6 +336,7 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     MAAccountDetailSectionHeader *headerView = [[MAAccountDetailSectionHeader alloc] initWithHeaderTitle:@"未知错误"];
 
     NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:section row:0];
+
     [headerView setHeaderTitle:[sectionInfo objectForKey:kAccountDetailHeaderTitle]];
 
     return headerView;
@@ -320,11 +349,11 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         return;
     }
 
-    if (AccountDetailSectionType == indexPath.section &&
-        (DetailPayerType == indexPath.row || DetailConsumerType == indexPath.row)) {
+    if ((AccountDetailSectionType == indexPath.section) &&
+        ((DetailPayerType == indexPath.row) || (DetailConsumerType == indexPath.row))) {
         [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
-    } else if (AccountDetailSectionType == indexPath.section &&
-               DetailDateType == indexPath.row) {
+    } else if ((AccountDetailSectionType == indexPath.section) &&
+        (DetailDateType == indexPath.row)) {
         self.isShowDateCellPicker = !self.isShowDateCellPicker;
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else {
@@ -339,6 +368,17 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                                                to:nil
                                              from:nil
                                          forEvent:nil];
+}
+
+#pragma mark property method
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (_cancelBarItem) {
+        return _cancelBarItem;
+    }
+
+    _cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelButtonTaped:)];
+    return _cancelBarItem;
 }
 
 #pragma mark UI action
@@ -356,10 +396,11 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                                              from:nil
                                          forEvent:nil];
 
-    if (self.group) {
+    if (self.account) {
         // not create mode
         // TODO:
         BOOL updated = YES;
+
         if (updated) {
             [self setEditing:NO animated:YES];
         } else {
@@ -372,13 +413,15 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         // create mode
         // TODO:
         self.account = nil;
+
         if (self.account) {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
                                         text:@"创建成功"
                              completionBlock:^{
-                                 [self setEditing:NO animated:YES];
-                                 [self disappear:YES];
-                             }
+                [self setEditing:NO animated:YES];
+                [self disappear:YES];
+            }
+
                                     animated:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
@@ -393,14 +436,16 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if (self.editing) {
         MAAlertView *alert = nil;
+
         if (self.account) {
             alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
                                         message:nil
                                    buttonTitle1:@"放弃更改"
                                    buttonBlock1:^{
-                                       [self clearEditingData];
-                                       [self setEditing:NO animated:YES];
-                                   }
+                    [self clearEditingData];
+                    [self setEditing:NO animated:YES];
+                }
+
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
         } else {
@@ -408,12 +453,14 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                                         message:nil
                                    buttonTitle1:@"放弃创建"
                                    buttonBlock1:^{
-                                       [self clearEditingData];
-                                       [self disappear:YES];
-                                   }
+                    [self clearEditingData];
+                    [self disappear:YES];
+                }
+
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
         }
+
         [alert show];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
@@ -428,7 +475,6 @@ NSString * const kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         [self.navigationItem setHidesBackButton:YES animated:YES];
         [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSaveButtonTaped:)] animated:YES];
-
     } else {
         self.isShowDateCellPicker = NO;
         [self.navigationItem setHidesBackButton:NO animated:YES];

@@ -27,6 +27,7 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    [self.consumersDescriptionLabel setText:data];
     if (self.status) {
         [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
         [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

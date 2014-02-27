@@ -8,6 +8,9 @@
 
 #import "MAAccountDetailConsumerDetailCell.h"
 
+#import "RMemberToAccount.h"
+#import "MFriend.h"
+
 @interface MAAccountDetailConsumerDetailCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *consumerNameLabel;
@@ -26,8 +29,17 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(RMemberToAccount *)data
 {
+    NSNumber *fee = data.fee;
+    [self.consumerNameLabel setText:data.member.name];
+    [self.consumerFeeTextField setText:[fee stringValue]];
+    if (0 > [fee doubleValue]) {
+        [self.consumerTypeLabel setText:@"支付"];
+    } else {
+        [self.consumerTypeLabel setText:@"消费"];
+    }
+
     if (self.status) {
         self.consumerFeeTextField.userInteractionEnabled = YES;
         self.consumerFeeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);

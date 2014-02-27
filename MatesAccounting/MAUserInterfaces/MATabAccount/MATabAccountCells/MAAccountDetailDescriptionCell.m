@@ -24,8 +24,9 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(NSString *)data
 {
+    [self.accountDescriptionTextView setText:data];
     if (self.status) {
         self.accountDescriptionTextView.userInteractionEnabled = YES;
         self.accountDescriptionTextView.backgroundColor = UIColorFromRGB(222, 222, 222);

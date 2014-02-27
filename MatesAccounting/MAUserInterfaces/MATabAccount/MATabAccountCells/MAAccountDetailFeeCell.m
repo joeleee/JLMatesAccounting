@@ -25,12 +25,14 @@
     return self;
 }
 
-- (void)reuseCellWithData:(id)data
+- (void)reuseCellWithData:(NSString *)data
 {
     if (self.status) {
+        [self.feeTextField setText:data];
         self.feeTextField.userInteractionEnabled = YES;
         self.feeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
     } else {
+        [self.feeTextField setText:[@([data doubleValue]) stringValue]];
         self.feeTextField.userInteractionEnabled = NO;
         self.feeTextField.backgroundColor = [UIColor clearColor];
     }
