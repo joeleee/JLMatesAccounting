@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MAccount, MFriend, MPlace, MGroup;
+@class MAccount, MFriend, MPlace, MGroup, RMemberToAccount;
 
 @interface MAAccountPersistent : NSObject
 
@@ -26,5 +26,9 @@
 - (BOOL)deleteAccount:(MAccount *)account;
 
 - (NSArray *)fetchAccounts:(NSFetchRequest *)request;
+
+- (RMemberToAccount *)createMemberToAccount:(MAccount *)account member:(MFriend *)member fee:(double)fee;
+
+- (BOOL)deleteMemberToAccount:(RMemberToAccount *)memberToAccount;
 
 @end

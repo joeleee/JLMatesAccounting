@@ -19,6 +19,7 @@
 #import "MAccount+expand.h"
 #import "UIViewController+MAAddition.h"
 #import "MPlace.h"
+#import "MAAccountManager.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -50,10 +51,17 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 @property (nonatomic, assign) BOOL     isShowDateCellPicker;
 @property (nonatomic, strong) MAccount *account;
 @property (nonatomic, strong) MGroup   *group;
+@property (nonatomic, strong) NSArray  *payers;
+@property (nonatomic, strong) NSArray  *consumers;
+@property (nonatomic, copy) NSString   *placeName;
+@property (nonatomic, assign) CLLocationDegrees  latitude;
+@property (nonatomic, assign) CLLocationDegrees  longitude;
+
 @property (nonatomic, assign) CGFloat  editingTotalFee;
 @property (nonatomic, strong) NSDate   *editingDate;
-@property (nonatomic, assign) CGFloat  editingLatitude;
-@property (nonatomic, assign) CGFloat  editingLongitude;
+@property (nonatomic, copy) NSString   *editingPlaceName;
+@property (nonatomic, assign) CLLocationDegrees  editingLatitude;
+@property (nonatomic, assign) CLLocationDegrees  editingLongitude;
 @property (nonatomic, copy) NSString   *editingDetail;
 @property (nonatomic, strong) NSArray  *editingPayers;
 @property (nonatomic, strong) NSArray  *editingConsumers;
@@ -110,10 +118,33 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 }
 
+- (void)loadData
+{
+    if (self.isEditing) {
+        self.payers = self.editingPayers;
+        self.consumers = self.editingConsumers;
+        self.placeName = self.editingPlaceName;
+        self.latitude = self.editingLatitude;
+        self.longitude = self.editingLongitude;
+    } else {
+        self.payers = [AccountManager feeOfMembersForAccount:self.account isPayers:YES];
+        self.consumers = [AccountManager feeOfMembersForAccount:self.account isPayers:YES];
+        self.placeName = self.account.place.placeName;
+        self.latitude = [self.account.place.latitude doubleValue];
+        self.longitude = [self.account.place.longitude doubleValue];
+    }
+
+    NSRange range;
+    range.location = 0;
+    range.length = kAccountDetailNumberOfSections;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 - (void)clearEditingData
 {
     self.editingTotalFee = 0.0f;
     self.editingDate = nil;
+    self.editingPlaceName = nil;
     self.editingLatitude = 0.0f;
     self.editingLongitude = 0.0f;
     self.editingDetail = nil;
@@ -125,11 +156,12 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     self.editingTotalFee = [self.account.totalFee doubleValue];
     self.editingDate = self.account.accountDate;
+    self.editingPlaceName = self.account.place.placeName;
     self.editingLatitude = [self.account.place.latitude doubleValue];
     self.editingLongitude = [self.account.place.longitude doubleValue];
     self.editingDetail = self.account.detail;
-    self.editingPayers = nil;
-    self.editingConsumers = nil;
+    self.editingPayers = [AccountManager feeOfMembersForAccount:self.account isPayers:YES];
+    self.editingConsumers = [AccountManager feeOfMembersForAccount:self.account isPayers:YES];
 }
 
 - (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
@@ -192,7 +224,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     case MembersSectionType:
         {
             headerTitle = @"消费伙伴";
-            rowCount = self.account.relationshipToMember.count;
+            rowCount = self.payers.count + self.consumers.count;
 
             if (0 >= rowCount) {
                 rowCount = 1;
@@ -272,7 +304,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 {
                     MAAccountDetailLocationCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    [detailCell reuseCellWithData:@"beijing"];
+                    [detailCell reuseCellWithData:self.placeName];
                     break;
                 }
 
@@ -286,7 +318,14 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             MAAccountDetailConsumerDetailCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            [detailCell reuseCellWithData:nil];
+            NSUInteger index = indexPath.row;
+            MAFeeOfMember *data = nil;
+            if (index < self.payers.count) {
+                data = self.payers[index];
+            } else if ((index - self.payers.count) < self.consumers.count) {
+                data = self.consumers[index];
+            }
+            [detailCell reuseCellWithData:data];
             break;
         }
 
@@ -385,7 +424,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)didEditButtonTaped:(UIBarButtonItem *)sender
 {
-    [self refreshEditingData];
     [self setEditing:YES animated:YES];
 }
 
@@ -398,8 +436,23 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
     if (self.account) {
         // not create mode
-        // TODO:
-        BOOL updated = YES;
+        NSMutableSet *memberSet = [NSMutableSet setWithArray:self.editingPayers];
+        [memberSet addObjectsFromArray:self.editingConsumers];
+        // check total fee
+        if (0.0f != [AccountManager totalFeeOfMambers:memberSet memberToAccounts:self.account.relationshipToMember]) {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"总支出和总付款不一样哦~"
+                             completionBlock:nil
+                                    animated:YES];
+            return;
+        }
+        BOOL updated = [AccountManager updateAccount:self.account
+                                                date:self.editingDate
+                                           placeName:self.editingPlaceName
+                                            latitude:self.editingLatitude
+                                           longitude:self.editingLongitude
+                                              detail:self.editingDetail
+                                        feeOfMembers:memberSet];
 
         if (updated) {
             [self setEditing:NO animated:YES];
@@ -411,8 +464,23 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
     } else {
         // create mode
-        // TODO:
-        self.account = nil;
+        NSMutableSet *memberSet = [NSMutableSet setWithArray:self.editingPayers];
+        [memberSet addObjectsFromArray:self.editingConsumers];
+        // check total fee
+        if (0.0f != [AccountManager totalFeeOfMambers:memberSet memberToAccounts:self.account.relationshipToMember]) {
+            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
+                                        text:@"总支出和总付款不一样哦~"
+                             completionBlock:nil
+                                    animated:YES];
+            return;
+        }
+        self.account = [AccountManager createAccountWithGroup:self.group
+                                                         date:self.editingDate
+                                                    placeName:self.editingPlaceName
+                                                     latitude:self.editingLatitude
+                                                    longitude:self.editingLongitude
+                                                       detail:self.editingDetail
+                                                 feeOfMembers:memberSet];
 
         if (self.account) {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
@@ -475,17 +543,16 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         [self.navigationItem setHidesBackButton:YES animated:YES];
         [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSaveButtonTaped:)] animated:YES];
+        [self refreshEditingData];
     } else {
         self.isShowDateCellPicker = NO;
         [self.navigationItem setHidesBackButton:NO animated:YES];
         [self.navigationItem setLeftBarButtonItem:nil animated:YES];
         [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didEditButtonTaped:)] animated:YES];
+        [self clearEditingData];
     }
 
-    NSRange range;
-    range.location = 0;
-    range.length = kAccountDetailNumberOfSections;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationFade];
+    [self loadData];
 }
 
 #pragma mark - Public Method

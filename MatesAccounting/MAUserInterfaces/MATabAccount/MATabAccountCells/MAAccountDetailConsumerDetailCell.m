@@ -10,6 +10,7 @@
 
 #import "RMemberToAccount.h"
 #import "MFriend.h"
+#import "MAAccountManager.h"
 
 @interface MAAccountDetailConsumerDetailCell ()
 
@@ -29,12 +30,12 @@
     return self;
 }
 
-- (void)reuseCellWithData:(RMemberToAccount *)data
+- (void)reuseCellWithData:(MAFeeOfMember *)data
 {
-    NSNumber *fee = data.fee;
+    double fee = data.fee;
     [self.consumerNameLabel setText:data.member.name];
-    [self.consumerFeeTextField setText:[fee stringValue]];
-    if (0 > [fee doubleValue]) {
+    [self.consumerFeeTextField setText:[@(fee) stringValue]];
+    if (0 > fee) {
         [self.consumerTypeLabel setText:@"支付"];
     } else {
         [self.consumerTypeLabel setText:@"消费"];

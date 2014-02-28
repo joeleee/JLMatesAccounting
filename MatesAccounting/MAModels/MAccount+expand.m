@@ -16,7 +16,9 @@
 {
     double totalFee = 0.0f;
     for (RMemberToAccount *relationship in self.relationshipToMember) {
-        totalFee += [relationship.fee doubleValue];
+        if (0.0f < [relationship.fee doubleValue]) {
+            totalFee += [relationship.fee doubleValue];
+        }
     }
     self.totalFee = @(totalFee);
 }

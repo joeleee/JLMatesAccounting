@@ -60,10 +60,8 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 - (NSArray *)currentGroupToMemberRelationships
 {
-    NSArray *relationshipToMember = [[[GroupManager currentGroup].relationshipToMember allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        RMemberToGroup *r1 = obj1;
-        RMemberToGroup *r2 = obj2;
-        return [r1.createDate compare:r2.createDate];
+    NSArray *relationshipToMember = [[[GroupManager currentGroup].relationshipToMember allObjects] sortedArrayUsingComparator:^NSComparisonResult(RMemberToGroup *obj1, RMemberToGroup *obj2) {
+        return [obj1.createDate compare:obj2.createDate];
     }];
 
     return relationshipToMember;

@@ -12,6 +12,8 @@
 #import "MPlace.h"
 #import "MFriend.h"
 #import "RMemberToAccount.h"
+#import "MAAccountPersistent.h"
+#import "MAPlacePersistent.h"
 
 @implementation MAFeeOfMember
 
@@ -22,6 +24,18 @@
     MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
     feeOfMember.member = member;
     feeOfMember.fee = fee;
+    feeOfMember.createDate = [NSDate date];
+    return feeOfMember;
+}
+
++ (MAFeeOfMember *)feeOfMember:(RMemberToAccount *)memberToAccount
+{
+    MA_QUICK_ASSERT(memberToAccount, @"member should not be nil! - MAFeeOfMember");
+
+    MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
+    feeOfMember.member = memberToAccount.member;
+    feeOfMember.fee = [memberToAccount.fee doubleValue];
+    feeOfMember.createDate = memberToAccount.createDate;
     return feeOfMember;
 }
 
@@ -46,68 +60,115 @@
     return nil;
 }
 
-- (MAccount *)createAccountWithFee:(CGFloat)totalFee
-                              date:(NSDate *)date
-                          latitude:(CGFloat *)latitude
-                         longitude:(CGFloat *)longitude
-                            detail:(NSString *)detail
-                             group:(MGroup *)group
-                 payerFeeOfMembers:(NSArray *)payersOfMembers
-              consumerFeeOfMembers:(NSArray *)consumersOfMembers
+- (MAccount *)createAccountWithGroup:(MGroup *)group
+                                date:(NSDate *)date
+                           placeName:(NSString *)placeName
+                            latitude:(CLLocationDegrees)latitude
+                           longitude:(CLLocationDegrees)longitude
+                              detail:(NSString *)detail
+                        feeOfMembers:(NSSet *)feeOfMembers
 {
-    return nil;
-}
-
-- (NSArray *)payersDetailForAccount:(MAccount *)account
-{
-    NSMutableArray *payerDetailList = [NSMutableArray array];
-
-    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (0 < [memberToAccount.fee doubleValue]) {
+    MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date];
+    
+    if (account) {
+        BOOL updateSucceed = [self updateAccount:account
+                                            date:date
+                                       placeName:placeName
+                                        latitude:latitude
+                                       longitude:longitude
+                                          detail:detail
+                                    feeOfMembers:feeOfMembers];
+        if (!updateSucceed) {
+            [[MAAccountPersistent instance] deleteAccount:account];
+            account = nil;
         }
     }
 
-    return payerDetailList;
+    return account;
 }
 
-- (NSArray *)consumersDetailForAccount:(MAccount *)account
+- (BOOL)updateAccount:(MAccount *)account
+                 date:(NSDate *)date
+            placeName:(NSString *)placeName
+             latitude:(CLLocationDegrees)latitude
+            longitude:(CLLocationDegrees)longitude
+               detail:(NSString *)detail
+         feeOfMembers:(NSSet *)feeOfMembers
 {
-    NSMutableArray *consumerDetailList = [NSMutableArray array];
+    if (0.0f != [self totalFeeOfMambers:feeOfMembers memberToAccounts:account.relationshipToMember]) {
+        return NO;
+    }
+
+    // 更新成员条目
+    NSArray *updateMembers = [feeOfMembers allObjects];
+    NSArray *originMembers = [account.relationshipToMember allObjects];
+    NSMutableSet *updatedMembers = [NSMutableSet set];
+    [updateMembers enumerateObjectsUsingBlock:^(MAFeeOfMember *obj, NSUInteger idx, BOOL *stop) {
+        RMemberToAccount *memberToAccount = nil;
+        if (idx < originMembers.count) {
+            memberToAccount = originMembers[idx];
+            memberToAccount.member = obj.member;
+            memberToAccount.fee = @(obj.fee);
+        } else {
+            memberToAccount = [[MAAccountPersistent instance] createMemberToAccount:account member:obj.member fee:obj.fee];
+        }
+
+        if (memberToAccount) {
+            [updatedMembers addObject:memberToAccount];
+        }
+    }];
+    // 删除多余的成员条目
+    NSUInteger index = updateMembers.count;
+    while (originMembers.count > index) {
+        RMemberToAccount *memberToAccount = originMembers[index++];
+        [[MAAccountPersistent instance] deleteMemberToAccount:memberToAccount];
+    }
+    account.relationshipToMember = updatedMembers;
+    // 更新地理位置
+    CLLocationCoordinate2D location;
+    location.latitude = latitude;
+    location.longitude = longitude;
+    MPlace *place = [[MAPlacePersistent instance] createPlaceWithCoordinate:location name:placeName];
+    account.place = place;
+    // 更新账目详情
+    account.detail = detail;
+
+    BOOL updated = [[MAAccountPersistent instance] updateAccount:account];
+    return updated;
+}
+
+- (CGFloat)totalFeeOfMambers:(NSSet *)feeOfMambers memberToAccounts:(NSSet *)memberToAccounts
+{
+    CGFloat totalFee = 0.0f;
+    for (RMemberToAccount *memberToAccount in memberToAccounts) {
+        totalFee += [memberToAccount.fee doubleValue];
+    }
+    for (MAFeeOfMember *feeOfMember in feeOfMambers) {
+        totalFee += feeOfMember.fee;
+    }
+    return totalFee;
+}
+
+- (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers
+{
+    NSMutableArray *memberToAccounts = [NSMutableArray array];
 
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (0 >= [memberToAccount.fee doubleValue]) {
+        if (isPayers && 0 > [memberToAccount.fee doubleValue]) {
+            MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:memberToAccount];
+            [memberToAccounts addObject:feeOfMember];
+        } else if (!isPayers && 0 <= [memberToAccount.fee doubleValue]) {
+            MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:memberToAccount];
+            [memberToAccounts addObject:feeOfMember];
         }
     }
 
-    return consumerDetailList;
+    return [memberToAccounts sortedArrayUsingComparator:^NSComparisonResult(MAFeeOfMember *obj1, MAFeeOfMember *obj2) {
+        return [obj1.createDate compare:obj2.createDate];
+    }];
 }
 
 #pragma mark - private method
-
-- (MAccount *)createAccountWithFee:(CGFloat)totalFee
-                              date:(NSDate *)date
-                             place:(MPlace *)place
-                            detail:(NSString *)detail
-                             group:(MGroup *)group
-{
-    return nil;
-}
-
-- (BOOL)addFeeOfMembers:(NSArray *)feeOfMembers
-              toAccount:(MAccount *)account
-{
-    for (MAFeeOfMember *feeOfMember in feeOfMembers) {
-        MA_QUICK_ASSERT(feeOfMember.member, @"member should not be nil! - MAAccountManager");
-    }
-    return NO;
-}
-
-- (BOOL)addMember:(MFriend *)member
-        toAccount:(MAccount *)account
-          withFee:(CGFloat)fee
-{
-    return NO;
-}
 
 - (NSUInteger)insertIndexOfRMemberToAccount:(RMemberToAccount *)memberToAccount
                                      inList:(NSArray *)list

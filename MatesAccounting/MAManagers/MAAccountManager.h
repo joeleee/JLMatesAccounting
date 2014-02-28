@@ -7,17 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLLocation.h>
 
 #define AccountManager [MAAccountManager sharedManager]
 
-@class MFriend, MAccount, MGroup;
+@class MFriend, MAccount, MGroup, RMemberToAccount;
 
 @interface MAFeeOfMember : NSObject
 
+@property (nonatomic, strong) NSDate *createDate;
 @property (nonatomic, strong) MFriend *member;
 @property (nonatomic, assign) CGFloat fee;
 
 + (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee;
++ (MAFeeOfMember *)feeOfMember:(RMemberToAccount *)memberToAccount;
 
 @end
 
@@ -28,13 +31,24 @@
 
 - (NSArray *)sectionedAccountListForCurrentGroup;
 
-- (MAccount *)createAccountWithFee:(CGFloat)totalFee
-                              date:(NSDate *)date
-                          latitude:(CGFloat *)latitude
-                         longitude:(CGFloat *)longitude
-                            detail:(NSString *)detail
-                             group:(MGroup *)group
-                 payerFeeOfMembers:(NSArray *)payersOfMembers
-              consumerFeeOfMembers:(NSArray *)consumersOfMembers;
+- (MAccount *)createAccountWithGroup:(MGroup *)group
+                                date:(NSDate *)date
+                           placeName:(NSString *)placeName
+                            latitude:(CLLocationDegrees)latitude
+                           longitude:(CLLocationDegrees)longitude
+                              detail:(NSString *)detail
+                        feeOfMembers:(NSSet *)feeOfMembers;
+
+- (BOOL)updateAccount:(MAccount *)account
+                 date:(NSDate *)date
+            placeName:(NSString *)placeName
+             latitude:(CLLocationDegrees)latitude
+            longitude:(CLLocationDegrees)longitude
+               detail:(NSString *)detail
+         feeOfMembers:(NSSet *)feeOfMembers;
+
+- (CGFloat)totalFeeOfMambers:(NSSet *)feeOfMambers memberToAccounts:(NSSet *)memberToAccounts;
+
+- (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers;
 
 @end

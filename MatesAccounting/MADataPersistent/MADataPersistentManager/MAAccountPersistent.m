@@ -26,49 +26,6 @@
     return sharedInstance;
 }
 
-- (BOOL)addFriend:(MFriend *)mFriend toAccount:(MAccount *)account fee:(double)fee
-{
-    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (memberToAccount.member == mFriend) {
-            return NO;
-        }
-    }
-
-    RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
-    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
-
-    if (memberToAccount) {
-        NSDate *currentData = [NSDate date];
-        memberToAccount.createDate = currentData;
-        memberToAccount.member = mFriend;
-        memberToAccount.fee = @(fee);
-        memberToAccount.account = account;
-        [account refreshAccountTotalFee];
-        return [[MAContextAPI sharedAPI] saveContextData];
-    }
-
-    return NO;
-}
-
-- (BOOL)removeFriend:(MFriend *)mFriend fromAccount:(MAccount *)account
-{
-    BOOL isSucceed = NO;
-
-    RMemberToAccount *memberToAccount = nil;
-    for (RMemberToAccount *relationship in account.relationshipToMember) {
-        if (relationship.member == mFriend) {
-            memberToAccount = relationship;
-            break;
-        }
-    }
-
-    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
-    isSucceed = [MACommonPersistent deleteObject:memberToAccount];
-    [account refreshAccountTotalFee];
-
-    return isSucceed;
-}
-
 - (MAccount *)createAccountInGroup:(MGroup *)group
                               date:(NSDate *)date
 {
@@ -116,6 +73,71 @@
     NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MAccount class])];
 
     return result;
+}
+
+- (RMemberToAccount *)createMemberToAccount:(MAccount *)account member:(MFriend *)member fee:(double)fee
+{
+    MA_QUICK_ASSERT(account && member, @"account && member cannot be nil.");
+    RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
+    MA_QUICK_ASSERT(memberToAccount, @"Assert create memberToAccount failed.");
+
+    if (memberToAccount) {
+        memberToAccount.createDate = [NSDate date];
+        memberToAccount.member = member;
+        memberToAccount.fee = @(fee);
+        memberToAccount.account = account;
+        if (![[MAContextAPI sharedAPI] saveContextData]) {
+            [MACommonPersistent deleteObject:memberToAccount];
+            memberToAccount = nil;
+        }
+    }
+
+    return memberToAccount;
+}
+
+- (BOOL)deleteMemberToAccount:(RMemberToAccount *)memberToAccount
+{
+    BOOL isSucceed = [MACommonPersistent deleteObject:memberToAccount];
+
+    return isSucceed;
+}
+
+- (BOOL)addFriend:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee
+{
+    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
+        if (memberToAccount.member == member) {
+            return NO;
+        }
+    }
+
+    RMemberToAccount *memberToAccount = [self createMemberToAccount:account member:member fee:fee];
+    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
+
+    if (memberToAccount) {
+        [account refreshAccountTotalFee];
+        return [[MAContextAPI sharedAPI] saveContextData];
+    }
+
+    return NO;
+}
+
+- (BOOL)removeFriend:(MFriend *)mFriend fromAccount:(MAccount *)account
+{
+    BOOL isSucceed = NO;
+
+    RMemberToAccount *memberToAccount = nil;
+    for (RMemberToAccount *relationship in account.relationshipToMember) {
+        if (relationship.member == mFriend) {
+            memberToAccount = relationship;
+            break;
+        }
+    }
+
+    MA_QUICK_ASSERT(memberToAccount, @"Assert memberToAccount == nil");
+    isSucceed = [MACommonPersistent deleteObject:memberToAccount];
+    [account refreshAccountTotalFee];
+
+    return isSucceed;
 }
 
 @end
