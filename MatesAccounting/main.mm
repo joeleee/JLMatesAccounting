@@ -140,7 +140,7 @@ void reverseStringByWorld(char *words, size_t start, size_t end)
 void shuffleCards(int *cards, int count)
 {
     int index = count;
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
     while (--index >= 0) {
         int exchangeIndex = rand() % count;
         if (exchangeIndex != index) {
@@ -169,18 +169,18 @@ NodePointer insertValueToList(NodePointer listHead, int beforeValue, int insertV
         pre = current;
         current = next;
         if (NULL != next) {
-            next = (NodePointer)((int)next->neighborInfo ^ (int)temp);
+            next = (NodePointer)((long)next->neighborInfo ^ (long)temp);
         }
     }
 
-    node->neighborInfo = (NodePointer)((int)pre ^ (int)current);
+    node->neighborInfo = (NodePointer)((long)pre ^ (long)current);
     if (NULL == pre) {
         listHead = node;
     } else {
-        pre->neighborInfo = (NodePointer)((int)pre->neighborInfo ^ (int)current ^ (int)node);
+        pre->neighborInfo = (NodePointer)((long)pre->neighborInfo ^ (long)current ^ (long)node);
     }
     if (NULL != current) {
-        current->neighborInfo = (NodePointer)((int)node ^ (int)next);
+        current->neighborInfo = (NodePointer)((long)node ^ (long)next);
     }
 
     return listHead;
@@ -195,7 +195,7 @@ void releaseList(NodePointer listHead)
         NodePointer temp = current;
         current = next;
         if (NULL != next) {
-            next = (NodePointer)((int)next->neighborInfo ^ (int)temp);
+            next = (NodePointer)((long)next->neighborInfo ^ (long)temp);
         }
 
         cout << temp->value << " | " << flush;
@@ -206,6 +206,17 @@ void releaseList(NodePointer listHead)
 
 int main(int argc, char *argv[])
 {
+#pragma mark test NSMutableArray
+    testClass *tc1 = [[testClass alloc] init];
+    testClass *tc2 = [[testClass alloc] init];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:tc1];
+    [array addObject:tc2];
+    [array addObject:tc1];
+    NSLog(@"%@", array);
+    return 0;
+
+#pragma mark test ^ operation
     NSMutableArray *arr = [NSMutableArray arrayWithArray:nil];
     NSLog(@"%@", arr);
     int x = 1;
@@ -353,7 +364,7 @@ int main(int argc, char *argv[])
     date = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:date];
     NSUInteger dateKey = [components year] * 10000 + [components month] * 100 + [components day];
-    NSLog(@"date : %@ %d-%d-%d %d",
+    NSLog(@"date : %@ %ld-%ld-%ld %ld",
           date,
           [components year],
           [components month],

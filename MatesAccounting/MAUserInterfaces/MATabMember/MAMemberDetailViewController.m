@@ -130,7 +130,7 @@ typedef enum {
 - (void)refreshEditingData
 {
     self.editingName = self.mFriend.name ? self.mFriend.name : @"";
-    self.editingGender = [self.mFriend.sex integerValue];
+    self.editingGender = [self.mFriend.sex unsignedIntValue];
     self.editingPhone = [self.mFriend.telephoneNumber stringValue];
     self.editingMail = self.mFriend.eMail ? self.mFriend.eMail : @"";
     self.editingBirthday = self.mFriend.birthday;
@@ -157,7 +157,7 @@ typedef enum {
     NSString *cellIdentifier = [rowInfo objectForKey:kMemberDetailCellIdentifier];
     id cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    MAMemberDetailListType rowType = [[rowInfo objectForKey:kMemberDetailRowType] integerValue];
+    MAMemberDetailListType rowType = [[rowInfo objectForKey:kMemberDetailRowType] unsignedIntValue];
     switch (rowType) {
 
         case MAMemberDetailListTypeName: {
@@ -285,7 +285,7 @@ typedef enum {
             break;
         }
         case MAMemberDetailListTypeGender: {
-            self.editingGender = [data integerValue];
+            self.editingGender = [data unsignedIntValue];
             break;
         }
         case MAMemberDetailListTypeTelephone: {
