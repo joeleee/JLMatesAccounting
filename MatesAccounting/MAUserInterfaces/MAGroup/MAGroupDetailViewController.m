@@ -118,7 +118,7 @@
 
 - (void)setGroup:(MGroup *)group
 {
-    self.group = group;
+    _group = group;
     [self refreshView];
 }
 
