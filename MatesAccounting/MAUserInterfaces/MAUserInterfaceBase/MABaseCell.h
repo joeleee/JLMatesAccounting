@@ -6,8 +6,6 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#import "MABaseCell.h"
-
 #import "MACellProtocols.h"
 
 @interface MABaseCell : UITableViewCell <MACellReuseProtocol>
