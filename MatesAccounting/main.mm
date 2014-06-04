@@ -46,11 +46,16 @@ using namespace std;
 @property (nonatomic, assign) NSInteger i;
 @property (nonatomic, retain) NSDate *nd;
 @property (nonatomic, retain) id d;
+@property (nonatomic, strong) NSString *string1;
+@property (nonatomic, unsafe_unretained) NSString *string2;
+@property (nonatomic, strong) NSNumber *number1;
+@property (nonatomic, unsafe_unretained) NSNumber *number2;
 //@property (nonatomic, assign) NSInteger ni;
 //@property (nonatomic, assign) double d;
 //@property (nonatomic, assign) CGFloat cf;
 
 + (void)testMethod;
+- (void)testMethod;
 
 @end
 
@@ -58,6 +63,63 @@ using namespace std;
 
 + (void)testMethod
 {
+}
+
+- (void)testMethod
+{
+    self.number1 = @(-2);
+    // NSLog(@"after--->self.string1 = [[NSString alloc] initWithUTF8String:\"string 1\"];");
+    self.number2 = @(-2);
+    // NSLog(@"after--->self.string2 = self.string1;");
+    id a = [[NSObject alloc] init];
+    id b = [[NSObject alloc] init];
+    [a description];
+    [b description];
+    self.number1 = nil;
+    // NSLog(@"after--->self.string1 = nil;");
+    NSLog(@"number2 = %@", self.number2);
+    // NSLog(@"now--->NSLog(self.string2);");
+}
+
+@end
+
+@interface testClass0 : NSObject
+
+@property (nonatomic, strong) NSMutableArray *array;
+
+- (void)testMethod;
+
+@end
+
+@implementation testClass0
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.array = [NSMutableArray array];
+        testClass *testC = [[testClass alloc] init];
+        testC.s = @"sdfas";
+        [testC addObserver:self forKeyPath:@"s" options:NSKeyValueObservingOptionNew context:nil];
+        [self.array addObject:testC];
+    }
+
+    return self;
+}
+
+- (void)testMethod
+{
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([object isKindOfClass:[testClass class]] && [keyPath isEqualToString:@"s"]) {
+        NSLog(@"%@", change);
+        id newValue = [change objectForKey:NSKeyValueChangeNewKey];
+        NSLog(@"%@", newValue);
+        if ([newValue isKindOfClass:[NSNull class]]) {
+            [object removeObserver:self forKeyPath:@"s" context:nil];
+        }
+    }
 }
 
 @end
@@ -204,8 +266,44 @@ void releaseList(NodePointer listHead)
     cout << endl << "---------------------------" << endl;
 }
 
+
+#pragma mark - test main
+
 int main(int argc, char *argv[])
 {
+
+#pragma mark - test reverse NSString by CString
+    NSString *originString = @"1234567890";
+    NSUInteger length = [originString length];
+    const char *cString = [originString UTF8String];
+    NSMutableString *reverseString = [NSMutableString string];
+    for (NSInteger index = length - 1; 0 <= index; --index) {
+        [reverseString appendFormat:@"%c", cString[index]];
+    }
+
+    length = strlen(cString);
+    char s[length + 1];
+    s[length] = '\0';
+    strcpy(s, cString);
+    printf("%s\n", s);
+
+    NSLog(@"originString = %@", originString);
+    NSLog(@"reverseString = %@", reverseString);
+
+    return 0;
+
+#pragma mark - test NSString and NSNumber memory
+    testClass *tc = [[testClass alloc] init];
+    [tc testMethod];
+    return 0;
+
+#pragma mark - test KVO
+    testClass0 *tc0 = [[testClass0 alloc] init];
+    ((testClass *)tc0.array[0]).s = @"wer";
+    ((testClass *)tc0.array[0]).s = nil;
+    ((testClass *)tc0.array[0]).s = @"aaa";
+    return 0;
+
 #pragma mark test NSMutableArray
     testClass *tc1 = [[testClass alloc] init];
     testClass *tc2 = [[testClass alloc] init];
@@ -364,7 +462,7 @@ int main(int argc, char *argv[])
     date = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:date];
     NSUInteger dateKey = [components year] * 10000 + [components month] * 100 + [components day];
-    NSLog(@"date : %@ %ld-%ld-%ld %ld",
+    NSLog(@"date : %@ %d-%d-%d %d",
           date,
           [components year],
           [components month],

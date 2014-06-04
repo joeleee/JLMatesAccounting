@@ -20,8 +20,7 @@
 		9B25AA1918534236008D79B7 /* MATabMemberViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B25AA1818534236008D79B7 /* MATabMemberViews.xib */; };
 		9B25AA1C1853472C008D79B7 /* MAMemberListSectionEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1B1853472C008D79B7 /* MAMemberListSectionEmptyCell.m */; };
 		9B25AA1F185350FE008D79B7 /* UIColor+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1E185350FE008D79B7 /* UIColor+MAAddition.m */; };
-		9B26C07318BE22E9004B7E7D /* MACommonManagerBase+private.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B26C07018BE22E9004B7E7D /* MACommonManagerBase+private.m */; };
-		9B26C07418BE22E9004B7E7D /* MACommonManagerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B26C07218BE22E9004B7E7D /* MACommonManagerBase.m */; };
+		9B26C07418BE22E9004B7E7D /* ZLMulticastAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B26C07218BE22E9004B7E7D /* ZLMulticastAgent.m */; };
 		9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C68183525940025A2FB /* MatesAccounting.xcdatamodeld */; };
 		9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6D183527CE0025A2FB /* MARootNavigationController.m */; };
 		9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C6F183527CE0025A2FB /* MARootTabBarController.m */; };
@@ -126,10 +125,8 @@
 		9B25AA1B1853472C008D79B7 /* MAMemberListSectionEmptyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberListSectionEmptyCell.m; path = MATabMemberCells/MAMemberListSectionEmptyCell.m; sourceTree = "<group>"; };
 		9B25AA1D185350FE008D79B7 /* UIColor+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MAAddition.h"; path = "MAAdditions/UIColor+MAAddition.h"; sourceTree = "<group>"; };
 		9B25AA1E185350FE008D79B7 /* UIColor+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MAAddition.m"; path = "MAAdditions/UIColor+MAAddition.m"; sourceTree = "<group>"; };
-		9B26C06F18BE22E9004B7E7D /* MACommonManagerBase+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MACommonManagerBase+private.h"; sourceTree = "<group>"; };
-		9B26C07018BE22E9004B7E7D /* MACommonManagerBase+private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MACommonManagerBase+private.m"; sourceTree = "<group>"; };
-		9B26C07118BE22E9004B7E7D /* MACommonManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACommonManagerBase.h; sourceTree = "<group>"; };
-		9B26C07218BE22E9004B7E7D /* MACommonManagerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACommonManagerBase.m; sourceTree = "<group>"; };
+		9B26C07118BE22E9004B7E7D /* ZLMulticastAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLMulticastAgent.h; sourceTree = "<group>"; };
+		9B26C07218BE22E9004B7E7D /* ZLMulticastAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLMulticastAgent.m; sourceTree = "<group>"; };
 		9B391C69183525940025A2FB /* MatesAccounting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatesAccounting.xcdatamodel; sourceTree = "<group>"; };
 		9B391C6C183527CE0025A2FB /* MARootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARootNavigationController.h; sourceTree = "<group>"; };
 		9B391C6D183527CE0025A2FB /* MARootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARootNavigationController.m; sourceTree = "<group>"; };
@@ -324,10 +321,8 @@
 		9B26C06E18BE22E9004B7E7D /* MAManagerBase */ = {
 			isa = PBXGroup;
 			children = (
-				9B26C07118BE22E9004B7E7D /* MACommonManagerBase.h */,
-				9B26C07218BE22E9004B7E7D /* MACommonManagerBase.m */,
-				9B26C06F18BE22E9004B7E7D /* MACommonManagerBase+private.h */,
-				9B26C07018BE22E9004B7E7D /* MACommonManagerBase+private.m */,
+				9B26C07118BE22E9004B7E7D /* ZLMulticastAgent.h */,
+				9B26C07218BE22E9004B7E7D /* ZLMulticastAgent.m */,
 			);
 			name = MAManagerBase;
 			path = MAManagers/MAManagerBase;
@@ -802,7 +797,6 @@
 				9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */,
 				9B25AA1718533E1E008D79B7 /* MAMemberListSectionHeader.m in Sources */,
 				9BE1DBB518B9F022000BE969 /* MBProgressHUD+MAAddition.m in Sources */,
-				9B26C07318BE22E9004B7E7D /* MACommonManagerBase+private.m in Sources */,
 				9BB88C701865567100C16895 /* MPlace.m in Sources */,
 				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
 				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
@@ -827,7 +821,7 @@
 				9BC23113184B27DE005ADD59 /* MAAccountDetailLocationCell.m in Sources */,
 				9B726B0418BF862500ACDD99 /* UIViewController+MAAddition.m in Sources */,
 				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
-				9B26C07418BE22E9004B7E7D /* MACommonManagerBase.m in Sources */,
+				9B26C07418BE22E9004B7E7D /* ZLMulticastAgent.m in Sources */,
 				9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */,
 				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
 				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
@@ -961,7 +955,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_NS_ASSERTIONS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -970,6 +964,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -52,15 +52,11 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-    [GroupManager addListener:self];
     [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [GroupManager removeListener:self];
-
     [super viewWillDisappear:animated];
 }
 

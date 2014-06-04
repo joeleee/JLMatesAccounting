@@ -10,7 +10,6 @@
 
 #import "MGroup.h"
 #import "MAGroupPersistent.h"
-#import "MACommonManagerBase+private.h"
 #import "RMemberToGroup.h"
 
 NSString * const kCurrentGroupID = @"kCurrentGroupID";
@@ -43,28 +42,14 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 {
     if (self = [super init]) {
 
-        _listeners = @{kMAGMGroupHasCreated:[NSMutableSet set],
-                       kMAGMGroupHasModified:[NSMutableSet set],
-                       kMAGMGroupMemberHasChanged:[NSMutableSet set],
-                       kMAGMCurrentGroupHasChanged:[NSMutableSet set]};
+        [self setListenerKeyToSelecterDict:@{kMAGMGroupHasCreated:NSStringFromSelector(@selector(groupHasCreated:)),
+                                            kMAGMGroupHasModified:NSStringFromSelector(@selector(groupHasModified:)),
+                                            kMAGMGroupMemberHasChanged:NSStringFromSelector(@selector(groupMemberHasChanged:member:isAdd:)),
+                                             kMAGMCurrentGroupHasChanged:NSStringFromSelector(@selector(currentGroupHasChanged:))}];
 
-        _listenerKeyToSelector = @{kMAGMGroupHasCreated:NSStringFromSelector(@selector(groupHasCreated:)),
-                                   kMAGMGroupHasModified:NSStringFromSelector(@selector(groupHasModified:)),
-                                   kMAGMGroupMemberHasChanged:NSStringFromSelector(@selector(groupMemberHasChanged:member:isAdd:)),
-                                   kMAGMCurrentGroupHasChanged:NSStringFromSelector(@selector(currentGroupHasChanged:))};
     }
 
     return self;
-}
-
-- (BOOL)addListener:(id<MAGroupManagerListenerProtocol>)listener
-{
-    return [self listener:listener isAdd:YES];
-}
-
-- (BOOL)removeListener:(id<MAGroupManagerListenerProtocol>)listener
-{
-    return [self listener:listener isAdd:NO];
 }
 
 - (MGroup *)currentGroup

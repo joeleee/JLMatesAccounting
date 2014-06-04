@@ -8,7 +8,7 @@
 
 #define FriendManager [MAFriendManager sharedManager]
 
-#import "MACommonManagerBase.h"
+#import "ZLMulticastAgent.h"
 
 @class MFriend, MGroup;
 
@@ -21,7 +21,9 @@
 @end
 
 
-@interface MAFriendManager : MACommonManagerBase
+@interface MAFriendManager : ZLMulticastAgent
+
++ (MAFriendManager *)sharedManager;
 
 - (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener;
 

@@ -12,7 +12,6 @@
 #import "MAGroupManager.h"
 #import "MAFriendPersistent.h"
 #import "MFriend.h"
-#import "MACommonManagerBase+private.h"
 #import "RMemberToGroup.h"
 
 NSString * const kMAFMFriendHasCreated = @"kMAFMFriendHasCreated";
@@ -36,11 +35,9 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 {
     if (self = [super init]) {
 
-        _listeners = @{kMAFMFriendHasCreated:[NSMutableSet set],
-                       kMAFMFriendHasModified:[NSMutableSet set]};
+        [self setListenerKeyToSelecterDict:@{kMAFMFriendHasCreated:NSStringFromSelector(@selector(friendHasCreated:)),
+                                             kMAFMFriendHasModified:NSStringFromSelector(@selector(friendHasModified:))}];
 
-        _listenerKeyToSelector = @{kMAFMFriendHasCreated:NSStringFromSelector(@selector(friendHasCreated:)),
-                                   kMAFMFriendHasModified:NSStringFromSelector(@selector(friendHasModified:))};
     }
 
     return self;
@@ -50,12 +47,12 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 - (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener
 {
-    return [self listener:listener isAdd:YES];
+    return [self addListener:listener];
 }
 
 - (BOOL)removeListener:(id<MAFriendManagerListenerProtocol>)listener
 {
-    return [self listener:listener isAdd:NO];
+    return [self removeListener:listener];
 }
 
 - (NSArray *)currentGroupToMemberRelationships

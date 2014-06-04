@@ -8,7 +8,7 @@
 
 #define GroupManager [MAGroupManager sharedManager]
 
-#import "MACommonManagerBase.h"
+#import "ZLMulticastAgent.h"
 
 @class MGroup, MFriend, RMemberToGroup;
 
@@ -23,11 +23,7 @@
 @end
 
 
-@interface MAGroupManager : MACommonManagerBase
-
-- (BOOL)addListener:(id<MAGroupManagerListenerProtocol>)listener;
-
-- (BOOL)removeListener:(id<MAGroupManagerListenerProtocol>)listener;
+@interface MAGroupManager : ZLMulticastAgent
 
 + (MAGroupManager *)sharedManager;
 
