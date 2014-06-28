@@ -38,6 +38,11 @@
     }
 }
 
+- (IBAction)feeTextFieldEditingDidBegin:(UITextField *)sender
+{
+    [self.actionDelegate actionWithData:nil cell:self type:0];
+}
+
 + (CGFloat)cellHeight:(id)data
 {
     return 60.0f;

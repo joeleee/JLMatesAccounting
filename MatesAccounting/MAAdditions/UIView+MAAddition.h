@@ -10,15 +10,10 @@
 
 @interface UIView (MAAddition)
 
-- (CGFloat)x;
-- (CGFloat)y;
-- (CGFloat)width;
-- (CGFloat)height;
-- (CGFloat)bottom;
-
-- (void)setX:(CGFloat)x;
-- (void)setY:(CGFloat)y;
-- (void)setWidth:(CGFloat)width;
-- (void)setHeight:(CGFloat)height;
+@property (nonatomic, assign) CGFloat x;
+@property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat bottom;
 
 @end

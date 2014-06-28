@@ -50,6 +50,11 @@
     }
 }
 
+- (IBAction)feeTextFieldEditingDidBegin:(id)sender
+{
+    [self.actionDelegate actionWithData:nil cell:self type:0];
+}
+
 + (CGFloat)cellHeight:(id)data
 {
     return 40.0f;

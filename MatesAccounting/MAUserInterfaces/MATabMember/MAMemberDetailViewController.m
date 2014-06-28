@@ -269,10 +269,7 @@ typedef enum {
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
-                                               to:nil
-                                             from:nil
-                                         forEvent:nil];
+    MA_HIDE_KEYBOARD;
 }
 
 #pragma mark - MACellActionDelegate
@@ -319,6 +316,7 @@ typedef enum {
 
 - (void)didSaveButtonTaped:(UIBarButtonItem *)sender
 {
+    MA_HIDE_KEYBOARD;
     if (0 >= [self.editingName stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
         [MBProgressHUD showTextHUDOnView:self.view
                                     text:@"姓名不能为空"
@@ -327,10 +325,6 @@ typedef enum {
         return;
     }
 
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
-                                               to:nil
-                                             from:nil
-                                         forEvent:nil];
     if (self.mFriend) {
         // not create mode
         BOOL updated = [FriendManager editAndSaveFriend:self.mFriend

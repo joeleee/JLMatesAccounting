@@ -44,9 +44,6 @@
 
 - (void)setY:(CGFloat)y
 {
-    CGRect frame = self.frame;
-    frame.origin.y = y;
-    self.frame = frame;
 }
 
 - (void)setWidth:(CGFloat)width
@@ -60,6 +57,13 @@
 {
     CGRect frame = self.frame;
     frame.size.height = height;
+    self.frame = frame;
+}
+
+- (void)setBottom:(CGFloat)bottom
+{
+    CGRect frame = self.frame;
+    frame.origin.y = bottom - self.height;
     self.frame = frame;
 }
 

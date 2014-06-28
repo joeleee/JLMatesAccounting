@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailDescriptionCell.h"
 
-@interface MAAccountDetailDescriptionCell ()
+@interface MAAccountDetailDescriptionCell () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *accountDescriptionTextView;
 
@@ -34,6 +34,11 @@
         self.accountDescriptionTextView.userInteractionEnabled = NO;
         self.accountDescriptionTextView.backgroundColor = [UIColor clearColor];
     }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.actionDelegate actionWithData:nil cell:self type:0];
 }
 
 + (CGFloat)cellHeight:(id)data

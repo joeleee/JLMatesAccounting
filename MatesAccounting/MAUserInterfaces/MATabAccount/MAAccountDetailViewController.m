@@ -43,7 +43,7 @@ NSString *const  kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
 NSString *const  kAccountDetailCellHeight = @"kAccountDetailCellHeight";
 NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
-@interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem    *cancelBarItem;
@@ -56,6 +56,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 @property (nonatomic, copy) NSString   *placeName;
 @property (nonatomic, assign) CLLocationDegrees  latitude;
 @property (nonatomic, assign) CLLocationDegrees  longitude;
+
+@property (nonatomic, strong) NSIndexPath *registKeyboardIndexPath;
+@property (nonatomic, assign) CGFloat tableViewHeightBeforeInput;
 
 @property (nonatomic, assign) CGFloat  editingTotalFee;
 @property (nonatomic, strong) NSDate   *editingDate;
@@ -74,9 +77,18 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.isShowDateCellPicker = NO;
+        self.tableViewHeightBeforeInput = 0.0f;
     }
 
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowNotification:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -86,13 +98,19 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
     if (!self.group) {
         [MBProgressHUD showTextHUDOnView:[[UIApplication sharedApplication].delegate window]
-                                    text:@"无效的小组~"
+                                    text:@"无效的小组，无法创建账目~"
                          completionBlock:^{
-            [self disappear:YES];
-        }
-
+                             [self disappear:YES];
+                         }
                                 animated:YES];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    MA_HIDE_KEYBOARD;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -100,6 +118,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     [super viewDidLoad];
 
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    self.tableView.clipsToBounds = NO;
 
     if (self.account) {
         [self setEditing:NO animated:NO];
@@ -255,6 +275,33 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     return info;
 }
 
+#pragma mark - notification actions
+
+- (void)keyboardDidShowNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    if (0 >= self.tableViewHeightBeforeInput) {
+        self.tableViewHeightBeforeInput = self.tableView.height;
+        self.tableView.height -= keyboardFrame.size.height;
+    } else {
+        self.tableView.height = self.tableViewHeightBeforeInput - keyboardFrame.size.height;
+    }
+
+    if (self.registKeyboardIndexPath) {
+        [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+- (void)keyboardWillHideNotification:(NSNotification *)notification
+{
+    if (0 < self.tableViewHeightBeforeInput) {
+        self.tableView.height = self.tableViewHeightBeforeInput;
+    }
+    self.tableViewHeightBeforeInput = 0.0f;
+    self.registKeyboardIndexPath = nil;
+}
+
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -269,6 +316,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             MAAccountDetailFeeCell *detailCell = cell;
             detailCell.status = self.isEditing;
             [detailCell reuseCellWithData:[self.account.totalFee stringValue]];
+            detailCell.actionDelegate = self;
             break;
         }
 
@@ -318,6 +366,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             MAAccountDetailConsumerDetailCell *detailCell = cell;
             detailCell.status = self.isEditing;
+            detailCell.actionDelegate = self;
             NSUInteger index = indexPath.row;
             MAFeeOfMember *data = nil;
             if (index < self.payers.count) {
@@ -333,6 +382,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             MAAccountDetailDescriptionCell *detailCell = cell;
             detailCell.status = self.isEditing;
+            detailCell.actionDelegate = self;
             [detailCell reuseCellWithData:self.account.detail];
             break;
         }
@@ -383,6 +433,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_HIDE_KEYBOARD;
+
     if (!self.editing) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
@@ -400,16 +452,21 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 }
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+#pragma mark - MACellActionDelegate
+
+- (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
-                                               to:nil
-                                             from:nil
-                                         forEvent:nil];
+    self.registKeyboardIndexPath = [self.tableView indexPathForCell:cell];
+
+    if (self.tableViewHeightBeforeInput > 0.0f) {
+        [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+
+    return YES;
 }
 
 #pragma mark property method
+
 - (UIBarButtonItem *)cancelBarItem
 {
     if (_cancelBarItem) {
@@ -429,10 +486,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)didSaveButtonTaped:(UIBarButtonItem *)sender
 {
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder)
-                                               to:nil
-                                             from:nil
-                                         forEvent:nil];
+    MA_HIDE_KEYBOARD;
 
     if (self.account) {
         // not create mode
@@ -504,29 +558,26 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if (self.editing) {
         MAAlertView *alert = nil;
-
         if (self.account) {
             alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
                                         message:nil
-                                   buttonTitle1:@"放弃更改"
-                                   buttonBlock1:^{
-                    [self clearEditingData];
-                    [self setEditing:NO animated:YES];
-                }
-
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
+                                   buttonTitle1:@"点错了~"
+                                   buttonBlock1:nil
+                                   buttonTitle2:@"放弃更改"
+                                   buttonBlock2:^{
+                                       [self clearEditingData];
+                                       [self setEditing:NO animated:YES];
+                                   }];
         } else {
             alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
                                         message:nil
-                                   buttonTitle1:@"放弃创建"
-                                   buttonBlock1:^{
-                    [self clearEditingData];
-                    [self disappear:YES];
-                }
-
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
+                                   buttonTitle1:@"点错了~"
+                                   buttonBlock1:nil
+                                   buttonTitle2:@"放弃创建"
+                                   buttonBlock2:^{
+                                       [self clearEditingData];
+                                       [self disappear:YES];
+                                   }];
         }
 
         [alert show];
@@ -553,6 +604,11 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 
     [self loadData];
+}
+
+- (IBAction)didTappingHideKeyboardButton:(id)sender
+{
+    MA_HIDE_KEYBOARD;
 }
 
 #pragma mark - Public Method

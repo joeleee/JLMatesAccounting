@@ -111,7 +111,7 @@
 
 - (IBAction)groupNameTextFieldDoneTaped:(UITextField *)sender
 {
-    [sender resignFirstResponder];
+    MA_HIDE_KEYBOARD;
 }
 
 #pragma mark - Public Method

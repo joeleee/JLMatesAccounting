@@ -19,6 +19,8 @@
 
 #define MA_QUICK_ASSERT(value, message) NSAssert(value, @"MA Assert Wrong - %@ : %s %@", message, __FUNCTION__, [self class])
 
+#define MA_HIDE_KEYBOARD [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil]
+
 #endif /* ifndef MAGLOBALDEFINITIONS_H */
 
 #pragma mark - definition blocks
