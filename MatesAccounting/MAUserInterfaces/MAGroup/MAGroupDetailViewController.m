@@ -91,12 +91,12 @@
         [[MAAlertView alertWithTitle:@"要放弃已输入的内容么？"
                              message:nil
                         buttonTitle1:@"确认放弃"
-                        buttonBlock1:nil
-                        buttonTitle2:@"点错了~"
-                        buttonBlock2:^{
+                        buttonBlock1:^{
                             [self dismissViewControllerAnimated:YES completion:^{
                             }];
-                        }] show];
+                        }
+                        buttonTitle2:@"点错了~"
+                        buttonBlock2:nil] show];
 }
 
 - (IBAction)didGroupNameTextFieldBeginEdit:(UITextField *)sender

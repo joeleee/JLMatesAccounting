@@ -58,7 +58,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 @property (nonatomic, assign) CLLocationDegrees  longitude;
 
 @property (nonatomic, strong) NSIndexPath *registKeyboardIndexPath;
-@property (nonatomic, assign) CGFloat tableViewHeightBeforeInput;
 
 @property (nonatomic, assign) CGFloat  editingTotalFee;
 @property (nonatomic, strong) NSDate   *editingDate;
@@ -77,7 +76,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.isShowDateCellPicker = NO;
-        self.tableViewHeightBeforeInput = 0.0f;
     }
 
     return self;
@@ -281,12 +279,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     NSDictionary *userInfo = notification.userInfo;
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    if (0 >= self.tableViewHeightBeforeInput) {
-        self.tableViewHeightBeforeInput = self.tableView.height;
-        self.tableView.height -= keyboardFrame.size.height;
-    } else {
-        self.tableView.height = self.tableViewHeightBeforeInput - keyboardFrame.size.height;
-    }
+    UIEdgeInsets newContentInset = self.tableView.contentInset;
+    newContentInset.bottom = keyboardFrame.size.height;
+    self.tableView.contentInset = newContentInset;
 
     if (self.registKeyboardIndexPath) {
         [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -295,10 +290,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)keyboardWillHideNotification:(NSNotification *)notification
 {
-    if (0 < self.tableViewHeightBeforeInput) {
-        self.tableView.height = self.tableViewHeightBeforeInput;
-    }
-    self.tableViewHeightBeforeInput = 0.0f;
+    UIEdgeInsets newContentInset = self.tableView.contentInset;
+    newContentInset.bottom = 0.0f;
+    self.tableView.contentInset = newContentInset;
     self.registKeyboardIndexPath = nil;
 }
 
@@ -457,10 +451,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
     self.registKeyboardIndexPath = [self.tableView indexPathForCell:cell];
-
-    if (self.tableViewHeightBeforeInput > 0.0f) {
-        [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
+    [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
     return YES;
 }
@@ -543,7 +534,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 [self setEditing:NO animated:YES];
                 [self disappear:YES];
             }
-
                                     animated:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
@@ -604,11 +594,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 
     [self loadData];
-}
-
-- (IBAction)didTappingHideKeyboardButton:(id)sender
-{
-    MA_HIDE_KEYBOARD;
 }
 
 #pragma mark - Public Method
