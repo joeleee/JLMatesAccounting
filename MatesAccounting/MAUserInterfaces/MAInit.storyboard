@@ -1066,7 +1066,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <outlet property="consumersTitleLabel" destination="cnP-wz-5wG" id="ZF3-QG-8wU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAAccountDetailLocationCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="MAAccountDetailLocationCell" rowHeight="40" id="tcf-TN-syn" customClass="MAAccountDetailLocationCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAAccountDetailLocationCell" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="MAAccountDetailLocationCell" rowHeight="40" id="tcf-TN-syn" customClass="MAAccountDetailLocationCell">
                                         <rect key="frame" x="0.0" y="434" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tcf-TN-syn" id="xqS-WT-3FM">

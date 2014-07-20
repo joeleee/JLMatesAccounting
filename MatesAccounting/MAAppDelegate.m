@@ -14,8 +14,8 @@
 
 void uncaughtExceptionHandler(NSException *exception)
 {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    MALogError(@"CRASH: %@", exception);
+    MALogError(@"Stack Trace: %@", [exception callStackSymbols]);
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

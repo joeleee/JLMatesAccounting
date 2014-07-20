@@ -29,8 +29,8 @@
 {
     [self.locationDescriptionLabel setText:data];
     if (self.status) {
-        [self setSelectionStyle:UITableViewCellSelectionStyleDefault];
-        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [self setAccessoryType:UITableViewCellAccessoryNone];
     } else {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         [self setAccessoryType:UITableViewCellAccessoryNone];
