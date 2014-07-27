@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class MAccount;
+
 @interface MAMemberListViewController : UIViewController
+
+@property (nonatomic, strong) MAccount *account;
+@property (nonatomic, assign) BOOL isPayers;
 
 @end

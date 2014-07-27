@@ -11,6 +11,7 @@
 #import "MAMemberListSectionHeader.h"
 #import "MAMemberListSectionEmptyCell.h"
 #import "MAMemberListCell.h"
+#import "MAAccountManager.h"
 #import "MFriend.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
@@ -59,6 +60,78 @@ typedef enum {
     }
 }
 
+#pragma mark - private
+
+- (NSMutableArray *)arrayInSection:(NSUInteger)section
+{
+    switch (section) {
+        case MemberListSectionOfSelected: {
+            return self.selectedMembers;
+        }
+        case MemberListSectionOfUnselected: {
+            return self.unselectedMembers;
+        }
+        default: {
+            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
+            break;
+        }
+    }
+
+    return nil;
+}
+
+- (MFriend *)removeMemberAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *memberList = [self arrayInSection:indexPath.section];
+    if (0 > indexPath.row || indexPath.row >= memberList.count) {
+        return nil;
+    }
+
+    MFriend *member = [memberList objectAtIndex:indexPath.row];
+    [memberList removeObject:member];
+    if (0 < memberList.count) {
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    } else {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+
+    return member;
+}
+
+- (void)insertMember:(MFriend *)member atIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *memberList = [self arrayInSection:indexPath.section];
+    if (!member || 0 > indexPath.row || indexPath.row > memberList.count) {
+        return;
+    }
+
+    [memberList insertObject:member atIndex:indexPath.row];
+    if (1 < memberList.count) {
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    } else {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+
+    return;
+}
+
+- (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
+{
+    [self performSegueWithIdentifier:kSegueMemberListToFriendList sender:nil];
+}
+
+- (NSArray *)reloadMembersOfAccount:(BOOL)isSelected
+{
+    NSArray *memberList;
+
+    if (isSelected) {
+        [AccountManager feeOfMembersForAccount:self.account isPayers:self.isPayers];
+    } else {
+    }
+
+    return memberList;
+}
+
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -76,7 +149,6 @@ typedef enum {
             memberCell.actionDelegate = self;
         }
         cell = memberCell;
-
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListSectionEmptyCell className]];
     }
@@ -142,74 +214,13 @@ typedef enum {
 }
 
 #pragma mark MACellActionDelegate
+
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
     if ([cell isKindOfClass:[MAMemberListCell class]]) {
         [self performSegueWithIdentifier:kSegueMemberListToMemberDetail sender:data];
     }
     return YES;
-}
-
-#pragma mark - private
-
-#pragma table view
-- (NSMutableArray *)arrayInSection:(NSUInteger)section
-{
-    switch (section) {
-        case MemberListSectionOfSelected: {
-            return self.selectedMembers;
-        }
-        case MemberListSectionOfUnselected: {
-            return self.unselectedMembers;
-        }
-        default: {
-            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
-            break;
-        }
-    }
-
-    return nil;
-}
-
-- (MFriend *)removeMemberAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSMutableArray *memberList = [self arrayInSection:indexPath.section];
-    if (0 > indexPath.row || indexPath.row >= memberList.count) {
-        return nil;
-    }
-
-    MFriend *member = [memberList objectAtIndex:indexPath.row];
-    [memberList removeObject:member];
-    if (0 < memberList.count) {
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    } else {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-    }
-
-    return member;
-}
-
-- (void)insertMember:(MFriend *)member atIndexPath:(NSIndexPath *)indexPath
-{
-    NSMutableArray *memberList = [self arrayInSection:indexPath.section];
-    if (!member || 0 > indexPath.row || indexPath.row > memberList.count) {
-        return;
-    }
-
-    [memberList insertObject:member atIndex:indexPath.row];
-    if (1 < memberList.count) {
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    } else {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-    }
-
-    return;
-}
-
-#pragma UI action
-- (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
-{
-    [self performSegueWithIdentifier:kSegueMemberListToFriendList sender:nil];
 }
 
 @end
