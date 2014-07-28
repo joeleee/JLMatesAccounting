@@ -31,6 +31,8 @@
 
 - (NSArray *)currentGroupToMemberRelationships;
 
+- (NSArray *)allFriendsByGroup:(MGroup *)group;
+
 - (NSArray *)allFriendsFilteByGroup:(MGroup *)group;
 
 - (MFriend *)createFriendWithName:(NSString *)name

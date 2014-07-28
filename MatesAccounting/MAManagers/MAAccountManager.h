@@ -51,4 +51,6 @@
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers;
 
+- (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers;
+
 @end

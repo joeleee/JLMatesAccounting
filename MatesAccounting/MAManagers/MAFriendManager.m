@@ -64,6 +64,16 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     return relationshipToMember;
 }
 
+- (NSArray *)allFriendsByGroup:(MGroup *)group
+{
+    NSArray *relationshipToMember = [group.relationshipToMember allObjects];
+    NSMutableArray *friends = [NSMutableArray array];
+    for (RMemberToGroup *memberToGroup in relationshipToMember) {
+        [friends addObject:memberToGroup.member];
+    }
+    return friends;
+}
+
 - (NSArray *)allFriendsFilteByGroup:(MGroup *)group
 {
     NSArray *friends = [[MAFriendPersistent instance] fetchFriends:nil];

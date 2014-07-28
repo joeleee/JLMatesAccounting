@@ -380,15 +380,8 @@ typedef enum {
                                    buttonTitle2:@"点错了~"
                                    buttonBlock2:nil];
         } else {
-            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
-                                        message:nil
-                                   buttonTitle1:@"放弃创建"
-                                   buttonBlock1:^{
-                                       [self clearEditingData];
-                                       [self disappear:YES];
-                                   }
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
+            [self clearEditingData];
+            [self disappear:YES];
         }
         [alert show];
     } else {

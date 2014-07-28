@@ -12,7 +12,9 @@
 #import "MAMemberListSectionEmptyCell.h"
 #import "MAMemberListCell.h"
 #import "MAAccountManager.h"
+#import "MAFriendManager.h"
 #import "MFriend.h"
+#import "MAMemberDetailViewController.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
 NSString * const kSegueMemberListToFriendList = @"kSegueMemberListToFriendList";
@@ -25,9 +27,13 @@ typedef enum {
 @interface MAMemberListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIBarButtonItem *saveBarItem;
+@property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
+@property (nonatomic, strong) UIBarButtonItem *addFriendBarItem;
 
-@property (nonatomic, strong) NSMutableArray *unselectedMembers;
-@property (nonatomic, strong) NSMutableArray *selectedMembers;
+@property (nonatomic, strong) NSArray *unselectedMembers;
+@property (nonatomic, strong) NSMutableArray *modifiedSelectedMembers;
+@property (nonatomic, strong) NSMutableArray *modifiedUnselectedMembers;
 
 @end
 
@@ -36,8 +42,6 @@ typedef enum {
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        self.selectedMembers = [NSMutableArray arrayWithArray:@[@00, @01, @02, @03, @04]];
-        self.unselectedMembers = [NSMutableArray arrayWithArray:@[@10, @11, @12, @13, @14, @15]];
     }
 
     return self;
@@ -47,13 +51,22 @@ typedef enum {
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *addFriendBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddMemberNavigationButtonTaped:)];
-    [self.navigationItem setRightBarButtonItem:addFriendBarItem animated:YES];
+    self.saveBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSaveNavigationButtonTaped:)];
+    [self.saveBarItem setEnabled:NO];
+    self.cancelBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancelNavigationButtonTaped:)];
+    [self.navigationItem setLeftBarButtonItems:@[self.cancelBarItem, self.saveBarItem] animated:YES];
+
+    self.addFriendBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddMemberNavigationButtonTaped:)];
+    [self.navigationItem setRightBarButtonItem:self.addFriendBarItem animated:YES];
+
+    [self loadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueMemberListToMemberDetail]) {
+        MAMemberDetailViewController *memberDetail = segue.destinationViewController;
+        [memberDetail setFriend:sender];
     } else if ([segue.identifier isEqualToString:kSegueMemberListToFriendList]) {
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
@@ -62,14 +75,27 @@ typedef enum {
 
 #pragma mark - private
 
+- (BOOL)loadData
+{
+    if (!self.group) {
+        return NO;
+    }
+
+    self.modifiedSelectedMembers = [NSMutableArray arrayWithArray:self.selectedMembers];
+    self.modifiedUnselectedMembers = [NSMutableArray arrayWithArray:[FriendManager allFriendsByGroup:self.group]];
+    [self.modifiedUnselectedMembers removeObjectsInArray:self.selectedMembers];
+    self.unselectedMembers = [NSArray arrayWithArray:self.modifiedUnselectedMembers];
+    return YES;
+}
+
 - (NSMutableArray *)arrayInSection:(NSUInteger)section
 {
     switch (section) {
         case MemberListSectionOfSelected: {
-            return self.selectedMembers;
+            return self.modifiedSelectedMembers;
         }
         case MemberListSectionOfUnselected: {
-            return self.unselectedMembers;
+            return self.modifiedUnselectedMembers;
         }
         default: {
             MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
@@ -87,6 +113,7 @@ typedef enum {
         return nil;
     }
 
+    [self.saveBarItem setEnabled:YES];
     MFriend *member = [memberList objectAtIndex:indexPath.row];
     [memberList removeObject:member];
     if (0 < memberList.count) {
@@ -115,21 +142,27 @@ typedef enum {
     return;
 }
 
+- (void)didSaveNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.delegate respondsToSelector:@selector(memberListController:didFinishedSelectMember:)]) {
+            [self.delegate memberListController:self didFinishedSelectMember:self.selectedMembers];
+        }
+    }];
+}
+
+- (void)didCancelNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.delegate respondsToSelector:@selector(memberListControllerDidCancelSelectMember:)]) {
+            [self.delegate memberListControllerDidCancelSelectMember:self];
+        }
+    }];
+}
+
 - (void)didAddMemberNavigationButtonTaped:(UIBarButtonItem *)barButtonItem
 {
     [self performSegueWithIdentifier:kSegueMemberListToFriendList sender:nil];
-}
-
-- (NSArray *)reloadMembersOfAccount:(BOOL)isSelected
-{
-    NSArray *memberList;
-
-    if (isSelected) {
-        [AccountManager feeOfMembersForAccount:self.account isPayers:self.isPayers];
-    } else {
-    }
-
-    return memberList;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -145,9 +178,8 @@ typedef enum {
     id cell = nil;
     if (0 < sectionArray.count) {
         MAMemberListCell *memberCell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListCell className]];
-        if ([memberCell respondsToSelector:@selector(actionDelegate)]) {
-            memberCell.actionDelegate = self;
-        }
+        memberCell.actionDelegate = self;
+        [memberCell reuseCellWithData:sectionArray[indexPath.row]];
         cell = memberCell;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[MAMemberListSectionEmptyCell className]];

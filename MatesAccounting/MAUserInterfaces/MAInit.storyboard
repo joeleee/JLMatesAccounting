@@ -1115,7 +1115,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1231.12" placeholder="金额" textAlignment="right" minimumFontSize="12" id="nyJ-v6-Qyd">
-                                                    <rect key="frame" x="200.00000123182929" y="5" width="100" height="30"/>
+                                                    <rect key="frame" x="200" y="5" width="100" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1169,12 +1169,27 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="账目详情" id="BON-cF-Pd6"/>
                     <connections>
                         <outlet property="tableView" destination="R87-wD-q2g" id="HIj-DS-Nh3"/>
-                        <segue destination="OmF-Yj-eYa" kind="push" identifier="kSegueAccountDetailToMemberList" id="wWa-nu-Ift"/>
+                        <segue destination="5r4-fn-Iep" kind="modal" identifier="kSegueAccountDetailToMemberList" id="Coh-cM-R4t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Irr-n9-w6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="585" y="-1402"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pm4-U5-6PI">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="5r4-fn-Iep" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1vf-h3-AZV">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OmF-Yj-eYa" kind="relationship" relationship="rootViewController" id="IxZ-Uf-JhC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z7w-T6-jk0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="-1402"/>
         </scene>
         <!--Root Tab Bar Controller -  -->
         <scene sceneID="DoU-Ma-v8A">
@@ -1346,11 +1361,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="J0d-fi-SkM"/>
         <segue reference="ZMe-Ch-sex"/>
-        <segue reference="H6b-eb-bSk"/>
         <segue reference="trI-uf-AKA"/>
-        <segue reference="Qp4-1k-UgR"/>
-        <segue reference="atx-wc-fRM"/>
         <segue reference="NzF-kh-GnM"/>
+        <segue reference="Bvd-iw-5bp"/>
+        <segue reference="atx-wc-fRM"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,6 +21,7 @@
 #import "MPlace.h"
 #import "MAAccountManager.h"
 #import "MFriend.h"
+#import "MAMemberListViewController.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -132,6 +133,22 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueAccountDetailToMemberList]) {
+        MAMemberListViewController *memberListViewController = [(UINavigationController *)(segue.destinationViewController) viewControllers][0];
+        NSIndexPath *indexPath = sender;
+        NSArray *selectedFeeOfMembers;
+        if (AccountDetailSectionType == indexPath.section && DetailPayerType == indexPath.row) {
+            selectedFeeOfMembers = self.editingPayers;
+        } else if (AccountDetailSectionType == indexPath.section && DetailConsumerType == indexPath.row) {
+            selectedFeeOfMembers = self.editingConsumers;
+        } else {
+            MA_QUICK_ASSERT(NO, @"Unknow sender - MAAccountDetailViewController");
+        }
+        NSMutableOrderedSet *members = [NSMutableOrderedSet orderedSet];
+        for (MAFeeOfMember *feeOfMember in selectedFeeOfMembers) {
+            [members addObject:feeOfMember.member];
+        }
+        memberListViewController.selectedMembers = members.array;
+        memberListViewController.group = self.group;
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
@@ -459,7 +476,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
     if ((AccountDetailSectionType == indexPath.section) &&
         ((DetailPayerType == indexPath.row) || (DetailConsumerType == indexPath.row))) {
-        [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:nil];
+        [self performSegueWithIdentifier:kSegueAccountDetailToMemberList sender:indexPath];
     } else if ((AccountDetailSectionType == indexPath.section) &&
                (DetailDateType == indexPath.row)) {
         self.isShowDateCellPicker = !self.isShowDateCellPicker;
@@ -582,15 +599,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                                        [self setEditing:NO animated:YES];
                                    }];
         } else {
-            alert = [MAAlertView alertWithTitle:@"确认放弃创建么？"
-                                        message:nil
-                                   buttonTitle1:@"点错了~"
-                                   buttonBlock1:nil
-                                   buttonTitle2:@"放弃创建"
-                                   buttonBlock2:^{
-                                       [self clearEditingData];
-                                       [self disappear:YES];
-                                   }];
+            [self clearEditingData];
+            [self disappear:YES];
         }
 
         [alert show];

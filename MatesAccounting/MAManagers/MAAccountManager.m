@@ -14,6 +14,7 @@
 #import "RMemberToAccount.h"
 #import "MAAccountPersistent.h"
 #import "MAPlacePersistent.h"
+#import "MAFriendManager.h"
 
 @implementation MAFeeOfMember
 
@@ -166,6 +167,24 @@
     return [memberToAccounts sortedArrayUsingComparator:^NSComparisonResult(MAFeeOfMember *obj1, MAFeeOfMember *obj2) {
         return [obj1.createDate compare:obj2.createDate];
     }];
+}
+
+- (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers
+{
+    NSMutableArray *selectedMembers = [NSMutableArray array];
+    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
+        if ((isPayers ? memberToAccount.fee.floatValue > 0.0f : memberToAccount.fee.floatValue < 0.0f)) {
+            [selectedMembers addObject:memberToAccount.member];
+        }
+    }
+
+    if (isSelected) {
+        return selectedMembers;
+    } else {
+        NSMutableArray *unSelectedMembers = [NSMutableArray arrayWithArray:[FriendManager allFriendsFilteByGroup:account.group]];
+        [unSelectedMembers removeObjectsInArray:selectedMembers];
+        return unSelectedMembers;
+    }
 }
 
 #pragma mark - private method

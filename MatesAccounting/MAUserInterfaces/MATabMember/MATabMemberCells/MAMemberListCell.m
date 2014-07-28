@@ -35,6 +35,8 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    self.member = data;
+    self.memberNameLabel.text = self.member.name;
 }
 
 + (CGFloat)cellHeight:(id)data
