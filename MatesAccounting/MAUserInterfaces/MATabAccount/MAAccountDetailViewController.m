@@ -45,7 +45,7 @@ NSString *const  kAccountDetailCellIdentifier = @"kAccountDetailCellIdentifier";
 NSString *const  kAccountDetailCellHeight = @"kAccountDetailCellHeight";
 NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
-@interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
+@interface MAAccountDetailViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAMemberListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
@@ -149,6 +149,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
         memberListViewController.selectedMembers = members.array;
         memberListViewController.group = self.group;
+        memberListViewController.delegate = self;
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
@@ -486,7 +487,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     }
 }
 
-#pragma mark - MACellActionDelegate
+#pragma mark MACellActionDelegate
 
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
@@ -496,7 +497,17 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     return YES;
 }
 
-#pragma mark property method
+#pragma mark MAMemberListViewControllerDelegate
+
+- (void)memberListController:(MAMemberListViewController *)selder didFinishedSelectMember:(NSArray *)selectedMembers
+{
+}
+
+- (void)memberListControllerDidCancelSelectMember:(MAMemberListViewController *)selder
+{
+}
+
+#pragma mark - property method
 
 - (UIBarButtonItem *)cancelBarItem
 {
