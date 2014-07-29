@@ -138,8 +138,10 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         NSArray *selectedFeeOfMembers;
         if (AccountDetailSectionType == indexPath.section && DetailPayerType == indexPath.row) {
             selectedFeeOfMembers = self.editingPayers;
+            memberListViewController.userInfo[kSegueAccountDetailToMemberList] = @(DetailPayerType);
         } else if (AccountDetailSectionType == indexPath.section && DetailConsumerType == indexPath.row) {
             selectedFeeOfMembers = self.editingConsumers;
+            memberListViewController.userInfo[kSegueAccountDetailToMemberList] = @(DetailConsumerType);
         } else {
             MA_QUICK_ASSERT(NO, @"Unknow sender - MAAccountDetailViewController");
         }
@@ -147,9 +149,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         for (MAFeeOfMember *feeOfMember in selectedFeeOfMembers) {
             [members addObject:feeOfMember.member];
         }
-        memberListViewController.selectedMembers = members.array;
-        memberListViewController.group = self.group;
-        memberListViewController.delegate = self;
+        [memberListViewController setGroup:self.group selectedMembers:members.array delegate:self];
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
@@ -499,12 +499,24 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 #pragma mark MAMemberListViewControllerDelegate
 
-- (void)memberListController:(MAMemberListViewController *)selder didFinishedSelectMember:(NSArray *)selectedMembers
+- (void)memberListController:(MAMemberListViewController *)sender didFinishedSelectMember:(NSArray *)selectedMembers
 {
-}
+    switch ([sender.userInfo[kSegueAccountDetailToMemberList] integerValue]) {
 
-- (void)memberListControllerDidCancelSelectMember:(MAMemberListViewController *)selder
-{
+        case DetailPayerType: {
+            NSArray *editingPayers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingPayers totalFee:self.editingTotalFee isPayer:YES];
+            self.editingPayers = [NSMutableArray arrayWithArray:editingPayers];
+        } break;
+
+        case DetailConsumerType: {
+            NSArray *editingConsumers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingConsumers totalFee:self.editingTotalFee isPayer:NO];
+            self.editingPayers = [NSMutableArray arrayWithArray:editingConsumers];
+        } break;
+
+        default: {
+            MA_QUICK_ASSERT(NO, @"Wrong userInfo");
+        } break;
+    }
 }
 
 #pragma mark - property method

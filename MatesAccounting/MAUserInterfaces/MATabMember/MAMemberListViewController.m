@@ -31,6 +31,9 @@ typedef enum {
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 @property (nonatomic, strong) UIBarButtonItem *addFriendBarItem;
 
+@property (nonatomic, strong) MGroup *group;
+@property (nonatomic, weak) id <MAMemberListViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSArray *selectedMembers;
 @property (nonatomic, strong) NSArray *unselectedMembers;
 @property (nonatomic, strong) NSMutableArray *modifiedSelectedMembers;
 @property (nonatomic, strong) NSMutableArray *modifiedUnselectedMembers;
@@ -71,6 +74,13 @@ typedef enum {
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
     }
+}
+
+- (void)setGroup:(MGroup *)group selectedMembers:(NSArray *)selectedMembers delegate:(id<MAMemberListViewControllerDelegate>)delegate
+{
+    self.group = group;
+    self.selectedMembers = selectedMembers;
+    self.delegate = delegate;
 }
 
 #pragma mark - private
@@ -146,7 +156,7 @@ typedef enum {
 {
     [self dismissViewControllerAnimated:YES completion:^{
         if ([self.delegate respondsToSelector:@selector(memberListController:didFinishedSelectMember:)]) {
-            [self.delegate memberListController:self didFinishedSelectMember:self.selectedMembers];
+            [self.delegate memberListController:self didFinishedSelectMember:self.modifiedSelectedMembers];
         }
     }];
 }
@@ -246,13 +256,23 @@ typedef enum {
 }
 
 #pragma mark MACellActionDelegate
-
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
     if ([cell isKindOfClass:[MAMemberListCell class]]) {
         [self performSegueWithIdentifier:kSegueMemberListToMemberDetail sender:data];
     }
     return YES;
+}
+
+#pragma mark - @property
+- (NSMutableDictionary *)userInfo
+{
+    if (_userInfo) {
+        return _userInfo;
+    }
+
+    _userInfo = [NSMutableDictionary dictionary];
+    return _userInfo;
 }
 
 @end

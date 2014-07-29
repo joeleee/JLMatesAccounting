@@ -169,6 +169,32 @@
     }];
 }
 
+- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer
+{
+    CGFloat restTotalFee = 0.0f;
+    NSMutableArray *originPayers = [NSMutableArray array];
+    NSMutableArray *newMembers = [NSMutableArray arrayWithArray:members];
+    for (MAFeeOfMember *feeOfMember in originFeeOfMembers) {
+        if ([members containsObject:feeOfMember.member]) {
+            totalFee += feeOfMember.fee;
+            [originPayers addObject:feeOfMember];
+            [newMembers removeObject:feeOfMember.member];
+        }
+    }
+
+    CGFloat restFee = isPayer ? totalFee - restTotalFee : totalFee + restTotalFee;
+    CGFloat averageFee = 0;
+    if (newMembers.count > 0 && ((isPayer && restFee > 0) || (!isPayer && restFee < 0))) {
+        averageFee = restFee / newMembers.count;
+    }
+    for (MFriend *member in newMembers) {
+        MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:member fee:averageFee];
+        [originPayers addObject:feeOfMember];
+    }
+
+    return originPayers;
+}
+
 - (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers
 {
     NSMutableArray *selectedMembers = [NSMutableArray array];

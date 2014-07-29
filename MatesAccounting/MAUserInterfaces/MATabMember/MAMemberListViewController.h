@@ -13,9 +13,9 @@
 
 @interface MAMemberListViewController : UIViewController
 
-@property (nonatomic, strong) MGroup *group;
-@property (nonatomic, strong) NSArray *selectedMembers;
-@property (nonatomic, weak) id <MAMemberListViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSMutableDictionary *userInfo;
+
+- (void)setGroup:(MGroup *)group selectedMembers:(NSArray *)selectedMembers delegate:(id <MAMemberListViewControllerDelegate>)delegate;
 
 @end
 
@@ -23,7 +23,7 @@
 @protocol MAMemberListViewControllerDelegate <NSObject>
 
 @optional
-- (void)memberListController:(MAMemberListViewController *)selder didFinishedSelectMember:(NSArray *)selectedMembers;
+- (void)memberListController:(MAMemberListViewController *)sender didFinishedSelectMember:(NSArray *)selectedMembers;
 - (void)memberListControllerDidCancelSelectMember:(MAMemberListViewController *)selder;
 
 @end
