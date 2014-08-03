@@ -32,14 +32,9 @@
 
 - (void)reuseCellWithData:(MAFeeOfMember *)data
 {
-    double fee = data.fee;
+    double fee = data.fee > 0 ? data.fee : -data.fee;
     [self.consumerNameLabel setText:data.member.name];
-    [self.consumerFeeTextField setText:[@(fee) stringValue]];
-    if (0 > fee) {
-        [self.consumerTypeLabel setText:@"支付"];
-    } else {
-        [self.consumerTypeLabel setText:@"消费"];
-    }
+    [self.consumerFeeTextField setText:(0 != fee) ? [@(fee) stringValue] : nil];
 
     if (self.status) {
         self.consumerFeeTextField.userInteractionEnabled = YES;
@@ -52,7 +47,12 @@
 
 - (IBAction)feeTextFieldEditingDidBegin:(id)sender
 {
-    [self.actionDelegate actionWithData:nil cell:self type:0];
+    [self.actionDelegate actionWithData:sender cell:self type:0];
+}
+
+- (IBAction)feeTextFieldEditingDidEnd:(id)sender
+{
+    [self.actionDelegate actionWithData:sender cell:self type:1];
 }
 
 + (CGFloat)cellHeight:(id)data

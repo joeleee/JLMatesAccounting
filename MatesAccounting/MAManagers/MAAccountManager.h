@@ -47,7 +47,7 @@
                detail:(NSString *)detail
          feeOfMembers:(NSSet *)feeOfMembers;
 
-- (CGFloat)totalFeeOfMambers:(NSSet *)feeOfMambers memberToAccounts:(NSSet *)memberToAccounts;
+- (BOOL)verifyFeeOfMambers:(NSSet *)feeOfMambers;
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers;
 

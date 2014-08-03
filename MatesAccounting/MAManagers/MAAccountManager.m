@@ -69,6 +69,10 @@
                               detail:(NSString *)detail
                         feeOfMembers:(NSSet *)feeOfMembers
 {
+    if (![self verifyFeeOfMambers:feeOfMembers]) {
+        return nil;
+    }
+
     MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date];
     
     if (account) {
@@ -96,7 +100,7 @@
                detail:(NSString *)detail
          feeOfMembers:(NSSet *)feeOfMembers
 {
-    if (0.0f != [self totalFeeOfMambers:feeOfMembers memberToAccounts:account.relationshipToMember]) {
+    if (![self verifyFeeOfMambers:feeOfMembers]) {
         return NO;
     }
 
@@ -138,16 +142,13 @@
     return updated;
 }
 
-- (CGFloat)totalFeeOfMambers:(NSSet *)feeOfMambers memberToAccounts:(NSSet *)memberToAccounts
+- (BOOL)verifyFeeOfMambers:(NSSet *)feeOfMambers
 {
-    CGFloat totalFee = 0.0f;
-    for (RMemberToAccount *memberToAccount in memberToAccounts) {
-        totalFee += [memberToAccount.fee doubleValue];
-    }
+    CGFloat sumFee = 0.0f;
     for (MAFeeOfMember *feeOfMember in feeOfMambers) {
-        totalFee += feeOfMember.fee;
+        sumFee += feeOfMember.fee;
     }
-    return totalFee;
+    return sumFee == 0.0f;
 }
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers
@@ -171,28 +172,30 @@
 
 - (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer
 {
-    CGFloat restTotalFee = 0.0f;
-    NSMutableArray *originPayers = [NSMutableArray array];
+    CGFloat averageFee = 0;
+    if (members.count > 0) {
+        averageFee = isPayer ? totalFee / members.count : 0 - totalFee / members.count;
+    } else {
+        return nil;
+    }
+
+    NSMutableArray *feeOfMembers = [NSMutableArray array];
     NSMutableArray *newMembers = [NSMutableArray arrayWithArray:members];
+
     for (MAFeeOfMember *feeOfMember in originFeeOfMembers) {
         if ([members containsObject:feeOfMember.member]) {
-            totalFee += feeOfMember.fee;
-            [originPayers addObject:feeOfMember];
             [newMembers removeObject:feeOfMember.member];
+            feeOfMember.fee = averageFee;
+            [feeOfMembers addObject:feeOfMember];
         }
     }
 
-    CGFloat restFee = isPayer ? totalFee - restTotalFee : totalFee + restTotalFee;
-    CGFloat averageFee = 0;
-    if (newMembers.count > 0 && ((isPayer && restFee > 0) || (!isPayer && restFee < 0))) {
-        averageFee = restFee / newMembers.count;
-    }
     for (MFriend *member in newMembers) {
         MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:member fee:averageFee];
-        [originPayers addObject:feeOfMember];
+        [feeOfMembers addObject:feeOfMember];
     }
 
-    return originPayers;
+    return feeOfMembers;
 }
 
 - (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers

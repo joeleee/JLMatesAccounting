@@ -62,15 +62,17 @@
     return [self className];
 }
 
-#pragma mark - public method
-- (BOOL)isDatePickerHidden
+- (IBAction)didDatePickerValueChanged:(id)sender
 {
-    return self.datePicker.isHidden;
+    [self.dateDescriptionLabel setText:[[sender date] dateToString:@"yyyy年MM月dd日 HH:mm"]];
+    [self.actionDelegate actionWithData:sender cell:self type:0];
 }
 
-- (void)setIsDatePickerHidden:(BOOL)isDatePickerHidden
+#pragma mark - public method
+
+- (void)setDatePickerHidden:(BOOL)isHidden
 {
-    [self.datePicker setHidden:isDatePickerHidden];
+    [self.datePicker setHidden:isHidden];
 }
 
 @end

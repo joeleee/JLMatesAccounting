@@ -10,6 +10,6 @@
 
 @interface MAAccountDetailDateCell : MABaseCell
 
-@property (nonatomic, assign) BOOL isDatePickerHidden;
+- (void)setDatePickerHidden:(BOOL)isHidden;
 
 @end

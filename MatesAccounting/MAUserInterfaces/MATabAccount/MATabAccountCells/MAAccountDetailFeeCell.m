@@ -40,7 +40,12 @@
 
 - (IBAction)feeTextFieldEditingDidBegin:(UITextField *)sender
 {
-    [self.actionDelegate actionWithData:nil cell:self type:0];
+    [self.actionDelegate actionWithData:sender cell:self type:0];
+}
+
+- (IBAction)feeTextFieldEditingDidEnd:(UITextField *)sender
+{
+    [self.actionDelegate actionWithData:sender cell:self type:1];
 }
 
 + (CGFloat)cellHeight:(id)data

@@ -87,7 +87,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     [super viewWillAppear:animated];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowNotification:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -305,7 +305,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 #pragma mark - notification actions
 
-- (void)keyboardDidShowNotification:(NSNotification *)notification
+- (void)keyboardWillShowNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -339,7 +339,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             MAAccountDetailFeeCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            [detailCell reuseCellWithData:self.isEditing ? [@(self.editingTotalFee) stringValue] : [self.account.totalFee stringValue]];
+            CGFloat fee = self.isEditing ? self.editingTotalFee : [self.account.totalFee doubleValue];
+            [detailCell reuseCellWithData:(0 != fee) ? [@(fee) stringValue] : nil];
             detailCell.actionDelegate = self;
             break;
         }
@@ -351,7 +352,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 {
                     MAAccountDetailDateCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    detailCell.isDatePickerHidden = !self.isShowDateCellPicker;
+                    detailCell.actionDelegate = self;
+                    [detailCell setDatePickerHidden:!self.isShowDateCellPicker];
                     [detailCell reuseCellWithData:self.isEditing ? self.editingDate : self.account.accountDate];
                     break;
                 }
@@ -361,11 +363,11 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                     MAAccountDetailPayersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
                     NSArray *payers = self.isEditing ? self.editingPayers : self.payers;
-                    NSString *memberDescription = payers.count > 0 ? ((MAFeeOfMember *)payers.firstObject).member.name : @"tap to choice...";
-                    if (payers.count > 1) {
-                        memberDescription = [NSString stringWithFormat:@"%@...", memberDescription];
+                    NSString *memberDescription = ((MAFeeOfMember *)payers.firstObject).member.name;
+                    for (NSUInteger index = 1; index < payers.count; ++index) {
+                        memberDescription = [NSString stringWithFormat:@"%@, %@", memberDescription, ((MAFeeOfMember *)payers[index]).member.name];
                     }
-                    [detailCell reuseCellWithData:memberDescription];
+                    [detailCell reuseCellWithData:memberDescription ? memberDescription : @"tap to choice..."];
                     break;
                 }
 
@@ -373,12 +375,12 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 {
                     MAAccountDetailConsumersCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    NSArray *payers = self.isEditing ? self.editingConsumers : self.consumers;
-                    NSString *memberDescription = payers.count > 0 ? ((MAFeeOfMember *)payers.firstObject).member.name : @"tap to choice...";
-                    if (payers.count > 1) {
-                        memberDescription = [NSString stringWithFormat:@"%@...", memberDescription];
+                    NSArray *consumers = self.isEditing ? self.editingConsumers : self.consumers;
+                    NSString *memberDescription = ((MAFeeOfMember *)consumers.firstObject).member.name;
+                    for (NSUInteger index = 1; index < consumers.count; ++index) {
+                        memberDescription = [NSString stringWithFormat:@"%@, %@", memberDescription, ((MAFeeOfMember *)consumers[index]).member.name];
                     }
-                    [detailCell reuseCellWithData:memberDescription];
+                    [detailCell reuseCellWithData:memberDescription ? memberDescription : @"tap to choice..."];
                     break;
                 }
 
@@ -407,9 +409,12 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             NSArray *consumers = self.isEditing ? self.editingConsumers : self.consumers;
             if (index < payers.count) {
                 data = payers[index];
+                [detailCell.consumerTypeLabel setText:@"Pay"];
             } else if ((index - payers.count) < consumers.count) {
-                data = consumers[index];
+                data = consumers[index - payers.count];
+                [detailCell.consumerTypeLabel setText:@"Consume"];
             }
+            [detailCell reuseCellWithData:data];
             break;
         }
 
@@ -491,8 +496,46 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
-    self.registKeyboardIndexPath = [self.tableView indexPathForCell:cell];
-    [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    BOOL shouldScroll = NO;
+
+    if ([cell isKindOfClass:MAAccountDetailFeeCell.class]) {
+        if (0 == type) {
+            shouldScroll = YES;
+        } else if (1 == type) {
+            NSString *feeText = [(UILabel *)data text];
+            self.editingTotalFee = [feeText doubleValue];
+            if (0 == self.editingTotalFee) {
+                [(UILabel *)data setText:nil];
+            }
+        }
+    } else if ([cell isKindOfClass:MAAccountDetailDateCell.class]) {
+        if (self.isShowDateCellPicker) {
+            self.editingDate = [(UIDatePicker *)data date];
+        }
+    } else if ([cell isKindOfClass:MAAccountDetailConsumerDetailCell.class]) {
+        if (0 == type) {
+            shouldScroll = YES;
+        } else if (1 == type) {
+            NSString *feeText = [(UILabel *)data text];
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            MAFeeOfMember *feeOfMember = (indexPath.row < self.editingPayers.count) ? self.editingPayers[indexPath.row] : self.editingConsumers[indexPath.row];
+            feeOfMember.fee = [feeText doubleValue];
+            if (0 == feeOfMember.fee) {
+                [(UILabel *)data setText:nil];
+            }
+        }
+    } else if ([cell isKindOfClass:MAAccountDetailDescriptionCell.class]) {
+        if (0 == type) {
+            shouldScroll = YES;
+        } else if (1 == type) {
+            self.editingDetail = [(UITextView *)data text];
+        }
+    }
+
+    if (shouldScroll) {
+        self.registKeyboardIndexPath = [self.tableView indexPathForCell:cell];
+        [self.tableView scrollToRowAtIndexPath:self.registKeyboardIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 
     return YES;
 }
@@ -510,13 +553,14 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
         case DetailConsumerType: {
             NSArray *editingConsumers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingConsumers totalFee:self.editingTotalFee isPayer:NO];
-            self.editingPayers = [NSMutableArray arrayWithArray:editingConsumers];
+            self.editingConsumers = [NSMutableArray arrayWithArray:editingConsumers];
         } break;
 
         default: {
             MA_QUICK_ASSERT(NO, @"Wrong userInfo");
         } break;
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - property method
@@ -542,25 +586,33 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 {
     MA_HIDE_KEYBOARD;
 
-    if (self.account) {
-        // not create mode
-        NSMutableSet *memberSet = [NSMutableSet setWithArray:self.editingPayers];
-        [memberSet addObjectsFromArray:self.editingConsumers];
-        // check total fee
-        if (0.0f != [AccountManager totalFeeOfMambers:memberSet memberToAccounts:self.account.relationshipToMember]) {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"总支出和总付款不一样哦~"
-                             completionBlock:nil
-                                    animated:YES];
-            return;
+    NSMutableSet *feeOfMambers = [NSMutableSet setWithArray:self.editingPayers];
+    [feeOfMambers addObjectsFromArray:self.editingConsumers];
+
+    // verify total fee
+    CGFloat sumFee = 0.0f;
+    CGFloat totalFee = 0.0f;
+    for (MAFeeOfMember *feeOfMember in feeOfMambers) {
+        if (feeOfMember.fee > 0.0f) {
+            totalFee += feeOfMember.fee;
         }
+        sumFee += feeOfMember.fee;
+    }
+    NSString *errorText = (sumFee != 0.0f) ? @"Spending ≠ Income" : ((self.editingTotalFee - totalFee != 0.0f) ? @"Total fee is invalid" : nil);
+    if (errorText) {
+        [[MAAlertView alertWithTitle:errorText message:nil buttonTitle:@"OK" buttonBlock:nil] show];
+        return;
+    }
+
+    // not create mode
+    if (self.account) {
         BOOL updated = [AccountManager updateAccount:self.account
                                                 date:self.editingDate
                                            placeName:self.editingPlaceName
                                             latitude:self.editingLatitude
                                            longitude:self.editingLongitude
                                               detail:self.editingDetail
-                                        feeOfMembers:memberSet];
+                                        feeOfMembers:feeOfMambers];
 
         if (updated) {
             [self setEditing:NO animated:YES];
@@ -570,34 +622,18 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                              completionBlock:nil
                                     animated:YES];
         }
-    } else {
-        // create mode
-        NSMutableSet *memberSet = [NSMutableSet setWithArray:self.editingPayers];
-        [memberSet addObjectsFromArray:self.editingConsumers];
-        // check total fee
-        if (0.0f != [AccountManager totalFeeOfMambers:memberSet memberToAccounts:self.account.relationshipToMember]) {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"总支出和总付款不一样哦~"
-                             completionBlock:nil
-                                    animated:YES];
-            return;
-        }
+    } else { // create mode
         self.account = [AccountManager createAccountWithGroup:self.group
                                                          date:self.editingDate
                                                     placeName:self.editingPlaceName
                                                      latitude:self.editingLatitude
                                                     longitude:self.editingLongitude
                                                        detail:self.editingDetail
-                                                 feeOfMembers:memberSet];
+                                                 feeOfMembers:feeOfMambers];
 
         if (self.account) {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建成功"
-                             completionBlock:^{
-                                 [self setEditing:NO animated:YES];
-                                 [self disappear:YES];
-                             }
-                                    animated:YES];
+            [self setEditing:NO animated:YES];
+            [self disappear:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
                                         text:@"创建失败"

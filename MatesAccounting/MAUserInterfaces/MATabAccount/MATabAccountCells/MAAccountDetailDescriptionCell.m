@@ -38,7 +38,12 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self.actionDelegate actionWithData:nil cell:self type:0];
+    [self.actionDelegate actionWithData:textView cell:self type:0];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self.actionDelegate actionWithData:textView cell:self type:1];
 }
 
 + (CGFloat)cellHeight:(id)data

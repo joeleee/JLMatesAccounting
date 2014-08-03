@@ -219,7 +219,7 @@ typedef enum {
         }
 
         case MemberListSectionOfUnselected: {
-            insertIndexPath = [NSIndexPath indexPathForRow:self.selectedMembers.count inSection:MemberListSectionOfSelected];
+            insertIndexPath = [NSIndexPath indexPathForRow:self.modifiedSelectedMembers.count inSection:MemberListSectionOfSelected];
             break;
         }
 

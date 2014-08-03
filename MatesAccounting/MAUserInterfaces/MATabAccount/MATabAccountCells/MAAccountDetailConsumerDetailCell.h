@@ -10,4 +10,6 @@
 
 @interface MAAccountDetailConsumerDetailCell : MABaseCell
 
+@property (nonatomic, weak, readonly) UILabel *consumerTypeLabel;
+
 @end
