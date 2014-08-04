@@ -161,18 +161,18 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 #pragma mark - UI action
 - (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:[GroupManager currentGroup]];
+    [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:MASelectedGroup];
 }
 
 - (void)didAddNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    if (![GroupManager currentGroup]) {
+    if (!MASelectedGroup) {
         [MBProgressHUD showTextHUDOnView:self.view
                                     text:@"还木有选小组，肿么添加成员~"
                          completionBlock:nil
                                 animated:YES];
     } else {
-        [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:[GroupManager currentGroup]];
+        [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:MASelectedGroup];
     }
 }
 

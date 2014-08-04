@@ -12,7 +12,9 @@ extern NSTimeInterval const oneDaySeconds;
 
 @interface NSDate (MAAddition)
 
-// format example: @"yyyy-MM-dd"
+/**
+ * format example: @"yyyy-MM-dd"
+ */
 - (NSString *)dateToString:(NSString *)format;
 
 + (NSDate *)dateWithString:(NSString *)dateString format:(NSString *)format;

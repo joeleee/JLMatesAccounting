@@ -29,7 +29,7 @@
 
 + (MAAccountManager *)sharedManager;
 
-- (NSArray *)sectionedAccountListForCurrentGroup;
+- (NSArray *)sectionedAccountListForGroup:(MGroup *)group;
 
 - (MAccount *)createAccountWithGroup:(MGroup *)group
                                 date:(NSDate *)date

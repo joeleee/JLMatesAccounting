@@ -318,10 +318,7 @@ typedef enum {
 {
     MA_HIDE_KEYBOARD;
     if (0 >= [self.editingName stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
-        [MBProgressHUD showTextHUDOnView:self.view
-                                    text:@"姓名不能为空"
-                         completionBlock:nil
-                                animated:YES];
+        [[MAAlertView alertWithTitle:@"姓名不能为空" message:nil buttonTitle:@"OK" buttonBlock:^{}] show];
         return;
     }
 
@@ -349,13 +346,8 @@ typedef enum {
                                                      eMail:self.editingMail
                                                   birthday:self.editingBirthday];
         if (self.mFriend) {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建成功"
-                             completionBlock:^{
-                                 [self setEditing:NO animated:YES];
-                                 [self disappear:YES];
-                             }
-                                    animated:YES];
+            [self setEditing:NO animated:YES];
+            [self disappear:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
                                         text:@"创建失败"

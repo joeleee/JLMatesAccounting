@@ -52,14 +52,14 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     return self;
 }
 
-- (MGroup *)currentGroup
+- (MGroup *)selectedGroup
 {
-    if (!self.selectedGroup) {
+    if (!_selectedGroup) {
         NSNumber *groupID = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentGroupID];
-        self.selectedGroup = [[MAGroupPersistent instance] groupByGroupID:groupID];
+        _selectedGroup = [[MAGroupPersistent instance] groupByGroupID:groupID];
     }
 
-    return self.selectedGroup;
+    return _selectedGroup;
 }
 
 - (NSArray *)myGroups

@@ -14,7 +14,6 @@
 @interface MATabAccountGroupInfoCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
-@property (weak, nonatomic) IBOutlet UILabel *createTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accountCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalFeesLabel;
@@ -43,7 +42,6 @@
 - (void)refreshUI
 {
     [self.groupNameLabel setText:self.group.groupName];
-    [self.createTimeLabel setText:[self.group.createDate description]];
     [self.memberCountLabel setText:[@([self.group.relationshipToMember count]) stringValue]];
     [self.accountCountLabel setText:[@([self.group.accounts count]) stringValue]];
     double totalFee = 0;

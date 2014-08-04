@@ -15,6 +15,7 @@
 #import "MAAccountPersistent.h"
 #import "MAPlacePersistent.h"
 #import "MAFriendManager.h"
+#import "MGroup.h"
 
 @implementation MAFeeOfMember
 
@@ -56,9 +57,28 @@
     return sharedInstance;
 }
 
-- (NSArray *)sectionedAccountListForCurrentGroup
+- (NSArray *)sectionedAccountListForGroup:(MGroup *)group
 {
-    return nil;
+    NSArray *accounts = [group.accounts.allObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"accountDate" ascending:NO]]];
+
+    NSMutableArray *result = [NSMutableArray array];
+    NSMutableArray *accountList = [NSMutableArray array];
+    for (MAccount *account in accounts) {
+        long long currentTime = [[account.accountDate dateToString:@"yyyyMMdd"] longLongValue];
+        long long lastTime = [[[accountList.lastObject accountDate] dateToString:@"yyyyMMdd"] longLongValue];
+        if (0 >= accountList.count || currentTime == lastTime) {
+            [accountList addObject:account];
+        } else {
+            [result addObject:accountList];
+            accountList = [NSMutableArray array];
+            [accountList addObject:account];
+        }
+    }
+    if (0 < accountList.count) {
+        [result addObject:accountList];
+    }
+
+    return result;
 }
 
 - (MAccount *)createAccountWithGroup:(MGroup *)group
@@ -104,7 +124,7 @@
         return NO;
     }
 
-    // 更新成员条目
+    // update members
     NSArray *updateMembers = [feeOfMembers allObjects];
     NSArray *originMembers = [account.relationshipToMember allObjects];
     NSMutableSet *updatedMembers = [NSMutableSet set];
@@ -122,21 +142,23 @@
             [updatedMembers addObject:memberToAccount];
         }
     }];
-    // 删除多余的成员条目
+    // delete the remaining members
     NSUInteger index = updateMembers.count;
     while (originMembers.count > index) {
         RMemberToAccount *memberToAccount = originMembers[index++];
         [[MAAccountPersistent instance] deleteMemberToAccount:memberToAccount];
     }
     account.relationshipToMember = updatedMembers;
-    // 更新地理位置
+    // update place
     CLLocationCoordinate2D location;
     location.latitude = latitude;
     location.longitude = longitude;
     MPlace *place = [[MAPlacePersistent instance] createPlaceWithCoordinate:location name:placeName];
     account.place = place;
-    // 更新账目详情
+    // update detail
     account.detail = detail;
+    // update date
+    account.accountDate = date;
 
     BOOL updated = [[MAAccountPersistent instance] updateAccount:account];
     return updated;

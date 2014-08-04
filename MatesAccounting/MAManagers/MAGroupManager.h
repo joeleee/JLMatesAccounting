@@ -7,6 +7,7 @@
 //
 
 #define GroupManager [MAGroupManager sharedManager]
+#define MASelectedGroup [GroupManager selectedGroup]
 
 #import "ZLMulticastAgent.h"
 
@@ -27,7 +28,7 @@
 
 + (MAGroupManager *)sharedManager;
 
-- (MGroup *)currentGroup;
+- (MGroup *)selectedGroup;
 
 - (NSArray *)myGroups;
 

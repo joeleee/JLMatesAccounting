@@ -8,6 +8,8 @@
 
 #import "MATabAccountListCell.h"
 
+#import "MAccount.h"
+
 @interface MATabAccountListCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
@@ -30,6 +32,11 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    MAccount *account = data;
+    [self.accountDetailLabel setText:account.detail];
+    [self.accountTimeLabel setText:[account.accountDate dateToString:@"HH:mm"]];
+    [self.accountTotalFeeLabel setText:[account.totalFee stringValue]];
+    [self.payerNameLabel setText:@"dsfdtw"];
 }
 
 + (CGFloat)cellHeight:(id)data

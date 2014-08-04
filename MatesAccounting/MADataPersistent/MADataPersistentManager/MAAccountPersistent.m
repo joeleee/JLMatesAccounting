@@ -52,6 +52,7 @@
     if (account) {
         NSDate *currentData = [NSDate date];
         account.updateDate = currentData;
+        [account refreshAccountTotalFee];
         isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     }
 

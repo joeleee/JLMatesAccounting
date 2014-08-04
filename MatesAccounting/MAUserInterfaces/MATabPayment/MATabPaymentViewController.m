@@ -52,7 +52,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
-    [self performSegueWithIdentifier:kSegueTabPaymentToGroupList sender:[GroupManager currentGroup]];
+    [self performSegueWithIdentifier:kSegueTabPaymentToGroupList sender:MASelectedGroup];
 }
 
 @end

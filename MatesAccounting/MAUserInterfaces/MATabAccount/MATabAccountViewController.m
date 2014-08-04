@@ -15,6 +15,7 @@
 #import "MATabAccountGroupInfoCell.h"
 #import "MATabAccountListCell.h"
 #import "MAAccountDetailViewController.h"
+#import "MAccount.h"
 
 NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
@@ -64,10 +65,15 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 {
     if ([segue.identifier isEqualToString:kSegueTabAccountToGroupList]) {
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToAccountDetail]) {
+        NSIndexPath *indexPath = [(UITableView *)sender indexPathForSelectedRow];
+        MAAccountDetailViewController *accountDetail = segue.destinationViewController;
+        NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
+        MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
+        [accountDetail setGroup:MASelectedGroup account:account];
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAAccountDetailViewController *accountDetail = [segue.destinationViewController viewControllers][0];
-        [accountDetail setGroup:[GroupManager currentGroup] account:nil];
+        [accountDetail setGroup:MASelectedGroup account:nil];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }
@@ -75,7 +81,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (void)loadData
 {
-    self.sectionedAccountList = [AccountManager sectionedAccountListForCurrentGroup];
+    self.sectionedAccountList = [AccountManager sectionedAccountListForGroup:MASelectedGroup];
     [self.tableView reloadData];
 }
 
@@ -88,7 +94,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
-    [self performSegueWithIdentifier:kSegueTabAccountToGroupList sender:[GroupManager currentGroup]];
+    [self performSegueWithIdentifier:kSegueTabAccountToGroupList sender:MASelectedGroup];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -96,7 +102,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    if (![GroupManager currentGroup]) {
+    if (!MASelectedGroup) {
         return 0;
     } else {
         return self.sectionedAccountList.count + 1;
@@ -120,20 +126,22 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
     if (0 == indexPath.section) {
         cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell reuseIdentifier]];
-        [(MATabAccountGroupInfoCell *)cell reuseCellWithData:[GroupManager currentGroup]];
+        [(MATabAccountGroupInfoCell *)cell reuseCellWithData:MASelectedGroup];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell reuseIdentifier]];
+        NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
+        MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
+        [(MATabAccountListCell *)cell reuseCellWithData:account];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO:
     if (0 == indexPath.section) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else {
-        [self performSegueWithIdentifier:kSegueTabAccountToAccountDetail sender:nil];
+        [self performSegueWithIdentifier:kSegueTabAccountToAccountDetail sender:tableView];
     }
 }
 
@@ -144,11 +152,20 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    MATabAccountListSectionHeader *headerView = [[MATabAccountListSectionHeader alloc] initWithHeaderTitle:@"未知错误"];
+    MATabAccountListSectionHeader *headerView = [[MATabAccountListSectionHeader alloc] initWithHeaderTitle:@""];
     if (0 == section) {
-        [headerView setHeaderTitle:@"账户组信息"];
-    } else if (((section - 1) < [AccountManager sectionedAccountListForCurrentGroup].count)) {
-        [headerView setHeaderTitle:@"2011年11月11日"];
+        [headerView setHeaderTitle:@"Group Infomation"];
+    } else if (((section - 1) < self.sectionedAccountList.count)) {
+        MAccount *account = [self.sectionedAccountList[section - 1] firstObject];
+        NSInteger currentYear = [[[NSDate date] dateToString:@"yyyy"] integerValue];
+        if ([[account.accountDate dateToString:@"yyyy"] integerValue] == currentYear) {
+            [headerView setHeaderTitle:[account.accountDate dateToString:@"MM-dd"]];
+        } else {
+            [headerView setHeaderTitle:[account.accountDate dateToString:@"yyyy-MM-dd"]];
+        }
+    } else {
+        [headerView setHeaderTitle:@"Unknow Error"];
+        MA_QUICK_ASSERT(NO, @"Out of bound!");
     }
     return headerView;
 }
