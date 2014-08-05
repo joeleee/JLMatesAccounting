@@ -98,7 +98,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
     if (!self.group) {
         [MBProgressHUD showTextHUDOnView:[[UIApplication sharedApplication].delegate window]
-                                    text:@"无效的小组，无法创建账目~"
+                                    text:@"Empty group, can not create account!"
                          completionBlock:^{
                              [self disappear:YES];
                          }
@@ -618,7 +618,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self setEditing:NO animated:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"更新失败"
+                                        text:@"Update Failed!"
                              completionBlock:nil
                                     animated:YES];
         }
@@ -636,7 +636,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self disappear:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建失败"
+                                        text:@"Create Failed!"
                              completionBlock:nil
                                     animated:YES];
         }
@@ -646,23 +646,13 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)didCancelButtonTaped:(UIBarButtonItem *)sender
 {
     if (self.editing) {
-        MAAlertView *alert = nil;
-        if (self.account) {
-            alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
-                                        message:nil
-                                   buttonTitle1:@"点错了~"
-                                   buttonBlock1:nil
-                                   buttonTitle2:@"放弃更改"
-                                   buttonBlock2:^{
-                                       [self clearEditingData];
-                                       [self setEditing:NO animated:YES];
-                                   }];
+      if (self.account) {
+        [self clearEditingData];
+        [self setEditing:NO animated:YES];
         } else {
             [self clearEditingData];
             [self disappear:YES];
         }
-
-        [alert show];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
     }
