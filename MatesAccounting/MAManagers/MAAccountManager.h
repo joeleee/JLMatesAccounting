@@ -24,6 +24,16 @@
 
 @end
 
+@interface MAAccountSettlement : NSObject
+
+@property (nonatomic, strong) MFriend *fromMember;
+@property (nonatomic, strong) MFriend *toMember;
+@property (nonatomic, assign) CGFloat fee;
+
++ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(CGFloat)fee;
+
+@end
+
 
 @interface MAAccountManager : NSObject
 
@@ -54,5 +64,7 @@
 - (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer;
 
 - (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers;
+
+- (NSArray *)accountSettlementListForGroup:(MGroup *)group;
 
 @end

@@ -16,7 +16,10 @@
 #import "MAPlacePersistent.h"
 #import "MAFriendManager.h"
 #import "MGroup.h"
+#import "RMemberToGroup.h"
 
+
+#pragma mark - @implementation MAFeeOfMember
 @implementation MAFeeOfMember
 
 + (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee
@@ -44,6 +47,22 @@
 @end
 
 
+#pragma mark - @implementation MAAccountSettlement
+@implementation MAAccountSettlement
+
++ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(CGFloat)fee
+{
+  MAAccountSettlement *accountSettlement = [[MAAccountSettlement alloc] init];
+  accountSettlement.fromMember = fromMember;
+  accountSettlement.toMember = toMember;
+  accountSettlement.fee = fee;
+  return accountSettlement;
+}
+
+@end
+
+
+#pragma mark - @implementation MAAccountManager
 @implementation MAAccountManager
 
 + (MAAccountManager *)sharedManager
@@ -238,8 +257,62 @@
     }
 }
 
-#pragma mark - private method
+- (NSArray *)accountSettlementListForGroup:(MGroup *)group
+{
+  NSMutableArray *receiverSettlementList = [NSMutableArray array];
+  NSMutableArray *payerSettlementList = [NSMutableArray array];
+  for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
+    CGFloat finalFee = 0.0f;
+    for (RMemberToAccount *memberToAccount in memberToGroup.member.relationshipToAccount) {
+      finalFee += memberToAccount.fee.floatValue;
+    }
+    if (finalFee > 0.0f) {
+      MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:nil toMember:memberToGroup.member fee:finalFee];
+      [receiverSettlementList addObject:accountSettlement];
+    } else if (finalFee < 0.0f) {
+      MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:memberToGroup.member toMember:nil fee:finalFee];
+      [payerSettlementList addObject:accountSettlement];
+    }
+  }
 
+  [receiverSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
+  [payerSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
+  NSMutableArray *accountSettlementList = [NSMutableArray array];
+
+  for (MAAccountSettlement *receiverSettlement in receiverSettlementList) {
+
+    NSArray *seekArray = payerSettlementList;
+    for (MAAccountSettlement *payerSettlement in seekArray) {
+
+      if (receiverSettlement.fee > payerSettlement.fee) {
+        receiverSettlement.fee += payerSettlement.fee;
+        payerSettlement.fee = -payerSettlement.fee;
+        payerSettlement.toMember = receiverSettlement.toMember;
+        [accountSettlementList addObject:payerSettlement];
+        [payerSettlementList removeObject:payerSettlement];
+      }
+      else if (receiverSettlement.fee < payerSettlement.fee) {
+        payerSettlement.fee -= receiverSettlement.fee;
+        receiverSettlement.fromMember = payerSettlement.fromMember;
+        [accountSettlementList addObject:receiverSettlement];
+        break;
+      }
+      else {
+        receiverSettlement.fromMember = payerSettlement.fromMember;
+        [accountSettlementList addObject:receiverSettlement];
+        [payerSettlementList removeObject:payerSettlement];
+        break;
+      }
+
+    }
+  }
+
+  MA_QUICK_ASSERT(0 == receiverSettlementList.count && 0 == payerSettlementList.count, @"Bad debt!");
+
+  return accountSettlementList;
+}
+
+#pragma mark private method
 - (NSUInteger)insertIndexOfRMemberToAccount:(RMemberToAccount *)memberToAccount
                                      inList:(NSArray *)list
 {
