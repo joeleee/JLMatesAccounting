@@ -1221,11 +1221,43 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <view key="view" contentMode="scaleToFill" id="bEn-I4-vHM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" id="NeZ-Qk-UT2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAAccountSettlementCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MAAccountSettlementCell" id="mjx-IT-4pk" customClass="MAAccountSettlementCell">
+                                        <rect key="frame" x="0.0" y="65" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mjx-IT-4pk" id="Dlf-Mf-rit">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="VLi-bW-qgt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.43691047319999998" blue="0.95412279209999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="AQN-iO-c0f" id="y4V-9T-kwm"/>
+                                    <outlet property="delegate" destination="AQN-iO-c0f" id="2rE-uQ-PrC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" systemItem="downloads" id="5Dy-ck-WJw"/>
                     <navigationItem key="navigationItem" title="结算" id="bus-QQ-4Sg"/>
                     <connections>
+                        <outlet property="tableView" destination="NeZ-Qk-UT2" id="Ob6-Wm-Ma9"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabPaymentToGroupList" id="ahX-16-mo4"/>
                     </connections>
                 </viewController>
@@ -1346,11 +1378,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="J0d-fi-SkM"/>
         <segue reference="ZMe-Ch-sex"/>
         <segue reference="f34-mq-Bgm"/>
-        <segue reference="NzF-kh-GnM"/>
         <segue reference="Bvd-iw-5bp"/>
+        <segue reference="J0d-fi-SkM"/>
         <segue reference="atx-wc-fRM"/>
+        <segue reference="NzF-kh-GnM"/>
     </inferredMetricsTieBreakers>
 </document>

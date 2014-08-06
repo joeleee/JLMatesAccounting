@@ -9,10 +9,16 @@
 #import "MATabPaymentViewController.h"
 
 #import "MAGroupManager.h"
+#import "MAAccountManager.h"
+#import "MAAccountSettlementCell.h"
 
 NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
-@interface MATabPaymentViewController ()
+@interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *settlementList;
 
 @end
 
@@ -46,6 +52,21 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)loadData
 {
+  self.settlementList = [AccountManager accountSettlementListForGroup:MASelectedGroup];
+}
+
+#pragma mark UITableViewDataSource & UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return self.settlementList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
+
+  return cell;
 }
 
 #pragma mark - UI action

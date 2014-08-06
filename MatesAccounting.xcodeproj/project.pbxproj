@@ -87,6 +87,7 @@
 		9BD0E7B11847AC9F00BA9F2E /* NSObject+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E7B01847AC9F00BA9F2E /* NSObject+MAAddition.m */; };
 		9BD0E7B41847ADB100BA9F2E /* MAAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0E7B31847ADB100BA9F2E /* MAAccountManager.m */; };
 		9BE1DBB518B9F022000BE969 /* MBProgressHUD+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1DBB418B9F022000BE969 /* MBProgressHUD+MAAddition.m */; };
+		D8E25ABD19927FB9006772B4 /* MAAccountSettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +247,8 @@
 		9BD0E7B31847ADB100BA9F2E /* MAAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountManager.m; path = MAManagers/MAAccountManager.m; sourceTree = "<group>"; };
 		9BE1DBB318B9F022000BE969 /* MBProgressHUD+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MBProgressHUD+MAAddition.h"; path = "MAAdditions/MBProgressHUD+MAAddition.h"; sourceTree = "<group>"; };
 		9BE1DBB418B9F022000BE969 /* MBProgressHUD+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MBProgressHUD+MAAddition.m"; path = "MAAdditions/MBProgressHUD+MAAddition.m"; sourceTree = "<group>"; };
+		D8E25ABB19927FB9006772B4 /* MAAccountSettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountSettlementCell.h; sourceTree = "<group>"; };
+		D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountSettlementCell.m; sourceTree = "<group>"; };
 		EF02035F8D744C878C1ED891 /* Pods-MatesAccounting.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatesAccounting.xcconfig"; path = "Pods/Pods-MatesAccounting.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +388,7 @@
 		9B391C79183527CE0025A2FB /* MATabPayment */ = {
 			isa = PBXGroup;
 			children = (
+				D8E25ABA19927F77006772B4 /* MATabPaymentCells */,
 				9B391C7A183527CE0025A2FB /* MATabPaymentViewController.h */,
 				9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */,
 			);
@@ -660,6 +664,15 @@
 			name = MAGroupCells;
 			sourceTree = "<group>";
 		};
+		D8E25ABA19927F77006772B4 /* MATabPaymentCells */ = {
+			isa = PBXGroup;
+			children = (
+				D8E25ABB19927FB9006772B4 /* MAAccountSettlementCell.h */,
+				D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */,
+			);
+			path = MATabPaymentCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -819,6 +832,7 @@
 				9BC23119184B281D005ADD59 /* MAAccountDetailDescriptionCell.m in Sources */,
 				9BD0E7B41847ADB100BA9F2E /* MAAccountManager.m in Sources */,
 				9BC23113184B27DE005ADD59 /* MAAccountDetailLocationCell.m in Sources */,
+				D8E25ABD19927FB9006772B4 /* MAAccountSettlementCell.m in Sources */,
 				9B726B0418BF862500ACDD99 /* UIViewController+MAAddition.m in Sources */,
 				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
 				9B26C07418BE22E9004B7E7D /* ZLMulticastAgent.m in Sources */,

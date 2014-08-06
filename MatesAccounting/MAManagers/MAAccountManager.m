@@ -279,28 +279,31 @@
   [payerSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
   NSMutableArray *accountSettlementList = [NSMutableArray array];
 
-  for (MAAccountSettlement *receiverSettlement in receiverSettlementList) {
+  NSArray *seekReceiverArray = [NSArray arrayWithArray:receiverSettlementList];
+  for (MAAccountSettlement *receiverSettlement in seekReceiverArray) {
 
-    NSArray *seekArray = payerSettlementList;
-    for (MAAccountSettlement *payerSettlement in seekArray) {
+    NSArray *seekPayerArray = [NSArray arrayWithArray:payerSettlementList];
+    for (MAAccountSettlement *payerSettlement in seekPayerArray) {
 
-      if (receiverSettlement.fee > payerSettlement.fee) {
+      if (receiverSettlement.fee > -payerSettlement.fee) {
         receiverSettlement.fee += payerSettlement.fee;
         payerSettlement.fee = -payerSettlement.fee;
         payerSettlement.toMember = receiverSettlement.toMember;
         [accountSettlementList addObject:payerSettlement];
         [payerSettlementList removeObject:payerSettlement];
       }
-      else if (receiverSettlement.fee < payerSettlement.fee) {
+      else if (receiverSettlement.fee < -payerSettlement.fee) {
         payerSettlement.fee -= receiverSettlement.fee;
         receiverSettlement.fromMember = payerSettlement.fromMember;
         [accountSettlementList addObject:receiverSettlement];
+        [receiverSettlementList removeObject:receiverSettlement];
         break;
       }
       else {
         receiverSettlement.fromMember = payerSettlement.fromMember;
         [accountSettlementList addObject:receiverSettlement];
         [payerSettlementList removeObject:payerSettlement];
+        [receiverSettlementList removeObject:receiverSettlement];
         break;
       }
 
