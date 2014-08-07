@@ -52,11 +52,11 @@
 
 + (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(CGFloat)fee
 {
-  MAAccountSettlement *accountSettlement = [[MAAccountSettlement alloc] init];
-  accountSettlement.fromMember = fromMember;
-  accountSettlement.toMember = toMember;
-  accountSettlement.fee = fee;
-  return accountSettlement;
+    MAAccountSettlement *accountSettlement = [[MAAccountSettlement alloc] init];
+    accountSettlement.fromMember = fromMember;
+    accountSettlement.toMember = toMember;
+    accountSettlement.fee = fee;
+    return accountSettlement;
 }
 
 @end
@@ -113,7 +113,7 @@
     }
 
     MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date];
-    
+
     if (account) {
         BOOL updateSucceed = [self updateAccount:account
                                             date:date
@@ -259,60 +259,60 @@
 
 - (NSArray *)accountSettlementListForGroup:(MGroup *)group
 {
-  NSMutableArray *receiverSettlementList = [NSMutableArray array];
-  NSMutableArray *payerSettlementList = [NSMutableArray array];
-  for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
-    CGFloat finalFee = 0.0f;
-    for (RMemberToAccount *memberToAccount in memberToGroup.member.relationshipToAccount) {
-      finalFee += memberToAccount.fee.floatValue;
+    NSMutableArray *receiverSettlementList = [NSMutableArray array];
+    NSMutableArray *payerSettlementList = [NSMutableArray array];
+    for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
+        CGFloat finalFee = 0.0f;
+        for (RMemberToAccount *memberToAccount in memberToGroup.member.relationshipToAccount) {
+            finalFee += memberToAccount.fee.floatValue;
+        }
+        if (finalFee > 0.0f) {
+            MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:nil toMember:memberToGroup.member fee:finalFee];
+            [receiverSettlementList addObject:accountSettlement];
+        } else if (finalFee < 0.0f) {
+            MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:memberToGroup.member toMember:nil fee:finalFee];
+            [payerSettlementList addObject:accountSettlement];
+        }
     }
-    if (finalFee > 0.0f) {
-      MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:nil toMember:memberToGroup.member fee:finalFee];
-      [receiverSettlementList addObject:accountSettlement];
-    } else if (finalFee < 0.0f) {
-      MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:memberToGroup.member toMember:nil fee:finalFee];
-      [payerSettlementList addObject:accountSettlement];
+
+    [receiverSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
+    [payerSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
+    NSMutableArray *accountSettlementList = [NSMutableArray array];
+
+    NSArray *seekReceiverArray = [NSArray arrayWithArray:receiverSettlementList];
+    for (MAAccountSettlement *receiverSettlement in seekReceiverArray) {
+
+        NSArray *seekPayerArray = [NSArray arrayWithArray:payerSettlementList];
+        for (MAAccountSettlement *payerSettlement in seekPayerArray) {
+
+            if (receiverSettlement.fee > -payerSettlement.fee) {
+                receiverSettlement.fee += payerSettlement.fee;
+                payerSettlement.fee = -payerSettlement.fee;
+                payerSettlement.toMember = receiverSettlement.toMember;
+                [accountSettlementList addObject:payerSettlement];
+                [payerSettlementList removeObject:payerSettlement];
+            }
+            else if (receiverSettlement.fee < -payerSettlement.fee) {
+                payerSettlement.fee -= receiverSettlement.fee;
+                receiverSettlement.fromMember = payerSettlement.fromMember;
+                [accountSettlementList addObject:receiverSettlement];
+                [receiverSettlementList removeObject:receiverSettlement];
+                break;
+            }
+            else {
+                receiverSettlement.fromMember = payerSettlement.fromMember;
+                [accountSettlementList addObject:receiverSettlement];
+                [payerSettlementList removeObject:payerSettlement];
+                [receiverSettlementList removeObject:receiverSettlement];
+                break;
+            }
+
+        }
     }
-  }
 
-  [receiverSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
-  [payerSettlementList sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"fee" ascending:NO]]];
-  NSMutableArray *accountSettlementList = [NSMutableArray array];
+    MA_QUICK_ASSERT(0 == receiverSettlementList.count && 0 == payerSettlementList.count, @"Bad debt!");
 
-  NSArray *seekReceiverArray = [NSArray arrayWithArray:receiverSettlementList];
-  for (MAAccountSettlement *receiverSettlement in seekReceiverArray) {
-
-    NSArray *seekPayerArray = [NSArray arrayWithArray:payerSettlementList];
-    for (MAAccountSettlement *payerSettlement in seekPayerArray) {
-
-      if (receiverSettlement.fee > -payerSettlement.fee) {
-        receiverSettlement.fee += payerSettlement.fee;
-        payerSettlement.fee = -payerSettlement.fee;
-        payerSettlement.toMember = receiverSettlement.toMember;
-        [accountSettlementList addObject:payerSettlement];
-        [payerSettlementList removeObject:payerSettlement];
-      }
-      else if (receiverSettlement.fee < -payerSettlement.fee) {
-        payerSettlement.fee -= receiverSettlement.fee;
-        receiverSettlement.fromMember = payerSettlement.fromMember;
-        [accountSettlementList addObject:receiverSettlement];
-        [receiverSettlementList removeObject:receiverSettlement];
-        break;
-      }
-      else {
-        receiverSettlement.fromMember = payerSettlement.fromMember;
-        [accountSettlementList addObject:receiverSettlement];
-        [payerSettlementList removeObject:payerSettlement];
-        [receiverSettlementList removeObject:receiverSettlement];
-        break;
-      }
-
-    }
-  }
-
-  MA_QUICK_ASSERT(0 == receiverSettlementList.count && 0 == payerSettlementList.count, @"Bad debt!");
-
-  return accountSettlementList;
+    return accountSettlementList;
 }
 
 #pragma mark private method
@@ -350,7 +350,7 @@
         index = middleIndex + [self insertIndexOfRMemberToAccount:memberToAccount
                                                            inList:[list subarrayWithRange:range]];
     }
-
+    
     return index;
 }
 

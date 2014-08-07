@@ -52,21 +52,21 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)loadData
 {
-  self.settlementList = [AccountManager accountSettlementListForGroup:MASelectedGroup];
+    self.settlementList = [AccountManager accountSettlementListForGroup:MASelectedGroup];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.settlementList.count;
+    return self.settlementList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
 
-  return cell;
+    return cell;
 }
 
 #pragma mark - UI action

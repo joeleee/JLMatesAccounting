@@ -16,10 +16,10 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-  if (self = [super initWithCoder:aDecoder]) {
-  }
+    if (self = [super initWithCoder:aDecoder]) {
+    }
 
-  return self;
+    return self;
 }
 
 - (void)reuseCellWithData:(id)data
@@ -28,12 +28,12 @@
 
 + (CGFloat)cellHeight:(id)data
 {
-  return 80.0f;
+    return 80.0f;
 }
 
 + (NSString *)reuseIdentifier
 {
-  return [self className];
+    return [self className];
 }
 
 @end
