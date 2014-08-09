@@ -9,6 +9,11 @@
 #import "MAAppDelegate.h"
 
 #import "MAContextAPI.h"
+#import "MARootNavigationControllerDelegate.h"
+
+@interface MAAppDelegate ()
+
+@end
 
 @implementation MAAppDelegate
 
@@ -23,6 +28,12 @@ void uncaughtExceptionHandler(NSException *exception)
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [[MAContextAPI sharedAPI] saveContextData];
     [self.window makeKeyAndVisible];
+
+    // Set rootNavigaionController's delegate
+    id rootNavigationController = self.window.rootViewController;
+    MA_QUICK_ASSERT([rootNavigationController isKindOfClass:UINavigationController.class], @"Wrong root navigation controller!");
+    [(UINavigationController *)rootNavigationController setDelegate:[MARootNavigationControllerDelegate sharedDelegate]];
+
     return YES;
 }
 
@@ -36,6 +47,7 @@ void uncaughtExceptionHandler(NSException *exception)
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [[MAContextAPI sharedAPI] saveContextData];
 }
 
@@ -52,6 +64,7 @@ void uncaughtExceptionHandler(NSException *exception)
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [[MAContextAPI sharedAPI] saveContextData];
 }
 

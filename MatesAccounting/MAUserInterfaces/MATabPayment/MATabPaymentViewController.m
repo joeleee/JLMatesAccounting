@@ -33,6 +33,20 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    UIEdgeInsets tableViewEdgeInsets = UIEdgeInsetsMake(MA_STATUSBAR_HEIGHT + MA_NAVIGATIONBAR_HEIGHT, 0.0f, MA_TABBAR_HEIGHT, 0.0f);
+    [self.tableView setContentInset:tableViewEdgeInsets];
+    [self.tableView setScrollIndicatorInsets:tableViewEdgeInsets];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

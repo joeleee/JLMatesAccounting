@@ -41,10 +41,15 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
-    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    self.tableView.contentOffset = CGPointMake(0, -64);
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+
+    UIEdgeInsets tableViewEdgeInsets = UIEdgeInsetsMake(MA_STATUSBAR_HEIGHT + MA_NAVIGATIONBAR_HEIGHT, 0.0f, MA_TABBAR_HEIGHT, 0.0f);
+    [self.tableView setContentInset:tableViewEdgeInsets];
+    [self.tableView setScrollIndicatorInsets:tableViewEdgeInsets];
 }
 
 - (void)viewWillAppear:(BOOL)animated
