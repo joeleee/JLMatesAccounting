@@ -293,7 +293,7 @@
                 [payerSettlementList removeObject:payerSettlement];
             }
             else if (receiverSettlement.fee < -payerSettlement.fee) {
-                payerSettlement.fee -= receiverSettlement.fee;
+                payerSettlement.fee += receiverSettlement.fee;
                 receiverSettlement.fromMember = payerSettlement.fromMember;
                 [accountSettlementList addObject:receiverSettlement];
                 [receiverSettlementList removeObject:receiverSettlement];

@@ -78,9 +78,18 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
+    MAAccountSettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
+
+    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    [cell reuseCellWithData:self.settlementList[indexPath.row]];
 
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    return [MAAccountSettlementCell cellHeight:self.settlementList[indexPath.row]];
 }
 
 #pragma mark - UI action
