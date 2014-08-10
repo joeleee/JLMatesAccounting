@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailFeeCell.h"
 
-@interface MAAccountDetailFeeCell ()
+@interface MAAccountDetailFeeCell () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *feeTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *feeTextField;
@@ -38,16 +38,6 @@
     }
 }
 
-- (IBAction)feeTextFieldEditingDidBegin:(UITextField *)sender
-{
-    [self.actionDelegate actionWithData:sender cell:self type:0];
-}
-
-- (IBAction)feeTextFieldEditingDidEnd:(UITextField *)sender
-{
-    [self.actionDelegate actionWithData:sender cell:self type:1];
-}
-
 + (CGFloat)cellHeight:(id)data
 {
     return 60.0f;
@@ -56,6 +46,23 @@
 + (NSString *)reuseIdentifier
 {
     return [self className];
+}
+
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.actionDelegate actionWithData:textField cell:self type:0];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.actionDelegate actionWithData:textField cell:self type:1];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    return [resultText isTwoDecimalPlaces];
 }
 
 @end

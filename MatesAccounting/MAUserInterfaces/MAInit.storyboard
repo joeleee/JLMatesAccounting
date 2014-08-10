@@ -933,8 +933,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <action selector="feeTextFieldEditingDidBegin:" destination="9n1-E6-BYK" eventType="editingDidBegin" id="70Z-Se-BDy"/>
-                                                        <action selector="feeTextFieldEditingDidEnd:" destination="9n1-E6-BYK" eventType="editingDidEnd" id="oZ6-X5-nYj"/>
+                                                        <outlet property="delegate" destination="9n1-E6-BYK" id="1tX-wq-SxR"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -1114,8 +1113,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <action selector="feeTextFieldEditingDidBegin:" destination="zg0-iU-WDZ" eventType="editingDidBegin" id="Wio-RB-2Pv"/>
-                                                        <action selector="feeTextFieldEditingDidEnd:" destination="zg0-iU-WDZ" eventType="editingDidEnd" id="h9N-2x-JUG"/>
+                                                        <outlet property="delegate" destination="zg0-iU-WDZ" id="dfu-0Q-gTf"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>

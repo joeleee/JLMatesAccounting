@@ -31,5 +31,6 @@
 #import "MAAlertView.h"
 #import "NSDate+MAAddition.h"
 #import "MBProgressHUD+MAAddition.h"
+#import "NSString+MAAddition.h"
 
 #endif

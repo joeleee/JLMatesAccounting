@@ -15,6 +15,7 @@
 #import "MAFriendManager.h"
 #import "MFriend.h"
 #import "MAMemberDetailViewController.h"
+#import "MAFriendListViewController.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
 NSString * const kSegueMemberListToFriendList = @"kSegueMemberListToFriendList";
@@ -71,6 +72,8 @@ typedef enum {
         MAMemberDetailViewController *memberDetail = segue.destinationViewController;
         [memberDetail setFriend:sender];
     } else if ([segue.identifier isEqualToString:kSegueMemberListToFriendList]) {
+        MAFriendListViewController *frientList = segue.destinationViewController;
+        [frientList setGroup:self.group];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
     }

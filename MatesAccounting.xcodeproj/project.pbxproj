@@ -90,6 +90,7 @@
 		D88E3E7519966EAF00FA5005 /* RMemberToAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E7419966EAF00FA5005 /* RMemberToAccount.m */; };
 		D88E3E7819966EAF00FA5005 /* RMemberToGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E7719966EAF00FA5005 /* RMemberToGroup.m */; };
 		D88E3E7B1996745100FA5005 /* RMemberToGroup+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E7A1996745100FA5005 /* RMemberToGroup+expand.m */; };
+		D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3EA11996869600FA5005 /* NSString+MAAddition.m */; };
 		D8E25ABD19927FB9006772B4 /* MAAccountSettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +257,8 @@
 		D88E3E7719966EAF00FA5005 /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/coreDataModels/RMemberToGroup.m; sourceTree = "<group>"; };
 		D88E3E791996745100FA5005 /* RMemberToGroup+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RMemberToGroup+expand.h"; path = "MAModels/RMemberToGroup+expand.h"; sourceTree = "<group>"; };
 		D88E3E7A1996745100FA5005 /* RMemberToGroup+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RMemberToGroup+expand.m"; path = "MAModels/RMemberToGroup+expand.m"; sourceTree = "<group>"; };
+		D88E3EA01996869600FA5005 /* NSString+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MAAddition.h"; path = "MAAdditions/NSString+MAAddition.h"; sourceTree = "<group>"; };
+		D88E3EA11996869600FA5005 /* NSString+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MAAddition.m"; path = "MAAdditions/NSString+MAAddition.m"; sourceTree = "<group>"; };
 		D8E25ABB19927FB9006772B4 /* MAAccountSettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountSettlementCell.h; sourceTree = "<group>"; };
 		D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountSettlementCell.m; sourceTree = "<group>"; };
 		EF02035F8D744C878C1ED891 /* Pods-MatesAccounting.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatesAccounting.xcconfig"; path = "Pods/Pods-MatesAccounting.xcconfig"; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 				9B726B0318BF862500ACDD99 /* UIViewController+MAAddition.m */,
 				D88E3E611995177400FA5005 /* UIApplication+MAAddition.h */,
 				D88E3E621995177400FA5005 /* UIApplication+MAAddition.m */,
+				D88E3EA01996869600FA5005 /* NSString+MAAddition.h */,
+				D88E3EA11996869600FA5005 /* NSString+MAAddition.m */,
 			);
 			name = MAAdditions;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				9BD0E7A6184796FF00BA9F2E /* MATabAccountListSectionHeader.m in Sources */,
 				9B079B72185A0B26003C654B /* MATabMemberListCell.m in Sources */,
 				9BC23107184B274F005ADD59 /* MAAccountDetailFeeCell.m in Sources */,
+				D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */,
 				9B079B86185D8436003C654B /* MABaseCell.m in Sources */,
 				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
 				9B25AA1F185350FE008D79B7 /* UIColor+MAAddition.m in Sources */,

@@ -12,7 +12,7 @@
 #import "MFriend.h"
 #import "MAAccountManager.h"
 
-@interface MAAccountDetailConsumerDetailCell ()
+@interface MAAccountDetailConsumerDetailCell () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *consumerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *consumerTypeLabel;
@@ -45,16 +45,6 @@
     }
 }
 
-- (IBAction)feeTextFieldEditingDidBegin:(id)sender
-{
-    [self.actionDelegate actionWithData:sender cell:self type:0];
-}
-
-- (IBAction)feeTextFieldEditingDidEnd:(id)sender
-{
-    [self.actionDelegate actionWithData:sender cell:self type:1];
-}
-
 + (CGFloat)cellHeight:(id)data
 {
     return 40.0f;
@@ -63,6 +53,23 @@
 + (NSString *)reuseIdentifier
 {
     return [self className];
+}
+
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.actionDelegate actionWithData:textField cell:self type:0];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.actionDelegate actionWithData:textField cell:self type:1];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    return [resultText isTwoDecimalPlaces];
 }
 
 @end

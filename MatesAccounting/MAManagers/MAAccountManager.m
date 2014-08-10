@@ -213,9 +213,14 @@
 
 - (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer
 {
-    CGFloat averageFee = 0;
+    totalFee = isPayer ? totalFee : -totalFee;
+    double averageFee = 0.0;
+    double oddFee = 0.0;
     if (members.count > 0) {
-        averageFee = isPayer ? totalFee / members.count : 0 - totalFee / members.count;
+        averageFee = totalFee / members.count;
+        NSString *tempFeeString = [NSString stringWithFormat:@"%.2f", averageFee];
+        averageFee = [tempFeeString doubleValue];
+        oddFee = totalFee - averageFee * members.count;
     } else {
         return nil;
     }
@@ -235,6 +240,9 @@
         MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:member fee:averageFee];
         [feeOfMembers addObject:feeOfMember];
     }
+
+    MAFeeOfMember *lastObject = feeOfMembers.lastObject;
+    lastObject.fee += oddFee;
 
     return feeOfMembers;
 }
