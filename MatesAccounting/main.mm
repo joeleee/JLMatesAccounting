@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#define TEST_MODE 0
+#define TEST_MODE 1
 
 #import <UIKit/UIKit.h>
 
@@ -271,6 +271,14 @@ void releaseList(NodePointer listHead)
 
 int main(int argc, char *argv[])
 {
+
+#pragma mark - test float
+    CGFloat f = 0.3;
+    NSDecimalNumber *ff = [NSDecimalNumber decimalNumberWithString:[@(f) stringValue]];
+    double df = 0.3f;
+    double d = 0.3;
+    NSLog(@"\nff = %@\nf = %f\ndf = %f\nd = %f", ff, f, df, d);
+    return 0;
 
 #pragma mark - test reverse NSString by CString
     NSString *originString = @"1234567890";
