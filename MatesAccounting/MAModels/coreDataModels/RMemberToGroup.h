@@ -2,7 +2,7 @@
 //  RMemberToGroup.h
 //  MatesAccounting
 //
-//  Created by Joe Lee on 2014-8-9.
+//  Created by Joe Lee on 2014-8-11.
 //  Copyright (c) 2014年 Lee. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 @interface RMemberToGroup : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSNumber * fee;
+@property (nonatomic, retain) NSDecimalNumber * fee;
 @property (nonatomic, retain) MGroup *group;
 @property (nonatomic, retain) MFriend *member;
 

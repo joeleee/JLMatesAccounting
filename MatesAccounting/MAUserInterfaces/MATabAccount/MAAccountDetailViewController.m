@@ -61,7 +61,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 @property (nonatomic, strong) NSIndexPath *registKeyboardIndexPath;
 
-@property (nonatomic, assign) CGFloat editingTotalFee;
+@property (nonatomic, strong) NSDecimalNumber *editingTotalFee;
 @property (nonatomic, strong) NSDate *editingDate;
 @property (nonatomic, copy) NSString *editingPlaceName;
 @property (nonatomic, assign) CLLocationDegrees editingLatitude;
@@ -179,7 +179,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (void)clearEditingData
 {
-    self.editingTotalFee = 0.0f;
+    self.editingTotalFee = DecimalZero;
     self.editingDate = nil;
     self.editingPlaceName = nil;
     self.editingLatitude = 0.0f;
@@ -192,7 +192,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)refreshEditingData
 {
     if (self.account) {
-        self.editingTotalFee = [self.account.totalFee doubleValue];
+        self.editingTotalFee = self.account.totalFee;
         self.editingDate = self.account.accountDate;
         self.editingPlaceName = self.account.place.placeName;
         self.editingLatitude = [self.account.place.latitude doubleValue];
@@ -201,7 +201,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.editingPayers = [NSMutableArray arrayWithArray:self.payers];
         self.editingConsumers = [NSMutableArray arrayWithArray:self.consumers];
     } else {
-        self.editingTotalFee = 0.0f;
+        self.editingTotalFee = DecimalZero;
         self.editingDate = [NSDate date];
         self.editingPayers = nil;
         self.editingConsumers = nil;
@@ -339,8 +339,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             MAAccountDetailFeeCell *detailCell = cell;
             detailCell.status = self.isEditing;
-            CGFloat fee = self.isEditing ? self.editingTotalFee : [self.account.totalFee doubleValue];
-            [detailCell reuseCellWithData:(0 != fee) ? [@(fee) stringValue] : nil];
+            NSDecimalNumber *fee = self.isEditing ? self.editingTotalFee : self.account.totalFee;
+            [detailCell reuseCellWithData:(NSOrderedSame != [fee compare:DecimalZero]) ? [fee description] : nil];
             detailCell.actionDelegate = self;
             break;
         }
@@ -503,8 +503,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             shouldScroll = YES;
         } else if (1 == type) {
             NSString *feeText = [(UILabel *)data text];
-            self.editingTotalFee = [feeText doubleValue];
-            if (0 == self.editingTotalFee) {
+            self.editingTotalFee = [NSDecimalNumber decimalNumberWithString:feeText];
+            if (NSOrderedSame == [self.editingTotalFee compare:DecimalZero]) {
                 [(UILabel *)data setText:nil];
             }
         }
@@ -519,8 +519,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             NSString *feeText = [(UILabel *)data text];
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             MAFeeOfMember *feeOfMember = (indexPath.row < self.editingPayers.count) ? self.editingPayers[indexPath.row] : self.editingConsumers[indexPath.row];
-            feeOfMember.fee = [feeText doubleValue];
-            if (0 == feeOfMember.fee) {
+            feeOfMember.fee = [NSDecimalNumber decimalNumberWithString:feeText];
+            if (NSOrderedSame == [feeOfMember.fee compare:DecimalZero]) {
                 [(UILabel *)data setText:nil];
             }
         }
@@ -590,15 +590,15 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     [feeOfMambers addObjectsFromArray:self.editingConsumers];
 
     // verify total fee
-    CGFloat sumFee = 0.0f;
-    CGFloat totalFee = 0.0f;
+    NSDecimalNumber *sumFee = DecimalZero;
+    NSDecimalNumber *totalFee = DecimalZero;
     for (MAFeeOfMember *feeOfMember in feeOfMambers) {
-        if (feeOfMember.fee > 0.0f) {
-            totalFee += feeOfMember.fee;
+        if (NSOrderedDescending == [feeOfMember.fee compare:DecimalZero]) {
+            totalFee = [totalFee decimalNumberByAdding:feeOfMember.fee];
         }
-        sumFee += feeOfMember.fee;
+        sumFee = [sumFee decimalNumberByAdding:feeOfMember.fee];
     }
-    NSString *errorText = (sumFee != 0.0f) ? @"Spending ≠ Income" : ((self.editingTotalFee - totalFee != 0.0f) ? @"Total fee is invalid" : nil);
+    NSString *errorText = (NSOrderedSame != [sumFee compare:DecimalZero]) ? @"Spending ≠ Income" : ((NSOrderedSame != [[self.editingTotalFee decimalNumberByAdding:[totalFee inverseNumber]] compare:DecimalZero]) ? @"Total fee is invalid" : nil);
     if (errorText) {
         [[MAAlertView alertWithTitle:errorText message:nil buttonTitle:@"OK" buttonBlock:nil] show];
         return;

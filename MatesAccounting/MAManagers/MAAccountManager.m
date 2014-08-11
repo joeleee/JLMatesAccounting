@@ -22,7 +22,7 @@
 #pragma mark - @implementation MAFeeOfMember
 @implementation MAFeeOfMember
 
-+ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee
++ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(NSDecimalNumber *)fee
 {
     MA_QUICK_ASSERT(member, @"member should not be nil! - MAFeeOfMember");
 
@@ -39,7 +39,7 @@
 
     MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
     feeOfMember.member = memberToAccount.member;
-    feeOfMember.fee = [memberToAccount.fee doubleValue];
+    feeOfMember.fee = memberToAccount.fee;
     feeOfMember.createDate = memberToAccount.createDate;
     return feeOfMember;
 }
@@ -152,7 +152,7 @@
         if (idx < originMembers.count) {
             memberToAccount = originMembers[idx];
             memberToAccount.member = obj.member;
-            memberToAccount.fee = @(obj.fee);
+            memberToAccount.fee = obj.fee;
         } else {
             memberToAccount = [[MAAccountPersistent instance] createMemberToAccount:account member:obj.member fee:obj.fee];
         }
@@ -185,11 +185,11 @@
 
 - (BOOL)verifyFeeOfMambers:(NSSet *)feeOfMambers
 {
-    CGFloat sumFee = 0.0f;
+    NSDecimalNumber *sumFee = DecimalZero;
     for (MAFeeOfMember *feeOfMember in feeOfMambers) {
-        sumFee += feeOfMember.fee;
+        [sumFee decimalNumberByAdding:feeOfMember.fee];
     }
-    return sumFee == 0.0f;
+    return NSOrderedSame == [sumFee compare:DecimalZero];
 }
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers
@@ -211,16 +211,15 @@
     }];
 }
 
-- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer
+- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer
 {
-    totalFee = isPayer ? totalFee : -totalFee;
-    double averageFee = 0.0;
-    double oddFee = 0.0;
+    totalFee = isPayer ? totalFee : [totalFee inverseNumber];
+    NSDecimalNumber *averageFee = DecimalZero;
+    NSDecimalNumber *oddFee = DecimalZero;
     if (members.count > 0) {
-        averageFee = totalFee / members.count;
-        NSString *tempFeeString = [NSString stringWithFormat:@"%.2f", averageFee];
-        averageFee = [tempFeeString doubleValue];
-        oddFee = totalFee - averageFee * members.count;
+        averageFee = [totalFee decimalNumberByDividingBy:MAULongDecimal(members.count)];
+        averageFee = MATwoPreciseDecimal([averageFee doubleValue]);
+        oddFee = [totalFee decimalNumberByAdding:[[averageFee decimalNumberByMultiplyingBy:MAULongDecimal(members.count)] inverseNumber]];
     } else {
         return nil;
     }
@@ -242,7 +241,7 @@
     }
 
     MAFeeOfMember *lastObject = feeOfMembers.lastObject;
-    lastObject.fee += oddFee;
+    lastObject.fee = [lastObject.fee decimalNumberByAdding:oddFee];
 
     return feeOfMembers;
 }

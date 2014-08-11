@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#define TEST_MODE 1
+#define TEST_MODE 0
 
 #import <UIKit/UIKit.h>
 

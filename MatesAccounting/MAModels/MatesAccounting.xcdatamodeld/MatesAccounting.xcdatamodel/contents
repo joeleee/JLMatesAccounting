@@ -5,7 +5,7 @@
         <attribute name="accountID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalFee" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalFee" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MGroup" inverseName="accounts" inverseEntity="MGroup" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MPlace" inverseName="account" inverseEntity="MPlace" syncable="YES"/>
@@ -43,13 +43,13 @@
     </entity>
     <entity name="RMemberToAccount" representedClassName="RMemberToAccount" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="fee" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="fee" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MAccount" inverseName="relationshipToMember" inverseEntity="MAccount" syncable="YES"/>
         <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFriend" inverseName="relationshipToAccount" inverseEntity="MFriend" syncable="YES"/>
     </entity>
     <entity name="RMemberToGroup" representedClassName="RMemberToGroup" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="fee" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fee" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MGroup" inverseName="relationshipToMember" inverseEntity="MGroup" syncable="YES"/>
         <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFriend" inverseName="relationshipToGroup" inverseEntity="MFriend" syncable="YES"/>
     </entity>
@@ -59,6 +59,6 @@
         <element name="MGroup" positionX="0" positionY="0" width="128" height="135"/>
         <element name="MPlace" positionX="0" positionY="0" width="128" height="165"/>
         <element name="RMemberToAccount" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="RMemberToGroup" positionX="0" positionY="0" width="128" height="103"/>
+        <element name="RMemberToGroup" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>

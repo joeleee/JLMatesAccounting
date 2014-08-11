@@ -39,7 +39,7 @@
         account.accountID = @([currentData timeIntervalSince1970]);
         account.group = group;
         account.accountDate = date;
-        account.totalFee = @(0);
+        account.totalFee = DecimalZero;
         [[MAContextAPI sharedAPI] saveContextData];
     }
 
@@ -76,7 +76,7 @@
     return result;
 }
 
-- (RMemberToAccount *)createMemberToAccount:(MAccount *)account member:(MFriend *)member fee:(double)fee
+- (RMemberToAccount *)createMemberToAccount:(MAccount *)account member:(MFriend *)member fee:(NSDecimalNumber *)fee
 {
     MA_QUICK_ASSERT(account && member, @"account && member cannot be nil.");
     RMemberToAccount *memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
@@ -85,7 +85,7 @@
     if (memberToAccount) {
         memberToAccount.createDate = [NSDate date];
         memberToAccount.member = member;
-        memberToAccount.fee = @(fee);
+        memberToAccount.fee = fee;
         memberToAccount.account = account;
         if (![[MAContextAPI sharedAPI] saveContextData]) {
             [MACommonPersistent deleteObject:memberToAccount];
@@ -103,7 +103,7 @@
     return isSucceed;
 }
 
-- (BOOL)addFriend:(MFriend *)member toAccount:(MAccount *)account fee:(double)fee
+- (BOOL)addFriend:(MFriend *)member toAccount:(MAccount *)account fee:(NSDecimalNumber *)fee
 {
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
         if (memberToAccount.member == member) {

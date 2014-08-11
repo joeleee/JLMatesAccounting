@@ -14,13 +14,13 @@
 
 - (void)refreshAccountTotalFee
 {
-    double totalFee = 0.0f;
+    NSDecimalNumber *totalFee = DecimalZero;
     for (RMemberToAccount *relationship in self.relationshipToMember) {
-        if (0.0f < [relationship.fee doubleValue]) {
-            totalFee += [relationship.fee doubleValue];
+        if (NSOrderedDescending == [relationship.fee compare:DecimalZero]) {
+            totalFee = [totalFee decimalNumberByAdding:relationship.fee];
         }
     }
-    self.totalFee = @(totalFee);
+    self.totalFee = totalFee;
 }
 
 @end

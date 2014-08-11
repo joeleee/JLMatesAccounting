@@ -17,9 +17,9 @@
 
 @property (nonatomic, strong) NSDate *createDate;
 @property (nonatomic, strong) MFriend *member;
-@property (nonatomic, assign) CGFloat fee;
+@property (nonatomic, strong) NSDecimalNumber *fee;
 
-+ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(CGFloat)fee;
++ (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(NSDecimalNumber *)fee;
 + (MAFeeOfMember *)feeOfMember:(RMemberToAccount *)memberToAccount;
 
 @end
@@ -61,7 +61,7 @@
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers;
 
-- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(CGFloat)totalFee isPayer:(BOOL)isPayer;
+- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer;
 
 - (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers;
 

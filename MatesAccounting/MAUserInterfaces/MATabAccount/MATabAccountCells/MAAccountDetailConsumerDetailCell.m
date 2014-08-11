@@ -32,9 +32,9 @@
 
 - (void)reuseCellWithData:(MAFeeOfMember *)data
 {
-    double fee = data.fee > 0 ? data.fee : -data.fee;
+    NSDecimalNumber *fee = (NSOrderedDescending == [data.fee compare:DecimalZero]) ? data.fee : [data.fee inverseNumber];
     [self.consumerNameLabel setText:data.member.name];
-    [self.consumerFeeTextField setText:(0 != fee) ? [@(fee) stringValue] : nil];
+    [self.consumerFeeTextField setText:(NSOrderedSame != [fee compare:DecimalZero]) ? [fee description] : nil];
 
     if (self.status) {
         self.consumerFeeTextField.userInteractionEnabled = YES;

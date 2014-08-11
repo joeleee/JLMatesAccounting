@@ -16,13 +16,13 @@
 
 - (void)refreshMemberTotalFee
 {
-    CGFloat totalFee = 0.0f;
+    NSDecimalNumber *totalFee = DecimalZero;
     for (RMemberToAccount *memberToAccount in self.member.relationshipToAccount) {
         if (memberToAccount.account.group == self.group) {
-            totalFee += [memberToAccount.fee doubleValue];
+            [totalFee decimalNumberByAdding:memberToAccount.fee];
         }
     }
-    self.fee = @(totalFee);
+    self.fee = totalFee;
 }
 
 @end
