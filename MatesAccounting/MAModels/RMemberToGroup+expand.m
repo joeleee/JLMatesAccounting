@@ -19,7 +19,7 @@
     NSDecimalNumber *totalFee = DecimalZero;
     for (RMemberToAccount *memberToAccount in self.member.relationshipToAccount) {
         if (memberToAccount.account.group == self.group) {
-            [totalFee decimalNumberByAdding:memberToAccount.fee];
+            totalFee = [totalFee decimalNumberByAdding:memberToAccount.fee];
         }
     }
     self.fee = totalFee;

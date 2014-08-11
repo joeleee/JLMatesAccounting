@@ -187,7 +187,7 @@
 {
     NSDecimalNumber *sumFee = DecimalZero;
     for (MAFeeOfMember *feeOfMember in feeOfMambers) {
-        [sumFee decimalNumberByAdding:feeOfMember.fee];
+        sumFee = [sumFee decimalNumberByAdding:feeOfMember.fee];
     }
     return NSOrderedSame == [sumFee compare:DecimalZero];
 }
