@@ -217,9 +217,9 @@
     NSDecimalNumber *averageFee = DecimalZero;
     NSDecimalNumber *oddFee = DecimalZero;
     if (members.count > 0) {
-        averageFee = [totalFee decimalNumberByDividingBy:MAULongDecimal(members.count)];
+        averageFee = [totalFee decimalNumberByDividingBy:MAULongDecimal((unsigned long)members.count)];
         averageFee = MATwoPreciseDecimal([averageFee doubleValue]);
-        oddFee = [totalFee decimalNumberByAdding:[[averageFee decimalNumberByMultiplyingBy:MAULongDecimal(members.count)] inverseNumber]];
+        oddFee = [totalFee decimalNumberByAdding:[[averageFee decimalNumberByMultiplyingBy:MAULongDecimal((unsigned long)members.count)] inverseNumber]];
     } else {
         return nil;
     }

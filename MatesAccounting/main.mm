@@ -470,12 +470,12 @@ int main(int argc, char *argv[])
     date = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:date];
     NSUInteger dateKey = [components year] * 10000 + [components month] * 100 + [components day];
-    NSLog(@"date : %@ %d-%d-%d %d",
+    NSLog(@"date : %@ %ld-%ld-%ld %lu",
           date,
-          [components year],
-          [components month],
-          [components day],
-          dateKey
+          (long)[components year],
+          (long)[components month],
+          (long)[components day],
+          (unsigned long)dateKey
           );
     return 0;
 
