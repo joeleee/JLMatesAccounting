@@ -87,6 +87,8 @@
 		D825410F1998FF4F00559835 /* MAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = D825410E1998FF4F00559835 /* MAccount.m */; };
 		D82541121998FF4F00559835 /* MFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = D82541111998FF4F00559835 /* MFriend.m */; };
 		D82541151998FF4F00559835 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D82541141998FF4F00559835 /* MGroup.m */; };
+		D840328619A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
+		D840328719A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
 		D88D00F71999239200E929B7 /* NSDecimalNumber+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */; };
 		D88E3E631995177400FA5005 /* UIApplication+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E621995177400FA5005 /* UIApplication+MAAddition.m */; };
 		D88E3E6619951B9E00FA5005 /* MARootNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E6519951B9E00FA5005 /* MARootNavigationControllerDelegate.m */; };
@@ -252,6 +254,8 @@
 		D82541111998FF4F00559835 /* MFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFriend.m; path = MAModels/coreDataModels/MFriend.m; sourceTree = "<group>"; };
 		D82541131998FF4F00559835 /* MGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGroup.h; path = MAModels/coreDataModels/MGroup.h; sourceTree = "<group>"; };
 		D82541141998FF4F00559835 /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/coreDataModels/MGroup.m; sourceTree = "<group>"; };
+		D840328419A24DD4002E772C /* MATestDataGenerater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATestDataGenerater.h; sourceTree = "<group>"; };
+		D840328519A24DD4002E772C /* MATestDataGenerater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATestDataGenerater.m; sourceTree = "<group>"; };
 		D88D00F51999239200E929B7 /* NSDecimalNumber+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDecimalNumber+MAAddition.h"; path = "MAAdditions/NSDecimalNumber+MAAddition.h"; sourceTree = "<group>"; };
 		D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDecimalNumber+MAAddition.m"; path = "MAAdditions/NSDecimalNumber+MAAddition.m"; sourceTree = "<group>"; };
 		D88E3E611995177400FA5005 /* UIApplication+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+MAAddition.h"; path = "MAAdditions/UIApplication+MAAddition.h"; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 			isa = PBXGroup;
 			children = (
 				9BCAC04F18322997000417FD /* MatesAccountingTests.m */,
+				D840328419A24DD4002E772C /* MATestDataGenerater.h */,
+				D840328519A24DD4002E772C /* MATestDataGenerater.m */,
 				9BCAC04A18322997000417FD /* Supporting Files */,
 			);
 			path = MatesAccountingTests;
@@ -584,8 +590,8 @@
 				9BD0E7A718479D5200BA9F2E /* MAGroup */,
 				9B391C70183527CE0025A2FB /* MATabAccount */,
 				9B391C73183527CE0025A2FB /* MATabMember */,
-				9B391C76183527CE0025A2FB /* MATabMore */,
 				9B391C79183527CE0025A2FB /* MATabPayment */,
+				9B391C76183527CE0025A2FB /* MATabMore */,
 			);
 			name = MAUserInterfaces;
 			sourceTree = "<group>";
@@ -891,6 +897,7 @@
 				D825410C1998FF4F00559835 /* RMemberToAccount.m in Sources */,
 				D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */,
 				D82541061998FF4E00559835 /* MPlace.m in Sources */,
+				D840328619A24DD4002E772C /* MATestDataGenerater.m in Sources */,
 				9B079B86185D8436003C654B /* MABaseCell.m in Sources */,
 				9B391C7C183527CE0025A2FB /* MARootNavigationController.m in Sources */,
 				9B25AA1F185350FE008D79B7 /* UIColor+MAAddition.m in Sources */,
@@ -910,6 +917,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BCAC05018322997000417FD /* MatesAccountingTests.m in Sources */,
+				D840328719A24DD4002E772C /* MATestDataGenerater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

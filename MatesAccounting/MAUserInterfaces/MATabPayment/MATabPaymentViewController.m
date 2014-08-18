@@ -50,7 +50,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tabBarController setTitle:@"结算"];
+    [self.tabBarController setTitle:@"Pay Settlement"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
     UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didRefreshNavigationButtonTapped:)];

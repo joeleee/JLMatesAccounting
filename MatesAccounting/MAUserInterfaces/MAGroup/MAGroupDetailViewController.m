@@ -46,6 +46,9 @@
     [super viewWillAppear:animated];
 
     [self refreshView];
+    if (!self.group) {
+        [self.groupNameTextField becomeFirstResponder];
+    }
 }
 
 - (void)refreshView
@@ -88,15 +91,7 @@
 
 - (IBAction)cancelButtonTaped:(UIButton *)sender
 {
-        [[MAAlertView alertWithTitle:@"要放弃已输入的内容么？"
-                             message:nil
-                        buttonTitle1:@"确认放弃"
-                        buttonBlock1:^{
-                            [self dismissViewControllerAnimated:YES completion:^{
-                            }];
-                        }
-                        buttonTitle2:@"点错了~"
-                        buttonBlock2:nil] show];
+    [self dismissViewControllerAnimated:YES completion:^{ }];
 }
 
 - (IBAction)didGroupNameTextFieldBeginEdit:(UITextField *)sender

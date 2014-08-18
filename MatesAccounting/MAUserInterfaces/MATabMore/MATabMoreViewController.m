@@ -8,6 +8,8 @@
 
 #import "MATabMoreViewController.h"
 
+#import "MATestDataGenerater.h"
+
 @interface MATabMoreViewController ()
 
 @end
@@ -30,14 +32,27 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tabBarController setTitle:@"更多"];
-    [self.tabBarController.navigationItem setRightBarButtonItem:nil animated:YES];
-    [self.tabBarController.navigationItem setLeftBarButtonItem:nil animated:YES];
+    [self.tabBarController setTitle:@"More"];
+
+    UIBarButtonItem *deleteAllTestDataBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(didDeleteAllTestDataBarButtonTaped:)];
+    UIBarButtonItem *generateTestDataBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(didGenerateTestDataBarButtonTaped:)];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:deleteAllTestDataBarItem animated:YES];
+    [self.tabBarController.navigationItem setRightBarButtonItem:generateTestDataBarItem animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)didDeleteAllTestDataBarButtonTaped:(id)sender
+{
+    [[MATestDataGenerater instance] clearAllData];
+}
+
+- (void)didGenerateTestDataBarButtonTaped:(id)sender
+{
+    [[MATestDataGenerater instance] onePackageService];
 }
 
 @end
