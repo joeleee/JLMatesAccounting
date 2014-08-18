@@ -50,7 +50,7 @@
 #pragma mark - @implementation MAAccountSettlement
 @implementation MAAccountSettlement
 
-+ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(CGFloat)fee
++ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(NSDecimalNumber *)fee
 {
     MAAccountSettlement *accountSettlement = [[MAAccountSettlement alloc] init];
     accountSettlement.fromMember = fromMember;
@@ -269,14 +269,14 @@
     NSMutableArray *receiverSettlementList = [NSMutableArray array];
     NSMutableArray *payerSettlementList = [NSMutableArray array];
     for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
-        CGFloat finalFee = 0.0f;
+        NSDecimalNumber *finalFee = DecimalZero;
         for (RMemberToAccount *memberToAccount in memberToGroup.member.relationshipToAccount) {
-            finalFee += memberToAccount.fee.floatValue;
+            [finalFee decimalNumberByAdding:memberToAccount.fee];
         }
-        if (finalFee > 0.0f) {
+        if (NSOrderedDescending == [finalFee compare:DecimalZero]) {
             MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:nil toMember:memberToGroup.member fee:finalFee];
             [receiverSettlementList addObject:accountSettlement];
-        } else if (finalFee < 0.0f) {
+        } else if (NSOrderedAscending == [finalFee compare:DecimalZero]) {
             MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:memberToGroup.member toMember:nil fee:finalFee];
             [payerSettlementList addObject:accountSettlement];
         }
@@ -292,15 +292,15 @@
         NSArray *seekPayerArray = [NSArray arrayWithArray:payerSettlementList];
         for (MAAccountSettlement *payerSettlement in seekPayerArray) {
 
-            if (receiverSettlement.fee > -payerSettlement.fee) {
-                receiverSettlement.fee += payerSettlement.fee;
-                payerSettlement.fee = -payerSettlement.fee;
+            if (NSOrderedDescending == [receiverSettlement.fee compare:[payerSettlement.fee inverseNumber]]) {
+                [receiverSettlement.fee decimalNumberByAdding:payerSettlement.fee];
+                payerSettlement.fee = [payerSettlement.fee inverseNumber];
                 payerSettlement.toMember = receiverSettlement.toMember;
                 [accountSettlementList addObject:payerSettlement];
                 [payerSettlementList removeObject:payerSettlement];
             }
-            else if (receiverSettlement.fee < -payerSettlement.fee) {
-                payerSettlement.fee += receiverSettlement.fee;
+            else if (NSOrderedAscending == [receiverSettlement.fee compare:[payerSettlement.fee inverseNumber]]) {
+                [payerSettlement.fee decimalNumberByAdding:receiverSettlement.fee];
                 receiverSettlement.fromMember = payerSettlement.fromMember;
                 [accountSettlementList addObject:receiverSettlement];
                 [receiverSettlementList removeObject:receiverSettlement];

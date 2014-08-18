@@ -35,7 +35,7 @@
     MAAccountSettlement *accountSettlement = data;
     self.payerNameLabel.text = accountSettlement.fromMember.name;
     self.receiverNameLabel.text = accountSettlement.toMember.name;
-    self.feeLabel.text = [@(accountSettlement.fee) stringValue];
+    self.feeLabel.text = [accountSettlement.fee description];
 }
 
 + (CGFloat)cellHeight:(id)data

@@ -53,7 +53,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     [self.tabBarController setTitle:@"结算"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
-    UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
+    UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didRefreshNavigationButtonTapped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:refreshBarItem animated:YES];
 }
@@ -67,6 +67,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)loadData
 {
     self.settlementList = [AccountManager accountSettlementListForGroup:MASelectedGroup];
+    [self.tableView reloadData];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -97,6 +98,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
     [self performSegueWithIdentifier:kSegueTabPaymentToGroupList sender:MASelectedGroup];
+}
+
+- (void)didRefreshNavigationButtonTapped:(id)sender
+{
+    [self loadData];
 }
 
 @end

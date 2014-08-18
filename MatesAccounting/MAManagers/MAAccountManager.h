@@ -28,9 +28,9 @@
 
 @property (nonatomic, strong) MFriend *fromMember;
 @property (nonatomic, strong) MFriend *toMember;
-@property (nonatomic, assign) CGFloat fee;
+@property (nonatomic, strong) NSDecimalNumber *fee;
 
-+ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(CGFloat)fee;
++ (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(NSDecimalNumber *)fee;
 
 @end
 
