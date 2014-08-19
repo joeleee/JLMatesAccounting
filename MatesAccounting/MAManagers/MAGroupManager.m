@@ -104,8 +104,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     return group;
 }
 
-- (MGroup *)editAndSaveGroup:(MGroup *)group
-                        name:(NSString *)name
+- (MGroup *)editAndSaveGroup:(MGroup *)group name:(NSString *)name
 {
     if ((0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length)) {
         return nil;

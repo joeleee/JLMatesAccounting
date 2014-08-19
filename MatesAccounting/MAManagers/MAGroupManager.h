@@ -36,8 +36,7 @@
 
 - (MGroup *)createGroup:(NSString *)name;
 
-- (MGroup *)editAndSaveGroup:(MGroup *)group
-                        name:(NSString *)name;
+- (MGroup *)editAndSaveGroup:(MGroup *)group name:(NSString *)name;
 
 - (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group;
 

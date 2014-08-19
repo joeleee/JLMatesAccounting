@@ -15,8 +15,8 @@
 #import "MAAccountPersistent.h"
 #import "MAPlacePersistent.h"
 #import "MAFriendManager.h"
-#import "MGroup.h"
-#import "RMemberToGroup.h"
+#import "MGroup+expand.h"
+#import "RMemberToGroup+expand.h"
 
 
 #pragma mark - @implementation MAFeeOfMember
@@ -146,11 +146,14 @@
     // update members
     NSArray *updateMembers = [feeOfMembers allObjects];
     NSArray *originMembers = [account.relationshipToMember allObjects];
+    NSMutableSet *membersNeedUpdate = [NSMutableSet set];
     NSMutableSet *updatedMembers = [NSMutableSet set];
     [updateMembers enumerateObjectsUsingBlock:^(MAFeeOfMember *obj, NSUInteger idx, BOOL *stop) {
+        [membersNeedUpdate addObject:obj.member];
         RMemberToAccount *memberToAccount = nil;
         if (idx < originMembers.count) {
             memberToAccount = originMembers[idx];
+            [membersNeedUpdate addObject:memberToAccount.member];
             memberToAccount.member = obj.member;
             memberToAccount.fee = obj.fee;
         } else {
@@ -165,6 +168,7 @@
     NSUInteger index = updateMembers.count;
     while (originMembers.count > index) {
         RMemberToAccount *memberToAccount = originMembers[index++];
+        [membersNeedUpdate addObject:memberToAccount.member];
         [[MAAccountPersistent instance] deleteMemberToAccount:memberToAccount];
     }
     account.relationshipToMember = updatedMembers;
@@ -180,6 +184,10 @@
     account.accountDate = date;
 
     BOOL updated = [[MAAccountPersistent instance] updateAccount:account];
+    for (MFriend *member in membersNeedUpdate) {
+        NSArray *relationshipToMember = [account.group relationshipToMembersByFriend:member];
+        [(RMemberToGroup *)[relationshipToMember firstObject] refreshMemberTotalFee];
+    }
     return updated;
 }
 
