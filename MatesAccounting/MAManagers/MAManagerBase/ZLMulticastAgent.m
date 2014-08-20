@@ -57,7 +57,7 @@
     NSMutableSet *listenerSet = [_listeners objectForKey:key];
     for (MAListenerPackingObject *listenerObject in listenerSet) {
         NSAssert(listenerObject.listener, @"Do you forgot to remove listener when you dealloc the delegate?");
-        EXECUTE_BLOCK_SAFELY(block, listenerObject.listener);
+        MA_INVOKE_BLOCK_SAFELY(block, listenerObject.listener);
     }
 }
 

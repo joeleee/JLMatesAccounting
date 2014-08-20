@@ -89,6 +89,7 @@
 		D82541151998FF4F00559835 /* MGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D82541141998FF4F00559835 /* MGroup.m */; };
 		D840328619A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
 		D840328719A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
+		D8530B5E19A4E92000396DFF /* MALocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8530B5D19A4E92000396DFF /* MALocationManager.m */; };
 		D88D00F71999239200E929B7 /* NSDecimalNumber+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */; };
 		D88E3E631995177400FA5005 /* UIApplication+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E621995177400FA5005 /* UIApplication+MAAddition.m */; };
 		D88E3E6619951B9E00FA5005 /* MARootNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E6519951B9E00FA5005 /* MARootNavigationControllerDelegate.m */; };
@@ -257,6 +258,8 @@
 		D82541141998FF4F00559835 /* MGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGroup.m; path = MAModels/coreDataModels/MGroup.m; sourceTree = "<group>"; };
 		D840328419A24DD4002E772C /* MATestDataGenerater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATestDataGenerater.h; sourceTree = "<group>"; };
 		D840328519A24DD4002E772C /* MATestDataGenerater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATestDataGenerater.m; sourceTree = "<group>"; };
+		D8530B5C19A4E92000396DFF /* MALocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MALocationManager.h; path = MAManagers/MALocationManager.h; sourceTree = "<group>"; };
+		D8530B5D19A4E92000396DFF /* MALocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MALocationManager.m; path = MAManagers/MALocationManager.m; sourceTree = "<group>"; };
 		D88D00F51999239200E929B7 /* NSDecimalNumber+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDecimalNumber+MAAddition.h"; path = "MAAdditions/NSDecimalNumber+MAAddition.h"; sourceTree = "<group>"; };
 		D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDecimalNumber+MAAddition.m"; path = "MAAdditions/NSDecimalNumber+MAAddition.m"; sourceTree = "<group>"; };
 		D88E3E611995177400FA5005 /* UIApplication+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+MAAddition.h"; path = "MAAdditions/UIApplication+MAAddition.h"; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				9BD0E7B31847ADB100BA9F2E /* MAAccountManager.m */,
 				9B079B73185A0E03003C654B /* MAFriendManager.h */,
 				9B079B74185A0E03003C654B /* MAFriendManager.m */,
+				D8530B5C19A4E92000396DFF /* MALocationManager.h */,
+				D8530B5D19A4E92000396DFF /* MALocationManager.m */,
 			);
 			name = MAManagers;
 			sourceTree = "<group>";
@@ -887,6 +892,7 @@
 				9B25AA1C1853472C008D79B7 /* MAMemberListSectionEmptyCell.m in Sources */,
 				D825410F1998FF4F00559835 /* MAccount.m in Sources */,
 				9BC2310A184B2776005ADD59 /* MAAccountDetailDateCell.m in Sources */,
+				D8530B5E19A4E92000396DFF /* MALocationManager.m in Sources */,
 				9BCAC03318322997000417FD /* main.mm in Sources */,
 				9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */,
 				9BC23104184B1F11005ADD59 /* MAAccountDetailViewController.m in Sources */,

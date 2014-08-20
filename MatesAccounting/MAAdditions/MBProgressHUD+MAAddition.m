@@ -29,7 +29,7 @@
         } else {
             MBProgressHUDCompletionBlock block = [hud.completionBlock copy];
             hud.completionBlock = ^{
-                EXECUTE_BLOCK_SAFELY(block);
+                MA_INVOKE_BLOCK_SAFELY(block);
                 [self showTextHUDOnView:view
                                    text:text
                         completionBlock:completionBlock
@@ -54,7 +54,7 @@
     MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
 
     if (hud && MBProgressHUDModeIndeterminate == hud.mode) {
-        EXECUTE_BLOCK_SAFELY(hud.completionBlock);
+        MA_INVOKE_BLOCK_SAFELY(hud.completionBlock);
         hud.completionBlock = completionBlock;
         hud.detailsLabelText = text;
     } else {

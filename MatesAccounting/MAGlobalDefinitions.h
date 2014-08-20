@@ -11,7 +11,7 @@
 #ifndef MAGLOBALDEFINITIONS_H
   #define MAGLOBALDEFINITIONS_H
 
-  #define EXECUTE_BLOCK_SAFELY(block, ...) { \
+  #define MA_INVOKE_BLOCK_SAFELY(block, ...) { \
         if (block) {                         \
             block(__VA_ARGS__);              \
         }                                    \
