@@ -106,11 +106,11 @@
         }
 
         // generating account
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:(randomValue % 10000) longitude:(randomValue % 10000)];
         [AccountManager createAccountWithGroup:group
                                           date:[[NSDate date] dateByAddingTimeInterval:(randomValue % 1000000)]
                                      placeName:[NSString stringWithFormat:@"place_%u", randomValue % 1000]
-                                      latitude:(randomValue % 10000)
-                                     longitude:(randomValue % 10000)
+                                      location:location
                                         detail:[NSString stringWithFormat:@"detail_%u", randomValue % 1000]
                                   feeOfMembers:feeOfMembers];
     }

@@ -56,16 +56,14 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 @property (nonatomic, strong) NSArray *payers;
 @property (nonatomic, strong) NSArray *consumers;
 @property (nonatomic, copy) NSString *placeName;
-@property (nonatomic, assign) CLLocationDegrees latitude;
-@property (nonatomic, assign) CLLocationDegrees longitude;
+@property (nonatomic, strong) CLLocation *location;
 
 @property (nonatomic, strong) NSIndexPath *registKeyboardIndexPath;
 
 @property (nonatomic, strong) NSDecimalNumber *editingTotalFee;
 @property (nonatomic, strong) NSDate *editingDate;
 @property (nonatomic, copy) NSString *editingPlaceName;
-@property (nonatomic, assign) CLLocationDegrees editingLatitude;
-@property (nonatomic, assign) CLLocationDegrees editingLongitude;
+@property (nonatomic, strong) CLLocation *editingLocation;
 @property (nonatomic, copy) NSString *editingDetail;
 @property (nonatomic, strong) NSMutableArray *editingPayers;
 @property (nonatomic, strong) NSMutableArray *editingConsumers;
@@ -161,14 +159,12 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.payers = self.editingPayers;
         self.consumers = self.editingConsumers;
         self.placeName = self.editingPlaceName;
-        self.latitude = self.editingLatitude;
-        self.longitude = self.editingLongitude;
+        self.location = self.editingLocation;
     } else {
         self.payers = [AccountManager feeOfMembersForAccount:self.account isPayers:YES];
         self.consumers = [AccountManager feeOfMembersForAccount:self.account isPayers:NO];
         self.placeName = self.account.place.placeName;
-        self.latitude = [self.account.place.latitude doubleValue];
-        self.longitude = [self.account.place.longitude doubleValue];
+        self.location = self.account.place.location;
     }
 
     NSRange range;
@@ -182,8 +178,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     self.editingTotalFee = DecimalZero;
     self.editingDate = nil;
     self.editingPlaceName = nil;
-    self.editingLatitude = 0.0f;
-    self.editingLongitude = 0.0f;
+    self.editingLocation = nil;
     self.editingDetail = nil;
     self.editingPayers = nil;
     self.editingConsumers = nil;
@@ -195,8 +190,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.editingTotalFee = self.account.totalFee;
         self.editingDate = self.account.accountDate;
         self.editingPlaceName = self.account.place.placeName;
-        self.editingLatitude = [self.account.place.latitude doubleValue];
-        self.editingLongitude = [self.account.place.longitude doubleValue];
+        self.editingLocation = self.account.place.location;
         self.editingDetail = self.account.detail;
         self.editingPayers = [NSMutableArray arrayWithArray:self.payers];
         self.editingConsumers = [NSMutableArray arrayWithArray:self.consumers];
@@ -206,8 +200,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.editingPayers = nil;
         self.editingConsumers = nil;
         self.editingPlaceName = @"locating...";
-        self.editingLatitude = 0.0f;
-        self.editingLongitude = 0.0f;
+        self.editingLocation = nil;
         self.editingDetail = nil;
     }
 }
@@ -609,8 +602,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         BOOL updated = [AccountManager updateAccount:self.account
                                                 date:self.editingDate
                                            placeName:self.editingPlaceName
-                                            latitude:self.editingLatitude
-                                           longitude:self.editingLongitude
+                                            location:self.editingLocation
                                               detail:self.editingDetail
                                         feeOfMembers:feeOfMambers];
 
@@ -626,8 +618,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.account = [AccountManager createAccountWithGroup:self.group
                                                          date:self.editingDate
                                                     placeName:self.editingPlaceName
-                                                     latitude:self.editingLatitude
-                                                    longitude:self.editingLongitude
+                                                     location:self.editingLocation
                                                        detail:self.editingDetail
                                                  feeOfMembers:feeOfMambers];
 

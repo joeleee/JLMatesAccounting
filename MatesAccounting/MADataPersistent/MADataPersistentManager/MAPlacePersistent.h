@@ -15,7 +15,7 @@
 
 + (MAPlacePersistent *)instance;
 
-- (MPlace *)createPlaceWithCoordinate:(CLLocationCoordinate2D)coordinate name:(NSString *)name;
+- (MPlace *)createPlaceWithLocation:(CLLocation *)location name:(NSString *)name;
 
 - (BOOL)deletePlace:(MPlace *)place;
 

@@ -44,16 +44,14 @@
 - (MAccount *)createAccountWithGroup:(MGroup *)group
                                 date:(NSDate *)date
                            placeName:(NSString *)placeName
-                            latitude:(CLLocationDegrees)latitude
-                           longitude:(CLLocationDegrees)longitude
+                            location:(CLLocation *)location
                               detail:(NSString *)detail
                         feeOfMembers:(NSSet *)feeOfMembers;
 
 - (BOOL)updateAccount:(MAccount *)account
                  date:(NSDate *)date
             placeName:(NSString *)placeName
-             latitude:(CLLocationDegrees)latitude
-            longitude:(CLLocationDegrees)longitude
+             location:(CLLocation *)location
                detail:(NSString *)detail
          feeOfMembers:(NSSet *)feeOfMembers;
 

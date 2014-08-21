@@ -103,8 +103,7 @@
 - (MAccount *)createAccountWithGroup:(MGroup *)group
                                 date:(NSDate *)date
                            placeName:(NSString *)placeName
-                            latitude:(CLLocationDegrees)latitude
-                           longitude:(CLLocationDegrees)longitude
+                            location:(CLLocation *)location
                               detail:(NSString *)detail
                         feeOfMembers:(NSSet *)feeOfMembers
 {
@@ -118,8 +117,7 @@
         BOOL updateSucceed = [self updateAccount:account
                                             date:date
                                        placeName:placeName
-                                        latitude:latitude
-                                       longitude:longitude
+                                        location:location
                                           detail:detail
                                     feeOfMembers:feeOfMembers];
         if (!updateSucceed) {
@@ -134,8 +132,7 @@
 - (BOOL)updateAccount:(MAccount *)account
                  date:(NSDate *)date
             placeName:(NSString *)placeName
-             latitude:(CLLocationDegrees)latitude
-            longitude:(CLLocationDegrees)longitude
+             location:(CLLocation *)location
                detail:(NSString *)detail
          feeOfMembers:(NSSet *)feeOfMembers
 {
@@ -173,10 +170,13 @@
     }
     account.relationshipToMember = updatedMembers;
     // update place
-    CLLocationCoordinate2D location;
-    location.latitude = latitude;
-    location.longitude = longitude;
-    MPlace *place = [[MAPlacePersistent instance] createPlaceWithCoordinate:location name:placeName];
+    MPlace *place = account.place;
+    if (place) {
+        place.location = location;
+        place.placeName = placeName;
+    } else {
+        place = [[MAPlacePersistent instance] createPlaceWithLocation:location name:placeName];
+    }
     account.place = place;
     // update detail
     account.detail = detail;

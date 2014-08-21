@@ -25,17 +25,15 @@
     return sharedInstance;
 }
 
-- (MPlace *)createPlaceWithCoordinate:(CLLocationCoordinate2D)coordinate name:(NSString *)name
+- (MPlace *)createPlaceWithLocation:(CLLocation *)location name:(NSString *)name
 {
     MPlace *place = [MACommonPersistent createObject:NSStringFromClass([MPlace class])];
     MA_QUICK_ASSERT(place, @"Assert place == nil");
 
     if (place) {
         NSDate *currentData = [NSDate date];
-        place.createDate = currentData;
+        place.location = location;
         place.placeName = name;
-        place.longitude = @(coordinate.longitude);
-        place.latitude = @(coordinate.latitude);
         place.placeID = @([currentData timeIntervalSince1970]);
         [[MAContextAPI sharedAPI] saveContextData];
     }
