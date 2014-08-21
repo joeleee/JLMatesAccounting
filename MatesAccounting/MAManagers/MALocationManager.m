@@ -9,7 +9,7 @@
 #import "MALocationManager.h"
 
 NSInteger const MALocationTimeOutErrorCode = 10000;
-double const kLocationTimeOutSeconds = 20.0f;
+double const kLocationTimeOutSeconds = 10.0f;
 NSString * const kCachedLocationKey = @"kCachedLocationKey";
 
 NSString * const kCallBackHandlersCompletionBlockKey = @"kCallBackHandlersCompletionBlockKey";
@@ -19,7 +19,7 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
 
 @property (nonatomic, strong) CLLocation *cachedLocation;
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) NSMutableArray *callBackHandlers;
+@property (nonatomic, strong) NSMutableDictionary *callBackHandlerDict;
 @property (nonatomic, assign) BOOL isLocating;
 
 @end
@@ -40,8 +40,8 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
 - (id)init
 {
     if (self = [super init]) {
-        self.cachedLocation = [[NSUserDefaults standardUserDefaults] objectForKey:kCachedLocationKey];
-        self.callBackHandlers = [NSMutableArray array];
+        self.cachedLocation = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:kCachedLocationKey]];
+        self.callBackHandlerDict = [NSMutableDictionary dictionary];
         self.isLocating = NO;
     }
 
@@ -49,6 +49,7 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
 }
 
 - (BOOL)locationByExpirationMinute:(double)minute
+                               key:(NSString *)key
                       onCompletion:(MALocationCompletionBlock)completionBlock
                           onFailed:(MALocationFailedBlock)failedBlock
 {
@@ -60,9 +61,12 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
     if (isExpired) {
         completionBlock = completionBlock ? : ^(CLLocation *location){};
         failedBlock = failedBlock ? : ^(NSError *error){};
-        NSDictionary *callBackHandlerDict = @{kCallBackHandlersCompletionBlockKey: [completionBlock copy], kCallBackHandlersFailedBlockKey: [failedBlock copy]};
-        [self.callBackHandlers addObject:callBackHandlerDict];
+        if (!key) {
+            key = [@([[NSDate date] timeIntervalSince1970]) stringValue];
+        }
+        self.callBackHandlerDict[key] = @{kCallBackHandlersCompletionBlockKey: [completionBlock copy], kCallBackHandlersFailedBlockKey: [failedBlock copy]};
         if (!self.isLocating) {
+            self.cachedLocation = nil;
             self.isLocating = YES;
             [self.locationManager startUpdatingLocation];
             [self performSelector:@selector(stopLocationWithError:) withObject:[NSError errorWithDomain:@"Locating is time out!" code:MALocationTimeOutErrorCode userInfo:nil] afterDelay:kLocationTimeOutSeconds];
@@ -73,12 +77,30 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
     return YES;
 }
 
+- (void)stopLocationWithKey:(NSString *)key
+{
+    if (!key || ![self.callBackHandlerDict objectForKey:key]) {
+        return;
+    }
+
+    [self.callBackHandlerDict removeObjectForKey:key];
+    if (0 >= [self.callBackHandlerDict allValues].count) {
+        [self stopLocationWithError:nil];
+    }
+}
+
+#pragma mark private API
 - (void)stopLocationWithError:(NSError *)error
 {
+    if (!self.isLocating) {
+        return;
+    }
+
     self.isLocating = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopLocationWithError:) object:nil];
     [self.locationManager stopUpdatingLocation];
 
-    for (NSDictionary *callBackHandlerDict in self.callBackHandlers) {
+    for (NSDictionary *callBackHandlerDict in [self.callBackHandlerDict allValues]) {
         if (error) {
             MALocationFailedBlock failedBlock = callBackHandlerDict[kCallBackHandlersFailedBlockKey];
             MA_INVOKE_BLOCK_SAFELY(failedBlock, error);
@@ -87,22 +109,24 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
             MA_INVOKE_BLOCK_SAFELY(completionBlock, self.cachedLocation);
         }
     }
-    [self.callBackHandlers removeAllObjects];
+    [self.callBackHandlerDict removeAllObjects];
 }
 
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    CLLocation *bestLocation = self.cachedLocation;
     for (CLLocation *location in locations) {
-        if (location.horizontalAccuracy < 0 || -[location.timestamp timeIntervalSinceNow] > 15.0) {
+        if (location.horizontalAccuracy < 0 || -[location.timestamp timeIntervalSinceNow] > 8.0) {
             continue;
         }
-        if (!self.cachedLocation || location.horizontalAccuracy <= self.cachedLocation.horizontalAccuracy) {
-            self.cachedLocation = location;
+        if (!bestLocation || location.horizontalAccuracy <= self.cachedLocation.horizontalAccuracy) {
+            bestLocation = location;
         }
     }
 
-    if (self.cachedLocation.horizontalAccuracy <= self.locationManager.desiredAccuracy) {
+    if (bestLocation && bestLocation != self.cachedLocation && bestLocation.horizontalAccuracy <= self.locationManager.desiredAccuracy) {
+        self.cachedLocation = bestLocation;
         [self stopLocationWithError:nil];
     }
 }
@@ -127,6 +151,17 @@ NSString * const kCallBackHandlersFailedBlockKey = @"kCallBackHandlersFailedBloc
     }
 
     return _locationManager;
+}
+
+- (void)setCachedLocation:(CLLocation *)cachedLocation
+{
+    if (_cachedLocation == cachedLocation) {
+        return;
+    }
+
+    _cachedLocation = cachedLocation;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:_cachedLocation] forKey:kCachedLocationKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

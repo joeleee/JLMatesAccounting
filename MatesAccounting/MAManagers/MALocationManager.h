@@ -17,4 +17,13 @@ typedef void (^ MALocationFailedBlock)(NSError *error);
 
 @interface MALocationManager : NSObject
 
++ (MALocationManager *)sharedManager;
+
+- (BOOL)locationByExpirationMinute:(double)minute
+                               key:(NSString *)key
+                      onCompletion:(MALocationCompletionBlock)completionBlock
+                          onFailed:(MALocationFailedBlock)failedBlock;
+
+- (void)stopLocationWithKey:(NSString *)key;
+
 @end

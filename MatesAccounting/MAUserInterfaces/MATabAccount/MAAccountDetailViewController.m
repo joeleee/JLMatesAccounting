@@ -22,6 +22,7 @@
 #import "MAAccountManager.h"
 #import "MFriend.h"
 #import "MAMemberListViewController.h"
+#import "MALocationManager.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -109,6 +110,11 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     MA_HIDE_KEYBOARD;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[MALocationManager sharedManager] stopLocationWithKey:self.className];
 }
 
 - (void)viewDidLoad
@@ -202,7 +208,27 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.editingPlaceName = @"locating...";
         self.editingLocation = nil;
         self.editingDetail = nil;
+        __weak typeof(self) weakSelf = self;
+        [[MALocationManager sharedManager] locationByExpirationMinute:3 key:self.className onCompletion:^(CLLocation *location) {
+            [weakSelf didFinishedLocationing:location error:nil];
+        } onFailed:^(NSError *error) {
+            [weakSelf didFinishedLocationing:nil error:error];
+        }];
     }
+}
+
+- (void)didFinishedLocationing:(CLLocation *)location error:(NSError *)error
+{
+    if (!self.isEditing) {
+        return;
+    }
+
+    if (error || !location) {
+    } else {
+        self.editingLocation = location;
+        self.editingPlaceName = [NSString stringWithFormat:@"%.4f, %.4f", location.coordinate.longitude, location.coordinate.latitude];
+    }
+    [self.tableView reloadData];
 }
 
 - (NSDictionary *)tableView:(UITableView *)tableView infoOfSection:(NSInteger)section row:(NSInteger)row
@@ -381,7 +407,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 {
                     MAAccountDetailLocationCell *detailCell = cell;
                     detailCell.status = self.isEditing;
-                    [detailCell reuseCellWithData:self.placeName];
+                    [detailCell reuseCellWithData:self.isEditing ? self.editingPlaceName : self.placeName];
                     break;
                 }
 
@@ -597,8 +623,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         return;
     }
 
-    // not create mode
-    if (self.account) {
+    if (self.account) { // not create mode
         BOOL updated = [AccountManager updateAccount:self.account
                                                 date:self.editingDate
                                            placeName:self.editingPlaceName
@@ -637,9 +662,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)didCancelButtonTaped:(UIBarButtonItem *)sender
 {
     if (self.editing) {
-      if (self.account) {
-        [self clearEditingData];
-        [self setEditing:NO animated:YES];
+        if (self.account) {
+            [self clearEditingData];
+            [self setEditing:NO animated:YES];
         } else {
             [self clearEditingData];
             [self disappear:YES];
