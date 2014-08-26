@@ -20,8 +20,8 @@ CGFloat const kAccountDetailSectionHeaderHeight = 30.0f;
 
 - (MAAccountDetailSectionHeader *)initWithHeaderTitle:(NSString *)title
 {
-    NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:@"MATabAccountViews" owner:self options:nil];
-    self = nibArray[1];
+    NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"MATabAccountViews" owner:self options:nil];
+    self = nibArray[0];
 
     if (self) {
         self.headerTitleLabel.text = title;

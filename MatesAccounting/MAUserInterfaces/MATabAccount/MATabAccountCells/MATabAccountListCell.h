@@ -10,4 +10,6 @@
 
 @interface MATabAccountListCell : MABaseCell
 
+@property (weak, nonatomic) IBOutlet UIView *dividingLineView;
+
 @end

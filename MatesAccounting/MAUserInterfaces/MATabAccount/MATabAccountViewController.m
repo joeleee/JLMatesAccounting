@@ -146,6 +146,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
         MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
         [(MATabAccountListCell *)cell reuseCellWithData:account];
+        [(MATabAccountListCell *)cell dividingLineView].hidden = (accountList.lastObject == account);
     }
     return cell;
 }
@@ -161,24 +162,37 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return kTabAccountListSectionHeaderHeight;
+    if (0 == section) {
+        return 0;
+    } else if (((section - 1) < self.sectionedAccountList.count)) {
+        return kTabAccountListSectionHeaderHeight;
+    } else {
+        MA_QUICK_ASSERT(NO, @"Out of bound!");
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    MATabAccountListSectionHeader *headerView = [[MATabAccountListSectionHeader alloc] initWithHeaderTitle:@""];
     if (0 == section) {
-        [headerView setHeaderTitle:@"Group Infomation"];
-    } else if (((section - 1) < self.sectionedAccountList.count)) {
+        return nil;
+    }
+
+    MATabAccountListSectionHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MATabAccountListSectionHeader"];
+    if (!headerView) {
+        headerView = [[MATabAccountListSectionHeader alloc] initWithReuseIdentifier:@"MATabAccountListSectionHeader"];
+    }
+
+    if (((section - 1) < self.sectionedAccountList.count)) {
         MAccount *account = [self.sectionedAccountList[section - 1] firstObject];
         NSInteger currentYear = [[[NSDate date] dateToString:@"yyyy"] integerValue];
         if ([[account.accountDate dateToString:@"yyyy"] integerValue] == currentYear) {
-            [headerView setHeaderTitle:[account.accountDate dateToString:@"MM-dd"]];
+            [headerView reuseWithHeaderTitle:[account.accountDate dateToString:@"MM-dd"]];
         } else {
-            [headerView setHeaderTitle:[account.accountDate dateToString:@"yyyy-MM-dd"]];
+            [headerView reuseWithHeaderTitle:[account.accountDate dateToString:@"yyyy-MM-dd"]];
         }
     } else {
-        [headerView setHeaderTitle:@"Unknow Error"];
+        [headerView reuseWithHeaderTitle:@""];
         MA_QUICK_ASSERT(NO, @"Out of bound!");
     }
     return headerView;

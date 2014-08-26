@@ -10,10 +10,8 @@
 
 extern CGFloat const kTabAccountListSectionHeaderHeight;
 
-@interface MATabAccountListSectionHeader : UIView
+@interface MATabAccountListSectionHeader : UITableViewHeaderFooterView
 
-- (MATabAccountListSectionHeader *)initWithHeaderTitle:(NSString *)title;
-
-- (void)setHeaderTitle:(NSString *)headerTitle;
+- (void)reuseWithHeaderTitle:(NSString *)title;
 
 @end

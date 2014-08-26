@@ -42,23 +42,23 @@
 - (void)refreshUIWithGroup:(MGroup *)group
 {
     [self.groupNameLabel setText:group.groupName];
-    [self.groupNameLabel setTextColor:MA_COLOR_LABEL];
+    [self.groupNameLabel setTextColor:MA_COLOR_LABEL_GROUP];
 
     [self.memberCountLabel setText:[@([group.relationshipToMember count]) stringValue]];
-    [self.memberCountLabel setTextColor:MA_COLOR_LABEL];
-    [self.memberCountTitle setTextColor:MA_COLOR_SUB_TITLE];
+    [self.memberCountLabel setTextColor:MA_COLOR_LABEL_GROUP];
+    [self.memberCountTitle setTextColor:MA_COLOR_TITLE_GROUP];
 
     [self.accountCountLabel setText:[@([group.accounts count]) stringValue]];
-    [self.accountCountLabel setTextColor:MA_COLOR_LABEL];
-    [self.accountCountTitle setTextColor:MA_COLOR_SUB_TITLE];
+    [self.accountCountLabel setTextColor:MA_COLOR_LABEL_GROUP];
+    [self.accountCountTitle setTextColor:MA_COLOR_TITLE_GROUP];
 
     NSDecimalNumber *totalFee = DecimalZero;
     for (MAccount *account in group.accounts) {
         totalFee = [totalFee decimalNumberByAdding:account.totalFee];
     }
     [self.totalFeesLabel setText:[totalFee stringValue]];
-    [self.totalFeesLabel setTextColor:MA_COLOR_OUTCOME];
-    [self.totalFeesTitle setTextColor:MA_COLOR_SUB_TITLE];
+    [self.totalFeesLabel setTextColor:MA_COLOR_ACCOUNT_COAST];
+    [self.totalFeesTitle setTextColor:MA_COLOR_TITLE_GROUP];
 }
 
 + (CGFloat)cellHeight:(id)data
