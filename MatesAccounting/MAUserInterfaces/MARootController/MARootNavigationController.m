@@ -27,7 +27,13 @@ NSString * const kLastSelectedTabIndex = @"kLastSelectedTabIndex";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+    [[UINavigationBar appearance] setBarTintColor:MA_COLOR_BAR_BACKGROUND];
+    [[UINavigationBar appearance] setTintColor:MA_COLOR_BAR_ITEM];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: MA_COLOR_BAR_TITLE, NSShadowAttributeName: shadow, NSFontAttributeName: MA_FONT_BAR_TITLE}];
 
     [[[UIApplication sharedApplication] rootTabBarController] setDelegate:self];
 
@@ -35,6 +41,11 @@ NSString * const kLastSelectedTabIndex = @"kLastSelectedTabIndex";
     if (tabIndex < [[UIApplication sharedApplication] rootTabBarController].viewControllers.count) {
         [[[UIApplication sharedApplication] rootTabBarController] setSelectedIndex:tabIndex];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UITabBarControllerDelegate

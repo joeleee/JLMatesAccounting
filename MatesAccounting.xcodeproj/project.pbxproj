@@ -244,6 +244,8 @@
 		9BD0E7B31847ADB100BA9F2E /* MAAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountManager.m; path = MAManagers/MAAccountManager.m; sourceTree = "<group>"; };
 		9BE1DBB318B9F022000BE969 /* MBProgressHUD+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MBProgressHUD+MAAddition.h"; path = "MAAdditions/MBProgressHUD+MAAddition.h"; sourceTree = "<group>"; };
 		9BE1DBB418B9F022000BE969 /* MBProgressHUD+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MBProgressHUD+MAAddition.m"; path = "MAAdditions/MBProgressHUD+MAAddition.m"; sourceTree = "<group>"; };
+		D8170FB419AB779E000A42CD /* MAColorDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAColorDefine.h; path = MAUtilities/MAColorDefine.h; sourceTree = "<group>"; };
+		D8170FB719AB90EC000A42CD /* MAFontDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAFontDefine.h; path = MAUtilities/MAFontDefine.h; sourceTree = "<group>"; };
 		D82541071998FF4F00559835 /* RMemberToGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToGroup.h; path = MAModels/coreDataModels/RMemberToGroup.h; sourceTree = "<group>"; };
 		D82541081998FF4F00559835 /* RMemberToGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMemberToGroup.m; path = MAModels/coreDataModels/RMemberToGroup.m; sourceTree = "<group>"; };
 		D825410A1998FF4F00559835 /* RMemberToAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMemberToAccount.h; path = MAModels/coreDataModels/RMemberToAccount.h; sourceTree = "<group>"; };
@@ -437,6 +439,8 @@
 		9B391C8618352ED80025A2FB /* MAUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				D8170FB419AB779E000A42CD /* MAColorDefine.h */,
+				D8170FB719AB90EC000A42CD /* MAFontDefine.h */,
 				9B391C8718352F580025A2FB /* MAUtilityTools.h */,
 				9B391C8818352F580025A2FB /* MAUtilityTools.m */,
 				9B2085BB1853760C009C03BD /* MAAlertView.h */,

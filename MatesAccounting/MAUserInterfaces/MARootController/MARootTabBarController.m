@@ -25,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[UITabBar appearance] setBarTintColor:MA_COLOR_BAR_BACKGROUND];
+    [[UITabBar appearance] setTintColor:MA_COLOR_BAR_ITEM];
 }
 
 @end

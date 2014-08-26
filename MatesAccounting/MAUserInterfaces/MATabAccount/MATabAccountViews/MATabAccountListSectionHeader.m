@@ -24,7 +24,9 @@ CGFloat const kTabAccountListSectionHeaderHeight = 30.0f;
     self = nibArray[0];
 
     if (self) {
+        [self setBackgroundColor:MA_COLOR_TABLE_HEADER_BACKGROUND];
         self.headerTitleLabel.text = title;
+        [self.headerTitleLabel setTextColor:MA_COLOR_TABLE_HEADER_TITLE];
     }
 
     return self;
