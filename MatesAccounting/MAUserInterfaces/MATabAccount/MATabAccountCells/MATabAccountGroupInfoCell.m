@@ -11,7 +11,7 @@
 #import "MGroup.h"
 #import "MAccount+expand.h"
 
-@interface MATabAccountGroupInfoCell ()
+@interface MATabAccountGroupInfoCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *memberCountTitle;
@@ -29,6 +29,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -42,23 +43,28 @@
 - (void)refreshUIWithGroup:(MGroup *)group
 {
     [self.groupNameLabel setText:group.groupName];
-    [self.groupNameLabel setTextColor:MA_COLOR_LABEL_GROUP];
 
     [self.memberCountLabel setText:[@([group.relationshipToMember count]) stringValue]];
-    [self.memberCountLabel setTextColor:MA_COLOR_LABEL_GROUP];
-    [self.memberCountTitle setTextColor:MA_COLOR_TITLE_GROUP];
 
     [self.accountCountLabel setText:[@([group.accounts count]) stringValue]];
-    [self.accountCountLabel setTextColor:MA_COLOR_LABEL_GROUP];
-    [self.accountCountTitle setTextColor:MA_COLOR_TITLE_GROUP];
 
     NSDecimalNumber *totalFee = DecimalZero;
     for (MAccount *account in group.accounts) {
         totalFee = [totalFee decimalNumberByAdding:account.totalFee];
     }
     [self.totalFeesLabel setText:[totalFee stringValue]];
-    [self.totalFeesLabel setTextColor:MA_COLOR_ACCOUNT_COAST];
-    [self.totalFeesTitle setTextColor:MA_COLOR_TITLE_GROUP];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    [self.groupNameLabel setTextColor:MA_COLOR_TABACCOUNT_LABEL_GROUP];
+    [self.memberCountLabel setTextColor:MA_COLOR_TABACCOUNT_LABEL_GROUP];
+    [self.memberCountTitle setTextColor:MA_COLOR_TABACCOUNT_TITLE_GROUP];
+    [self.accountCountLabel setTextColor:MA_COLOR_TABACCOUNT_LABEL_GROUP];
+    [self.accountCountTitle setTextColor:MA_COLOR_TABACCOUNT_TITLE_GROUP];
+    [self.totalFeesLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
+    [self.totalFeesTitle setTextColor:MA_COLOR_TABACCOUNT_TITLE_GROUP];
 }
 
 + (CGFloat)cellHeight:(id)data
