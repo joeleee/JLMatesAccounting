@@ -36,6 +36,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 }
 
 - (void)viewDidLayoutSubviews
@@ -66,7 +67,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)loadData
 {
-    self.settlementList = [AccountManager accountSettlementListForGroup:MASelectedGroup];
+    self.settlementList = [AccountManager accountSettlementListForGroup:MACurrentGroup];
     [self.tableView reloadData];
 }
 
@@ -97,7 +98,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
-    [self performSegueWithIdentifier:kSegueTabPaymentToGroupList sender:MASelectedGroup];
+    [self performSegueWithIdentifier:kSegueTabPaymentToGroupList sender:MACurrentGroup];
 }
 
 - (void)didRefreshNavigationButtonTapped:(id)sender

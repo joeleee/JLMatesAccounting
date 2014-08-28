@@ -120,6 +120,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;

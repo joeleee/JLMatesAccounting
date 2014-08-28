@@ -41,6 +41,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 }
 
 - (void)viewWillLayoutSubviews
@@ -166,18 +167,18 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 #pragma mark - UI action
 - (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:MASelectedGroup];
+    [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:MACurrentGroup];
 }
 
 - (void)didAddNavigationButtonTaped:(UIBarButtonItem *)sender
 {
-    if (!MASelectedGroup) {
+    if (!MACurrentGroup) {
         [MBProgressHUD showTextHUDOnView:self.view
                                     text:@"还木有选小组，肿么添加成员~"
                          completionBlock:nil
                                 animated:YES];
     } else {
-        [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:MASelectedGroup];
+        [self performSegueWithIdentifier:kSegueTabMemberToFriendList sender:MACurrentGroup];
     }
 }
 

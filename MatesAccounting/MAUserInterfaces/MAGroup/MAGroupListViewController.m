@@ -33,16 +33,18 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     return self;
 }
 
-- (void)dealloc
-{
-}
-
 - (void)loadView
 {
     [super loadView];
 
     UIBarButtonItem *addGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroupNavigationButtonTaped:)];
     [self.navigationItem setRightBarButtonItem:addGroupBarItem animated:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 }
 
 - (void)viewDidAppear:(BOOL)animated

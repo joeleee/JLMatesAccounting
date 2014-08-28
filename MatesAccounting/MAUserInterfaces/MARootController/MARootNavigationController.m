@@ -28,6 +28,7 @@ NSString * const kLastSelectedTabIndex = @"kLastSelectedTabIndex";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+
     [[UINavigationBar appearance] setBarTintColor:MA_COLOR_BAR_BACKGROUND];
     [[UINavigationBar appearance] setTintColor:MA_COLOR_BAR_ITEM];
     NSShadow *shadow = [[NSShadow alloc] init];

@@ -54,6 +54,7 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 
     self.saveBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSaveNavigationButtonTaped:)];
     [self.saveBarItem setEnabled:NO];

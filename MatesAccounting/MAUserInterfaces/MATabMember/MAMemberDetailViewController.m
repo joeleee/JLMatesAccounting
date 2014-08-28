@@ -56,6 +56,7 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
 
     if (self.mFriend) {
         [self setEditing:NO animated:NO];

@@ -9,13 +9,16 @@
 #import "MATabMemberListCell.h"
 
 #import "MFriend.h"
+#import "MGroup+expand.h"
+#import "MAGroupManager.h"
+#import "RMemberToGroup+expand.h"
 
-@interface MATabMemberListCell ()
+@interface MATabMemberListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *memberNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *memberTelphoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberFeeTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberFeeLabel;
+@property (weak, nonatomic) IBOutlet UIView *dividingLineView;
 
 @end
 
@@ -24,6 +27,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -32,11 +36,21 @@
 - (void)reuseCellWithData:(MFriend *)data
 {
     [self.memberNameLabel setText:data.name];
-    if (0 != [data.telephoneNumber integerValue]) {
-        [self.memberTelphoneLabel setText:[data.telephoneNumber stringValue]];
-    } else {
-        [self.memberTelphoneLabel setText:@"暂无号码"];
+
+    NSArray *relationToMembers = [MACurrentGroup relationshipToMembersByFriend:data];
+    if (relationToMembers.count > 0) {
+        RMemberToGroup *memberToGroup = relationToMembers[0];
+        [self.memberFeeLabel setText:[memberToGroup.fee description]];
     }
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
+    self.memberFeeTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.memberFeeLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
+    self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 
 + (CGFloat)cellHeight:(id)data

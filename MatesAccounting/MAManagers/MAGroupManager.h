@@ -7,7 +7,7 @@
 //
 
 #define GroupManager [MAGroupManager sharedManager]
-#define MASelectedGroup [GroupManager selectedGroup]
+#define MACurrentGroup [GroupManager selectedGroup]
 
 #import "ZLMulticastAgent.h"
 

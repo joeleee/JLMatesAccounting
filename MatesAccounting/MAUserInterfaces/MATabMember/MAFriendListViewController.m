@@ -35,6 +35,12 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

@@ -11,13 +11,15 @@
 #import "MGroup.h"
 #import "MAccount+expand.h"
 
-@interface MAGroupListCell ()
+@interface MAGroupListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *groupCreateDataLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groupMemberCountTitle;
 @property (weak, nonatomic) IBOutlet UILabel *groupMemberCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groupAccountCountTitle;
 @property (weak, nonatomic) IBOutlet UILabel *groupAccountCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groupTotalFeeTitle;
 @property (weak, nonatomic) IBOutlet UILabel *groupTotalFeeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *groupDetailButton;
 
@@ -30,6 +32,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -40,7 +43,6 @@
     self.group = data;
 
     [self.groupNameLabel setText:self.group.groupName];
-    [self.groupCreateDataLabel setText:[self.group.createDate description]];
     [self.groupMemberCountLabel setText:[@([self.group.relationshipToMember count]) stringValue]];
     [self.groupAccountCountLabel setText:[@([self.group.accounts count]) stringValue]];
     double totalFee = 0;
@@ -48,6 +50,18 @@
         totalFee += [account.totalFee doubleValue];
     }
     [self.groupTotalFeeLabel setText:[@(totalFee) stringValue]];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.groupNameLabel.textColor = MA_COLOR_GROUP_GROUP_NAME;
+    self.groupMemberCountTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
+    self.groupMemberCountLabel.textColor = MA_COLOR_GROUP_GROUP_LABEL;
+    self.groupAccountCountTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
+    self.groupAccountCountLabel.textColor = MA_COLOR_GROUP_GROUP_LABEL;
+    self.groupTotalFeeTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
+    self.groupTotalFeeLabel.textColor = MA_COLOR_GROUP_COAST_FEE;
 }
 
 + (CGFloat)cellHeight:(id)data
