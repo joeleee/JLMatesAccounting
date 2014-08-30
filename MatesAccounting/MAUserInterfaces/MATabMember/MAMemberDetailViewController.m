@@ -60,10 +60,10 @@ typedef enum {
 
     if (self.mFriend) {
         [self setEditing:NO animated:NO];
-        self.title = @"成员信息";
+        self.title = @"Member detail";
     } else {
         [self setEditing:YES animated:NO];
-        self.title = @"创建新成员";
+        self.title = @"Create friend";
     }
 }
 
@@ -172,7 +172,7 @@ typedef enum {
             } else {
                 name = self.mFriend.name;
             }
-            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"姓名：",
+            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"Name",
                                        kMemberDetailCellContent:name ? name : @"",
                                        kMemberDetailCellKeyboardType:@(UIKeyboardTypeDefault)};
             [detailCell reuseCellWithData:cellInfo];
@@ -203,7 +203,7 @@ typedef enum {
             } else {
                 phoneString = [self.mFriend.telephoneNumber stringValue];
             }
-            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"电话：",
+            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"Phone",
                                        kMemberDetailCellContent:phoneString ? phoneString : @"",
                                        kMemberDetailCellKeyboardType:@(UIKeyboardTypeNumberPad)};
             [detailCell reuseCellWithData:cellInfo];
@@ -221,7 +221,7 @@ typedef enum {
             } else {
                 mail = self.mFriend.eMail;
             }
-            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"邮箱：",
+            NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"E-mail",
                                        kMemberDetailCellContent:mail ? mail : @"",
                                        kMemberDetailCellKeyboardType:@(UIKeyboardTypeEmailAddress)};
             [detailCell reuseCellWithData:cellInfo];
@@ -319,7 +319,7 @@ typedef enum {
 {
     MA_HIDE_KEYBOARD;
     if (0 >= [self.editingName stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
-        [[MAAlertView alertWithTitle:@"姓名不能为空" message:nil buttonTitle:@"OK" buttonBlock:^{}] show];
+        [[MAAlertView alertWithTitle:@"Name can not be NULL" message:nil buttonTitle:@"OK" buttonBlock:^{}] show];
         return;
     }
 
@@ -335,7 +335,7 @@ typedef enum {
             [self setEditing:NO animated:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"更新失败"
+                                        text:@"Update failed"
                              completionBlock:nil
                                     animated:YES];
         }
@@ -351,7 +351,7 @@ typedef enum {
             [self disappear:YES];
         } else {
             [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"创建失败"
+                                        text:@"Create failed"
                              completionBlock:nil
                                     animated:YES];
         }
@@ -363,15 +363,15 @@ typedef enum {
     if (self.editing) {
         MAAlertView *alert = nil;
         if (self.mFriend) {
-            alert = [MAAlertView alertWithTitle:@"确认放弃更改么？"
+            alert = [MAAlertView alertWithTitle:@"You will lost the modification"
                                         message:nil
-                                   buttonTitle1:@"放弃更改"
-                                   buttonBlock1:^{
+                                   buttonTitle1:@"NO"
+                                   buttonBlock1:nil
+                                   buttonTitle2:@"YES"
+                                   buttonBlock2:^{
                                        [self clearEditingData];
                                        [self setEditing:NO animated:YES];
-                                   }
-                                   buttonTitle2:@"点错了~"
-                                   buttonBlock2:nil];
+                                   }];
         } else {
             [self clearEditingData];
             [self disappear:YES];

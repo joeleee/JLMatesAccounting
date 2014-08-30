@@ -8,7 +8,7 @@
 
 #import "MAMemberDetailGenderCell.h"
 
-@interface MAMemberDetailGenderCell ()
+@interface MAMemberDetailGenderCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *genderSwitch;
@@ -21,6 +21,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -28,17 +29,16 @@
 
 - (void)reuseCellWithData:(NSNumber *)gender
 {
-    if (MAGenderFemale == [gender integerValue]) {
-        [self.genderSwitch setOn:YES animated:YES];
-    } else {
-        [self.genderSwitch setOn:NO animated:YES];
-    }
+    [self.genderSwitch setOn:(MAGenderFemale == [gender integerValue]) animated:YES];
+    [self.genderSwitch setHidden:!self.status];
+    [self.genderLabel setText:(MAGenderFemale == [gender integerValue]) ? @"F" : @"M"];
+}
 
-    if (self.status) {
-        [self.genderSwitch setHidden:NO];
-    } else {
-        [self.genderSwitch setHidden:YES];
-    }
+#pragma MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
+    self.genderLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL;
 }
 
 + (CGFloat)cellHeight:(id)data
@@ -56,10 +56,10 @@
     MAGenderEnum gender = MAGenderUnknow;
     if (sender.isOn) {
         gender = MAGenderFemale;
-        [self.genderLabel setText:@"女"];
+        [self.genderLabel setText:@"F"];
     } else {
         gender = MAGenderMale;
-        [self.genderLabel setText:@"男"];
+        [self.genderLabel setText:@"M"];
     }
     [self.actionDelegate actionWithData:@(gender) cell:self type:self.tag];
 }

@@ -10,7 +10,7 @@
 
 #import "MFriend.h"
 
-@interface MAMemberDetailBirthdayCell ()
+@interface MAMemberDetailBirthdayCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
@@ -23,6 +23,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -42,6 +43,13 @@
     } else {
         [self.birthdayDatePicker setHidden:YES];
     }
+}
+
+#pragma MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
+    self.birthdayLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL;
 }
 
 + (CGFloat)cellHeight:(id)data
