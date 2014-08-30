@@ -45,11 +45,11 @@
     [self.groupNameLabel setText:self.group.groupName];
     [self.groupMemberCountLabel setText:[@([self.group.relationshipToMember count]) stringValue]];
     [self.groupAccountCountLabel setText:[@([self.group.accounts count]) stringValue]];
-    double totalFee = 0;
+    NSDecimalNumber *totalFee = DecimalZero;
     for (MAccount *account in self.group.accounts) {
-        totalFee += [account.totalFee doubleValue];
+        totalFee = [totalFee decimalNumberByAdding:account.totalFee];
     }
-    [self.groupTotalFeeLabel setText:[@(totalFee) stringValue]];
+    [self.groupTotalFeeLabel setText:[totalFee description]];
 }
 
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol

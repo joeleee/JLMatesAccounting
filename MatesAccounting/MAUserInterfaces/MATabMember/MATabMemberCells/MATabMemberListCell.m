@@ -41,6 +41,15 @@
     if (relationToMembers.count > 0) {
         RMemberToGroup *memberToGroup = relationToMembers[0];
         [self.memberFeeLabel setText:[memberToGroup.fee description]];
+
+        NSComparisonResult result = [memberToGroup.fee compare:DecimalZero];
+        if (NSOrderedAscending == result) {
+            self.memberFeeLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_COAST;
+        } else if (NSOrderedSame == result) {
+            self.memberFeeLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_NULL;
+        } else if (NSOrderedDescending == result) {
+            self.memberFeeLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_PAY;
+        }
     }
 }
 
@@ -49,7 +58,6 @@
 {
     self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
     self.memberFeeTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.memberFeeLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
     self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 

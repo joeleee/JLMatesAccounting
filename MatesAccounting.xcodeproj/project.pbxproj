@@ -17,7 +17,6 @@
 		9B25AA0F18532E41008D79B7 /* MAMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA0E18532E41008D79B7 /* MAMemberListViewController.m */; };
 		9B25AA1418533DBC008D79B7 /* MAMemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */; };
 		9B25AA1718533E1E008D79B7 /* MAMemberListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1618533E1E008D79B7 /* MAMemberListSectionHeader.m */; };
-		9B25AA1918534236008D79B7 /* MATabMemberViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B25AA1818534236008D79B7 /* MATabMemberViews.xib */; };
 		9B25AA1C1853472C008D79B7 /* MAMemberListSectionEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1B1853472C008D79B7 /* MAMemberListSectionEmptyCell.m */; };
 		9B25AA1F185350FE008D79B7 /* UIColor+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25AA1E185350FE008D79B7 /* UIColor+MAAddition.m */; };
 		9B26C07418BE22E9004B7E7D /* ZLMulticastAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B26C07218BE22E9004B7E7D /* ZLMulticastAgent.m */; };
@@ -131,7 +130,6 @@
 		9B25AA1318533DBC008D79B7 /* MAMemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberListCell.m; path = MATabMemberCells/MAMemberListCell.m; sourceTree = "<group>"; };
 		9B25AA1518533E1E008D79B7 /* MAMemberListSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberListSectionHeader.h; path = MATabMemberViews/MAMemberListSectionHeader.h; sourceTree = "<group>"; };
 		9B25AA1618533E1E008D79B7 /* MAMemberListSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberListSectionHeader.m; path = MATabMemberViews/MAMemberListSectionHeader.m; sourceTree = "<group>"; };
-		9B25AA1818534236008D79B7 /* MATabMemberViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MATabMemberViews.xib; path = MATabMemberViews/MATabMemberViews.xib; sourceTree = "<group>"; };
 		9B25AA1A1853472C008D79B7 /* MAMemberListSectionEmptyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberListSectionEmptyCell.h; path = MATabMemberCells/MAMemberListSectionEmptyCell.h; sourceTree = "<group>"; };
 		9B25AA1B1853472C008D79B7 /* MAMemberListSectionEmptyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberListSectionEmptyCell.m; path = MATabMemberCells/MAMemberListSectionEmptyCell.m; sourceTree = "<group>"; };
 		9B25AA1D185350FE008D79B7 /* UIColor+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MAAddition.h"; path = "MAAdditions/UIColor+MAAddition.h"; sourceTree = "<group>"; };
@@ -324,7 +322,6 @@
 		9B25AA1018533D1F008D79B7 /* MATabMemberViews */ = {
 			isa = PBXGroup;
 			children = (
-				9B25AA1818534236008D79B7 /* MATabMemberViews.xib */,
 				9B25AA1518533E1E008D79B7 /* MAMemberListSectionHeader.h */,
 				9B25AA1618533E1E008D79B7 /* MAMemberListSectionHeader.m */,
 			);
@@ -803,7 +800,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B25AA1918534236008D79B7 /* MATabMemberViews.xib in Resources */,
 				9BCAC07918327097000417FD /* MAInit.storyboard in Resources */,
 				9BCAC03118322997000417FD /* InfoPlist.strings in Resources */,
 				9BCAC03C18322997000417FD /* Images.xcassets in Resources */,

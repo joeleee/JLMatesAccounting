@@ -23,11 +23,15 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        [self.textLabel setFont:[UIFont systemFontOfSize:16.0f]];
-        [self.textLabel setTextColor:UIColorFromRGB(0, 64, 128)];
+        [self.contentView setBackgroundColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_BACKGROUND];
+        self.contentView.layer.shadowColor = MA_COLOR_TABACCOUNT_TABLE_HEADER_SHADOW.CGColor;
+        self.contentView.layer.shadowOpacity = 0.2;
+        self.contentView.layer.shadowRadius = 3;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0.1);
+        [self.textLabel setTextColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_TITLE];
     }
 
-    return self;
+    return  self;
 }
 
 - (void)setHeaderTitle:(NSString *)headerTitle

@@ -243,11 +243,11 @@ typedef enum {
 
     switch (section) {
         case MemberListSectionOfSelected: {
-            [headerView setHeaderTitle:@"已选择"];
+            [headerView setHeaderTitle:@"Selected"];
             break;
         }
         case MemberListSectionOfUnselected: {
-            [headerView setHeaderTitle:@"未选择"];
+            [headerView setHeaderTitle:@"Unselected"];
             break;
         }
         default: {
