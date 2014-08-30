@@ -233,7 +233,7 @@
             </objects>
             <point key="canvasLocation" x="113" y="-25"/>
         </scene>
-        <!--Member Detail View Controller - 成员详情-->
+        <!--Member Detail View Controller - Member detail-->
         <scene sceneID="ozM-K5-rqj">
             <objects>
                 <viewController storyboardIdentifier="MAMemberDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Mr-cM-xIL" customClass="MAMemberDetailViewController" sceneMemberID="viewController">
@@ -422,7 +422,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="成员详情" id="5C2-St-uVh"/>
+                    <navigationItem key="navigationItem" title="Member detail" id="5C2-St-uVh"/>
                     <connections>
                         <outlet property="accountButton" destination="sT6-9J-J9r" id="riX-kZ-vZU"/>
                         <outlet property="tableView" destination="pMT-zW-dfh" id="dP3-02-fz0"/>
@@ -432,7 +432,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="113" y="681"/>
         </scene>
-        <!--Friend List View Controller - 好友-->
+        <!--Friend List View Controller - Friends-->
         <scene sceneID="TJp-xV-lbR">
             <objects>
                 <viewController storyboardIdentifier="MAFriendListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1H3-fR-Ewz" customClass="MAFriendListViewController" sceneMemberID="viewController">
@@ -440,77 +440,75 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="35m-X8-bKi">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="35m-X8-bKi">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAFriendListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MAFriendListCell" rowHeight="80" id="mMp-j1-GMG" customClass="MAFriendListCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAFriendListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAFriendListCell" rowHeight="80" id="mMp-j1-GMG" customClass="MAFriendListCell">
                                         <rect key="frame" x="0.0" y="86" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mMp-j1-GMG" id="woD-PL-cxJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="dky-4H-3KL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李某某" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0j6-Yp-z4l">
-                                                            <rect key="frame" x="20" y="12" width="125" height="30"/>
+                                                            <rect key="frame" x="20" y="12" width="125" height="22.5"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890123" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="RGE-e4-quk">
-                                                            <rect key="frame" x="43" y="42" width="102" height="21"/>
+                                                            <rect key="frame" x="43" y="40.5" width="102" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zhuocheng.lee@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dy2-Jh-6sk">
-                                                            <rect key="frame" x="20" y="58" width="125" height="21"/>
+                                                            <rect key="frame" x="20" y="55" width="125" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tel." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="izZ-3U-VVG">
-                                                            <rect key="frame" x="20" y="42" width="25" height="21"/>
+                                                            <rect key="frame" x="20" y="40.5" width="25" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账目数:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Adh-IW-RiX">
-                                                            <rect key="frame" x="206" y="15" width="50" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accounts:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Adh-IW-RiX">
+                                                            <rect key="frame" x="179" y="15.5" width="80" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小组数:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="58s-lm-clg">
-                                                            <rect key="frame" x="206" y="44" width="50" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groups:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="58s-lm-clg">
+                                                            <rect key="frame" x="179" y="45" width="80" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="8Vf-zR-c30">
-                                                            <rect key="frame" x="260" y="15" width="40" height="21"/>
+                                                            <rect key="frame" x="262" y="15.5" width="40" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="tfe-5c-iSP">
-                                                            <rect key="frame" x="260" y="44" width="40" height="21"/>
+                                                            <rect key="frame" x="262" y="45" width="40" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" id="BDn-sj-aSA" userLabel="Dividing line">
+                                                            <rect key="frame" x="20" y="79" width="300" height="1"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -521,6 +519,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <connections>
                                             <outlet property="accountCountLabel" destination="8Vf-zR-c30" id="TtZ-vd-gA7"/>
                                             <outlet property="accountTitleLabel" destination="Adh-IW-RiX" id="CxF-T2-N1d"/>
+                                            <outlet property="dividingLineView" destination="BDn-sj-aSA" id="Lle-VT-l53"/>
                                             <outlet property="eMailLabel" destination="dy2-Jh-6sk" id="q8w-SI-LMT"/>
                                             <outlet property="friendNameLabel" destination="0j6-Yp-z4l" id="pBL-Ol-zdV"/>
                                             <outlet property="groupCountLabel" destination="tfe-5c-iSP" id="XNU-ro-Y6q"/>
@@ -538,7 +537,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="好友" id="NIz-IA-Egk"/>
+                    <navigationItem key="navigationItem" title="Friends" id="NIz-IA-Egk"/>
                     <connections>
                         <outlet property="tableView" destination="35m-X8-bKi" id="tsc-cc-0jn"/>
                         <segue destination="aQK-tv-AIo" kind="modal" identifier="kSegueFriendListToCreateMember" id="atx-wc-fRM"/>
@@ -1080,7 +1079,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="12" id="nyJ-v6-Qyd">
-                                                    <rect key="frame" x="200.00000111262" y="5" width="100" height="30"/>
+                                                    <rect key="frame" x="200.00000178284108" y="5" width="100" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1232,7 +1231,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dcT-rm-fD6">
-                                                            <rect key="frame" x="154.99999609398452" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="154.99999943091547" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
@@ -1394,11 +1393,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="llC-v5-bXO"/>
         <segue reference="trI-uf-AKA"/>
-        <segue reference="Qp4-1k-UgR"/>
-        <segue reference="H6b-eb-bSk"/>
-        <segue reference="NzF-kh-GnM"/>
         <segue reference="ZMe-Ch-sex"/>
+        <segue reference="H6b-eb-bSk"/>
+        <segue reference="Qp4-1k-UgR"/>
+        <segue reference="atx-wc-fRM"/>
+        <segue reference="NzF-kh-GnM"/>
     </inferredMetricsTieBreakers>
 </document>
