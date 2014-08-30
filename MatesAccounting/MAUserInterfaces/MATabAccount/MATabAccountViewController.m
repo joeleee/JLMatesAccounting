@@ -179,9 +179,9 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         return nil;
     }
 
-    MATabAccountListSectionHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MATabAccountListSectionHeader"];
+    MATabAccountListSectionHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MATabAccountListSectionHeader className]];
     if (!headerView) {
-        headerView = [[MATabAccountListSectionHeader alloc] initWithReuseIdentifier:@"MATabAccountListSectionHeader"];
+        headerView = [[MATabAccountListSectionHeader alloc] initWithReuseIdentifier:[MATabAccountListSectionHeader className]];
     }
 
     if (((section - 1) < self.sectionedAccountList.count)) {

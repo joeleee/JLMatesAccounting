@@ -242,7 +242,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     switch (section) {
         case FeeSectionType:
         {
-            headerTitle = @"消费金额";
+            headerTitle = @"Total coast";
             rowCount = 1;
             cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
             cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
@@ -251,7 +251,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
         case AccountDetailSectionType:
         {
-            headerTitle = @"消费信息";
+            headerTitle = @"Account info";
             rowCount = 4;
 
             switch (row) {
@@ -291,7 +291,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
         case MembersSectionType:
         {
-            headerTitle = @"消费统计";
+            headerTitle = @"Consumer details";
             if (self.isEditing) {
                 rowCount = self.editingPayers.count + self.editingConsumers.count;
             } else {
@@ -305,7 +305,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
         case AccountDescriptionSectionType:
         {
-            headerTitle = @"消费描述";
+            headerTitle = @"Description";
             rowCount = 1;
             cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
             cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
@@ -477,16 +477,26 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return kAccountDetailSectionHeaderHeight;
+    if (0 == section) {
+        return 0;
+    } else {
+        return kAccountDetailSectionHeaderHeight;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    MAAccountDetailSectionHeader *headerView = [[MAAccountDetailSectionHeader alloc] initWithHeaderTitle:@"未知错误"];
+    if (0 == section) {
+        return nil;
+    }
+
+    MAAccountDetailSectionHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[MAAccountDetailSectionHeader className]];
+    if (!headerView) {
+        headerView = [[MAAccountDetailSectionHeader alloc] initWithReuseIdentifier:[MAAccountDetailSectionHeader className]];
+    }
 
     NSDictionary *sectionInfo = [self tableView:tableView infoOfSection:section row:0];
-
-    [headerView setHeaderTitle:[sectionInfo objectForKey:kAccountDetailHeaderTitle]];
+    [headerView reuseWithHeaderTitle:[sectionInfo objectForKey:kAccountDetailHeaderTitle]];
 
     return headerView;
 }

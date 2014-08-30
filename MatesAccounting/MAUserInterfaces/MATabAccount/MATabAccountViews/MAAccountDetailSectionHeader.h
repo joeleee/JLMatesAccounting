@@ -10,10 +10,8 @@
 
 extern CGFloat const kAccountDetailSectionHeaderHeight;
 
-@interface MAAccountDetailSectionHeader : UIView
+@interface MAAccountDetailSectionHeader : UITableViewHeaderFooterView
 
-- (MAAccountDetailSectionHeader *)initWithHeaderTitle:(NSString *)title;
-
-- (void)setHeaderTitle:(NSString *)headerTitle;
+- (void)reuseWithHeaderTitle:(NSString *)title;
 
 @end

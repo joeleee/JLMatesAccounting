@@ -12,27 +12,27 @@ CGFloat const kAccountDetailSectionHeaderHeight = 30.0f;
 
 @interface MAAccountDetailSectionHeader ()
 
-@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
-
 @end
 
 @implementation MAAccountDetailSectionHeader
 
-- (MAAccountDetailSectionHeader *)initWithHeaderTitle:(NSString *)title
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
-    NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"MATabAccountViews" owner:self options:nil];
-    self = nibArray[0];
-
-    if (self) {
-        self.headerTitleLabel.text = title;
+    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        [self.contentView setBackgroundColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_BACKGROUND];
+        self.contentView.layer.shadowColor = MA_COLOR_TABACCOUNT_TABLE_HEADER_SHADOW.CGColor;
+        self.contentView.layer.shadowOpacity = 0.2;
+        self.contentView.layer.shadowRadius = 3;
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0.1);
+        [self.textLabel setTextColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_TITLE];
     }
 
-    return self;
+    return  self;
 }
 
-- (void)setHeaderTitle:(NSString *)headerTitle
+- (void)reuseWithHeaderTitle:(NSString *)title
 {
-    self.headerTitleLabel.text = headerTitle;
+    self.textLabel.text = title;
 }
 
 @end
