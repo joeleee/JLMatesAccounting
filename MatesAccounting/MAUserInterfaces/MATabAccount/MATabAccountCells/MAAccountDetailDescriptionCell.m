@@ -30,9 +30,11 @@
     if (self.status) {
         self.accountDescriptionTextView.userInteractionEnabled = YES;
         self.accountDescriptionTextView.backgroundColor = UIColorFromRGB(222, 222, 222);
+        self.accountDescriptionTextView.textColor = [UIColor blackColor];
     } else {
         self.accountDescriptionTextView.userInteractionEnabled = NO;
         self.accountDescriptionTextView.backgroundColor = [UIColor clearColor];
+        self.accountDescriptionTextView.textColor = UIColorFromRGB(222, 222, 222);
     }
 }
 

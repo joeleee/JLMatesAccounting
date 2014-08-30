@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailFeeCell.h"
 
-@interface MAAccountDetailFeeCell () <UITextFieldDelegate>
+@interface MAAccountDetailFeeCell () <UITextFieldDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *feeTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *feeTextField;
@@ -20,6 +20,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -32,7 +33,7 @@
         self.feeTextField.userInteractionEnabled = YES;
         self.feeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
     } else {
-        [self.feeTextField setText:[@([data doubleValue]) stringValue]];
+        [self.feeTextField setText:data];
         self.feeTextField.userInteractionEnabled = NO;
         self.feeTextField.backgroundColor = [UIColor clearColor];
     }
@@ -46,6 +47,13 @@
 + (NSString *)reuseIdentifier
 {
     return [self className];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.feeTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.feeTextField.textColor = MA_COLOR_TABACCOUNT_ACCOUNT_COAST;
 }
 
 #pragma mark UITextFieldDelegate

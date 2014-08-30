@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailLocationCell.h"
 
-@interface MAAccountDetailLocationCell ()
+@interface MAAccountDetailLocationCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *locationTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
@@ -20,6 +20,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -45,6 +46,13 @@
 + (NSString *)reuseIdentifier
 {
     return [self className];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.locationTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.locationDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 @end

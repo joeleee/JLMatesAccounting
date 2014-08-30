@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailPayersCell.h"
 
-@interface MAAccountDetailPayersCell ()
+@interface MAAccountDetailPayersCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *payersTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payersDescriptionLabel;
@@ -20,6 +20,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -45,6 +46,13 @@
 + (NSString *)reuseIdentifier
 {
     return [self className];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.payersTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.payersDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 @end

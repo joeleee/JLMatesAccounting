@@ -203,20 +203,24 @@
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers
 {
     NSMutableArray *memberToAccounts = [NSMutableArray array];
+    NSMutableArray *zeroCoastMembers = [NSMutableArray array];
 
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
-        if (isPayers && 0 > [memberToAccount.fee doubleValue]) {
-            MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:memberToAccount];
+        MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:memberToAccount];
+        if (isPayers && NSOrderedDescending == [memberToAccount.fee compare:DecimalZero]) {
             [memberToAccounts addObject:feeOfMember];
-        } else if (!isPayers && 0 <= [memberToAccount.fee doubleValue]) {
-            MAFeeOfMember *feeOfMember = [MAFeeOfMember feeOfMember:memberToAccount];
+        } else if (!isPayers && NSOrderedAscending == [memberToAccount.fee compare:DecimalZero]) {
             [memberToAccounts addObject:feeOfMember];
+        } else if (!isPayers && NSOrderedSame == [memberToAccount.fee compare:DecimalZero]) {
+            [zeroCoastMembers addObject:feeOfMember];
         }
     }
 
-    return [memberToAccounts sortedArrayUsingComparator:^NSComparisonResult(MAFeeOfMember *obj1, MAFeeOfMember *obj2) {
+    memberToAccounts = [NSMutableArray arrayWithArray:[memberToAccounts sortedArrayUsingComparator:^NSComparisonResult(MAFeeOfMember *obj1, MAFeeOfMember *obj2) {
         return [obj1.createDate compare:obj2.createDate];
-    }];
+    }]];
+    [memberToAccounts addObjectsFromArray:zeroCoastMembers];
+    return memberToAccounts;
 }
 
 - (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer

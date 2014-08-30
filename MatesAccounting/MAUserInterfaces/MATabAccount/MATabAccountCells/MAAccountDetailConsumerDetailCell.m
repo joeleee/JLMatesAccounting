@@ -12,10 +12,9 @@
 #import "MFriend.h"
 #import "MAAccountManager.h"
 
-@interface MAAccountDetailConsumerDetailCell () <UITextFieldDelegate>
+@interface MAAccountDetailConsumerDetailCell () <UITextFieldDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UILabel *consumerNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *consumerTypeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *consumerFeeTextField;
 
 @end
@@ -25,6 +24,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -32,9 +32,16 @@
 
 - (void)reuseCellWithData:(MAFeeOfMember *)data
 {
-    NSDecimalNumber *fee = (NSOrderedDescending == [data.fee compare:DecimalZero]) ? data.fee : [data.fee inverseNumber];
+    NSComparisonResult result = [data.fee compare:DecimalZero];
     [self.consumerNameLabel setText:data.member.name];
-    [self.consumerFeeTextField setText:(NSOrderedSame != [fee compare:DecimalZero]) ? [fee description] : nil];
+    [self.consumerFeeTextField setText:(NSOrderedSame != result) ? [data.fee description] : nil];
+    if (NSOrderedAscending == result) {
+        self.consumerFeeTextField.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_COAST;
+    } else if (NSOrderedSame == result) {
+        self.consumerFeeTextField.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_NULL;
+    } else if (NSOrderedDescending == result) {
+        self.consumerFeeTextField.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_PAY;
+    }
 
     if (self.status) {
         self.consumerFeeTextField.userInteractionEnabled = YES;
@@ -70,6 +77,12 @@
 {
     NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     return [resultText isTwoDecimalPlaces];
+}
+
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
+{
+    self.consumerNameLabel.textColor = MA_COLOR_TABACCOUNT_USER_NAME;
 }
 
 @end

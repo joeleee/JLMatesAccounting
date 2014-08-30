@@ -429,10 +429,8 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             NSArray *consumers = self.isEditing ? self.editingConsumers : self.consumers;
             if (index < payers.count) {
                 data = payers[index];
-                [detailCell.consumerTypeLabel setText:@"Pay"];
             } else if ((index - payers.count) < consumers.count) {
                 data = consumers[index - payers.count];
-                [detailCell.consumerTypeLabel setText:@"Consume"];
             }
             [detailCell reuseCellWithData:data];
             break;
