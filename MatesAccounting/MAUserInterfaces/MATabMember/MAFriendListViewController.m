@@ -172,18 +172,18 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         } else {
-            NSArray *unpaidGroups = [FriendManager unpaidGroupsForFriend:mFriend];
-            if (0 < unpaidGroups.count) {
-                NSMutableString *unpaidGroupNames = [NSMutableString string];
-                for (MGroup *group in unpaidGroups) {
-                    if (group == unpaidGroups.firstObject) {
-                        [unpaidGroupNames appendFormat:@"%@", group.groupName];
+            if (0 < mFriend.relationshipToGroup.count) {
+                NSArray *relationshipToGroups = mFriend.relationshipToGroup.allObjects;
+                NSMutableString *groupNames = [NSMutableString string];
+                for (RMemberToGroup *memberToGroup in relationshipToGroups) {
+                    if (memberToGroup == relationshipToGroups.firstObject) {
+                        [groupNames appendFormat:@"%@", memberToGroup.group.groupName];
                     } else {
-                        [unpaidGroupNames appendFormat:@", %@", group.groupName];
+                        [groupNames appendFormat:@", %@", memberToGroup.group.groupName];
                     }
                 }
-                NSString *message = [NSString stringWithFormat:@"%@ has %lu unpaid groups: %@", mFriend.name, (unsigned long)unpaidGroups.count, unpaidGroupNames];
-                [[MAAlertView alertWithTitle:@"Delete friend failed" message:message buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                NSString *message = [NSString stringWithFormat:@"%@ belongs to %lu groups: %@", mFriend.name, (unsigned long)relationshipToGroups.count, groupNames];
+                [[MAAlertView alertWithTitle:@"Can't delete" message:message buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             } else {
                 [[MAAlertView alertWithTitle:@"Delete friend failed!" message:nil buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }

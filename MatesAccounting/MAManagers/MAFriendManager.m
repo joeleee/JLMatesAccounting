@@ -142,7 +142,7 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 - (BOOL)deleteFriend:(MFriend *)mFriend
 {
-    if (0 != [self unpaidGroupsForFriend:mFriend].count) {
+    if (0 != mFriend.relationshipToGroup.count) {
         return NO;
     }
 
