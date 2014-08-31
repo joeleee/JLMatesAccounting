@@ -9,6 +9,7 @@
         <scene sceneID="b4S-L0-piY">
             <objects>
                 <navigationController storyboardIdentifier="MARootNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TOM-cp-105" customClass="MARootNavigationController" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YpY-SN-Ptl">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -96,7 +97,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" systemItem="contacts" id="ELa-oR-qlG"/>
-                    <navigationItem key="navigationItem" title="账组成员" id="WbJ-Ka-1qu"/>
+                    <navigationItem key="navigationItem" title="Members" id="WbJ-Ka-1qu"/>
                     <connections>
                         <outlet property="tableView" destination="wTx-39-uXO" id="r7f-iz-Vod"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabMemberToGroupList" id="trI-uf-AKA"/>
@@ -545,7 +546,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jxm-fE-Drh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1043" y="681"/>
+            <point key="canvasLocation" x="1063" y="681"/>
         </scene>
         <!--Member List View Controller - 成员-->
         <scene sceneID="iwk-xv-FK1">
@@ -687,10 +688,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="105" y="1408"/>
         </scene>
-        <!--Tab Account View Controller - 账目-->
+        <!--Tab Account View Controller - Account-->
         <scene sceneID="Y6g-XU-yTH">
             <objects>
-                <viewController storyboardIdentifier="MAAccountViewController" title="账目" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wXF-C5-3XM" customClass="MATabAccountViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAAccountViewController" title="Account" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wXF-C5-3XM" customClass="MATabAccountViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZL-Mj-zKv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -845,10 +846,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" systemItem="mostViewed" id="vCq-zP-JxM"/>
-                    <navigationItem key="navigationItem" title="账目" id="obn-s3-ydX">
+                    <navigationItem key="navigationItem" title="Accounts" id="obn-s3-ydX">
                         <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="tTc-vL-Mm8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DFX-MW-koR"/>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="MU9-RW-sll" id="NY4-A3-XSg"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabAccountToGroupList" id="f34-mq-Bgm"/>
@@ -864,6 +866,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="HyY-ky-2NI">
             <objects>
                 <navigationController title=" " definesPresentationContext="YES" id="bVg-Iz-XI5" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="C8K-Ag-vXd">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1147,6 +1150,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="pm4-U5-6PI">
             <objects>
                 <navigationController definesPresentationContext="YES" id="5r4-fn-Iep" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1vf-h3-AZV">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1163,6 +1167,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tabBarController storyboardIdentifier="MARootTabBarController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jw5-bt-JrX" customClass="MARootTabBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title=" " id="KcY-hC-zhe"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DuC-cH-ukr">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -1190,7 +1195,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="4" systemItem="more" id="XQb-cB-Oiv"/>
-                    <navigationItem key="navigationItem" title="更多" id="Deu-QI-GqQ"/>
+                    <navigationItem key="navigationItem" title="More" id="Deu-QI-GqQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qw0-5f-EgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1275,7 +1280,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" systemItem="downloads" id="5Dy-ck-WJw"/>
-                    <navigationItem key="navigationItem" title="结算" id="bus-QQ-4Sg"/>
+                    <navigationItem key="navigationItem" title="Pay Settlement" id="bus-QQ-4Sg"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="NeZ-Qk-UT2" id="Ob6-Wm-Ma9"/>
                         <segue destination="D4S-IT-cSI" kind="push" identifier="kSegueTabPaymentToGroupList" id="ahX-16-mo4"/>
@@ -1396,8 +1402,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="trI-uf-AKA"/>
-        <segue reference="ZMe-Ch-sex"/>
+        <segue reference="ahX-16-mo4"/>
+        <segue reference="paX-30-ImT"/>
         <segue reference="J0d-fi-SkM"/>
         <segue reference="Bvd-iw-5bp"/>
         <segue reference="atx-wc-fRM"/>

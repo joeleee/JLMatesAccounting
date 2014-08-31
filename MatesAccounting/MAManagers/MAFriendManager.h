@@ -50,4 +50,6 @@
 
 - (BOOL)deleteFriend:(MFriend *)mFriend;
 
+- (NSArray *)unpaidGroupsForFriend:(MFriend *)mFriend;
+
 @end

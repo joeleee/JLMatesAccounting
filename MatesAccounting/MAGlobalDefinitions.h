@@ -22,6 +22,8 @@
 #define MALogInfo(...) NSLog(__VA_ARGS__)
 #define MALogError(...) NSLog(__VA_ARGS__)
 
+#define MALogTestInfo(...) NSLog(__VA_ARGS__)
+
 #define MA_HIDE_KEYBOARD [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil]
 
 #define MA_STATUSBAR_HEIGHT (20.0f)

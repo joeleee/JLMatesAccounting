@@ -28,51 +28,69 @@
     return sharedInstance;
 }
 
-- (void)generateGroups:(NSUInteger)totalCount
+- (NSArray *)generateGroups:(NSUInteger)totalCount
 {
-    MALogInfo(@"\n\n==============================\n");
+    MALogTestInfo(@"\n\n==============================\n");
+    NSMutableArray *groups = [NSMutableArray array];
     for (; totalCount > 0; --totalCount) {
-        MALogInfo(@"Generating groups %lu", (unsigned long)totalCount);
+        MALogTestInfo(@"Generating groups %lu", (unsigned long)totalCount);
         unsigned int randomValue = arc4random() % 10000;
-        [GroupManager createGroup:[NSString stringWithFormat:@"Group_%u", randomValue]];
+        MGroup *group = [GroupManager createGroup:[NSString stringWithFormat:@"Group_%u", randomValue]];
+        MA_QUICK_ASSERT(group, @"Create group failed!");
+        [groups addObject:group];
     }
+
+    return groups;
 }
 
-- (void)generateFriends:(NSUInteger)totalCount
+- (NSArray *)generateFriends:(NSUInteger)totalCount
 {
-    MALogInfo(@"\n\n==============================\n");
+    MALogTestInfo(@"\n\n==============================\n");
+    NSMutableArray *friends = [NSMutableArray array];
     for (; totalCount > 0; --totalCount) {
-        MALogInfo(@"Generating friend %lu", (unsigned long)totalCount);
+        MALogTestInfo(@"Generating friend %lu", (unsigned long)totalCount);
         unsigned int randomValue = arc4random();
-        [FriendManager createFriendWithName:[NSString stringWithFormat:@"Friend_%u", randomValue % 1000]
+        MFriend *friend = [FriendManager createFriendWithName:[NSString stringWithFormat:@"Friend_%u", randomValue % 1000]
                                      gender:(randomValue % 2) ? MAGenderFemale : MAGenderMale
                                 phoneNumber:@(randomValue)
                                       eMail:[NSString stringWithFormat:@"Friend_%u@gmail.boss", randomValue % 1000]
                                    birthday:[[NSDate date] dateByAddingTimeInterval:-randomValue]];
+        MA_QUICK_ASSERT(friend, @"Create friend failed!");
+        [friends addObject:friend];
     }
+
+    return friends;
 }
 
-- (void)addFriendToGroup:(MGroup *)group totalCount:(NSUInteger)totalCount
+- (NSArray *)addFriendToGroup:(MGroup *)group totalCount:(NSUInteger)totalCount
 {
-    MALogInfo(@"\n\n==============================\n");
-    for (MFriend *friend in [FriendManager allFriendsFilteByGroup:group]) {
-        if (totalCount-- == 0) {
-            return;
+    MALogTestInfo(@"\n\n==============================\n");
+    NSMutableArray *memberToGroups = [NSMutableArray array];
+    NSMutableArray *friends = [NSMutableArray arrayWithArray:[FriendManager allFriendsFilteByGroup:group]];
+    for (; totalCount > 0; --totalCount) {
+        if (0 >= friends.count) {
+            return memberToGroups;
         }
-        MALogInfo(@"Adding friend to group %lu", (unsigned long)totalCount);
-        [GroupManager addFriend:friend toGroup:group];
+        NSUInteger index = arc4random() % friends.count;
+        MFriend *friend = friends[index];
+        [friends removeObjectAtIndex:index];
+        MALogTestInfo(@"Adding friend to group %lu", (unsigned long)totalCount);
+        RMemberToGroup *memberToGroup = [GroupManager addFriend:friend toGroup:group];
+        [memberToGroups addObject:memberToGroup];
     }
+
+    return memberToGroups;
 }
 
 - (void)generateAccountInGroup:(MGroup *)group totalCount:(NSUInteger)totalCount
 {
-    MALogInfo(@"\n\n==============================\n");
+    MALogTestInfo(@"\n\n==============================\n");
     if (0 == group.relationshipToMember.count) {
         return;
     }
 
     for (; totalCount > 0; --totalCount) {
-        MALogInfo(@"Generating account %lu", (unsigned long)totalCount);
+        MALogTestInfo(@"Generating account %lu", (unsigned long)totalCount);
 
         unsigned int randomValue = arc4random();
         NSMutableSet *feeOfMembers = [NSMutableSet set];
@@ -119,10 +137,10 @@
 - (void)onePackageService
 {
     [[MATestDataGenerater instance] generateGroups:10];
-    [[MATestDataGenerater instance] generateFriends:100];
+    [[MATestDataGenerater instance] generateFriends:80];
     for (MGroup *group in [GroupManager myGroups]) {
-        [[MATestDataGenerater instance] addFriendToGroup:group totalCount:24];
-        [[MATestDataGenerater instance] generateAccountInGroup:group totalCount:23];
+        [[MATestDataGenerater instance] addFriendToGroup:group totalCount:10];
+        [[MATestDataGenerater instance] generateAccountInGroup:group totalCount:10];
     }
 }
 
@@ -150,7 +168,7 @@
         }
     }
     if (![context save:&error]) {
-        MALogInfo(@"!!! Save failed !!!");
+        MALogTestInfo(@"!!! Save failed !!!");
     }
 }
 

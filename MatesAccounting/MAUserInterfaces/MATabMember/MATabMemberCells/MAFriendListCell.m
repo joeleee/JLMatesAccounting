@@ -9,6 +9,7 @@
 #import "MAFriendListCell.h"
 
 #import "MFriend.h"
+#import "RMemberToAccount.h"
 
 @interface MAFriendListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
@@ -35,6 +36,12 @@
     return self;
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    self.backgroundColor = selected ? MA_COLOR_TABMEMBER_SELECTED_BACKGROUND : [UIColor clearColor];
+}
+
 - (void)reuseCellWithData:(MFriend *)data
 {
     [self.friendNameLabel setText:data.name];
@@ -44,8 +51,22 @@
     } else {
         [self.eMailLabel setText:@"With out E-mail"];
     }
-    [self.accountCountLabel setText:[@(data.relationshipToAccount.count) stringValue]];
+    NSMutableSet *accountSet = [NSMutableSet set];
+    for (RMemberToAccount *memberToAccount in data.relationshipToAccount) {
+        [accountSet addObject:memberToAccount.account];
+    }
+    [self.accountCountLabel setText:[@(accountSet.count) stringValue]];
     [self.groupCountLabel setText:[@(data.relationshipToGroup.count) stringValue]];
+}
+
++ (CGFloat)cellHeight:(id)data
+{
+    return 50.0f;
+}
+
++ (NSString *)reuseIdentifier
+{
+    return [self className];
 }
 
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
@@ -60,16 +81,6 @@
     self.groupTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
     self.groupCountLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
     self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
-}
-
-+ (CGFloat)cellHeight:(id)data
-{
-    return 50.0f;
-}
-
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
 }
 
 @end

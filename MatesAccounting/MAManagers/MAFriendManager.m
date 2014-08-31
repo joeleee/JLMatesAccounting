@@ -142,7 +142,23 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 - (BOOL)deleteFriend:(MFriend *)mFriend
 {
+    if (0 != [self unpaidGroupsForFriend:mFriend].count) {
+        return NO;
+    }
+
     return [[MAFriendPersistent instance] deleteFriend:mFriend];
+}
+
+- (NSArray *)unpaidGroupsForFriend:(MFriend *)mFriend
+{
+    NSMutableArray *unpaidMemberToGroups = [NSMutableArray array];
+    for (RMemberToGroup *memberToGroup in mFriend.relationshipToGroup) {
+        if (NSOrderedSame != [memberToGroup.fee compare:DecimalZero]) {
+            [unpaidMemberToGroups addObject:memberToGroup.group];
+        }
+    }
+
+    return unpaidMemberToGroups;
 }
 
 @end

@@ -11,7 +11,7 @@
 #import "MACommonPersistent.h"
 #import "MGroup.h"
 #import "MAContextAPI.h"
-#import "RMemberToGroup.h"
+#import "RMemberToGroup+expand.h"
 #import "MFriend.h"
 
 @implementation MAGroupPersistent
@@ -69,7 +69,10 @@
         }
     }
     MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
-
+    [memberToGroup refreshMemberTotalFee];
+    if (NSOrderedSame != [memberToGroup.fee compare:DecimalZero]) {
+        return NO;
+    }
     isSucceed = [MACommonPersistent deleteObject:memberToGroup];
 
     return isSucceed;

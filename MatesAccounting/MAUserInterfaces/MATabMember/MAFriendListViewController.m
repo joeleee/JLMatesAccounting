@@ -8,6 +8,9 @@
 
 #import "MAFriendListViewController.h"
 
+#import "MFriend.h"
+#import "MGroup+expand.h"
+#import "RMemberToGroup+expand.h"
 #import "MAFriendListCell.h"
 #import "MAMemberDetailViewController.h"
 #import "MAFriendManager.h"
@@ -94,7 +97,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
         return _selectDoneBarItem;
     }
 
-    _selectDoneBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didSelectDoneNavigationButtonTaped:)];
+    _selectDoneBarItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(didSelectDoneNavigationButtonTaped:)];
     return _selectDoneBarItem;
 }
 
@@ -135,6 +138,9 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     if ([self.navigationItem rightBarButtonItem] != self.selectDoneBarItem) {
         [self.navigationItem setRightBarButtonItem:self.selectDoneBarItem animated:YES];
     }
+    [self.selectDoneBarItem setTitle:[NSString stringWithFormat:@"Done(%lu)", (unsigned long)tableView.indexPathsForSelectedRows.count]];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +148,9 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     if (0 >= [[tableView indexPathsForSelectedRows] count]) {
         [self.navigationItem setRightBarButtonItem:self.createFriendBarItem animated:YES];
     }
+    [self.selectDoneBarItem setTitle:[NSString stringWithFormat:@"Done(%lu)", (unsigned long)tableView.indexPathsForSelectedRows.count]];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,10 +172,21 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         } else {
-            [MBProgressHUD showTextHUDOnView:self.view
-                                        text:@"报告，删除好友失败了..."
-                             completionBlock:nil
-                                    animated:YES];
+            NSArray *unpaidGroups = [FriendManager unpaidGroupsForFriend:mFriend];
+            if (0 < unpaidGroups.count) {
+                NSMutableString *unpaidGroupNames = [NSMutableString string];
+                for (MGroup *group in unpaidGroups) {
+                    if (group == unpaidGroups.firstObject) {
+                        [unpaidGroupNames appendFormat:@"%@", group.groupName];
+                    } else {
+                        [unpaidGroupNames appendFormat:@", %@", group.groupName];
+                    }
+                }
+                NSString *message = [NSString stringWithFormat:@"%@ has %lu unpaid groups: %@", mFriend.name, (unsigned long)unpaidGroups.count, unpaidGroupNames];
+                [[MAAlertView alertWithTitle:@"Delete friend failed" message:message buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            } else {
+                [[MAAlertView alertWithTitle:@"Delete friend failed!" message:nil buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            }
         }
     }
 }

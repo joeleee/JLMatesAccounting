@@ -14,11 +14,11 @@
 
 + (MATestDataGenerater *)instance;
 
-- (void)generateGroups:(NSUInteger)totalCount;
+- (NSArray *)generateGroups:(NSUInteger)totalCount;
 
-- (void)generateFriends:(NSUInteger)totalCount;
+- (NSArray *)generateFriends:(NSUInteger)totalCount;
 
-- (void)addFriendToGroup:(MGroup *)group totalCount:(NSUInteger)totalCount;
+- (NSArray *)addFriendToGroup:(MGroup *)group totalCount:(NSUInteger)totalCount;
 
 - (void)generateAccountInGroup:(MGroup *)group totalCount:(NSUInteger)totalCount;
 

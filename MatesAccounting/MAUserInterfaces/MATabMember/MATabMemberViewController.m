@@ -13,7 +13,7 @@
 #import "MATabMemberListCell.h"
 #import "MAFriendManager.h"
 #import "MAFriendListViewController.h"
-#import "RMemberToGroup.h"
+#import "RMemberToGroup+expand.h"
 
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
@@ -152,14 +152,17 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
         RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
-        if ([GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group]) {
+        [memberToGroup refreshMemberTotalFee];
+        if (NSOrderedSame == [memberToGroup.fee compare:DecimalZero] &&
+            [GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group]) {
             self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         } else {
-            [MBProgressHUD showTextHUDOnView:self.view
-                                        text:@"报告，移除成员失败了..."
-                             completionBlock:nil
-                                    animated:YES];
+            if (NSOrderedSame != [memberToGroup.fee compare:DecimalZero]) {
+                [[MAAlertView alertWithTitle:@"Please be sure this member's balance is zero first." message:nil buttonTitle:@"OK" buttonBlock:nil] show];
+            } else {
+                [[MAAlertView alertWithTitle:@"Remove member failed!" message:nil buttonTitle:@"OK" buttonBlock:nil] show];
+            }
         }
     }
 }
