@@ -94,7 +94,8 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
 - (MGroup *)createGroup:(NSString *)name
 {
-    if ((0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length)) {
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ((0 >= name.length)) {
         return nil;
     }
 
@@ -116,7 +117,8 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
 - (MGroup *)editAndSaveGroup:(MGroup *)group name:(NSString *)name
 {
-    if ((0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length)) {
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ((0 >= name.length)) {
         return nil;
     }
 

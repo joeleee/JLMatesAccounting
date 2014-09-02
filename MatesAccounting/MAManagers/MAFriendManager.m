@@ -10,9 +10,10 @@
 
 #import "MGroup.h"
 #import "MAGroupManager.h"
-#import "MAFriendPersistent.h"
 #import "MFriend.h"
 #import "RMemberToGroup.h"
+#import "MACommonPersistent.h"
+#import "MAContextAPI.h"
 
 NSString * const kMAFMFriendHasCreated = @"kMAFMFriendHasCreated";
 NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
@@ -76,7 +77,7 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
 - (NSArray *)allFriendsFilteByGroup:(MGroup *)group
 {
-    NSArray *friends = [[MAFriendPersistent instance] fetchFriends:nil];
+    NSArray *friends = [MACommonPersistent fetchObjectsWithEntityName:[MFriend className]];;
 
     if (group) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -95,24 +96,32 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday
 {
-    if (0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (0 >= name.length) {
         return nil;
     }
 
-    MFriend *mFriend = [[MAFriendPersistent instance] createFriendWithName:name];
-    MA_QUICK_ASSERT(mFriend, @"Create friend failed~ createFriendWithName");
+    MFriend *member = [MACommonPersistent createObject:NSStringFromClass([MFriend class])];
+    MA_QUICK_ASSERT(member, @"Assert member == nil");
 
-    mFriend.sex = @(gender);
-    mFriend.telephoneNumber = phoneNumber;
-    mFriend.eMail = eMail;
-    mFriend.birthday = birthday;
-    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:mFriend];
-    MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
+    NSDate *currentData = [NSDate date];
+    member.name = name;
+    member.createDate = currentData;
+    member.friendID = @([currentData timeIntervalSince1970]);
+    member.sex = @(gender);
+    member.telephoneNumber = phoneNumber;
+    member.eMail = eMail;
+    member.birthday = birthday;
+    member.updateDate = currentData;
+
+    BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
+    MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
 
     [self listenersForKey:kMAFMFriendHasCreated withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
-        [listener friendHasModified:mFriend];
+        [listener friendHasModified:member];
     }];
-    return mFriend;
+
+    return member;
 }
 
 - (BOOL)editAndSaveFriend:(MFriend *)mFriend
@@ -122,7 +131,8 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday
 {
-    if (0 >= [name stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (0 >= name.length) {
         return NO;
     }
 
@@ -131,8 +141,9 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     mFriend.telephoneNumber = phoneNumber;
     mFriend.eMail = eMail;
     mFriend.birthday = birthday;
-    BOOL isSucceed = [[MAFriendPersistent instance] updateFriend:mFriend];
-    MA_QUICK_ASSERT(isSucceed, @"Update friend failed~ createFriendWithName");
+    mFriend.updateDate = [NSDate date];
+    BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
+    MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
 
     [self listenersForKey:kMAFMFriendHasModified withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
         [listener friendHasModified:mFriend];
@@ -146,7 +157,9 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
         return NO;
     }
 
-    return [[MAFriendPersistent instance] deleteFriend:mFriend];
+    BOOL isSucceed = [MACommonPersistent deleteObject:mFriend];
+    MA_QUICK_ASSERT(isSucceed, @"Delete friend failed");
+    return isSucceed;
 }
 
 - (NSArray *)unpaidGroupsForFriend:(MFriend *)mFriend
