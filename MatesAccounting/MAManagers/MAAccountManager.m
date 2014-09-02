@@ -12,7 +12,6 @@
 #import "MPlace.h"
 #import "MFriend.h"
 #import "RMemberToAccount.h"
-#import "MAAccountPersistent.h"
 #import "MAContextAPI.h"
 #import "MACommonPersistent.h"
 #import "MAFriendManager.h"
@@ -112,19 +111,27 @@
         return nil;
     }
 
-    MAccount *account = [[MAAccountPersistent instance] createAccountInGroup:group date:date];
+    MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
+    MA_QUICK_ASSERT(account, @"Assert account == nil");
 
-    if (account) {
-        BOOL updateSucceed = [self updateAccount:account
-                                            date:date
-                                       placeName:placeName
-                                        location:location
-                                          detail:detail
-                                    feeOfMembers:feeOfMembers];
-        if (!updateSucceed) {
-            [[MAAccountPersistent instance] deleteAccount:account];
-            account = nil;
-        }
+    NSDate *currentData = [NSDate date];
+    account.createDate = currentData;
+    account.updateDate = currentData;
+    account.accountID = @([currentData timeIntervalSince1970]);
+    account.group = group;
+    account.accountDate = date;
+    account.totalFee = DecimalZero;
+    [[MAContextAPI sharedAPI] saveContextData];
+
+    BOOL updateSucceed = [self updateAccount:account
+                                        date:date
+                                   placeName:placeName
+                                    location:location
+                                      detail:detail
+                                feeOfMembers:feeOfMembers];
+    if (!updateSucceed) {
+        [MACommonPersistent deleteObject:account];
+        account = nil;
     }
 
     return account;
@@ -155,7 +162,16 @@
             memberToAccount.member = obj.member;
             memberToAccount.fee = obj.fee;
         } else {
-            memberToAccount = [[MAAccountPersistent instance] createMemberToAccount:account member:obj.member fee:obj.fee];
+            memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
+            MA_QUICK_ASSERT(memberToAccount, @"Assert create memberToAccount failed.");
+            memberToAccount.createDate = [NSDate date];
+            memberToAccount.member = obj.member;
+            memberToAccount.fee = obj.fee;
+            memberToAccount.account = account;
+            if (![[MAContextAPI sharedAPI] saveContextData]) {
+                [MACommonPersistent deleteObject:memberToAccount];
+                memberToAccount = nil;
+            }
         }
 
         if (memberToAccount) {
@@ -167,7 +183,7 @@
     while (originMembers.count > index) {
         RMemberToAccount *memberToAccount = originMembers[index++];
         [membersNeedUpdate addObject:memberToAccount.member];
-        [[MAAccountPersistent instance] deleteMemberToAccount:memberToAccount];
+        [MACommonPersistent deleteObject:memberToAccount];
     }
     account.relationshipToMember = updatedMembers;
     // update place
@@ -190,12 +206,14 @@
     // update date
     account.accountDate = date;
 
-    BOOL updated = [[MAAccountPersistent instance] updateAccount:account];
+    account.updateDate = [NSDate date];
+    [account refreshAccountTotalFee];
+    BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     for (MFriend *member in membersNeedUpdate) {
         NSArray *relationshipToMember = [account.group relationshipToMembersByFriend:member];
         [(RMemberToGroup *)[relationshipToMember firstObject] refreshMemberTotalFee];
     }
-    return updated;
+    return isSucceed;
 }
 
 - (BOOL)verifyFeeOfMambers:(NSSet *)feeOfMambers

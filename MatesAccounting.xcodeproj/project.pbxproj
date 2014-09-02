@@ -29,7 +29,6 @@
 		9B391C81183527CE0025A2FB /* MATabPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C7B183527CE0025A2FB /* MATabPaymentViewController.m */; };
 		9B391C8518352C670025A2FB /* MARootContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8418352C670025A2FB /* MARootContextManager.m */; };
 		9B391C8918352F580025A2FB /* MAUtilityTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8818352F580025A2FB /* MAUtilityTools.m */; };
-		9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C941835EF040025A2FB /* MAAccountPersistent.m */; };
 		9B391C981835EF210025A2FB /* MAFriendPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C971835EF210025A2FB /* MAFriendPersistent.m */; };
 		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
 		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
@@ -151,8 +150,6 @@
 		9B391C8418352C670025A2FB /* MARootContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootContextManager.m; path = MADataPersistent/MARootContextManager/MARootContextManager.m; sourceTree = "<group>"; };
 		9B391C8718352F580025A2FB /* MAUtilityTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAUtilityTools.h; path = MAUtilities/MAUtilityTools.h; sourceTree = "<group>"; };
 		9B391C8818352F580025A2FB /* MAUtilityTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAUtilityTools.m; path = MAUtilities/MAUtilityTools.m; sourceTree = "<group>"; };
-		9B391C931835EF040025A2FB /* MAAccountPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountPersistent.h; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.h; sourceTree = "<group>"; };
-		9B391C941835EF040025A2FB /* MAAccountPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountPersistent.m; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.m; sourceTree = "<group>"; };
 		9B391C961835EF210025A2FB /* MAFriendPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAFriendPersistent.h; path = MADataPersistent/MADataPersistentManager/MAFriendPersistent.h; sourceTree = "<group>"; };
 		9B391C971835EF210025A2FB /* MAFriendPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAFriendPersistent.m; path = MADataPersistent/MADataPersistentManager/MAFriendPersistent.m; sourceTree = "<group>"; };
 		9B391C9C1835F0D40025A2FB /* MAContextAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAContextAPI.h; path = MADataPersistent/MARootContextManager/MAContextAPI.h; sourceTree = "<group>"; };
@@ -446,8 +443,6 @@
 		9B391C8F1835EE130025A2FB /* MADataPersistentManager */ = {
 			isa = PBXGroup;
 			children = (
-				9B391C931835EF040025A2FB /* MAAccountPersistent.h */,
-				9B391C941835EF040025A2FB /* MAAccountPersistent.m */,
 				9B391C961835EF210025A2FB /* MAFriendPersistent.h */,
 				9B391C971835EF210025A2FB /* MAFriendPersistent.m */,
 				9B391CA2183611070025A2FB /* MACommonPersistent.h */,
@@ -842,7 +837,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */,
 				9B25AA1718533E1E008D79B7 /* MAMemberListSectionHeader.m in Sources */,
 				9BE1DBB518B9F022000BE969 /* MBProgressHUD+MAAddition.m in Sources */,
 				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
