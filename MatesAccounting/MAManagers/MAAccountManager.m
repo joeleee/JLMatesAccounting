@@ -13,7 +13,8 @@
 #import "MFriend.h"
 #import "RMemberToAccount.h"
 #import "MAAccountPersistent.h"
-#import "MAPlacePersistent.h"
+#import "MAContextAPI.h"
+#import "MACommonPersistent.h"
 #import "MAFriendManager.h"
 #import "MGroup+expand.h"
 #import "RMemberToGroup+expand.h"
@@ -175,7 +176,13 @@
         place.location = location;
         place.placeName = placeName;
     } else {
-        place = [[MAPlacePersistent instance] createPlaceWithLocation:location name:placeName];
+        place = [MACommonPersistent createObject:NSStringFromClass([MPlace class])];
+        MA_QUICK_ASSERT(place, @"Assert place == nil");
+        NSDate *currentData = [NSDate date];
+        place.location = location;
+        place.placeName = placeName;
+        place.placeID = @([currentData timeIntervalSince1970]);
+        [[MAContextAPI sharedAPI] saveContextData];
     }
     account.place = place;
     // update detail

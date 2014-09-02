@@ -40,7 +40,6 @@
 		9B8893991854AA43003A9DCB /* MAMemberDetailBirthdayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8893981854AA43003A9DCB /* MAMemberDetailBirthdayCell.m */; };
 		9B88939C1854ABF7003A9DCB /* MAMemberDetailGenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */; };
 		9B88939F1854C7F8003A9DCB /* NSDate+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */; };
-		9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */; };
 		9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB074CB183B7C950023B728 /* MAccount+expand.m */; };
 		9BB88C851865679500C16895 /* MAManagerPublicDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB88C841865679500C16895 /* MAManagerPublicDefinitions.m */; };
 		9BC230FB1849FFA6005ADD59 /* MAGroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC230FA1849FFA6005ADD59 /* MAGroupDetailViewController.m */; };
@@ -174,8 +173,6 @@
 		9B88939B1854ABF7003A9DCB /* MAMemberDetailGenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberDetailGenderCell.m; path = MATabMemberCells/MAMemberDetailGenderCell.m; sourceTree = "<group>"; };
 		9B88939D1854C7F8003A9DCB /* NSDate+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MAAddition.h"; path = "MAAdditions/NSDate+MAAddition.h"; sourceTree = "<group>"; };
 		9B88939E1854C7F8003A9DCB /* NSDate+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MAAddition.m"; path = "MAAdditions/NSDate+MAAddition.m"; sourceTree = "<group>"; };
-		9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAPlacePersistent.h; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.h; sourceTree = "<group>"; };
-		9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAPlacePersistent.m; path = MADataPersistent/MADataPersistentManager/MAPlacePersistent.m; sourceTree = "<group>"; };
 		9BB074CA183B7C950023B728 /* MAccount+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MAccount+expand.h"; path = "MAModels/MAccount+expand.h"; sourceTree = "<group>"; };
 		9BB074CB183B7C950023B728 /* MAccount+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MAccount+expand.m"; path = "MAModels/MAccount+expand.m"; sourceTree = "<group>"; };
 		9BB88C831865679500C16895 /* MAManagerPublicDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAManagerPublicDefinitions.h; path = MAManagers/MAManagerPublicDefinitions.h; sourceTree = "<group>"; };
@@ -453,8 +450,6 @@
 				9B391C941835EF040025A2FB /* MAAccountPersistent.m */,
 				9B391C961835EF210025A2FB /* MAFriendPersistent.h */,
 				9B391C971835EF210025A2FB /* MAFriendPersistent.m */,
-				9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */,
-				9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */,
 				9B391CA2183611070025A2FB /* MACommonPersistent.h */,
 				9B391CA3183611070025A2FB /* MACommonPersistent.m */,
 			);
@@ -877,7 +872,6 @@
 				9B726B0418BF862500ACDD99 /* UIViewController+MAAddition.m in Sources */,
 				9B391C6A183525940025A2FB /* MatesAccounting.xcdatamodeld in Sources */,
 				9B26C07418BE22E9004B7E7D /* ZLMulticastAgent.m in Sources */,
-				9BB074AD183B3AD60023B728 /* MAPlacePersistent.m in Sources */,
 				9B391C80183527CE0025A2FB /* MATabMoreViewController.m in Sources */,
 				9B391C7D183527CE0025A2FB /* MARootTabBarController.m in Sources */,
 				D82541151998FF4F00559835 /* MGroup.m in Sources */,
