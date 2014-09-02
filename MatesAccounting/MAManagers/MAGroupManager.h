@@ -40,6 +40,6 @@
 
 - (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group;
 
-- (BOOL)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group;
+- (void)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
 
 @end

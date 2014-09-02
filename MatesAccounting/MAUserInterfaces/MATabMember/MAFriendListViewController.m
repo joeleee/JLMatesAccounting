@@ -168,10 +168,14 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
         MFriend *mFriend = self.friendList[indexPath.row];
+
         if ([FriendManager deleteFriend:mFriend]) {
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         } else {
+            NSString *errorTitle = @"Delete friend failed!";
+            NSString *errorMessage = nil;
+            // Get a right error message
             if (0 < mFriend.relationshipToGroup.count) {
                 NSArray *relationshipToGroups = mFriend.relationshipToGroup.allObjects;
                 NSMutableString *groupNames = [NSMutableString string];
@@ -182,11 +186,13 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
                         [groupNames appendFormat:@", %@", memberToGroup.group.groupName];
                     }
                 }
-                NSString *message = [NSString stringWithFormat:@"%@ belongs to %lu groups: %@", mFriend.name, (unsigned long)relationshipToGroups.count, groupNames];
-                [[MAAlertView alertWithTitle:@"Can't delete" message:message buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            } else {
-                [[MAAlertView alertWithTitle:@"Delete friend failed!" message:nil buttonBlocks:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                errorTitle = @"Can't delete";
+                errorMessage = [NSString stringWithFormat:@"%@ still belongs to %lu groups: %@", mFriend.name, (unsigned long)relationshipToGroups.count, groupNames];
             }
+
+            [[MAAlertView alertWithTitle:errorTitle message:errorMessage buttonTitle:@"OK" buttonBlock:^{
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            }] show];
         }
     }
 }

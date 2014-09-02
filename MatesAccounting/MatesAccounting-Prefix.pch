@@ -23,6 +23,7 @@
 
 // utilities
 #import "MAGlobalDefinitions.h"
+#import "MAManagerPublicDefinitions.h"
 #import "MAUtilityTools.h"
 #import "UIApplication+MAAddition.h"
 #import "UIView+MAAddition.h"

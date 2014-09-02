@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *groupCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *dividingLineView;
 
+@property (nonatomic, strong) MFriend *friend;
+
 @end
 
 @implementation MAFriendListCell
@@ -39,11 +41,16 @@
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
-    self.backgroundColor = selected ? MA_COLOR_TABMEMBER_SELECTED_BACKGROUND : [UIColor clearColor];
+    self.backgroundColor = selected ? MA_COLOR_TABMEMBER_SELECTED_BACKGROUND : MA_COLOR_VIEW_BACKGROUND;
 }
 
 - (void)reuseCellWithData:(MFriend *)data
 {
+    if (self.friend == data) {
+        return;
+    }
+    self.friend = data;
+
     [self.friendNameLabel setText:data.name];
     [self.phoneNumberLabel setText:[data.telephoneNumber stringValue]];
     if (0 < data.eMail.length) {
@@ -72,6 +79,7 @@
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
 - (void)manualLayoutAfterLayoutSubviews
 {
+    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
     self.friendNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
     self.phoneTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
     self.phoneNumberLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;

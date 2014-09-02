@@ -14,6 +14,8 @@
 
 + (BOOL)deleteObject:(id)object;
 
-+ (NSArray *)fetchObjects:(NSFetchRequest *)request entityName:(NSString *)entityName;
++ (NSArray *)fetchObjectsWithRequest:(NSFetchRequest *)request;
+
++ (NSArray *)fetchObjectsWithEntityName:(NSString *)entityName;
 
 @end

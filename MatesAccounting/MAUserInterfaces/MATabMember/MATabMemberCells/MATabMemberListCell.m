@@ -56,6 +56,7 @@
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
 - (void)manualLayoutAfterLayoutSubviews
 {
+    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
     self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
     self.memberFeeTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
     self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;

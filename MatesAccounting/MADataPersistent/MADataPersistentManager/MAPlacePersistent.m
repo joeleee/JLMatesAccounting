@@ -50,10 +50,12 @@
 
 - (NSArray *)fetchPlaces:(NSFetchRequest *)request
 {
-    if (!request) {
-        request = [[NSFetchRequest alloc] init];
+    NSArray *result;
+    if (request) {
+        result = [MACommonPersistent fetchObjectsWithRequest:request];
+    } else {
+        result = [MACommonPersistent fetchObjectsWithEntityName:[MPlace className]];
     }
-    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MPlace class])];
     
     return result;
 }

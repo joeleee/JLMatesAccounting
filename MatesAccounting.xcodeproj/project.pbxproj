@@ -31,7 +31,6 @@
 		9B391C8918352F580025A2FB /* MAUtilityTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C8818352F580025A2FB /* MAUtilityTools.m */; };
 		9B391C951835EF040025A2FB /* MAAccountPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C941835EF040025A2FB /* MAAccountPersistent.m */; };
 		9B391C981835EF210025A2FB /* MAFriendPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C971835EF210025A2FB /* MAFriendPersistent.m */; };
-		9B391C9B1835EF3A0025A2FB /* MAGroupPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */; };
 		9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391C9D1835F0D40025A2FB /* MAContextAPI.m */; };
 		9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA01835FA370025A2FB /* MAGlobalDefinitions.m */; };
 		9B391CA4183611070025A2FB /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B391CA3183611070025A2FB /* MACommonPersistent.m */; };
@@ -153,13 +152,10 @@
 		9B391C8418352C670025A2FB /* MARootContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MARootContextManager.m; path = MADataPersistent/MARootContextManager/MARootContextManager.m; sourceTree = "<group>"; };
 		9B391C8718352F580025A2FB /* MAUtilityTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAUtilityTools.h; path = MAUtilities/MAUtilityTools.h; sourceTree = "<group>"; };
 		9B391C8818352F580025A2FB /* MAUtilityTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAUtilityTools.m; path = MAUtilities/MAUtilityTools.m; sourceTree = "<group>"; };
-		9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MADataPersistentProtocols.h; path = MADataPersistent/MADataPersistentProtocols.h; sourceTree = "<group>"; };
 		9B391C931835EF040025A2FB /* MAAccountPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountPersistent.h; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.h; sourceTree = "<group>"; };
 		9B391C941835EF040025A2FB /* MAAccountPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountPersistent.m; path = MADataPersistent/MADataPersistentManager/MAAccountPersistent.m; sourceTree = "<group>"; };
 		9B391C961835EF210025A2FB /* MAFriendPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAFriendPersistent.h; path = MADataPersistent/MADataPersistentManager/MAFriendPersistent.h; sourceTree = "<group>"; };
 		9B391C971835EF210025A2FB /* MAFriendPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAFriendPersistent.m; path = MADataPersistent/MADataPersistentManager/MAFriendPersistent.m; sourceTree = "<group>"; };
-		9B391C991835EF3A0025A2FB /* MAGroupPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAGroupPersistent.h; path = MADataPersistent/MADataPersistentManager/MAGroupPersistent.h; sourceTree = "<group>"; };
-		9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAGroupPersistent.m; path = MADataPersistent/MADataPersistentManager/MAGroupPersistent.m; sourceTree = "<group>"; };
 		9B391C9C1835F0D40025A2FB /* MAContextAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAContextAPI.h; path = MADataPersistent/MARootContextManager/MAContextAPI.h; sourceTree = "<group>"; };
 		9B391C9D1835F0D40025A2FB /* MAContextAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAContextAPI.m; path = MADataPersistent/MARootContextManager/MAContextAPI.m; sourceTree = "<group>"; };
 		9B391C9F1835FA370025A2FB /* MAGlobalDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGlobalDefinitions.h; sourceTree = "<group>"; };
@@ -457,8 +453,6 @@
 				9B391C941835EF040025A2FB /* MAAccountPersistent.m */,
 				9B391C961835EF210025A2FB /* MAFriendPersistent.h */,
 				9B391C971835EF210025A2FB /* MAFriendPersistent.m */,
-				9B391C991835EF3A0025A2FB /* MAGroupPersistent.h */,
-				9B391C9A1835EF3A0025A2FB /* MAGroupPersistent.m */,
 				9BB074AB183B3AD60023B728 /* MAPlacePersistent.h */,
 				9BB074AC183B3AD60023B728 /* MAPlacePersistent.m */,
 				9B391CA2183611070025A2FB /* MACommonPersistent.h */,
@@ -587,7 +581,6 @@
 		9BCAC059183262BC000417FD /* MADataPersistent */ = {
 			isa = PBXGroup;
 			children = (
-				9B391C8E183530E10025A2FB /* MADataPersistentProtocols.h */,
 				9B391C8F1835EE130025A2FB /* MADataPersistentManager */,
 				9B391C8218352C0A0025A2FB /* MARootContextManager */,
 			);
@@ -928,7 +921,6 @@
 				9B391C981835EF210025A2FB /* MAFriendPersistent.m in Sources */,
 				D88E3E6619951B9E00FA5005 /* MARootNavigationControllerDelegate.m in Sources */,
 				9B25AA1418533DBC008D79B7 /* MAMemberListCell.m in Sources */,
-				9B391C9B1835EF3A0025A2FB /* MAGroupPersistent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

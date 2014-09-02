@@ -153,17 +153,14 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
         MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
         RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
         [memberToGroup refreshMemberTotalFee];
-        if (NSOrderedSame == [memberToGroup.fee compare:DecimalZero] &&
-            [GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group]) {
+        [GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group onComplete:^(id result, NSError *error) {
             self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        } else {
-            if (NSOrderedSame != [memberToGroup.fee compare:DecimalZero]) {
-                [[MAAlertView alertWithTitle:@"Please be sure this member's balance is zero first." message:nil buttonTitle:@"OK" buttonBlock:nil] show];
-            } else {
-                [[MAAlertView alertWithTitle:@"Remove member failed!" message:nil buttonTitle:@"OK" buttonBlock:nil] show];
-            }
-        }
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        } onFailed:^(id result, NSError *error) {
+            [[MAAlertView alertWithTitle:error.domain message:nil buttonTitle:@"OK" buttonBlock:^{
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            }] show];
+        }];
     }
 }
 
@@ -177,7 +174,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 {
     if (!MACurrentGroup) {
         [MBProgressHUD showTextHUDOnView:self.view
-                                    text:@"还木有选小组，肿么添加成员~"
+                                    text:@"You need select a group first"
                          completionBlock:nil
                                 animated:YES];
     } else {

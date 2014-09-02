@@ -9,8 +9,10 @@
 #import "MAGroupManager.h"
 
 #import "MGroup.h"
-#import "MAGroupPersistent.h"
-#import "RMemberToGroup.h"
+#import "MFriend.h"
+#import "MACommonPersistent.h"
+#import "RMemberToGroup+expand.h"
+#import "MAContextAPI.h"
 
 NSString * const kCurrentGroupID = @"kCurrentGroupID";
 
@@ -56,7 +58,10 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 {
     if (!_selectedGroup) {
         NSNumber *groupID = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentGroupID];
-        _selectedGroup = [[MAGroupPersistent instance] groupByGroupID:groupID];
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[MGroup className]];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"groupID == %@", groupID];
+        NSArray *groupList = [MACommonPersistent fetchObjectsWithRequest:fetchRequest];
+        _selectedGroup = groupList.firstObject;
     }
 
     return _selectedGroup;
@@ -64,7 +69,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
 - (NSArray *)myGroups
 {
-    NSArray *groups = [[MAGroupPersistent instance] fetchGroups:nil];
+    NSArray *groups = [MACommonPersistent fetchObjectsWithEntityName:[MGroup className]];
 
     return groups;
 }
@@ -93,14 +98,19 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
         return nil;
     }
 
-    MGroup *group = [[MAGroupPersistent instance] createGroupWithGroupName:name];
-    MA_QUICK_ASSERT(group, @"createGroup result is nil! - createGroup");
+    MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];
+    MA_QUICK_ASSERT(group, @"Assert group == nil");
+    NSDate *currentData = [NSDate date];
+    group.createDate = currentData;
+    group.updateDate = currentData;
+    group.groupName = name;
+    group.groupID = @([currentData timeIntervalSince1970]);
+    [[MAContextAPI sharedAPI] saveContextData];
 
-    if (group) {
-        [self listenersForKey:kMAGMGroupHasCreated withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-            [listener groupHasCreated:group];
-        }];
-    }
+    [self listenersForKey:kMAGMGroupHasCreated withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+        [listener groupHasCreated:group];
+    }];
+
     return group;
 }
 
@@ -111,37 +121,72 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     }
 
     group.groupName = name;
-    BOOL isSucceed = [[MAGroupPersistent instance] updateGroup:group];
+    group.updateDate = [NSDate date];
+    BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
 
-    if (isSucceed) {
-        [self listenersForKey:kMAGMGroupHasModified withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-            [listener groupHasModified:group];
-        }];
-    }
+    [self listenersForKey:kMAGMGroupHasModified withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+        [listener groupHasModified:group];
+    }];
+
     return group;
 }
 
 - (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group
 {
-    RMemberToGroup *relationship = [[MAGroupPersistent instance] addFriend:mFriend toGroup:group];
-    if (relationship) {
-        [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-            [listener groupMemberHasChanged:relationship.group member:relationship.member isAdd:YES];
-        }];
+    if (!mFriend || !group) {
+        return nil;
     }
-    return relationship;
+    for (RMemberToGroup *memberToGroup in mFriend.relationshipToGroup) {
+        if (memberToGroup.group == group) {
+            return nil;
+        }
+    }
+
+    RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];
+    MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
+
+    memberToGroup.createDate = [NSDate date];
+    memberToGroup.member = mFriend;
+    memberToGroup.group = group;
+    if (![[MAContextAPI sharedAPI] saveContextData]) {
+        MA_QUICK_ASSERT(NO, @"Update failed.");
+        [MACommonPersistent deleteObject:memberToGroup];
+        [[MAContextAPI sharedAPI] saveContextData];
+        return nil;
+    }
+
+    [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
+        [listener groupMemberHasChanged:memberToGroup.group member:memberToGroup.member isAdd:YES];
+    }];
+
+    return memberToGroup;
 }
 
-- (BOOL)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group
+- (void)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
 {
-    BOOL succeed = [[MAGroupPersistent instance] removeFriend:mFriend fromGroup:group];
-    if (succeed) {
+    NSSet *relationships = [group.relationshipToMember filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", @"member", mFriend]];
+    MA_QUICK_ASSERT(relationships.count > 0, @"Assert memberToGroup == nil");
+
+    RMemberToGroup *memberToGroup = relationships.allObjects.firstObject;
+    [memberToGroup refreshMemberTotalFee];
+    if (NSOrderedSame != [memberToGroup.fee compare:DecimalZero]) {
+        NSError *error = [NSError errorWithDomain:@"Please be sure this member's balance is zero first." code:-1 userInfo:nil];
+        MA_INVOKE_BLOCK_SAFELY(onFailed, nil, error);
+        return;
+    }
+
+    if ([MACommonPersistent deleteObject:memberToGroup]) {
         [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
             [listener groupMemberHasChanged:group member:mFriend isAdd:NO];
         }];
+        MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
+        return;
+    } else {
+        NSError *error = [NSError errorWithDomain:@"Remove member failed!" code:-1 userInfo:nil];
+        MA_INVOKE_BLOCK_SAFELY(onFailed, nil, error);
+        return;
     }
-    return succeed;
 }
 
 @end

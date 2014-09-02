@@ -40,18 +40,31 @@
     return isSucceed;
 }
 
-+ (NSArray *)fetchObjects:(NSFetchRequest *)request entityName:(NSString *)entityName
++ (NSArray *)fetchObjectsWithRequest:(NSFetchRequest *)request
 {
-    NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
-
-    if (entityName) {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:moContext];
-        MA_QUICK_ASSERT(entityDescription, @"Assert object == nil");
-        [request setEntity:entityDescription];
+    MA_QUICK_ASSERT(request, @"Assert request == nil");
+    if (!request) {
+        return nil;
     }
 
+    NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
     NSError *error = nil;
     NSArray *result = [moContext executeFetchRequest:request error:&error];
+
+    return result;
+}
+
++ (NSArray *)fetchObjectsWithEntityName:(NSString *)entityName
+{
+    MA_QUICK_ASSERT(0 < entityName.length, @"Assert request == nil");
+    if (0 >= entityName.length) {
+        return nil;
+    }
+
+    NSManagedObjectContext *moContext = [[MAContextAPI sharedAPI] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    NSError *error = nil;
+    NSArray *result = [moContext executeFetchRequest:fetchRequest error:&error];
 
     return result;
 }

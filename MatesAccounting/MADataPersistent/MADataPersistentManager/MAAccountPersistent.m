@@ -68,10 +68,12 @@
 
 - (NSArray *)fetchAccounts:(NSFetchRequest *)request
 {
-    if (!request) {
-        request = [[NSFetchRequest alloc] init];
+    NSArray *result;
+    if (request) {
+        result = [MACommonPersistent fetchObjectsWithRequest:request];
+    } else {
+        result = [MACommonPersistent fetchObjectsWithEntityName:[MAccount className]];
     }
-    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MAccount class])];
 
     return result;
 }

@@ -64,10 +64,12 @@
 
 - (NSArray *)fetchFriends:(NSFetchRequest *)request
 {
-    if (!request) {
-        request = [[NSFetchRequest alloc] init];
+    NSArray *result;
+    if (request) {
+        result = [MACommonPersistent fetchObjectsWithRequest:request];
+    } else {
+        result = [MACommonPersistent fetchObjectsWithEntityName:[MFriend className]];
     }
-    NSArray *result = [MACommonPersistent fetchObjects:request entityName:NSStringFromClass([MFriend class])];
 
     return result;
 }

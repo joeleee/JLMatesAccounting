@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MADataPersistentProtocols.h"
-
-@interface MAContextAPI : NSObject <MAContextProtocol>
+@interface MAContextAPI : NSObject
 
 + (MAContextAPI *)sharedAPI;
+
+- (BOOL)saveContextData;
+- (NSManagedObjectModel *)managedObjectModel;
+- (NSManagedObjectContext *)managedObjectContext;
 
 @end

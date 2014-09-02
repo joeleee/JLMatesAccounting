@@ -32,9 +32,6 @@
 
 #endif /* ifndef MAGLOBALDEFINITIONS_H */
 
-#pragma mark - definition blocks
-typedef void (^ PersistentBlock) (BOOL isSucceed, id data, NSError *error, NSDictionary *userInfo);
-
 typedef enum {
     MAGenderUnknow = 0,
     MAGenderFemale = 1,

@@ -8,13 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-// 按需扩展
-typedef enum {
-    MACallBackSucceed = 0,
-    MACallBackCommonFailed = 1
-} MACommonCallBackBlockResultType;
-
-typedef void (^ MACommonCallBackBlock) (MACommonCallBackBlockResultType resultType, id result, NSString *message, NSDictionary *extend);
+typedef void (^ MACommonCallBackBlock) (id result, NSError *error);
 
 @interface MAManagerPublicDefinitions : NSObject
 
