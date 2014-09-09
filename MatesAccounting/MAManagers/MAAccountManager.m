@@ -17,7 +17,7 @@
 #import "MAFriendManager.h"
 #import "MGroup+expand.h"
 #import "RMemberToGroup+expand.h"
-
+#import "MAGroupManager.h"
 
 #pragma mark - @implementation MAFeeOfMember
 @implementation MAFeeOfMember
@@ -248,7 +248,7 @@
     return memberToAccounts;
 }
 
-- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer
+- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer inGroup:(MGroup *)group
 {
     totalFee = isPayer ? totalFee : [totalFee inverseNumber];
     NSDecimalNumber *averageFee = DecimalZero;
@@ -267,7 +267,9 @@
     for (MAFeeOfMember *feeOfMember in originFeeOfMembers) {
         if ([members containsObject:feeOfMember.member]) {
             [newMembers removeObject:feeOfMember.member];
-            feeOfMember.fee = averageFee;
+            if ([GroupManager isMember:feeOfMember.member belongsToGroup:group]) {
+                feeOfMember.fee = averageFee;
+            }
             [feeOfMembers addObject:feeOfMember];
         }
     }

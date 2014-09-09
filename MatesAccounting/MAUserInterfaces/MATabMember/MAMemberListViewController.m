@@ -16,6 +16,7 @@
 #import "MFriend.h"
 #import "MAMemberDetailViewController.h"
 #import "MAFriendListViewController.h"
+#import "MAGroupManager.h"
 
 NSString * const kSegueMemberListToMemberDetail = @"kSegueMemberListToMemberDetail";
 NSString * const kSegueMemberListToFriendList = @"kSegueMemberListToFriendList";
@@ -218,6 +219,16 @@ typedef enum {
     switch (indexPath.section) {
 
         case MemberListSectionOfSelected: {
+            NSMutableArray *memberList = [self arrayInSection:indexPath.section];
+            if (indexPath.row >= memberList.count) {
+                MA_QUICK_ASSERT(NO, @"member list out of bounds!");
+                return;
+            }
+            MFriend *member = [memberList objectAtIndex:indexPath.row];
+            if (![GroupManager isMember:member belongsToGroup:self.group]) {
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                return;
+            }
             insertIndexPath = [NSIndexPath indexPathForRow:0 inSection:MemberListSectionOfUnselected];
             break;
         }

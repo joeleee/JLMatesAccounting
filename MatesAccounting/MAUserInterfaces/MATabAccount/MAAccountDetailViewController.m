@@ -23,6 +23,7 @@
 #import "MFriend.h"
 #import "MAMemberListViewController.h"
 #import "MALocationManager.h"
+#import "MAGroupManager.h"
 
 typedef enum {
     FeeSectionType = 0,
@@ -421,7 +422,6 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         case MembersSectionType:
         {
             MAAccountDetailConsumerDetailCell *detailCell = cell;
-            detailCell.status = self.isEditing;
             detailCell.actionDelegate = self;
             NSUInteger index = indexPath.row;
             MAFeeOfMember *data = nil;
@@ -432,6 +432,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             } else if ((index - payers.count) < consumers.count) {
                 data = consumers[index - payers.count];
             }
+            detailCell.status = self.isEditing && [GroupManager isMember:data.member belongsToGroup:self.group];
             [detailCell reuseCellWithData:data];
             break;
         }
@@ -546,11 +547,23 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         } else if (1 == type) {
             NSString *feeText = [(UILabel *)data text];
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            MAFeeOfMember *feeOfMember = (indexPath.row < self.editingPayers.count) ? self.editingPayers[indexPath.row] : self.editingConsumers[indexPath.row];
-            feeOfMember.fee = [NSDecimalNumber decimalNumberWithString:feeText];
-            if (NSOrderedSame == [feeOfMember.fee compare:DecimalZero]) {
-                [(UILabel *)data setText:nil];
+            BOOL isPayer = indexPath.row < self.editingPayers.count;
+            MAFeeOfMember *feeOfMember = isPayer ? self.editingPayers[indexPath.row] : self.editingConsumers[indexPath.row - self.editingPayers.count];
+            NSDecimalNumber *fee = [NSDecimalNumber decimalNumberWithString:feeText];
+            if ([fee isEqualToNumber:[NSDecimalNumber notANumber]]) {
+                fee = DecimalZero;
             }
+            if ((isPayer && NSOrderedAscending == [fee compare:DecimalZero]) ||
+                (!isPayer && NSOrderedDescending == [fee compare:DecimalZero])) {
+                fee = [fee decimalNumberByMultiplyingBy:MAIntegerDecimal(-1)];
+            }
+            feeOfMember.fee = fee;
+            if (NSOrderedSame == [feeOfMember.fee compare:DecimalZero]) {
+                [(UILabel *)data setText:@""];
+            } else {
+                [(UILabel *)data setText:[feeOfMember.fee description]];
+            }
+            [self.tableView reloadData];
         }
     } else if ([cell isKindOfClass:MAAccountDetailDescriptionCell.class]) {
         if (0 == type) {
@@ -575,12 +588,12 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     switch ([sender.userInfo[kSegueAccountDetailToMemberList] integerValue]) {
 
         case DetailPayerType: {
-            NSArray *editingPayers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingPayers totalFee:self.editingTotalFee isPayer:YES];
+            NSArray *editingPayers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingPayers totalFee:self.editingTotalFee isPayer:YES inGroup:self.group];
             self.editingPayers = [NSMutableArray arrayWithArray:editingPayers];
         } break;
 
         case DetailConsumerType: {
-            NSArray *editingConsumers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingConsumers totalFee:self.editingTotalFee isPayer:NO];
+            NSArray *editingConsumers = [AccountManager feeOfMembersForNewMembers:selectedMembers originFeeOfMembers:self.editingConsumers totalFee:self.editingTotalFee isPayer:NO inGroup:self.group];
             self.editingConsumers = [NSMutableArray arrayWithArray:editingConsumers];
         } break;
 
@@ -613,6 +626,15 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 - (void)didSaveButtonTaped:(UIBarButtonItem *)sender
 {
     MA_HIDE_KEYBOARD;
+    if (0 >= self.editingPayers.count || 0 >= self.editingConsumers.count) {
+        [[MAAlertView alertWithTitle:nil message:@"Payers or Consumers can't be null." buttonTitle:@"OK" buttonBlock:^{ }] show];
+        return;
+    }
+
+    if (NSOrderedSame == [self.editingTotalFee compare:DecimalZero]) {
+        [[MAAlertView alertWithTitle:nil message:@"Total fee can't be '0'." buttonTitle:@"OK" buttonBlock:^{ }] show];
+        return;
+    }
 
     NSMutableSet *feeOfMambers = [NSMutableSet setWithArray:self.editingPayers];
     [feeOfMambers addObjectsFromArray:self.editingConsumers];
@@ -626,9 +648,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
         sumFee = [sumFee decimalNumberByAdding:feeOfMember.fee];
     }
-    NSString *errorText = (NSOrderedSame != [sumFee compare:DecimalZero]) ? @"Spending ≠ Income" : ((NSOrderedSame != [[self.editingTotalFee decimalNumberByAdding:[totalFee inverseNumber]] compare:DecimalZero]) ? @"Total fee is invalid" : nil);
+    NSString *errorText = (NSOrderedSame != [sumFee compare:DecimalZero]) ? @"Spending ≠ Income." : ((NSOrderedSame != [[self.editingTotalFee decimalNumberByAdding:[totalFee inverseNumber]] compare:DecimalZero]) ? @"Total fee is invalid." : nil);
     if (errorText) {
-        [[MAAlertView alertWithTitle:errorText message:nil buttonTitle:@"OK" buttonBlock:nil] show];
+        [[MAAlertView alertWithTitle:nil message:errorText buttonTitle:@"OK" buttonBlock:nil] show];
         return;
     }
 
@@ -643,10 +665,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         if (updated) {
             [self setEditing:NO animated:YES];
         } else {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"Update Failed!"
-                             completionBlock:nil
-                                    animated:YES];
+            [[MAAlertView alertWithTitle:@"Update Failed!" message:nil buttonTitle:@"OK" buttonBlock:^{ }] show];
         }
     } else { // create mode
         self.account = [AccountManager createAccountWithGroup:self.group
@@ -660,10 +679,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self setEditing:NO animated:YES];
             [self disappear:YES];
         } else {
-            [MBProgressHUD showTextHUDOnView:[UIApplication sharedApplication].delegate.window
-                                        text:@"Create Failed!"
-                             completionBlock:nil
-                                    animated:YES];
+            [[MAAlertView alertWithTitle:@"Create Failed!" message:nil buttonTitle:@"OK" buttonBlock:^{ }] show];
         }
     }
 }

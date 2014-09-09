@@ -42,4 +42,6 @@
 
 - (void)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
 
+- (BOOL)isMember:(MFriend *)member belongsToGroup:(MGroup *)group;
+
 @end

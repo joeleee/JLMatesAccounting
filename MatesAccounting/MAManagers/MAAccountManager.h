@@ -59,7 +59,7 @@
 
 - (NSArray *)feeOfMembersForAccount:(MAccount *)account isPayers:(BOOL)isPayers;
 
-- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer;
+- (NSArray *)feeOfMembersForNewMembers:(NSArray *)members originFeeOfMembers:(NSArray *)originFeeOfMembers totalFee:(NSDecimalNumber *)totalFee isPayer:(BOOL)isPayer inGroup:(MGroup *)group;
 
 - (NSArray *)memberForAccount:(MAccount *)account isSelected:(BOOL)isSelected isPayers:(BOOL)isPayers;
 

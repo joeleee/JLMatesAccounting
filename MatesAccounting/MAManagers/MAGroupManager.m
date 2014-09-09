@@ -191,4 +191,10 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     }
 }
 
+- (BOOL)isMember:(MFriend *)member belongsToGroup:(MGroup *)group
+{
+    BOOL isBelong = [member.relationshipToGroup intersectsSet:group.relationshipToMember];
+    return isBelong;
+}
+
 @end
