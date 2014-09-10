@@ -48,7 +48,7 @@
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday;
 
-- (BOOL)deleteFriend:(MFriend *)mFriend;
+- (void)deleteFriend:(MFriend *)mFriend onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
 
 - (NSArray *)unpaidGroupsForFriend:(MFriend *)mFriend;
 

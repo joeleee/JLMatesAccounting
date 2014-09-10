@@ -157,7 +157,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
             self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         } onFailed:^(id result, NSError *error) {
-            [[MAAlertView alertWithTitle:error.domain message:nil buttonTitle:@"OK" buttonBlock:^{
+            [[MAAlertView alertWithTitle:@"Can't Delete" message:error.domain buttonTitle:@"OK" buttonBlock:^{
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             }] show];
         }];

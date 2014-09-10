@@ -14,6 +14,8 @@
 #import "RMemberToGroup.h"
 #import "MACommonPersistent.h"
 #import "MAContextAPI.h"
+#import "RMemberToAccount.h"
+#import "MAccount+expand.h"
 
 NSString * const kMAFMFriendHasCreated = @"kMAFMFriendHasCreated";
 NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
@@ -151,15 +153,41 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     return isSucceed;
 }
 
-- (BOOL)deleteFriend:(MFriend *)mFriend
+- (void)deleteFriend:(MFriend *)mFriend onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed
 {
     if (0 != mFriend.relationshipToGroup.count) {
-        return NO;
+        NSMutableArray *groupNames = [NSMutableArray array];
+        NSMutableSet *groupSet = [NSMutableSet set];
+        for (RMemberToGroup *memberToGroup in mFriend.relationshipToGroup.allObjects) {
+            if (![groupSet containsObject:memberToGroup.group]) {
+                [groupSet addObject:memberToGroup.group];
+                [groupNames addObject:memberToGroup.group.groupName];
+            }
+        }
+        NSString *errorDomain = [NSString stringWithFormat:@"%@ still belongs to %lu groups: %@", mFriend.name, (unsigned long)groupSet.count, [groupNames componentsJoinedByString:@", "]];
+        NSError *error = [NSError errorWithDomain:errorDomain code:-1 userInfo:nil];
+        MA_INVOKE_BLOCK_SAFELY(onFailed, nil, error);
+        return;
+    }
+
+    if (0 != mFriend.relationshipToAccount.count) {
+        NSMutableArray *groupNames = [NSMutableArray array];
+        NSMutableSet *groupSet = [NSMutableSet set];
+        for (RMemberToAccount *memberToAccount in mFriend.relationshipToAccount.allObjects) {
+            if (![groupSet containsObject:memberToAccount.account.group]) {
+                [groupSet addObject:memberToAccount.account.group];
+                [groupNames addObject:memberToAccount.account.group.groupName];
+            }
+        }
+        NSString *errorDomain = [NSString stringWithFormat:@"%@ still has accounts in %lu groups: %@", mFriend.name, (unsigned long)groupSet.count, [groupNames componentsJoinedByString:@", "]];
+        NSError *error = [NSError errorWithDomain:errorDomain code:-1 userInfo:nil];
+        MA_INVOKE_BLOCK_SAFELY(onFailed, nil, error);
+        return;
     }
 
     BOOL isSucceed = [MACommonPersistent deleteObject:mFriend];
     MA_QUICK_ASSERT(isSucceed, @"Delete friend failed");
-    return isSucceed;
+    MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
 }
 
 - (NSArray *)unpaidGroupsForFriend:(MFriend *)mFriend

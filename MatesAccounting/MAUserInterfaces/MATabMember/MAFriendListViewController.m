@@ -168,32 +168,14 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
         MFriend *mFriend = self.friendList[indexPath.row];
-
-        if ([FriendManager deleteFriend:mFriend]) {
+        [FriendManager deleteFriend:mFriend onComplete:^(id result, NSError *error) {
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        } else {
-            NSString *errorTitle = @"Delete friend failed!";
-            NSString *errorMessage = nil;
-            // Get a right error message
-            if (0 < mFriend.relationshipToGroup.count) {
-                NSArray *relationshipToGroups = mFriend.relationshipToGroup.allObjects;
-                NSMutableString *groupNames = [NSMutableString string];
-                for (RMemberToGroup *memberToGroup in relationshipToGroups) {
-                    if (memberToGroup == relationshipToGroups.firstObject) {
-                        [groupNames appendFormat:@"%@", memberToGroup.group.groupName];
-                    } else {
-                        [groupNames appendFormat:@", %@", memberToGroup.group.groupName];
-                    }
-                }
-                errorTitle = @"Can't delete";
-                errorMessage = [NSString stringWithFormat:@"%@ still belongs to %lu groups: %@", mFriend.name, (unsigned long)relationshipToGroups.count, groupNames];
-            }
-
-            [[MAAlertView alertWithTitle:errorTitle message:errorMessage buttonTitle:@"OK" buttonBlock:^{
+        } onFailed:^(id result, NSError *error) {
+            [[MAAlertView alertWithTitle:@"Can't Delete" message:error.domain buttonTitle:@"OK" buttonBlock:^{
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             }] show];
-        }
+        }];
     }
 }
 

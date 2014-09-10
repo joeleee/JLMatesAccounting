@@ -305,9 +305,12 @@
 
 - (NSArray *)accountSettlementListForGroup:(MGroup *)group
 {
+    MALogInfo(@"\nSettlement for group: %@   member count: %@", group.groupName, @(group.relationshipToMember.count));
     NSMutableArray *receiverSettlementList = [NSMutableArray array];
     NSMutableArray *payerSettlementList = [NSMutableArray array];
     for (RMemberToGroup *memberToGroup in group.relationshipToMember) {
+        [memberToGroup refreshMemberTotalFee];
+        MALogInfo(@"Member: %@   fee: %@", memberToGroup.member.name, memberToGroup.fee);
         if (NSOrderedDescending == [memberToGroup.fee compare:DecimalZero]) {
             MAAccountSettlement *accountSettlement = [MAAccountSettlement accountSettlement:nil toMember:memberToGroup.member fee:memberToGroup.fee];
             [receiverSettlementList addObject:accountSettlement];
