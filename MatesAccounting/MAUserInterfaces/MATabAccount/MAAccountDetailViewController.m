@@ -15,6 +15,7 @@
 #import "MAAccountDetailLocationCell.h"
 #import "MAAccountDetailConsumerDetailCell.h"
 #import "MAAccountDetailDescriptionCell.h"
+#import "MAAccountDetailDeleteCell.h"
 #import "MAAccountDetailSectionHeader.h"
 #import "MAccount+expand.h"
 #import "UIViewController+MAAddition.h"
@@ -245,7 +246,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             headerTitle = @"Total coast";
             rowCount = 1;
-            cellIdentifier = [MAAccountDetailFeeCell reuseIdentifier];
+            cellIdentifier = [MAAccountDetailFeeCell className];
             cellHeight = [MAAccountDetailFeeCell cellHeight:@(self.editing)];
             break;
         }
@@ -258,28 +259,28 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             switch (row) {
                 case DetailDateType:
                 {
-                    cellIdentifier = [MAAccountDetailDateCell reuseIdentifier];
+                    cellIdentifier = [MAAccountDetailDateCell className];
                     cellHeight = [MAAccountDetailDateCell cellHeight:@(self.isShowDateCellPicker)];
                     break;
                 }
 
                 case DetailPayerType:
                 {
-                    cellIdentifier = [MAAccountDetailPayersCell reuseIdentifier];
+                    cellIdentifier = [MAAccountDetailPayersCell className];
                     cellHeight = [MAAccountDetailPayersCell cellHeight:@(self.editing)];
                     break;
                 }
 
                 case DetailConsumerType:
                 {
-                    cellIdentifier = [MAAccountDetailConsumersCell reuseIdentifier];
+                    cellIdentifier = [MAAccountDetailConsumersCell className];
                     cellHeight = [MAAccountDetailConsumersCell cellHeight:@(self.editing)];
                     break;
                 }
 
                 case DetailLocationType:
                 {
-                    cellIdentifier = [MAAccountDetailLocationCell reuseIdentifier];
+                    cellIdentifier = [MAAccountDetailLocationCell className];
                     cellHeight = [MAAccountDetailLocationCell cellHeight:@(self.editing)];
                     break;
                 }
@@ -299,7 +300,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 rowCount = self.payers.count + self.consumers.count;
             }
 
-            cellIdentifier = [MAAccountDetailConsumerDetailCell reuseIdentifier];
+            cellIdentifier = [MAAccountDetailConsumerDetailCell className];
             cellHeight = [MAAccountDetailConsumerDetailCell cellHeight:nil];
             break;
         }
@@ -308,8 +309,22 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         {
             headerTitle = @"Description";
             rowCount = 1;
-            cellIdentifier = [MAAccountDetailDescriptionCell reuseIdentifier];
-            cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
+            if (self.isEditing && self.account) {
+                ++rowCount;
+            }
+
+            switch (row) {
+                case 0: {
+                    cellIdentifier = [MAAccountDetailDescriptionCell className];
+                    cellHeight = [MAAccountDetailDescriptionCell cellHeight:nil];
+                } break;
+                case 1: {
+                    cellIdentifier = [MAAccountDetailDeleteCell className];
+                    cellHeight = [MAAccountDetailDeleteCell cellHeight:nil];
+                } break;
+                default:
+                    break;
+            }
             break;
         }
 
@@ -439,7 +454,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
         case AccountDescriptionSectionType:
         {
-            MAAccountDetailDescriptionCell *detailCell = cell;
+            MABaseCell *detailCell = cell;
             detailCell.status = self.isEditing;
             detailCell.actionDelegate = self;
             [detailCell reuseCellWithData:self.account.detail];
@@ -571,6 +586,21 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         } else if (1 == type) {
             self.editingDetail = [(UITextView *)data text];
         }
+    } else if ([cell isKindOfClass:MAAccountDetailDeleteCell.class]) {
+        [[MAAlertView alertWithTitle:@"Confirm"
+                             message:@"Deleted account can not be recovered."
+                        buttonTitle1:@"Undelete"
+                        buttonBlock1:^{
+                        }
+                        buttonTitle2:@"Still Delete"
+                        buttonBlock2:^{
+                            [AccountManager deleteAccount:self.account onComplete:^(id result, NSError *error) {
+                                [self disappear:YES];
+                            } onFailed:^(id result, NSError *error) {
+                                [[MAAlertView alertWithTitle:@"Delete Failed" message:error.domain buttonTitle:@"OK" buttonBlock:^{ }] show];
+                            }];
+                        }]
+         show];
     }
 
     if (shouldScroll) {

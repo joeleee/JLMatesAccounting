@@ -30,10 +30,4 @@
     return 0.0f;
 }
 
-+ (NSString *)reuseIdentifier
-{
-    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - reuseIdentifier");
-    return @"";
-}
-
 @end

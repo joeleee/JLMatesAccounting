@@ -90,7 +90,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MAGroupListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell reuseIdentifier]];
+    MAGroupListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAGroupListCell className]];
     cell.actionDelegate = self;
 
     if (indexPath.row >= [GroupManager myGroups].count) {

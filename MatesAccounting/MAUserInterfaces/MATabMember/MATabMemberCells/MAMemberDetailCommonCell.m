@@ -40,7 +40,7 @@ NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType
 
     if (self.status) {
         self.detailTextField.userInteractionEnabled = YES;
-        self.detailTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
+        self.detailTextField.backgroundColor = MA_COLOR_TABACCOUNT_DETAIL_EDITVIEW;
         self.detailTextField.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL_EDIT;
     } else {
         self.detailTextField.userInteractionEnabled = NO;
@@ -58,11 +58,6 @@ NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType
 + (CGFloat)cellHeight:(id)data
 {
     return 50.0f;
-}
-
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
 }
 
 - (IBAction)didDetailTextEditingChanged:(UITextField *)sender

@@ -31,7 +31,7 @@
     if (self.status) {
         [self.feeTextField setText:data];
         self.feeTextField.userInteractionEnabled = YES;
-        self.feeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
+        self.feeTextField.backgroundColor = MA_COLOR_TABACCOUNT_DETAIL_EDITVIEW;
     } else {
         [self.feeTextField setText:data];
         self.feeTextField.userInteractionEnabled = NO;
@@ -42,11 +42,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 60.0f;
-}
-
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
 }
 
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol

@@ -43,11 +43,6 @@
     return 40.0f;
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
 - (void)manualLayoutAfterLayoutSubviews
 {

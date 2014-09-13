@@ -69,11 +69,6 @@
     return 80.0f;
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 - (IBAction)didGroupDetailButtonTaped:(UIButton *)sender
 {
     [self.actionDelegate actionWithData:self.group

@@ -399,4 +399,9 @@
     return index;
 }
 
+- (void)deleteAccount:(MAccount *)account onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed
+{
+    MA_INVOKE_BLOCK_SAFELY(onFailed, nil, nil);
+}
+
 @end

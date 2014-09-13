@@ -140,10 +140,10 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     UITableViewCell *cell = nil;
 
     if (0 == indexPath.section) {
-        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell reuseIdentifier]];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountGroupInfoCell className]];
         [(MATabAccountGroupInfoCell *)cell reuseCellWithData:MACurrentGroup];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell reuseIdentifier]];
+        cell = [tableView dequeueReusableCellWithIdentifier:[MATabAccountListCell className]];
         NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
         MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
         [(MATabAccountListCell *)cell reuseCellWithData:account];

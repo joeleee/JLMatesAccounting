@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailDescriptionCell.h"
 
-@interface MAAccountDetailDescriptionCell () <UITextViewDelegate>
+@interface MAAccountDetailDescriptionCell () <UITextViewDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UITextView *accountDescriptionTextView;
 
@@ -19,6 +19,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
@@ -28,14 +29,17 @@
 {
     [self.accountDescriptionTextView setText:data];
     if (self.status) {
-        self.accountDescriptionTextView.userInteractionEnabled = YES;
-        self.accountDescriptionTextView.backgroundColor = UIColorFromRGB(222, 222, 222);
+        self.accountDescriptionTextView.backgroundColor = MA_COLOR_TABACCOUNT_DETAIL_EDITVIEW;
         self.accountDescriptionTextView.textColor = [UIColor blackColor];
     } else {
-        self.accountDescriptionTextView.userInteractionEnabled = NO;
         self.accountDescriptionTextView.backgroundColor = [UIColor clearColor];
-        self.accountDescriptionTextView.textColor = UIColorFromRGB(222, 222, 222);
+        self.accountDescriptionTextView.textColor = MA_COLOR_TABACCOUNT_DETAIL_DESCRIPTION;
     }
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    return self.status;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -53,9 +57,11 @@
     return 110.0f;
 }
 
-+ (NSString *)reuseIdentifier
+#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
+- (void)manualLayoutAfterLayoutSubviews
 {
-    return [self className];
+    self.accountDescriptionTextView.scrollsToTop = NO;
+    self.accountDescriptionTextView.layer.cornerRadius = 5.0;
 }
 
 @end

@@ -62,11 +62,6 @@
     }
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 - (IBAction)didBirthdayDatePickerValueChanged:(UIDatePicker *)sender
 {
     [self.actionDelegate actionWithData:sender.date cell:self type:self.tag];

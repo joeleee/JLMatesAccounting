@@ -64,11 +64,6 @@
     return 65.0f;
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 - (IBAction)didInfoButtonTaped:(UIButton *)sender
 {
     [self.actionDelegate actionWithData:self.member cell:self type:0];

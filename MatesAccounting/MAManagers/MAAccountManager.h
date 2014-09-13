@@ -65,4 +65,6 @@
 
 - (NSArray *)accountSettlementListForGroup:(MGroup *)group;
 
+- (void)deleteAccount:(MAccount *)account onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
+
 @end

@@ -46,11 +46,6 @@
     return 50.0f;
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 - (IBAction)didGenderSwitchValueChanged:(UISwitch *)sender
 {
     MAGenderEnum gender = MAGenderUnknow;

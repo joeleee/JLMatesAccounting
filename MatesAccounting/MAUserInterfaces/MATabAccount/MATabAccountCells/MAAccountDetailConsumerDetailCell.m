@@ -45,7 +45,7 @@
 
     if (self.status) {
         self.consumerFeeTextField.userInteractionEnabled = YES;
-        self.consumerFeeTextField.backgroundColor = UIColorFromRGB(222, 222, 222);
+        self.consumerFeeTextField.backgroundColor = MA_COLOR_TABACCOUNT_DETAIL_EDITVIEW;
     } else {
         self.consumerFeeTextField.userInteractionEnabled = NO;
         self.consumerFeeTextField.backgroundColor = [UIColor clearColor];
@@ -55,11 +55,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 40.0f;
-}
-
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
 }
 
 #pragma mark UITextFieldDelegate

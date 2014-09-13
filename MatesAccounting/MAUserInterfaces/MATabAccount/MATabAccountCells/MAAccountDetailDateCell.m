@@ -58,11 +58,6 @@
     }
 }
 
-+ (NSString *)reuseIdentifier
-{
-    return [self className];
-}
-
 - (IBAction)didDatePickerValueChanged:(id)sender
 {
     [self.dateDescriptionLabel setText:[[sender date] dateToString:@"yyyy-MM-dd HH:mm"]];
