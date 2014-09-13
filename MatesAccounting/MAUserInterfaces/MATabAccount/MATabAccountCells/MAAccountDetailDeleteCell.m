@@ -30,7 +30,7 @@
 
 + (CGFloat)cellHeight:(id)data
 {
-    return 200.0f;
+    return 120.0f;
 }
 
 #pragma mark actions

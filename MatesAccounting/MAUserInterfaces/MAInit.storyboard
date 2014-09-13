@@ -1126,16 +1126,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <outlet property="accountDescriptionTextView" destination="0yX-iM-zMw" id="mUE-BU-mNx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAAccountDetailDeleteCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAAccountDetailDeleteCell" rowHeight="200" id="YBY-Yb-Gtz" userLabel="Account Detail Delete Account Cell" customClass="MAAccountDetailDeleteCell">
-                                        <rect key="frame" x="0.0" y="656" width="320" height="200"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAAccountDetailDeleteCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAAccountDetailDeleteCell" rowHeight="120" id="YBY-Yb-Gtz" userLabel="Account Detail Delete Account Cell" customClass="MAAccountDetailDeleteCell">
+                                        <rect key="frame" x="0.0" y="656" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YBY-Yb-Gtz" id="TKa-MJ-D8n">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SQC-Kh-Hpn">
-                                                    <rect key="frame" x="20" y="5" width="280" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <rect key="frame" x="15" y="56" width="290" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <state key="normal" title="Delete Account">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

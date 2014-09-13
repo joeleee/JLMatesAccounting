@@ -11,10 +11,11 @@
 #import "MAGroupManager.h"
 #import "MAAccountManager.h"
 #import "MAAccountSettlementCell.h"
+#import "MFriend.h"
 
 NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
-@interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -72,7 +73,6 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.settlementList.count;
@@ -94,7 +94,42 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     return [MAAccountSettlementCell cellHeight:self.settlementList[indexPath.row]];
 }
 
-#pragma mark - UI action
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+
+    MAAccountSettlement *settlement = self.settlementList[indexPath.row];
+    NSString *actionTitle = [NSString stringWithFormat:@"%@ needs to pay %@ back %@ to settle this accounts", settlement.fromMember.name, settlement.toMember.name, settlement.fee];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Repayment", nil];
+    actionSheet.tag = indexPath.row;
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (0 == buttonIndex) {
+        MA_QUICK_ASSERT(self.settlementList.count > actionSheet.tag, @"Array out of bounds!");
+        MAAccountSettlement *settlement = self.settlementList[actionSheet.tag];
+        if ([settlement.fee isEqualToNumber:[NSDecimalNumber notANumber]]) {
+            settlement.fee = DecimalZero;
+        }
+
+        NSDecimalNumber *fee = (NSOrderedDescending == [settlement.fee compare:DecimalZero]) ? settlement.fee : [settlement.fee inverseNumber];
+        MAFeeOfMember *payer = [MAFeeOfMember feeOfMember:settlement.fromMember fee:fee];
+        MAFeeOfMember *receiver = [MAFeeOfMember feeOfMember:settlement.toMember fee:[fee inverseNumber]];
+        NSString *detail = [NSString stringWithFormat:@"Repayment from %@ to %@", settlement.fromMember.name, settlement.toMember.name];
+
+        MAccount *account = [[MAAccountManager sharedManager] createAccountWithGroup:MACurrentGroup date:[NSDate date] placeName:nil location:nil detail:detail feeOfMembers:[NSSet setWithObjects:payer, receiver, nil]];
+        if (account) {
+            [self loadData];
+        } else {
+            [[MAAlertView alertWithTitle:@"Repayment Failed" message:nil buttonTitle:@"OK" buttonBlock:^{ }] show];
+        }
+    }
+}
+
+#pragma mark UI action
 
 - (void)viewGroupNavigationButtonTaped:(id)sender
 {
