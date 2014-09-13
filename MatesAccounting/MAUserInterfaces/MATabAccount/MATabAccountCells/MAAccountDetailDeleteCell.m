@@ -30,7 +30,7 @@
 
 + (CGFloat)cellHeight:(id)data
 {
-    return 50.0f;
+    return 200.0f;
 }
 
 #pragma mark actions
@@ -44,7 +44,7 @@
 {
     [self.deleteAccountButton setBackgroundColor:MA_COLOR_TABACCOUNT_DETAIL_DELETE];
     [self.deleteAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.deleteAccountButton.layer.cornerRadius = 5.0;
+    self.deleteAccountButton.layer.cornerRadius = 3.0;
 }
 
 @end

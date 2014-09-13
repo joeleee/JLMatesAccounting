@@ -78,6 +78,7 @@
 - (void)manualLayoutAfterLayoutSubviews
 {
     self.consumerNameLabel.textColor = MA_COLOR_TABACCOUNT_USER_NAME;
+    self.consumerFeeTextField.layer.cornerRadius = 3.0;
 }
 
 @end

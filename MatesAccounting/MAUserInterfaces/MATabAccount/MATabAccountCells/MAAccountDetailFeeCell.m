@@ -49,6 +49,7 @@
 {
     self.feeTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
     self.feeTextField.textColor = MA_COLOR_TABACCOUNT_ACCOUNT_COAST;
+    self.feeTextField.layer.cornerRadius = 3.0;
 }
 
 #pragma mark UITextFieldDelegate

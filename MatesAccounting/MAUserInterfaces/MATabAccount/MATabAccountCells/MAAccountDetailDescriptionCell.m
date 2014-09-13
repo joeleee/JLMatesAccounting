@@ -54,14 +54,14 @@
 
 + (CGFloat)cellHeight:(id)data
 {
-    return 110.0f;
+    return 150.0f;
 }
 
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
 - (void)manualLayoutAfterLayoutSubviews
 {
     self.accountDescriptionTextView.scrollsToTop = NO;
-    self.accountDescriptionTextView.layer.cornerRadius = 5.0;
+    self.accountDescriptionTextView.layer.cornerRadius = 3.0;
 }
 
 @end
