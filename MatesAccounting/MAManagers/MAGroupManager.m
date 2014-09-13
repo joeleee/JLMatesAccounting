@@ -8,7 +8,7 @@
 
 #import "MAGroupManager.h"
 
-#import "MGroup.h"
+#import "MGroup+expand.h"
 #import "MFriend.h"
 #import "MACommonPersistent.h"
 #import "RMemberToGroup+expand.h"
@@ -136,7 +136,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
 - (RMemberToGroup *)addFriend:(MFriend *)mFriend toGroup:(MGroup *)group
 {
-    if (!mFriend || !group) {
+    if (!mFriend || !group || 0 < [group relationshipToMembersByFriend:mFriend].count) {
         return nil;
     }
     for (RMemberToGroup *memberToGroup in mFriend.relationshipToGroup) {

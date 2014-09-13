@@ -215,11 +215,16 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSMutableArray *memberList = [self arrayInSection:indexPath.section];
+    if (0 == memberList.count && 0 == indexPath.row) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+
     NSIndexPath *insertIndexPath = nil;
     switch (indexPath.section) {
 
         case MemberListSectionOfSelected: {
-            NSMutableArray *memberList = [self arrayInSection:indexPath.section];
             if (indexPath.row >= memberList.count) {
                 MA_QUICK_ASSERT(NO, @"member list out of bounds!");
                 return;

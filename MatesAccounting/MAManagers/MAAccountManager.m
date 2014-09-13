@@ -401,7 +401,21 @@
 
 - (void)deleteAccount:(MAccount *)account onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed
 {
-    MA_INVOKE_BLOCK_SAFELY(onFailed, nil, nil);
+    NSMutableArray *members = [NSMutableArray array];
+    MGroup *group = account.group;
+    for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
+        [members addObject:memberToAccount.member];
+    }
+
+    BOOL succeed = [MACommonPersistent deleteObject:account];
+    MA_QUICK_ASSERT(succeed, @"Delete Account Failed!");
+
+    MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
+
+    for (MFriend *member in members) {
+        RMemberToGroup *memberToGroup = [group relationshipToMembersByFriend:member].firstObject;
+        [memberToGroup refreshMemberTotalFee];
+    }
 }
 
 @end

@@ -548,6 +548,9 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         } else if (1 == type) {
             NSString *feeText = [(UILabel *)data text];
             self.editingTotalFee = [NSDecimalNumber decimalNumberWithString:feeText];
+            if ([self.editingTotalFee isEqualToNumber:[NSDecimalNumber notANumber]]) {
+                self.editingTotalFee = DecimalZero;
+            }
             if (NSOrderedSame == [self.editingTotalFee compare:DecimalZero]) {
                 [(UILabel *)data setText:nil];
             }
