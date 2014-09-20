@@ -55,6 +55,11 @@
     [self.totalFeesLabel setText:[totalFee stringValue]];
 }
 
++ (CGFloat)cellHeight:(id)data
+{
+    return 80;
+}
+
 #pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
 - (void)manualLayoutAfterLayoutSubviews
 {
@@ -65,11 +70,6 @@
     [self.accountCountTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
     [self.totalFeesLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
     [self.totalFeesTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
-}
-
-+ (CGFloat)cellHeight:(id)data
-{
-    return 0.0f;
 }
 
 @end

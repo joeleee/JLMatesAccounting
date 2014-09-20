@@ -1,18 +1,18 @@
 //
-//  MATabAccountListCell.m
+//  MAMemberAccountListCell.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-27.
-//  Copyright (c) 2013年 Lee. All rights reserved.
+//  Created by Joe Lee on 2014-9-21.
+//  Copyright (c) 2014年 Lee. All rights reserved.
 //
 
-#import "MATabAccountListCell.h"
+#import "MAMemberAccountListCell.h"
 
 #import "MAccount+expand.h"
 #import "RMemberToAccount.h"
 #import "MFriend.h"
 
-@interface MATabAccountListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAMemberAccountListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation MATabAccountListCell
+@implementation MAMemberAccountListCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

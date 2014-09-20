@@ -147,9 +147,17 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
         MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
         [(MATabAccountListCell *)cell reuseCellWithData:account];
-        [(MATabAccountListCell *)cell dividingLineView].hidden = (accountList.lastObject == account);
     }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section) {
+        return [MATabAccountGroupInfoCell cellHeight:nil];
+    } else {
+        return [MATabAccountListCell cellHeight:nil];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

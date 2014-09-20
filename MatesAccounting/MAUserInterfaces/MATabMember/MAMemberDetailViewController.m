@@ -14,6 +14,9 @@
 #import "MFriend.h"
 #import "MAFriendManager.h"
 #import "UIViewController+MAAddition.h"
+#import "MAMemberAccountListViewController.h"
+
+NSString * const kSegueMemberDetailToAccountList = @"kSegueMemberDetailToAccountList";
 
 NSUInteger const kMemberDetailRowCount = 5;
 NSString * const kMemberDetailRowType = @"kMemberDetailRowType";
@@ -60,7 +63,7 @@ typedef enum {
 
     if (self.mFriend) {
         [self setEditing:NO animated:NO];
-        self.title = @"Member detail";
+        self.title = @"Friend";
     } else {
         [self setEditing:YES animated:NO];
         self.title = @"Create friend";
@@ -69,6 +72,11 @@ typedef enum {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:kSegueMemberDetailToAccountList]) {
+        // MAMemberAccountListViewController *accountList = segue.destinationViewController;
+    } else {
+        MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
+    }
 }
 
 #pragma mark table view control
@@ -400,6 +408,11 @@ typedef enum {
     }
 
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (IBAction)didAccountButtonTapped:(id)sender
+{
+    [self performSegueWithIdentifier:kSegueMemberDetailToAccountList sender:sender];
 }
 
 #pragma mark - Public Method

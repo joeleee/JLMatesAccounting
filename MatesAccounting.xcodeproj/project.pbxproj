@@ -91,7 +91,9 @@
 		D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3EA11996869600FA5005 /* NSString+MAAddition.m */; };
 		D8A64C7419B62F8100ED1E47 /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A64C7319B62F8100ED1E47 /* MACommonPersistent.m */; };
 		D8B68E2519A63FD500810E64 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B68E2419A63FD500810E64 /* MPlace.m */; };
+		D8C3082519CDDF8000943B56 /* MAMemberAccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C3082419CDDF8000943B56 /* MAMemberAccountListCell.m */; };
 		D8D5E5D319C48A12003D5FFE /* MAAccountDetailDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D5E5D219C48A12003D5FFE /* MAAccountDetailDeleteCell.m */; };
+		D8D5E5D619C5F645003D5FFE /* MAMemberAccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D5E5D519C5F645003D5FFE /* MAMemberAccountListViewController.m */; };
 		D8E25ABD19927FB9006772B4 /* MAAccountSettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */; };
 		D8EC817819A3AE4300AFCD13 /* MGroup+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EC817719A3AE4300AFCD13 /* MGroup+expand.m */; };
 /* End PBXBuildFile section */
@@ -262,8 +264,12 @@
 		D8A64C7319B62F8100ED1E47 /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MACommonPersistent.m; sourceTree = "<group>"; };
 		D8B68E2319A63FD500810E64 /* MPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPlace.h; path = MAModels/coreDataModels/MPlace.h; sourceTree = "<group>"; };
 		D8B68E2419A63FD500810E64 /* MPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPlace.m; path = MAModels/coreDataModels/MPlace.m; sourceTree = "<group>"; };
+		D8C3082319CDDF8000943B56 /* MAMemberAccountListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberAccountListCell.h; path = MATabAccountCells/MAMemberAccountListCell.h; sourceTree = "<group>"; };
+		D8C3082419CDDF8000943B56 /* MAMemberAccountListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberAccountListCell.m; path = MATabAccountCells/MAMemberAccountListCell.m; sourceTree = "<group>"; };
 		D8D5E5D119C48A12003D5FFE /* MAAccountDetailDeleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAccountDetailDeleteCell.h; path = MATabAccountCells/MAAccountDetailDeleteCell.h; sourceTree = "<group>"; };
 		D8D5E5D219C48A12003D5FFE /* MAAccountDetailDeleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAccountDetailDeleteCell.m; path = MATabAccountCells/MAAccountDetailDeleteCell.m; sourceTree = "<group>"; };
+		D8D5E5D419C5F645003D5FFE /* MAMemberAccountListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMemberAccountListViewController.h; sourceTree = "<group>"; };
+		D8D5E5D519C5F645003D5FFE /* MAMemberAccountListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMemberAccountListViewController.m; sourceTree = "<group>"; };
 		D8E25ABB19927FB9006772B4 /* MAAccountSettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountSettlementCell.h; sourceTree = "<group>"; };
 		D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountSettlementCell.m; sourceTree = "<group>"; };
 		D8EC817619A3AE4300AFCD13 /* MGroup+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MGroup+expand.h"; path = "MAModels/MGroup+expand.h"; sourceTree = "<group>"; };
@@ -372,6 +378,8 @@
 				9B391C72183527CE0025A2FB /* MATabAccountViewController.m */,
 				9BC23102184B1F11005ADD59 /* MAAccountDetailViewController.h */,
 				9BC23103184B1F11005ADD59 /* MAAccountDetailViewController.m */,
+				D8D5E5D419C5F645003D5FFE /* MAMemberAccountListViewController.h */,
+				D8D5E5D519C5F645003D5FFE /* MAMemberAccountListViewController.m */,
 			);
 			name = MATabAccount;
 			path = MAUserInterfaces/MATabAccount;
@@ -587,6 +595,8 @@
 			children = (
 				9BD0E7851845E87600BA9F2E /* MATabAccountListCell.h */,
 				9BD0E7861845E87600BA9F2E /* MATabAccountListCell.m */,
+				D8C3082319CDDF8000943B56 /* MAMemberAccountListCell.h */,
+				D8C3082419CDDF8000943B56 /* MAMemberAccountListCell.m */,
 				9BD0E79E18465AB500BA9F2E /* MATabAccountGroupInfoCell.h */,
 				9BD0E79F18465AB500BA9F2E /* MATabAccountGroupInfoCell.m */,
 				9BC23105184B274F005ADD59 /* MAAccountDetailFeeCell.h */,
@@ -830,6 +840,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B25AA1718533E1E008D79B7 /* MAMemberListSectionHeader.m in Sources */,
+				D8C3082519CDDF8000943B56 /* MAMemberAccountListCell.m in Sources */,
 				9BE1DBB518B9F022000BE969 /* MBProgressHUD+MAAddition.m in Sources */,
 				9B391CA11835FA370025A2FB /* MAGlobalDefinitions.m in Sources */,
 				9BB074CC183B7C950023B728 /* MAccount+expand.m in Sources */,
@@ -838,6 +849,7 @@
 				D82541091998FF4F00559835 /* RMemberToGroup.m in Sources */,
 				9B079B7E185C8B17003C654B /* MAFriendListViewController.m in Sources */,
 				9BC2311C184B2EC1005ADD59 /* MAAccountDetailSectionHeader.m in Sources */,
+				D8D5E5D619C5F645003D5FFE /* MAMemberAccountListViewController.m in Sources */,
 				9BCAC03718322997000417FD /* MAAppDelegate.m in Sources */,
 				D82541121998FF4F00559835 /* MFriend.m in Sources */,
 				9BC23116184B27FD005ADD59 /* MAAccountDetailConsumerDetailCell.m in Sources */,
@@ -1065,6 +1077,7 @@
 				);
 				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1083,6 +1096,7 @@
 				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
 				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

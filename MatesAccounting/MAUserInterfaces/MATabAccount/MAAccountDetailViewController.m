@@ -130,7 +130,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
     if (self.account) {
         [self setEditing:NO animated:NO];
-        self.title = @"Account detail";
+        self.title = @"Account";
     } else {
         [self setEditing:YES animated:NO];
         self.title = @"Create account";
@@ -400,7 +400,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                     detailCell.status = self.isEditing;
                     NSArray *payers = self.isEditing ? self.editingPayers : self.payers;
                     NSString *memberDescription = ((MAFeeOfMember *)payers.firstObject).member.name;
-                    for (NSUInteger index = 1; index < payers.count; ++index) {
+                    for (NSUInteger index = 0; index < payers.count; ++index) {
                         memberDescription = [NSString stringWithFormat:@"%@, %@", memberDescription, ((MAFeeOfMember *)payers[index]).member.name];
                     }
                     [detailCell reuseCellWithData:memberDescription ? memberDescription : @"tap to choice..."];
@@ -413,7 +413,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                     detailCell.status = self.isEditing;
                     NSArray *consumers = self.isEditing ? self.editingConsumers : self.consumers;
                     NSString *memberDescription = ((MAFeeOfMember *)consumers.firstObject).member.name;
-                    for (NSUInteger index = 1; index < consumers.count; ++index) {
+                    for (NSUInteger index = 0; index < consumers.count; ++index) {
                         memberDescription = [NSString stringWithFormat:@"%@, %@", memberDescription, ((MAFeeOfMember *)consumers[index]).member.name];
                     }
                     [detailCell reuseCellWithData:memberDescription ? memberDescription : @"tap to choice..."];
@@ -457,7 +457,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             MABaseCell *detailCell = cell;
             detailCell.status = self.isEditing;
             detailCell.actionDelegate = self;
-            [detailCell reuseCellWithData:self.account.detail];
+            [detailCell reuseCellWithData:self.isEditing ? self.editingDetail : self.account.detail];
             break;
         }
 
