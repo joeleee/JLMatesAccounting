@@ -12,6 +12,8 @@ CGFloat const kAccountDetailSectionHeaderHeight = 30.0f;
 
 @interface MAAccountDetailSectionHeader ()
 
+@property (nonatomic, strong) UILabel *titleLabel;
+
 @end
 
 @implementation MAAccountDetailSectionHeader
@@ -24,15 +26,31 @@ CGFloat const kAccountDetailSectionHeaderHeight = 30.0f;
         self.contentView.layer.shadowOpacity = 0.2;
         self.contentView.layer.shadowRadius = 3;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0.1);
-        [self.textLabel setTextColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_TITLE];
+
+        [self addSubview:self.titleLabel];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
     }
 
-    return  self;
+    return self;
 }
 
 - (void)reuseWithHeaderTitle:(NSString *)title
 {
-    self.textLabel.text = title;
+    self.titleLabel.text = title;
+}
+
+#pragma mark property
+- (UILabel *)titleLabel
+{
+    if (_titleLabel) {
+        return _titleLabel;
+    }
+
+    _titleLabel = [[UILabel alloc] init];
+    _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [_titleLabel setTextColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_TITLE];
+    return _titleLabel;
 }
 
 @end

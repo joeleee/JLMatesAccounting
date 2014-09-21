@@ -14,13 +14,6 @@
 
 @interface MAMemberAccountListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
-@property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
-@property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *accountTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *accountTotalFeeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *accountDetailLabel;
-@property (weak, nonatomic) IBOutlet UIView *dividingLineView;
-
 @end
 
 @implementation MAMemberAccountListCell
@@ -38,7 +31,7 @@
 {
     MAccount *account = data;
     [self.accountDetailLabel setText:account.detail];
-    [self.accountTimeLabel setText:[account.accountDate dateToString:@"HH:mm"]];
+    [self.accountTimeLabel setText:[account.accountDate dateToString:@"yyy-MM-dd HH:mm"]];
     [self.accountTotalFeeLabel setText:[account.totalFee stringValue]];
 
     NSSet *payers = [account.relationshipToMember filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"%K > 0", @"fee"]];

@@ -89,6 +89,7 @@
 		D88E3E6619951B9E00FA5005 /* MARootNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E6519951B9E00FA5005 /* MARootNavigationControllerDelegate.m */; };
 		D88E3E7B1996745100FA5005 /* RMemberToGroup+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E7A1996745100FA5005 /* RMemberToGroup+expand.m */; };
 		D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3EA11996869600FA5005 /* NSString+MAAddition.m */; };
+		D897ED0E19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D897ED0D19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m */; };
 		D8A64C7419B62F8100ED1E47 /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A64C7319B62F8100ED1E47 /* MACommonPersistent.m */; };
 		D8B68E2519A63FD500810E64 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B68E2419A63FD500810E64 /* MPlace.m */; };
 		D8C3082519CDDF8000943B56 /* MAMemberAccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C3082419CDDF8000943B56 /* MAMemberAccountListCell.m */; };
@@ -260,6 +261,8 @@
 		D88E3E7A1996745100FA5005 /* RMemberToGroup+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RMemberToGroup+expand.m"; path = "MAModels/RMemberToGroup+expand.m"; sourceTree = "<group>"; };
 		D88E3EA01996869600FA5005 /* NSString+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MAAddition.h"; path = "MAAdditions/NSString+MAAddition.h"; sourceTree = "<group>"; };
 		D88E3EA11996869600FA5005 /* NSString+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MAAddition.m"; path = "MAAdditions/NSString+MAAddition.m"; sourceTree = "<group>"; };
+		D897ED0C19CEC72500210CD8 /* MAMemberAccountListSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberAccountListSectionHeader.h; path = MATabAccountViews/MAMemberAccountListSectionHeader.h; sourceTree = "<group>"; };
+		D897ED0D19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberAccountListSectionHeader.m; path = MATabAccountViews/MAMemberAccountListSectionHeader.m; sourceTree = "<group>"; };
 		D8A64C7219B62F8100ED1E47 /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MACommonPersistent.h; sourceTree = "<group>"; };
 		D8A64C7319B62F8100ED1E47 /* MACommonPersistent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACommonPersistent.m; path = MADataPersistent/MACommonPersistent.m; sourceTree = "<group>"; };
 		D8B68E2319A63FD500810E64 /* MPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPlace.h; path = MAModels/coreDataModels/MPlace.h; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 			children = (
 				9BD0E7A4184796FF00BA9F2E /* MATabAccountListSectionHeader.h */,
 				9BD0E7A5184796FF00BA9F2E /* MATabAccountListSectionHeader.m */,
+				D897ED0C19CEC72500210CD8 /* MAMemberAccountListSectionHeader.h */,
+				D897ED0D19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m */,
 				9BC2311A184B2EC1005ADD59 /* MAAccountDetailSectionHeader.h */,
 				9BC2311B184B2EC1005ADD59 /* MAAccountDetailSectionHeader.m */,
 			);
@@ -875,6 +880,7 @@
 				D82541151998FF4F00559835 /* MGroup.m in Sources */,
 				D8B68E2519A63FD500810E64 /* MPlace.m in Sources */,
 				9B391C7E183527CE0025A2FB /* MATabAccountViewController.m in Sources */,
+				D897ED0E19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m in Sources */,
 				9B25AA0F18532E41008D79B7 /* MAMemberListViewController.m in Sources */,
 				9BD0E7AE1847A93800BA9F2E /* MAGroupListCell.m in Sources */,
 				9BB88C851865679500C16895 /* MAManagerPublicDefinitions.m in Sources */,

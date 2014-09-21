@@ -97,7 +97,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     [super viewDidAppear:animated];
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
 
-    if (!self.group) {
+    if (!self.group && !self.account) {
         [MBProgressHUD showTextHUDOnView:[[UIApplication sharedApplication].delegate window]
                                     text:@"Empty group, can not create account!"
                          completionBlock:^{
@@ -754,10 +754,28 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
 
 #pragma mark - Public Method
 
-- (void)setGroup:(MGroup *)group account:(MAccount *)account
+- (void)setAccount:(MAccount *)account
 {
-    self.group = group;
-    self.account = account;
+    if (_account == account) {
+        return;
+    }
+
+    [self willChangeValueForKey:@"account"];
+    _account = account;
+    [self didChangeValueForKey:@"account"];
+    _group = _account.group;
+}
+
+- (void)setGroup:(MGroup *)group
+{
+    if (_group == group) {
+        return;
+    }
+
+    [self willChangeValueForKey:@"group"];
+    _group = group;
+    [self didChangeValueForKey:@"group"];
+    _account = nil;
 }
 
 @end

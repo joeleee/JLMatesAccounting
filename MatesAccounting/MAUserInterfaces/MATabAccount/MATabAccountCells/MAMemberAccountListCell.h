@@ -10,4 +10,11 @@
 
 @interface MAMemberAccountListCell : MABaseCell
 
+@property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountTotalFeeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountDetailLabel;
+@property (weak, nonatomic) IBOutlet UIView *dividingLineView;
+
 @end

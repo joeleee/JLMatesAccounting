@@ -1,35 +1,31 @@
 //
-//  MATabAccountListSectionHeader.m
+//  MAMemberAccountListSectionHeader.m
 //  MatesAccounting
 //
-//  Created by Lee on 13-11-28.
-//  Copyright (c) 2013年 Lee. All rights reserved.
+//  Created by Joe Lee on 2014-9-21.
+//  Copyright (c) 2014年 Lee. All rights reserved.
 //
 
-#import "MATabAccountListSectionHeader.h"
+#import "MAMemberAccountListSectionHeader.h"
 
-CGFloat const kTabAccountListSectionHeaderHeight = 30.0f;
+CGFloat const kMemberAccountListSectionHeaderHeight = 50.0f;
 
-@interface MATabAccountListSectionHeader ()
+@interface MAMemberAccountListSectionHeader ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
-@implementation MATabAccountListSectionHeader
+@implementation MAMemberAccountListSectionHeader
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         [self.contentView setBackgroundColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_BACKGROUND];
-        self.contentView.layer.shadowColor = MA_COLOR_TABACCOUNT_TABLE_HEADER_SHADOW.CGColor;
-        self.contentView.layer.shadowOpacity = 0.2;
-        self.contentView.layer.shadowRadius = 3;
-        self.contentView.layer.shadowOffset = CGSizeMake(0, 0.1);
 
         [self addSubview:self.titleLabel];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_titleLabel]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
     }
 
     return self;
@@ -49,7 +45,8 @@ CGFloat const kTabAccountListSectionHeaderHeight = 30.0f;
 
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [_titleLabel setTextColor:MA_COLOR_TABACCOUNT_TABLE_HEADER_TITLE];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_titleLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
     return _titleLabel;
 }
 

@@ -73,7 +73,8 @@ typedef enum {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueMemberDetailToAccountList]) {
-        // MAMemberAccountListViewController *accountList = segue.destinationViewController;
+        MAMemberAccountListViewController *accountList = segue.destinationViewController;
+        [accountList setMember:self.mFriend];
     } else {
         MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
@@ -412,6 +413,11 @@ typedef enum {
 
 - (IBAction)didAccountButtonTapped:(id)sender
 {
+    if (!self.mFriend) {
+        MA_QUICK_ASSERT(NO, @"self.mFriend is nil!");
+        return;
+    }
+
     [self performSegueWithIdentifier:kSegueMemberDetailToAccountList sender:sender];
 }
 

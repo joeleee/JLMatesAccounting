@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MFriend;
+
 @interface MAMemberAccountListViewController : UIViewController
+
+@property (nonatomic, strong) MFriend *member;
 
 @end

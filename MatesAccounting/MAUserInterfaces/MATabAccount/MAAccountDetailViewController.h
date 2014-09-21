@@ -12,6 +12,8 @@
 
 @interface MAAccountDetailViewController : UIViewController
 
-- (void)setGroup:(MGroup *)group account:(MAccount *)account;
+- (void)setAccount:(MAccount *)account;
+
+- (void)setGroup:(MGroup *)group;
 
 @end

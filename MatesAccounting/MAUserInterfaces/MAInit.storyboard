@@ -861,10 +861,10 @@
             </objects>
             <point key="canvasLocation" x="113" y="-1853"/>
         </scene>
-        <!--账目详情-->
+        <!--Account-->
         <scene sceneID="J6p-pb-x5M">
             <objects>
-                <viewController storyboardIdentifier="MAAccountDetailViewController" title="账目详情" useStoryboardIdentifierAsRestorationIdentifier="YES" id="voC-ae-Zpm" customClass="MAAccountDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAAccountDetailViewController" title="Account" useStoryboardIdentifierAsRestorationIdentifier="YES" id="voC-ae-Zpm" customClass="MAAccountDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ach-bb-Sey">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1158,12 +1158,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="30" sectionFooterHeight="1" id="hCG-64-n8I">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="80" sectionHeaderHeight="30" sectionFooterHeight="1" id="hCG-64-n8I">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAMemberAccountListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAMemberAccountListCell" rowHeight="80" id="Jru-fq-cK2" customClass="MAMemberAccountListCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAMemberAccountListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAMemberAccountListCell" id="Jru-fq-cK2" customClass="MAMemberAccountListCell">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jru-fq-cK2" id="k5Q-pj-zZW">
@@ -1171,23 +1171,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="218-bM-nsq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="116.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8i-XH-iZJ" userLabel="payer">
-                                                            <rect key="frame" x="100.00000123182927" y="48" width="200" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="z8i-XH-iZJ" userLabel="payer">
+                                                            <rect key="frame" x="143" y="48" width="157" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PcE-vR-cq0" userLabel="time">
-                                                            <rect key="frame" x="20" y="48" width="50" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ec2-6Q-S39" userLabel="money">
-                                                            <rect key="frame" x="214.00000123182929" y="12" width="86" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ec2-6Q-S39" userLabel="money">
+                                                            <rect key="frame" x="214" y="12" width="86" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1203,6 +1197,12 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111-11-11 11:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="PcE-vR-cq0" userLabel="time">
+                                                            <rect key="frame" x="20" y="48" width="115" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -1220,11 +1220,19 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="28d-qI-olA" id="zh7-HQ-bPw"/>
+                                    <outlet property="delegate" destination="28d-qI-olA" id="sP6-Hs-joJ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Accounts" id="jmF-9S-KoJ"/>
+                    <connections>
+                        <outlet property="tableView" destination="hCG-64-n8I" id="ziS-Ym-mbp"/>
+                        <segue destination="voC-ae-Zpm" kind="push" identifier="kSegueMemberAccountListToAccountDetail" id="Col-92-NOr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APz-ns-jff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1307,7 +1315,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dcT-rm-fD6">
-                                                            <rect key="frame" x="155.00000002947814" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="154.99999734861819" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
@@ -1470,11 +1478,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Bvd-iw-5bp"/>
-        <segue reference="ZMe-Ch-sex"/>
-        <segue reference="f34-mq-Bgm"/>
         <segue reference="NzF-kh-GnM"/>
+        <segue reference="f34-mq-Bgm"/>
         <segue reference="J0d-fi-SkM"/>
+        <segue reference="Col-92-NOr"/>
+        <segue reference="Bvd-iw-5bp"/>
         <segue reference="atx-wc-fRM"/>
     </inferredMetricsTieBreakers>
 </document>

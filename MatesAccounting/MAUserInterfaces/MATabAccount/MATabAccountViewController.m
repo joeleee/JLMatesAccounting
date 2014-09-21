@@ -84,11 +84,11 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         MAAccountDetailViewController *accountDetail = segue.destinationViewController;
         NSArray *accountList = (0 < indexPath.section && indexPath.section <= self.sectionedAccountList.count) ? self.sectionedAccountList[indexPath.section - 1] : nil;
         MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
-        [accountDetail setGroup:MACurrentGroup account:account];
+        [accountDetail setAccount:account];
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
         MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAAccountDetailViewController *accountDetail = [segue.destinationViewController viewControllers][0];
-        [accountDetail setGroup:MACurrentGroup account:nil];
+        [accountDetail setGroup:MACurrentGroup];
     } else {
         MA_QUICK_ASSERT(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }
