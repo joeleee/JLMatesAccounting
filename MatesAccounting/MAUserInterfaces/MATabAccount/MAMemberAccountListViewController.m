@@ -154,7 +154,6 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
 
     MAccount *account = [self.accountsCategories[indexPath.section] objectAtIndex:indexPath.row];
     [cell reuseCellWithData:account];
-    cell.miniBackgroundView.frame = cell.miniBackgroundView.superview.frame;
 
     return cell;
 }

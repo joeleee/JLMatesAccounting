@@ -14,6 +14,13 @@
 
 @interface MAMemberAccountListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
 
+@property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountTotalFeeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountDetailLabel;
+@property (weak, nonatomic) IBOutlet UIView *dividingLineView;
+
 @end
 
 @implementation MAMemberAccountListCell
@@ -29,6 +36,8 @@
 
 - (void)reuseCellWithData:(id)data
 {
+    self.miniBackgroundView.frame = CGRectMake(0, 0, self.width, self.height);
+
     MAccount *account = data;
     [self.accountDetailLabel setText:account.detail];
     [self.accountTimeLabel setText:[account.accountDate dateToString:@"yyy-MM-dd HH:mm"]];
