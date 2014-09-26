@@ -13,7 +13,7 @@
 #import "MAGroupManager.h"
 #import "RMemberToGroup+expand.h"
 
-@interface MATabMemberListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MATabMemberListCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *memberNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberFeeTitleLabel;
@@ -27,10 +27,17 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
+    self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
+    self.memberFeeTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 
 - (void)reuseCellWithData:(MFriend *)data
@@ -51,15 +58,6 @@
             self.memberFeeLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_MEMBER_PAY;
         }
     }
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
-    self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
-    self.memberFeeTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 
 + (CGFloat)cellHeight:(id)data

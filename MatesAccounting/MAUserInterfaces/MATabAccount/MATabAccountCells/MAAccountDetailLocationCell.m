@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailLocationCell.h"
 
-@interface MAAccountDetailLocationCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailLocationCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *locationTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
@@ -20,10 +20,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.locationTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.locationDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 - (void)reuseCellWithData:(NSString *)data
@@ -41,13 +46,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 40.0f;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.locationTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
-    self.locationDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 @end

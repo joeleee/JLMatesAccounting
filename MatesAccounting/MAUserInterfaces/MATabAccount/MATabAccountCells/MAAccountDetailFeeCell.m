@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailFeeCell.h"
 
-@interface MAAccountDetailFeeCell () <UITextFieldDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailFeeCell () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *feeTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *feeTextField;
@@ -20,10 +20,16 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.feeTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.feeTextField.textColor = MA_COLOR_TABACCOUNT_ACCOUNT_COAST;
+    self.feeTextField.layer.cornerRadius = 3.0;
 }
 
 - (void)reuseCellWithData:(NSString *)data
@@ -42,14 +48,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 60.0f;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.feeTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
-    self.feeTextField.textColor = MA_COLOR_TABACCOUNT_ACCOUNT_COAST;
-    self.feeTextField.layer.cornerRadius = 3.0;
 }
 
 #pragma mark UITextFieldDelegate

@@ -13,7 +13,7 @@
 #import "RMemberToGroup+expand.h"
 #import "MAGroupManager.h"
 
-@interface MAMemberListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAMemberListCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *memberNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalFeeTitle;
@@ -31,10 +31,17 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_MEMBERS_NAME;
+    self.totalFeeTitle.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.phoneTitle.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.phoneLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
 }
 
 - (void)reuseCellWithData:(MFriend *)data
@@ -67,15 +74,6 @@
 - (IBAction)didInfoButtonTaped:(UIButton *)sender
 {
     [self.actionDelegate actionWithData:self.member cell:self type:0];
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.memberNameLabel.textColor = MA_COLOR_TABMEMBER_MEMBERS_NAME;
-    self.totalFeeTitle.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.phoneTitle.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.phoneLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
 }
 
 @end

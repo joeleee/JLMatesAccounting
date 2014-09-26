@@ -12,7 +12,7 @@
 #import "MFriend.h"
 #import "MAAccountManager.h"
 
-@interface MAAccountDetailConsumerDetailCell () <UITextFieldDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailConsumerDetailCell () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *consumerNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *consumerFeeTextField;
@@ -24,10 +24,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.consumerNameLabel.textColor = MA_COLOR_TABACCOUNT_USER_NAME;
+    self.consumerFeeTextField.layer.cornerRadius = 3.0;
 }
 
 - (void)reuseCellWithData:(MAFeeOfMember *)data
@@ -72,13 +77,6 @@
 {
     NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     return [resultText isTwoDecimalPlaces];
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.consumerNameLabel.textColor = MA_COLOR_TABACCOUNT_USER_NAME;
-    self.consumerFeeTextField.layer.cornerRadius = 3.0;
 }
 
 @end

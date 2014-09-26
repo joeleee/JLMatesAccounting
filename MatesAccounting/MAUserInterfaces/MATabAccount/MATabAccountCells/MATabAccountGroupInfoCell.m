@@ -11,7 +11,7 @@
 #import "MGroup.h"
 #import "MAccount+expand.h"
 
-@interface MATabAccountGroupInfoCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MATabAccountGroupInfoCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *memberCountTitle;
@@ -29,10 +29,20 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self.groupNameLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
+    [self.memberCountLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
+    [self.memberCountTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
+    [self.accountCountLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
+    [self.accountCountTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
+    [self.totalFeesLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
+    [self.totalFeesTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
 }
 
 - (void)reuseCellWithData:(MGroup *)data
@@ -58,18 +68,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 80;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    [self.groupNameLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
-    [self.memberCountLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
-    [self.memberCountTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
-    [self.accountCountLabel setTextColor:MA_COLOR_TABACCOUNT_GROUP_NAME];
-    [self.accountCountTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
-    [self.totalFeesLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
-    [self.totalFeesTitle setTextColor:MA_COLOR_GROUP_GROUP_TITLE];
 }
 
 @end

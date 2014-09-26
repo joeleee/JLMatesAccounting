@@ -8,7 +8,7 @@
 
 #import "MAMemberDetailGenderCell.h"
 
-@interface MAMemberDetailGenderCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAMemberDetailGenderCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *genderSwitch;
@@ -21,10 +21,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
+    self.genderLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL;
 }
 
 - (void)reuseCellWithData:(NSNumber *)gender
@@ -32,13 +37,6 @@
     [self.genderSwitch setOn:(MAGenderFemale == [gender integerValue]) animated:YES];
     [self.genderSwitch setHidden:!self.status];
     [self.genderLabel setText:(MAGenderFemale == [gender integerValue]) ? @"F" : @"M"];
-}
-
-#pragma MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
-    self.genderLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL;
 }
 
 + (CGFloat)cellHeight:(id)data

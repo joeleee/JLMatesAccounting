@@ -11,7 +11,7 @@
 #import "MFriend.h"
 #import "MAAccountManager.h"
 
-@interface MAAccountSettlementCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountSettlementCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *settlementTitleLabel;
@@ -26,10 +26,18 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.payerNameLabel.textColor = MA_COLOR_TABSETTLEMENT_PAYER_NAME;
+    self.receiverNameLabel.textColor = MA_COLOR_TABSETTLEMENT_REVEIVER_NAME;
+    self.settlementTitleLabel.textColor = MA_COLOR_TABSETTLEMENT_SETTLTMENT_TITLE;
+    self.feeLabel.textColor = MA_COLOR_TABSETTLEMENT_FEE;
+    self.dividingLineView.backgroundColor = MA_COLOR_TABSETTLEMENT_DIVIDING_LINE;
 }
 
 - (void)reuseCellWithData:(id)data
@@ -40,16 +48,6 @@
     self.settlementTitleLabel.text = @"should\npay";
     self.receiverNameLabel.text = accountSettlement.toMember.name;
     self.feeLabel.text = [accountSettlement.fee description];
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.payerNameLabel.textColor = MA_COLOR_TABSETTLEMENT_PAYER_NAME;
-    self.receiverNameLabel.textColor = MA_COLOR_TABSETTLEMENT_REVEIVER_NAME;
-    self.settlementTitleLabel.textColor = MA_COLOR_TABSETTLEMENT_SETTLTMENT_TITLE;
-    self.feeLabel.textColor = MA_COLOR_TABSETTLEMENT_FEE;
-    self.dividingLineView.backgroundColor = MA_COLOR_TABSETTLEMENT_DIVIDING_LINE;
 }
 
 + (CGFloat)cellHeight:(id)data

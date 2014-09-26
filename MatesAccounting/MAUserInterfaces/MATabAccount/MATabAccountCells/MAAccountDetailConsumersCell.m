@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailConsumersCell.h"
 
-@interface MAAccountDetailConsumersCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailConsumersCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *consumersTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *consumersDescriptionLabel;
@@ -20,10 +20,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.consumersTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.consumersDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 - (void)reuseCellWithData:(id)data
@@ -41,13 +46,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 40.0f;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.consumersTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
-    self.consumersDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 @end

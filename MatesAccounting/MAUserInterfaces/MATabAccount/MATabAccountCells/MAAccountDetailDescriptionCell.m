@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailDescriptionCell.h"
 
-@interface MAAccountDetailDescriptionCell () <UITextViewDelegate, MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailDescriptionCell () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *accountDescriptionTextView;
 
@@ -19,10 +19,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.accountDescriptionTextView.scrollsToTop = NO;
+    self.accountDescriptionTextView.layer.cornerRadius = 3.0;
 }
 
 - (void)reuseCellWithData:(NSString *)data
@@ -55,13 +60,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 150.0f;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.accountDescriptionTextView.scrollsToTop = NO;
-    self.accountDescriptionTextView.layer.cornerRadius = 3.0;
 }
 
 @end

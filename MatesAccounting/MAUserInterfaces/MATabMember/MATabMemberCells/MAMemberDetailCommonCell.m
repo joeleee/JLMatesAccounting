@@ -14,7 +14,7 @@ NSString * const kMemberDetailCellTitle = @"kMemberDetailCellTitle";
 NSString * const kMemberDetailCellContent = @"kMemberDetailCellContent";
 NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType";
 
-@interface MAMemberDetailCommonCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAMemberDetailCommonCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *detailTextField;
@@ -26,10 +26,14 @@ NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-      [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
 }
 
 - (void)reuseCellWithData:(NSDictionary *)info
@@ -47,12 +51,6 @@ NSString * const kMemberDetailCellKeyboardType = @"kMemberDetailCellKeyboardType
         self.detailTextField.backgroundColor = [UIColor clearColor];
         self.detailTextField.textColor = MA_COLOR_TABMEMBER_DETAIL_LABEL;
     }
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.titleLabel.textColor = MA_COLOR_TABMEMBER_DETAIL_TITLE;
 }
 
 + (CGFloat)cellHeight:(id)data

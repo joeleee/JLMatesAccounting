@@ -82,7 +82,6 @@
 		D840328619A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
 		D840328719A24DD4002E772C /* MATestDataGenerater.m in Sources */ = {isa = PBXBuildFile; fileRef = D840328519A24DD4002E772C /* MATestDataGenerater.m */; };
 		D8530B5E19A4E92000396DFF /* MALocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8530B5D19A4E92000396DFF /* MALocationManager.m */; };
-		D868238619AE28ED001E3A07 /* UIView+MALayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D868238519AE28ED001E3A07 /* UIView+MALayout.m */; };
 		D868238919AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D868238819AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.m */; };
 		D88D00F71999239200E929B7 /* NSDecimalNumber+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */; };
 		D88E3E631995177400FA5005 /* UIApplication+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E621995177400FA5005 /* UIApplication+MAAddition.m */; };
@@ -261,8 +260,6 @@
 		D840328519A24DD4002E772C /* MATestDataGenerater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATestDataGenerater.m; sourceTree = "<group>"; };
 		D8530B5C19A4E92000396DFF /* MALocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MALocationManager.h; path = MAManagers/MALocationManager.h; sourceTree = "<group>"; };
 		D8530B5D19A4E92000396DFF /* MALocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MALocationManager.m; path = MAManagers/MALocationManager.m; sourceTree = "<group>"; };
-		D868238419AE28ED001E3A07 /* UIView+MALayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+MALayout.h"; path = "MAAdditions/UIView+MALayout.h"; sourceTree = "<group>"; };
-		D868238519AE28ED001E3A07 /* UIView+MALayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+MALayout.m"; path = "MAAdditions/UIView+MALayout.m"; sourceTree = "<group>"; };
 		D868238719AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MAMethodSwizzle.h"; path = "MAAdditions/NSObject+MAMethodSwizzle.h"; sourceTree = "<group>"; };
 		D868238819AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MAMethodSwizzle.m"; path = "MAAdditions/NSObject+MAMethodSwizzle.m"; sourceTree = "<group>"; };
 		D88D00F51999239200E929B7 /* NSDecimalNumber+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDecimalNumber+MAAddition.h"; path = "MAAdditions/NSDecimalNumber+MAAddition.h"; sourceTree = "<group>"; };
@@ -657,8 +654,6 @@
 				D88E3EA11996869600FA5005 /* NSString+MAAddition.m */,
 				D88D00F51999239200E929B7 /* NSDecimalNumber+MAAddition.h */,
 				D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */,
-				D868238419AE28ED001E3A07 /* UIView+MALayout.h */,
-				D868238519AE28ED001E3A07 /* UIView+MALayout.m */,
 				D868238719AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.h */,
 				D868238819AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.m */,
 			);
@@ -883,7 +878,6 @@
 				9B2085BD1853760C009C03BD /* MAAlertView.m in Sources */,
 				9BD0E7871845E87600BA9F2E /* MATabAccountListCell.m in Sources */,
 				9BD0E7AA18479E0800BA9F2E /* MAGroupListViewController.m in Sources */,
-				D868238619AE28ED001E3A07 /* UIView+MALayout.m in Sources */,
 				9BC23119184B281D005ADD59 /* MAAccountDetailDescriptionCell.m in Sources */,
 				9BD0E7B41847ADB100BA9F2E /* MAAccountManager.m in Sources */,
 				9BC23113184B27DE005ADD59 /* MAAccountDetailLocationCell.m in Sources */,

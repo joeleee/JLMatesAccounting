@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailDeleteCell.h"
 
-@interface MAAccountDetailDeleteCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailDeleteCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteAccountButton;
 
@@ -19,9 +19,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self.deleteAccountButton setBackgroundColor:MA_COLOR_TABACCOUNT_DETAIL_DELETE];
+    [self.deleteAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.deleteAccountButton.layer.cornerRadius = 3.0;
 }
 
 - (void)reuseCellWithData:(id)data
@@ -37,14 +43,6 @@
 - (IBAction)didDeleteAccountButtonTapped:(id)sender
 {
     [self.actionDelegate actionWithData:nil cell:self type:0];
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    [self.deleteAccountButton setBackgroundColor:MA_COLOR_TABACCOUNT_DETAIL_DELETE];
-    [self.deleteAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.deleteAccountButton.layer.cornerRadius = 3.0;
 }
 
 @end

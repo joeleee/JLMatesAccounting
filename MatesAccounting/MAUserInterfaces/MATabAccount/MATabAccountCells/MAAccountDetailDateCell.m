@@ -8,7 +8,7 @@
 
 #import "MAAccountDetailDateCell.h"
 
-@interface MAAccountDetailDateCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAAccountDetailDateCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateDescriptionLabel;
@@ -21,10 +21,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.dateTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
+    self.dateDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 - (void)reuseCellWithData:(NSDate *)date
@@ -62,13 +67,6 @@
 {
     [self.dateDescriptionLabel setText:[[sender date] dateToString:@"yyyy-MM-dd HH:mm"]];
     [self.actionDelegate actionWithData:sender cell:self type:0];
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.dateTitleLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_TITLE;
-    self.dateDescriptionLabel.textColor = MA_COLOR_TABACCOUNT_DETAIL_INFO_LABEL;
 }
 
 #pragma mark - public method

@@ -11,7 +11,7 @@
 #import "MFriend.h"
 #import "RMemberToAccount.h"
 
-@interface MAFriendListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MAFriendListCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneTitleLabel;
@@ -32,10 +32,23 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
+    self.friendNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
+    self.phoneTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.phoneNumberLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.eMailLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.accountTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.accountCountLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
+    self.groupTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
+    self.groupCountLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
+    self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 
 - (void)setSelected:(BOOL)selected
@@ -69,21 +82,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 50.0f;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    self.backgroundColor = MA_COLOR_VIEW_BACKGROUND;
-    self.friendNameLabel.textColor = MA_COLOR_TABMEMBER_PAYER_NAME;
-    self.phoneTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.phoneNumberLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.eMailLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.accountTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.accountCountLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
-    self.groupTitleLabel.textColor = MA_COLOR_TABMEMBER_BALANCE_TITLE;
-    self.groupCountLabel.textColor = MA_COLOR_TABMEMBER_BALANCE;
-    self.dividingLineView.backgroundColor = MA_COLOR_TABMEMBER_DIVIDING_LINE;
 }
 
 @end

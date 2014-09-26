@@ -12,7 +12,7 @@
 #import "RMemberToAccount.h"
 #import "MFriend.h"
 
-@interface MATabAccountListCell () <MAManualLayoutAfterLayoutSubviewsProtocol>
+@interface MATabAccountListCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *miniBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *payerNameLabel;
@@ -28,10 +28,18 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self needManualLayoutAfterLayoutSubviews];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self.accountDetailLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_DETAIL];
+    [self.accountTimeLabel setTextColor:MA_COLOR_TABACCOUNT_TIME];
+    [self.accountTotalFeeLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
+    [self.payerNameLabel setTextColor:MA_COLOR_TABACCOUNT_USER_NAME];
+    [self.dividingLineView setBackgroundColor:MA_COLOR_TABACCOUNT_DIVIDING_LINE];
 }
 
 - (void)reuseCellWithData:(id)data
@@ -53,16 +61,6 @@
 + (CGFloat)cellHeight:(id)data
 {
     return 80;
-}
-
-#pragma mark MAManualLayoutAfterLayoutSubviewsProtocol
-- (void)manualLayoutAfterLayoutSubviews
-{
-    [self.accountDetailLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_DETAIL];
-    [self.accountTimeLabel setTextColor:MA_COLOR_TABACCOUNT_TIME];
-    [self.accountTotalFeeLabel setTextColor:MA_COLOR_TABACCOUNT_ACCOUNT_COAST];
-    [self.payerNameLabel setTextColor:MA_COLOR_TABACCOUNT_USER_NAME];
-    [self.dividingLineView setBackgroundColor:MA_COLOR_TABACCOUNT_DIVIDING_LINE];
 }
 
 @end
