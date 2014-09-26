@@ -107,6 +107,20 @@
 			remoteGlobalIDString = 9BCAC02018322997000417FD;
 			remoteInfo = MatesAccounting;
 		};
+		D841B55E19D5BC1C0072BE51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BCAC01918322997000417FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BCAC02018322997000417FD;
+			remoteInfo = MatesAccounting;
+		};
+		D841B56019D5BC1C0072BE51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BCAC01918322997000417FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BCAC02018322997000417FD;
+			remoteInfo = MatesAccounting;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -746,6 +760,8 @@
 			);
 			dependencies = (
 				9BCAC04818322997000417FD /* PBXTargetDependency */,
+				D841B55F19D5BC1C0072BE51 /* PBXTargetDependency */,
+				D841B56119D5BC1C0072BE51 /* PBXTargetDependency */,
 			);
 			name = MatesAccountingTests;
 			productName = MatesAccountingTests;
@@ -939,6 +955,16 @@
 			target = 9BCAC02018322997000417FD /* MatesAccounting */;
 			targetProxy = 9BCAC04718322997000417FD /* PBXContainerItemProxy */;
 		};
+		D841B55F19D5BC1C0072BE51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BCAC02018322997000417FD /* MatesAccounting */;
+			targetProxy = D841B55E19D5BC1C0072BE51 /* PBXContainerItemProxy */;
+		};
+		D841B56119D5BC1C0072BE51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BCAC02018322997000417FD /* MatesAccounting */;
+			targetProxy = D841B56019D5BC1C0072BE51 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1042,7 +1068,7 @@
 				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MatesAccounting/MatesAccounting-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1059,7 +1085,7 @@
 				GCC_PREFIX_HEADER = "MatesAccounting/MatesAccounting-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MatesAccounting/MatesAccounting-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1069,7 +1095,7 @@
 		9BCAC05718322997000417FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1084,7 +1110,7 @@
 				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1092,7 +1118,7 @@
 		9BCAC05818322997000417FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1103,7 +1129,7 @@
 				INFOPLIST_FILE = "MatesAccountingTests/MatesAccountingTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MatesAccounting.app/MatesAccounting";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
