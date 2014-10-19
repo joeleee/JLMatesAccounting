@@ -1,0 +1,11 @@
+How to use commit message hook script of  gerrit
+
+1:
+Copy file "commit-msg" to .git/hooks/
+
+2:
+chmod u+x .git/hooks/commit-msg
+
+Result:
+Each of your commit will has a Change-Id
+
