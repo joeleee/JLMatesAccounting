@@ -8,6 +8,8 @@
 
 #import "MAGroupManager.h"
 
+
+#import "MAObserverObject.h"
 #import "MGroup+expand.h"
 #import "MFriend.h"
 #import "MACommonPersistent.h"
@@ -16,13 +18,9 @@
 
 NSString * const kCurrentGroupID = @"kCurrentGroupID";
 
-NSString * const kMAGMGroupHasCreated = @"kMAGMGroupHasCreated";
-NSString * const kMAGMGroupHasModified = @"kMAGMGroupHasModified";
-NSString * const kMAGMGroupMemberHasChanged = @"kMAGMGroupMemberHasChanged";
-NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
+@interface MAGroupManager () <MAGroupManagerObserverProtocol>
 
-@interface MAGroupManager ()
-
+@property (nonatomic, strong) NSMutableArray *groupObservers;
 @property (nonatomic, strong) MGroup *selectedGroup;
 
 @end
@@ -35,23 +33,39 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
-            sharedInstance = [[self alloc] init];
-        });
+        sharedInstance = [[self alloc] init];
+    });
     return sharedInstance;
 }
 
 - (id)init
 {
     if (self = [super init]) {
-
-        [self setListenerKeyToSelecterDict:@{kMAGMGroupHasCreated:NSStringFromSelector(@selector(groupHasCreated:)),
-                                            kMAGMGroupHasModified:NSStringFromSelector(@selector(groupHasModified:)),
-                                            kMAGMGroupMemberHasChanged:NSStringFromSelector(@selector(groupMemberHasChanged:member:isAdd:)),
-                                             kMAGMCurrentGroupHasChanged:NSStringFromSelector(@selector(currentGroupHasChanged:))}];
-
     }
 
     return self;
+}
+
+
+#pragma mark - public methods
+
+- (void)registerGroupObserver:(id<MAGroupManagerObserverProtocol>)observer
+{
+    MAObserverObject *observerObject = [MAObserverObject observerObjectWith:observer];
+    [self.groupObservers addObject:observerObject];
+}
+
+- (void)unregisterGroupObserver:(id<MAGroupManagerObserverProtocol>)observer
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSMutableArray *invalidObservers = [NSMutableArray array];
+        for (MAObserverObject *observerObject in self.groupObservers) {
+            if (!observerObject.observer) {
+                [invalidObservers addObject:observerObject];
+            }
+        }
+        [self.groupObservers removeObjectsInArray:invalidObservers];
+    }];
 }
 
 - (MGroup *)selectedGroup
@@ -85,9 +99,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 
     [[NSUserDefaults standardUserDefaults] setObject:self.selectedGroup.groupID forKey:kCurrentGroupID];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self listenersForKey:kMAGMCurrentGroupHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-        [listener currentGroupHasChanged:group];
-    }];
+    [self currentGroupDidSwitched:group];
 
     return YES;
 }
@@ -107,10 +119,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     group.groupName = name;
     group.groupID = @([currentData timeIntervalSince1970]);
     [[MAContextAPI sharedAPI] saveContextData];
-
-    [self listenersForKey:kMAGMGroupHasCreated withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-        [listener groupHasCreated:group];
-    }];
+    [self groupDidCreated:group];
 
     return group;
 }
@@ -126,10 +135,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     group.updateDate = [NSDate date];
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
-
-    [self listenersForKey:kMAGMGroupHasModified withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-        [listener groupHasModified:group];
-    }];
+    [self groupDidChanged:group];
 
     return group;
 }
@@ -157,10 +163,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
         [[MAContextAPI sharedAPI] saveContextData];
         return nil;
     }
-
-    [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-        [listener groupMemberHasChanged:memberToGroup.group member:memberToGroup.member isAdd:YES];
-    }];
+    [self groupMemberDidChanged:memberToGroup.group member:memberToGroup.member isAdd:YES];
 
     return memberToGroup;
 }
@@ -179,9 +182,7 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
     }
 
     if ([MACommonPersistent deleteObject:memberToGroup]) {
-        [self listenersForKey:kMAGMGroupMemberHasChanged withBlock:^(id<MAGroupManagerListenerProtocol> listener) {
-            [listener groupMemberHasChanged:group member:mFriend isAdd:NO];
-        }];
+        [self groupMemberDidChanged:group member:mFriend isAdd:NO];
         MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
         return;
     } else {
@@ -195,6 +196,45 @@ NSString * const kMAGMCurrentGroupHasChanged = @"kMAGMCurrentGroupHasChanged";
 {
     BOOL isBelong = [member.relationshipToGroup intersectsSet:group.relationshipToMember];
     return isBelong;
+}
+
+
+#pragma mark - MAGroupManagerObserverProtocol
+
+- (void)groupDidCreated:(MGroup *)group
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(groupDidCreated:)) {
+        [observerObject.observer groupDidCreated:group];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)groupDidChanged:(MGroup *)group
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(groupDidChanged:)) {
+        [observerObject.observer groupDidChanged:group];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(groupMemberDidChanged:member:isAdd:)) {
+        [observerObject.observer groupMemberDidChanged:group member:mFriend isAdd:isAdd];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)currentGroupDidSwitched:(MGroup *)group
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(currentGroupDidSwitched:)) {
+        [observerObject.observer currentGroupDidSwitched:group];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
 }
 
 @end

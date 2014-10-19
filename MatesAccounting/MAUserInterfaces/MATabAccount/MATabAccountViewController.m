@@ -21,7 +21,7 @@ NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
 NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
-@interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerListenerProtocol>
+@interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -207,9 +207,24 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     return headerView;
 }
 
-#pragma mark - MAGroupManagerListenerProtocol
 
-- (void)currentGroupHasChanged:(MGroup *)group
+#pragma mark - MAGroupManagerObserverProtocol
+
+- (void)groupDidChanged:(MGroup *)group
+{
+    if (MACurrentGroup == group) {
+        [self loadData];
+    }
+}
+
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
+{
+    if (MACurrentGroup == group) {
+        [self loadData];
+    }
+}
+
+- (void)currentGroupDidSwitched:(MGroup *)group
 {
     [self loadData];
 }

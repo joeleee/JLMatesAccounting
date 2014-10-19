@@ -8,6 +8,7 @@
 
 #import "MAAccountManager.h"
 
+#import "MAObserverObject.h"
 #import "MAccount+expand.h"
 #import "MPlace.h"
 #import "MFriend.h"
@@ -395,7 +396,7 @@
         index = middleIndex + [self insertIndexOfRMemberToAccount:memberToAccount
                                                            inList:[list subarrayWithRange:range]];
     }
-    
+
     return index;
 }
 

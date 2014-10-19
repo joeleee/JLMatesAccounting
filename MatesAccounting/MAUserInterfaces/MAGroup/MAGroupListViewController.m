@@ -15,7 +15,7 @@
 NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
 NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
-@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAGroupManagerListenerProtocol>
+@interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAGroupManagerObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -137,14 +137,18 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     return YES;
 }
 
-#pragma mark - MAGroupManagerListenerProtocol
-
-- (void)groupHasCreated:(MGroup *)group
+#pragma mark - MAGroupManagerObserverProtocol
+- (void)groupDidCreated:(MGroup *)group
 {
     [self loadData];
 }
 
-- (void)groupHasModified:(MGroup *)group
+- (void)groupDidChanged:(MGroup *)group
+{
+    [self loadData];
+}
+
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
 {
     [self loadData];
 }

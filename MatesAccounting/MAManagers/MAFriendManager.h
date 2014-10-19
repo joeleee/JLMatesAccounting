@@ -6,28 +6,29 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
-#define FriendManager [MAFriendManager sharedManager]
+#import <Foundation/Foundation.h>
 
-#import "ZLMulticastAgent.h"
+#define FriendManager [MAFriendManager sharedManager]
 
 @class MFriend, MGroup;
 
-@protocol MAFriendManagerListenerProtocol <NSObject>
+@protocol MAFriendManagerObserverProtocol <NSObject>
 
 @optional
-- (void)friendHasCreated:(MFriend *)mFriend;
-- (void)friendHasModified:(MFriend *)mFriend;
+- (void)friendDidCreated:(MFriend *)mFriend;
+- (void)friendDidDeleted;
+- (void)friendDidChanged:(MFriend *)mFriend;
 
 @end
 
 
-@interface MAFriendManager : ZLMulticastAgent
+@interface MAFriendManager : NSObject
 
 + (MAFriendManager *)sharedManager;
 
-- (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener;
+- (void)registerFriendObserver:(id<MAFriendManagerObserverProtocol>)observer;
 
-- (BOOL)removeListener:(id<MAFriendManagerListenerProtocol>)listener;
+- (void)unregisterFriendObserver:(id<MAFriendManagerObserverProtocol>)observer;
 
 - (NSArray *)currentGroupToMemberRelationships;
 

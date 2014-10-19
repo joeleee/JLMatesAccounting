@@ -8,6 +8,7 @@
 
 #import "MAFriendManager.h"
 
+#import "MAObserverObject.h"
 #import "MGroup.h"
 #import "MAGroupManager.h"
 #import "MFriend.h"
@@ -17,8 +18,11 @@
 #import "RMemberToAccount.h"
 #import "MAccount+expand.h"
 
-NSString * const kMAFMFriendHasCreated = @"kMAFMFriendHasCreated";
-NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
+@interface MAFriendManager () <MAFriendManagerObserverProtocol>
+
+@property (nonatomic, strong) NSMutableArray *friendObservers;
+
+@end
 
 @implementation MAFriendManager
 
@@ -37,25 +41,31 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 - (id)init
 {
     if (self = [super init]) {
-
-        [self setListenerKeyToSelecterDict:@{kMAFMFriendHasCreated:NSStringFromSelector(@selector(friendHasCreated:)),
-                                             kMAFMFriendHasModified:NSStringFromSelector(@selector(friendHasModified:))}];
-
     }
 
     return self;
 }
 
+
 #pragma mark - public methods
 
-- (BOOL)addListener:(id<MAFriendManagerListenerProtocol>)listener
+- (void)registerFriendObserver:(id<MAFriendManagerObserverProtocol>)observer
 {
-    return [self addListener:listener];
+    MAObserverObject *observerObject = [MAObserverObject observerObjectWith:observer];
+    [self.friendObservers addObject:observerObject];
 }
 
-- (BOOL)removeListener:(id<MAFriendManagerListenerProtocol>)listener
+- (void)unregisterFriendObserver:(id<MAFriendManagerObserverProtocol>)observer
 {
-    return [self removeListener:listener];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSMutableArray *invalidObservers = [NSMutableArray array];
+        for (MAObserverObject *observerObject in self.friendObservers) {
+            if (!observerObject.observer) {
+                [invalidObservers addObject:observerObject];
+            }
+        }
+        [self.friendObservers removeObjectsInArray:invalidObservers];
+    }];
 }
 
 - (NSArray *)currentGroupToMemberRelationships
@@ -119,9 +129,7 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
 
-    [self listenersForKey:kMAFMFriendHasCreated withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
-        [listener friendHasModified:member];
-    }];
+    [self friendDidCreated:member];
 
     return member;
 }
@@ -147,9 +155,7 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
 
-    [self listenersForKey:kMAFMFriendHasModified withBlock:^(id<MAFriendManagerListenerProtocol> listener) {
-        [listener friendHasModified:mFriend];
-    }];
+    [self friendDidChanged:mFriend];
     return isSucceed;
 }
 
@@ -187,6 +193,7 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
     BOOL isSucceed = [MACommonPersistent deleteObject:mFriend];
     MA_QUICK_ASSERT(isSucceed, @"Delete friend failed");
+    [self friendDidDeleted];
     MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
 }
 
@@ -201,5 +208,36 @@ NSString * const kMAFMFriendHasModified = @"kMAFMFriendHasModified";
 
     return unpaidMemberToGroups;
 }
+
+
+#pragma mark - MAFriendManagerObserverProtocol
+
+- (void)friendDidCreated:(MFriend *)mFriend
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.friendObservers, observerObject, @selector(friendDidCreated:)) {
+        [observerObject.observer friendDidCreated:mFriend];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)friendDidDeleted
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.friendObservers, observerObject, @selector(friendDidDeleted)) {
+        [observerObject.observer friendDidDeleted];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)friendDidChanged:(MFriend *)mFriend
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.friendObservers, observerObject, @selector(friendDidChanged:)) {
+        [observerObject.observer friendDidChanged:mFriend];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
 
 @end

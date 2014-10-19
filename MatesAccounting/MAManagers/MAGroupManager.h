@@ -6,27 +6,31 @@
 //  Copyright (c) 2013年 Lee. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #define GroupManager [MAGroupManager sharedManager]
 #define MACurrentGroup [GroupManager selectedGroup]
 
-#import "ZLMulticastAgent.h"
-
 @class MGroup, MFriend, RMemberToGroup;
 
-@protocol MAGroupManagerListenerProtocol <NSObject>
+@protocol MAGroupManagerObserverProtocol <NSObject>
 
 @optional
-- (void)groupHasCreated:(MGroup *)group;
-- (void)groupHasModified:(MGroup *)group;
-- (void)groupMemberHasChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd;
-- (void)currentGroupHasChanged:(MGroup *)group;
+- (void)groupDidCreated:(MGroup *)group;
+- (void)groupDidChanged:(MGroup *)group;
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd;
+- (void)currentGroupDidSwitched:(MGroup *)group;
 
 @end
 
 
-@interface MAGroupManager : ZLMulticastAgent
+@interface MAGroupManager : NSObject
 
 + (MAGroupManager *)sharedManager;
+
+- (void)registerGroupObserver:(id<MAGroupManagerObserverProtocol>)observer;
+
+- (void)unregisterGroupObserver:(id<MAGroupManagerObserverProtocol>)observer;
 
 - (MGroup *)selectedGroup;
 

@@ -133,7 +133,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         self.title = @"Account";
     } else {
         [self setEditing:YES animated:NO];
-        self.title = @"Create account";
+        self.title = @"Create Account";
     }
 }
 
