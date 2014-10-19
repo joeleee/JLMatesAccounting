@@ -13,6 +13,15 @@
 
 @class MFriend, MAccount, MGroup, RMemberToAccount;
 
+
+@protocol MAAccountManagerObserverProtocol <NSObject>
+
+@optional
+- (void)accountDidChanged:(MAccount *)account;
+
+@end
+
+
 @interface MAFeeOfMember : NSObject
 
 @property (nonatomic, strong) NSDate *createDate;
@@ -23,6 +32,7 @@
 + (MAFeeOfMember *)feeOfMember:(RMemberToAccount *)memberToAccount;
 
 @end
+
 
 @interface MAAccountSettlement : NSObject
 

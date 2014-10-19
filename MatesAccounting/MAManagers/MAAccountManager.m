@@ -63,6 +63,13 @@
 @end
 
 
+@interface MAAccountManager () <MAAccountManagerObserverProtocol>
+
+@property (nonatomic, strong) NSMutableArray *accountObservers;
+
+@end
+
+
 #pragma mark - @implementation MAAccountManager
 @implementation MAAccountManager
 
@@ -75,6 +82,36 @@
         sharedInstance = [[self alloc] init];
     });
     return sharedInstance;
+}
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+    }
+
+    return self;
+}
+
+
+#pragma mark - public methods
+
+- (void)registerGroupObserver:(id<MAAccountManagerObserverProtocol>)observer
+{
+    MAObserverObject *observerObject = [MAObserverObject observerObjectWith:observer];
+    [self.accountObservers addObject:observerObject];
+}
+
+- (void)unregisterGroupObserver:(id<MAAccountManagerObserverProtocol>)observer
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSMutableArray *invalidObservers = [NSMutableArray array];
+        for (MAObserverObject *observerObject in self.accountObservers) {
+            if (!observerObject.observer) {
+                [invalidObservers addObject:observerObject];
+            }
+        }
+        [self.accountObservers removeObjectsInArray:invalidObservers];
+    }];
 }
 
 - (NSArray *)sectionedAccountListForGroup:(MGroup *)group
@@ -417,6 +454,18 @@
         RMemberToGroup *memberToGroup = [group relationshipToMembersByFriend:member].firstObject;
         [memberToGroup refreshMemberTotalFee];
     }
+}
+
+
+#pragma mark - MAAccountManagerObserverProtocol
+
+- (void)accountDidChanged:(MAccount *)account
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.accountObservers, observerObject, @selector(accountDidChanged:)) {
+        [observerObject.observer accountDidChanged:account];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
 }
 
 @end
