@@ -17,7 +17,7 @@
 
 @optional
 - (void)groupDidCreated:(MGroup *)group;
-- (void)groupDidChanged:(MGroup *)group;
+- (void)groupInfoDidChanged:(MGroup *)group;
 - (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd;
 - (void)currentGroupDidSwitched:(MGroup *)group;
 

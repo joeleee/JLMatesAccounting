@@ -21,22 +21,32 @@ NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
 NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
-@interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerObserverProtocol>
+
+@interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerObserverProtocol, MAAccountManagerObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSArray *sectionedAccountList;
 
 @end
+
 
 @implementation MATabAccountViewController
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [self loadData];
+        [GroupManager registerGroupObserver:self];
+        [AccountManager registerGroupObserver:self];
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [GroupManager unregisterGroupObserver:self];
+    [AccountManager unregisterGroupObserver:self];
 }
 
 - (void)viewDidLoad
@@ -68,7 +78,6 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -97,8 +106,8 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)loadData
 {
     self.sectionedAccountList = [AccountManager sectionedAccountListForGroup:MACurrentGroup];
-    [self.tableView reloadData];
 }
+
 
 #pragma mark - actions
 
@@ -111,6 +120,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 {
     [self performSegueWithIdentifier:kSegueTabAccountToGroupList sender:MACurrentGroup];
 }
+
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
@@ -210,23 +220,58 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 #pragma mark - MAGroupManagerObserverProtocol
 
-- (void)groupDidChanged:(MGroup *)group
+- (void)groupInfoDidChanged:(MGroup *)group
 {
     if (MACurrentGroup == group) {
-        [self loadData];
+        if (0 < [self.tableView numberOfSections]) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [self.tableView reloadData];
+        }
     }
 }
 
 - (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
 {
     if (MACurrentGroup == group) {
-        [self loadData];
+        if (0 < [self.tableView numberOfSections]) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [self.tableView reloadData];
+        }
     }
 }
 
 - (void)currentGroupDidSwitched:(MGroup *)group
 {
     [self loadData];
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - MAAccountManagerObserverProtocol
+
+- (void)accountDidChanged:(MAccount *)account
+{
+    if (MACurrentGroup == account.group) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)accountDidCreated:(MAccount *)account
+{
+    if (MACurrentGroup == account.group) {
+        [self loadData];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)accountDidDeletedInGroup:(MGroup *)group
+{
+    if (MACurrentGroup == group) {
+        [self loadData];
+        [self.tableView reloadData];
+    }
 }
 
 @end

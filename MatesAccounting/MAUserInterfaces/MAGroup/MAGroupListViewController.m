@@ -143,7 +143,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     [self loadData];
 }
 
-- (void)groupDidChanged:(MGroup *)group
+- (void)groupInfoDidChanged:(MGroup *)group
 {
     [self loadData];
 }

@@ -41,6 +41,7 @@
 - (id)init
 {
     if (self = [super init]) {
+        self.friendObservers = [NSMutableArray array];
     }
 
     return self;

@@ -14,28 +14,44 @@
 #import "MAFriendManager.h"
 #import "MAFriendListViewController.h"
 #import "RMemberToGroup+expand.h"
+#import "MAAccountManager.h"
+#import "MAccount+expand.h"
+#import "MFriend.h"
+#import "MGroup+expand.h"
+
 
 NSString * const kSegueTabMemberToGroupList = @"kSegueTabMemberToGroupList";
 NSString * const kSegueTabMemberToMemberDetail = @"kSegueTabMemberToMemberDetail";
 NSString * const kSegueTabMemberToCreateMember = @"kSegueTabMemberToCreateMember";
 NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
-@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@interface MATabMemberViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerObserverProtocol, MAAccountManagerObserverProtocol, MAFriendManagerObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSArray *groupToMemberList;
 
 @end
+
 
 @implementation MATabMemberViewController
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        [GroupManager registerGroupObserver:self];
+        [AccountManager registerGroupObserver:self];
+        [FriendManager registerFriendObserver:self];
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [GroupManager unregisterGroupObserver:self];
+    [AccountManager unregisterGroupObserver:self];
+    [FriendManager unregisterFriendObserver:self];
 }
 
 - (void)viewDidLoad
@@ -113,6 +129,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     }
 }
 
+
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +181,58 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     }
 }
 
+
+#pragma mark - MAGroupManagerObserverProtocol
+
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
+{
+    if (MACurrentGroup == group) {
+        [self loadData];
+    }
+}
+
+- (void)currentGroupDidSwitched:(MGroup *)group
+{
+    [self loadData];
+}
+
+
+#pragma mark - MAAccountManagerObserverProtocol
+
+- (void)accountDidChanged:(MAccount *)account
+{
+    if (MACurrentGroup == account.group) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)accountDidCreated:(MAccount *)account
+{
+    if (MACurrentGroup == account.group) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)accountDidDeletedInGroup:(MGroup *)group
+{
+    if (MACurrentGroup == group) {
+        [self.tableView reloadData];
+    }
+}
+
+
+#pragma mark - MAFriendManagerObserverProtocol
+
+- (void)friendDidChanged:(MFriend *)mFriend
+{
+    if (0 < [MACurrentGroup relationshipToMembersByFriend:mFriend].count) {
+        [self.tableView reloadData];
+    }
+}
+
+
 #pragma mark - UI action
+
 - (void)didGroupNavigationButtonTaped:(UIBarButtonItem *)sender
 {
     [self performSegueWithIdentifier:kSegueTabMemberToGroupList sender:MACurrentGroup];

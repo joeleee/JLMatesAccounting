@@ -41,6 +41,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
 - (id)init
 {
     if (self = [super init]) {
+        self.groupObservers = [NSMutableArray array];
     }
 
     return self;
@@ -135,7 +136,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     group.updateDate = [NSDate date];
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
     MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
-    [self groupDidChanged:group];
+    [self groupInfoDidChanged:group];
 
     return group;
 }
@@ -210,11 +211,11 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     MA_END_ENUMERATION_OBSERVERS;
 }
 
-- (void)groupDidChanged:(MGroup *)group
+- (void)groupInfoDidChanged:(MGroup *)group
 {
     MAObserverObject *observerObject;
-    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(groupDidChanged:)) {
-        [observerObject.observer groupDidChanged:group];
+    MA_START_ENUMERATION_OBSERVERS(self.groupObservers, observerObject, @selector(groupInfoDidChanged:)) {
+        [observerObject.observer groupInfoDidChanged:group];
     }
     MA_END_ENUMERATION_OBSERVERS;
 }

@@ -18,6 +18,8 @@
 
 @optional
 - (void)accountDidChanged:(MAccount *)account;
+- (void)accountDidCreated:(MAccount *)account;
+- (void)accountDidDeletedInGroup:(MGroup *)group;
 
 @end
 
@@ -48,6 +50,10 @@
 @interface MAAccountManager : NSObject
 
 + (MAAccountManager *)sharedManager;
+
+- (void)registerGroupObserver:(id<MAAccountManagerObserverProtocol>)observer;
+
+- (void)unregisterGroupObserver:(id<MAAccountManagerObserverProtocol>)observer;
 
 - (NSArray *)sectionedAccountListForGroup:(MGroup *)group;
 

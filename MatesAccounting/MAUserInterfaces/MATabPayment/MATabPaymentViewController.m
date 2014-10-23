@@ -15,13 +15,14 @@
 
 NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
-@interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+
+@interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, MAAccountManagerObserverProtocol, MAGroupManagerObserverProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSArray *settlementList;
 
 @end
+
 
 @implementation MATabPaymentViewController
 
@@ -29,9 +30,17 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     if (self = [super initWithCoder:aDecoder]) {
         [self loadData];
+        [AccountManager registerGroupObserver:self];
+        [GroupManager registerGroupObserver:self];
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [AccountManager unregisterGroupObserver:self];
+    [GroupManager unregisterGroupObserver:self];
 }
 
 - (void)viewDidLoad
@@ -72,7 +81,9 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     [self.tableView reloadData];
 }
 
+
 #pragma mark UITableViewDataSource & UITableViewDelegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.settlementList.count;
@@ -105,7 +116,9 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     [actionSheet showInView:self.view];
 }
 
+
 #pragma mark UIActionSheetDelegate
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (0 == buttonIndex) {
@@ -128,6 +141,42 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
         }
     }
 }
+
+
+#pragma mark - MAAccountManagerObserverProtocol
+
+- (void)accountDidChanged:(MAccount *)account
+{
+    [self loadData];
+}
+
+- (void)accountDidCreated:(MAccount *)account
+{
+    [self loadData];
+}
+
+- (void)accountDidDeletedInGroup:(MGroup *)group
+{
+    if (MACurrentGroup == group) {
+        [self loadData];
+    }
+}
+
+
+#pragma mark - MAGroupManagerObserverProtocol
+
+- (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
+{
+    if (group == MACurrentGroup) {
+        [self loadData];
+    }
+}
+
+- (void)currentGroupDidSwitched:(MGroup *)group
+{
+    [self loadData];
+}
+
 
 #pragma mark UI action
 

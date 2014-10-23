@@ -20,7 +20,9 @@
 #import "RMemberToGroup+expand.h"
 #import "MAGroupManager.h"
 
+
 #pragma mark - @implementation MAFeeOfMember
+
 @implementation MAFeeOfMember
 
 + (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(NSDecimalNumber *)fee
@@ -49,6 +51,7 @@
 
 
 #pragma mark - @implementation MAAccountSettlement
+
 @implementation MAAccountSettlement
 
 + (MAAccountSettlement *)accountSettlement:(MFriend *)fromMember toMember:(MFriend *)toMember fee:(NSDecimalNumber *)fee
@@ -71,6 +74,7 @@
 
 
 #pragma mark - @implementation MAAccountManager
+
 @implementation MAAccountManager
 
 + (MAAccountManager *)sharedManager
@@ -87,6 +91,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        self.accountObservers = [NSMutableArray array];
     }
 
     return self;
@@ -172,6 +177,7 @@
         account = nil;
     }
 
+    [self accountDidCreated:account];
     return account;
 }
 
@@ -251,6 +257,7 @@
         NSArray *relationshipToMember = [account.group relationshipToMembersByFriend:member];
         [(RMemberToGroup *)[relationshipToMember firstObject] refreshMemberTotalFee];
     }
+    [self accountDidChanged:account];
     return isSucceed;
 }
 
@@ -398,7 +405,9 @@
     return accountSettlementList;
 }
 
+
 #pragma mark private method
+
 - (NSUInteger)insertIndexOfRMemberToAccount:(RMemberToAccount *)memberToAccount
                                      inList:(NSArray *)list
 {
@@ -454,6 +463,8 @@
         RMemberToGroup *memberToGroup = [group relationshipToMembersByFriend:member].firstObject;
         [memberToGroup refreshMemberTotalFee];
     }
+
+    [self accountDidDeletedInGroup:group];
 }
 
 
@@ -464,6 +475,24 @@
     MAObserverObject *observerObject;
     MA_START_ENUMERATION_OBSERVERS(self.accountObservers, observerObject, @selector(accountDidChanged:)) {
         [observerObject.observer accountDidChanged:account];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)accountDidCreated:(MAccount *)account
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.accountObservers, observerObject, @selector(accountDidCreated:)) {
+        [observerObject.observer accountDidCreated:account];
+    }
+    MA_END_ENUMERATION_OBSERVERS;
+}
+
+- (void)accountDidDeletedInGroup:(MGroup *)group
+{
+    MAObserverObject *observerObject;
+    MA_START_ENUMERATION_OBSERVERS(self.accountObservers, observerObject, @selector(accountDidDeletedInGroup:)) {
+        [observerObject.observer accountDidDeletedInGroup:group];
     }
     MA_END_ENUMERATION_OBSERVERS;
 }
