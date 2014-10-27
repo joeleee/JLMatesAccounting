@@ -448,10 +448,20 @@
 
 - (void)deleteAccount:(MAccount *)account onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed
 {
-    NSMutableArray *members = [NSMutableArray array];
     MGroup *group = account.group;
+    NSMutableArray *members = [NSMutableArray array];
+    NSMutableArray *invalidMemberNames = [NSMutableArray array];
     for (RMemberToAccount *memberToAccount in account.relationshipToMember) {
+        if (0 >= [group relationshipToMembersByFriend:memberToAccount.member].count) {
+            [invalidMemberNames addObject:memberToAccount.member.name];
+        }
         [members addObject:memberToAccount.member];
+    }
+
+    if (0 < invalidMemberNames.count) {
+        NSString *errorString = [NSString stringWithFormat:@"%@ already not in current group, cann't delete this account.", [invalidMemberNames componentsJoinedByString:@","]];
+        MA_INVOKE_BLOCK_SAFELY(onFailed, nil, [NSError errorWithDomain:errorString code:0 userInfo:nil]);
+        return;
     }
 
     BOOL succeed = [MACommonPersistent deleteObject:account];

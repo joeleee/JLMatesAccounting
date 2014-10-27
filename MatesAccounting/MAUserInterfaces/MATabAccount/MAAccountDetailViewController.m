@@ -592,10 +592,10 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     } else if ([cell isKindOfClass:MAAccountDetailDeleteCell.class]) {
         [[MAAlertView alertWithTitle:@"Confirm"
                              message:@"Deleted account can not be recovered."
-                        buttonTitle1:@"Undelete"
+                        buttonTitle1:@"Cancel"
                         buttonBlock1:^{
                         }
-                        buttonTitle2:@"Still Delete"
+                        buttonTitle2:@"Delete"
                         buttonBlock2:^{
                             [AccountManager deleteAccount:self.account onComplete:^(id result, NSError *error) {
                                 [self disappear:YES];

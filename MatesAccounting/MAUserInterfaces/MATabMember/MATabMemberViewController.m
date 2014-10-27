@@ -39,6 +39,8 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+
+        [self loadData];
         [GroupManager registerGroupObserver:self];
         [AccountManager registerGroupObserver:self];
         [FriendManager registerFriendObserver:self];
@@ -83,8 +85,6 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-    [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -167,15 +167,18 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
+        self.tableView.editing = YES;
         MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
         RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
         [memberToGroup refreshMemberTotalFee];
         [GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group onComplete:^(id result, NSError *error) {
+            self.tableView.editing = NO;
             self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         } onFailed:^(id result, NSError *error) {
             [[MAAlertView alertWithTitle:@"Can't Delete" message:error.domain buttonTitle:@"OK" buttonBlock:^{
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+                self.tableView.editing = NO;
             }] show];
         }];
     }
@@ -186,7 +189,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
 {
-    if (MACurrentGroup == group) {
+    if (MACurrentGroup == group && !self.tableView.editing) {
         [self loadData];
     }
 }

@@ -185,11 +185,9 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     if ([MACommonPersistent deleteObject:memberToGroup]) {
         [self groupMemberDidChanged:group member:mFriend isAdd:NO];
         MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
-        return;
     } else {
         NSError *error = [NSError errorWithDomain:@"Remove member failed!" code:-1 userInfo:nil];
         MA_INVOKE_BLOCK_SAFELY(onFailed, nil, error);
-        return;
     }
 }
 
