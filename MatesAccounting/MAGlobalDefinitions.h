@@ -27,8 +27,8 @@
 
 #define MA_HIDE_KEYBOARD [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil]
 
-#define MA_STATUSBAR_HEIGHT (20.0f)
-#define MA_NAVIGATIONBAR_HEIGHT ((UIDeviceOrientationLandscapeLeft == [[UIDevice currentDevice] orientation] || UIDeviceOrientationLandscapeRight == [[UIDevice currentDevice] orientation]) ? 32.0f : [[[[UIApplication sharedApplication] rootNavigationController] navigationBar] height])
+#define MA_STATUSBAR_HEIGHT ([[UIApplication sharedApplication] statusBarFrame].size.height)
+#define MA_NAVIGATIONBAR_HEIGHT ([[[[UIApplication sharedApplication] rootNavigationController] navigationBar] height])
 #define MA_TABBAR_HEIGHT [[[[UIApplication sharedApplication] rootTabBarController] tabBar] height]
 
 #endif /* ifndef MAGLOBALDEFINITIONS_H */

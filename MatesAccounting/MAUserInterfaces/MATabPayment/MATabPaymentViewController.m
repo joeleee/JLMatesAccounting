@@ -12,13 +12,14 @@
 #import "MAAccountManager.h"
 #import "MAAccountSettlementCell.h"
 #import "MFriend.h"
+#import "MATabTableView.h"
 
 NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 
 @interface MATabPaymentViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, MAAccountManagerObserverProtocol, MAGroupManagerObserverProtocol>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet MATabTableView *tableView;
 @property (nonatomic, strong) NSArray *settlementList;
 
 @end
@@ -47,15 +48,18 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+    self.view.tag = -1;
+    [self.tableView setContentInset:self.tableView.contentInset];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
 
-    UIEdgeInsets tableViewEdgeInsets = UIEdgeInsetsMake(MA_STATUSBAR_HEIGHT + MA_NAVIGATIONBAR_HEIGHT, 0.0f, MA_TABBAR_HEIGHT, 0.0f);
-    [self.tableView setContentInset:tableViewEdgeInsets];
-    [self.tableView setScrollIndicatorInsets:tableViewEdgeInsets];
+    if (-1 == self.view.tag) {
+        self.view.tag = 0;
+        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top)];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,7 +82,6 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)loadData
 {
     self.settlementList = [AccountManager accountSettlementListForGroup:MACurrentGroup];
-    [self.tableView reloadData];
 }
 
 
@@ -163,17 +166,20 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)accountDidChanged:(MAccount *)account
 {
     [self loadData];
+    [self.tableView reloadData];
 }
 
 - (void)accountDidCreated:(MAccount *)account
 {
     [self loadData];
+    [self.tableView reloadData];
 }
 
 - (void)accountDidDeletedInGroup:(MGroup *)group
 {
     if (MACurrentGroup == group) {
         [self loadData];
+        [self.tableView reloadData];
     }
 }
 
@@ -184,12 +190,14 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     if (group == MACurrentGroup) {
         [self loadData];
+        [self.tableView reloadData];
     }
 }
 
 - (void)currentGroupDidSwitched:(MGroup *)group
 {
     [self loadData];
+    [self.tableView reloadData];
 }
 
 
@@ -203,6 +211,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)didRefreshNavigationButtonTapped:(id)sender
 {
     [self loadData];
+    if (0 < self.tableView.numberOfSections) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 @end

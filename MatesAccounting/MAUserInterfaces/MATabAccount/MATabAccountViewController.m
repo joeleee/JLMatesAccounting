@@ -16,6 +16,7 @@
 #import "MATabAccountListCell.h"
 #import "MAAccountDetailViewController.h"
 #import "MAccount.h"
+#import "MATabTableView.h"
 
 NSString * const kSegueTabAccountToGroupList = @"kSegueTabAccountToGroupList";
 NSString * const kSegueTabAccountToAccountDetail = @"kSegueTabAccountToAccountDetail";
@@ -24,7 +25,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 @interface MATabAccountViewController () <UITableViewDataSource, UITableViewDelegate, MAGroupManagerObserverProtocol, MAAccountManagerObserverProtocol>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet MATabTableView *tableView;
 @property (nonatomic, strong) NSArray *sectionedAccountList;
 
 @end
@@ -53,15 +54,18 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+    self.view.tag = -1;
+    [self.tableView setContentInset:self.tableView.contentInset];
 }
 
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
+    [super viewDidLayoutSubviews];
 
-    UIEdgeInsets tableViewEdgeInsets = UIEdgeInsetsMake(MA_STATUSBAR_HEIGHT + MA_NAVIGATIONBAR_HEIGHT, 0.0f, MA_TABBAR_HEIGHT, 0.0f);
-    [self.tableView setContentInset:tableViewEdgeInsets];
-    [self.tableView setScrollIndicatorInsets:tableViewEdgeInsets];
+    if (-1 == self.view.tag) {
+        self.view.tag = 0;
+        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top)];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
