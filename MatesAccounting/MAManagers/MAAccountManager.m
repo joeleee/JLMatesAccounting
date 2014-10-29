@@ -27,7 +27,7 @@
 
 + (MAFeeOfMember *)feeOfMember:(MFriend *)member fee:(NSDecimalNumber *)fee
 {
-    MA_QUICK_ASSERT(member, @"member should not be nil! - MAFeeOfMember");
+    MA_ASSERT(member, @"member should not be nil! - MAFeeOfMember");
 
     MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
     feeOfMember.member = member;
@@ -38,7 +38,7 @@
 
 + (MAFeeOfMember *)feeOfMember:(RMemberToAccount *)memberToAccount
 {
-    MA_QUICK_ASSERT(memberToAccount, @"member should not be nil! - MAFeeOfMember");
+    MA_ASSERT(memberToAccount, @"member should not be nil! - MAFeeOfMember");
 
     MAFeeOfMember *feeOfMember = [[MAFeeOfMember alloc] init];
     feeOfMember.member = memberToAccount.member;
@@ -155,7 +155,7 @@
     }
 
     MAccount *account = [MACommonPersistent createObject:NSStringFromClass([MAccount class])];
-    MA_QUICK_ASSERT(account, @"Assert account == nil");
+    MA_ASSERT(account, @"Assert account == nil");
 
     NSDate *currentData = [NSDate date];
     account.createDate = currentData;
@@ -207,7 +207,7 @@
             memberToAccount.fee = obj.fee;
         } else {
             memberToAccount = [MACommonPersistent createObject:NSStringFromClass([RMemberToAccount class])];
-            MA_QUICK_ASSERT(memberToAccount, @"Assert create memberToAccount failed.");
+            MA_ASSERT(memberToAccount, @"Assert create memberToAccount failed.");
             memberToAccount.createDate = [NSDate date];
             memberToAccount.member = obj.member;
             memberToAccount.fee = obj.fee;
@@ -237,7 +237,7 @@
         place.placeName = placeName;
     } else {
         place = [MACommonPersistent createObject:NSStringFromClass([MPlace class])];
-        MA_QUICK_ASSERT(place, @"Assert place == nil");
+        MA_ASSERT(place, @"Assert place == nil");
         NSDate *currentData = [NSDate date];
         place.location = location;
         place.placeName = placeName;
@@ -400,7 +400,7 @@
         }
     }
 
-    MA_QUICK_ASSERT(0 == receiverSettlementList.count && 0 == payerSettlementList.count, @"Bad debt!");
+    MA_ASSERT(0 == receiverSettlementList.count && 0 == payerSettlementList.count, @"Bad debt!");
 
     return accountSettlementList;
 }
@@ -411,7 +411,7 @@
 - (NSUInteger)insertIndexOfRMemberToAccount:(RMemberToAccount *)memberToAccount
                                      inList:(NSArray *)list
 {
-    MA_QUICK_ASSERT([list containsObject:memberToAccount], @"list already contained memberToAccount - indexOfRMemberToAccount");
+    MA_ASSERT([list containsObject:memberToAccount], @"list already contained memberToAccount - indexOfRMemberToAccount");
 
     if (0 == list.count) {
         return 0;
@@ -465,7 +465,7 @@
     }
 
     BOOL succeed = [MACommonPersistent deleteObject:account];
-    MA_QUICK_ASSERT(succeed, @"Delete Account Failed!");
+    MA_ASSERT(succeed, @"Delete Account Failed!");
 
     MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
 

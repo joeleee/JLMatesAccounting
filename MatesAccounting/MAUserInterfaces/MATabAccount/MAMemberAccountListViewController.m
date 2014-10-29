@@ -48,14 +48,14 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath.section >= self.accountsCategories.count ||
             indexPath.row >= [self.accountsCategories[indexPath.section] count]) {
-            MA_QUICK_ASSERT(NO, @"self.accountsCategories out of bounds!");
+            MA_ASSERT(NO, @"self.accountsCategories out of bounds!");
             return;
         }
         MAccount *account = [self.accountsCategories[indexPath.section] objectAtIndex:indexPath.row];
         MAAccountDetailViewController *accountDetail = segue.destinationViewController;
         [accountDetail setAccount:account];
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong segue!");
+        MA_ASSERT(NO, @"Wrong segue!");
     }
 }
 
@@ -106,7 +106,7 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section >= self.accountsCategories.count) {
-        MA_QUICK_ASSERT(NO, @"self.accountsCategories out of bounds!");
+        MA_ASSERT(NO, @"self.accountsCategories out of bounds!");
         return nil;
     }
 
@@ -122,7 +122,7 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section >= self.accountsCategories.count) {
-        MA_QUICK_ASSERT(NO, @"self.accountsCategories out of bounds!");
+        MA_ASSERT(NO, @"self.accountsCategories out of bounds!");
         return 0;
     }
 
@@ -134,7 +134,7 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
 {
     if (indexPath.section >= self.accountsCategories.count ||
         indexPath.row >= [self.accountsCategories[indexPath.section] count]) {
-        MA_QUICK_ASSERT(NO, @"self.accountsCategories out of bounds!");
+        MA_ASSERT(NO, @"self.accountsCategories out of bounds!");
         return 0;
     }
 
@@ -148,7 +148,7 @@ NSString * const kSegueMemberAccountListToAccountDetail = @"kSegueMemberAccountL
     MAMemberAccountListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[MAMemberAccountListCell className]];
     if (indexPath.section >= self.accountsCategories.count ||
         indexPath.row >= [self.accountsCategories[indexPath.section] count]) {
-        MA_QUICK_ASSERT(NO, @"self.accountsCategories out of bounds!");
+        MA_ASSERT(NO, @"self.accountsCategories out of bounds!");
         return cell;
     }
 

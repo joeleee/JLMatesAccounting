@@ -31,7 +31,7 @@ void uncaughtExceptionHandler(NSException *exception)
 
     // Set rootNavigaionController's delegate
     id rootNavigationController = self.window.rootViewController;
-    MA_QUICK_ASSERT([rootNavigationController isKindOfClass:UINavigationController.class], @"Wrong root navigation controller!");
+    MA_ASSERT([rootNavigationController isKindOfClass:UINavigationController.class], @"Wrong root navigation controller!");
     [(UINavigationController *)rootNavigationController setDelegate:[MARootNavigationControllerDelegate sharedDelegate]];
 
     return YES;

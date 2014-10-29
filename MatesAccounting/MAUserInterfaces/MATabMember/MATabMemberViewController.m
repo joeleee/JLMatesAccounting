@@ -99,14 +99,14 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
         MAMemberDetailViewController *memberDetail = segue.destinationViewController;
         [memberDetail setFriend:sender];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToCreateMember]) {
-        MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MA_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
         [memberDetail setFriend:nil];
     } else if ([segue.identifier isEqualToString:kSegueTabMemberToFriendList]) {
         MAFriendListViewController *controller = segue.destinationViewController;
         controller.group = sender;
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong segue! (MATabMemberViewController)");
+        MA_ASSERT(NO, @"Wrong segue! (MATabMemberViewController)");
     }
 }
 
@@ -134,7 +134,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
+    MA_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
     MATabMemberListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MATabMemberListCell className]];
     RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
     [cell reuseCellWithData:memberToGroup.member];
@@ -149,7 +149,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
+    MA_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
     RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
     [self performSegueWithIdentifier:kSegueTabMemberToMemberDetail sender:memberToGroup.member];
 }
@@ -168,7 +168,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         self.tableView.editing = YES;
-        MA_QUICK_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
+        MA_ASSERT(indexPath.row < self.groupToMemberList.count, @"indexPath wrong");
         RMemberToGroup *memberToGroup = self.groupToMemberList[indexPath.row];
         [memberToGroup refreshMemberTotalFee];
         [GroupManager removeFriend:memberToGroup.member fromGroup:memberToGroup.group onComplete:^(id result, NSError *error) {

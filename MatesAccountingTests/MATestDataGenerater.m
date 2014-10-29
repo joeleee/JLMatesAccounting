@@ -36,7 +36,7 @@
         MALogTestInfo(@"Generating groups %lu", (unsigned long)totalCount);
         unsigned int randomValue = arc4random() % 10000;
         MGroup *group = [GroupManager createGroup:[NSString stringWithFormat:@"Group_%u", randomValue]];
-        MA_QUICK_ASSERT(group, @"Create group failed!");
+        MA_ASSERT(group, @"Create group failed!");
         [groups addObject:group];
     }
 
@@ -55,7 +55,7 @@
                                 phoneNumber:@(randomValue)
                                       eMail:[NSString stringWithFormat:@"Friend_%u@gmail.boss", randomValue % 1000]
                                    birthday:[[NSDate date] dateByAddingTimeInterval:-randomValue]];
-        MA_QUICK_ASSERT(friend, @"Create friend failed!");
+        MA_ASSERT(friend, @"Create friend failed!");
         [friends addObject:friend];
     }
 

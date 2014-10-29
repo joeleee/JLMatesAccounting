@@ -21,12 +21,12 @@
 
 - (void)reuseCellWithData:(id)data
 {
-    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - reuseCellWithData");
+    MA_ASSERT(NO, @"If you want call this method, you must overwrite it. - reuseCellWithData");
 }
 
 + (CGFloat)cellHeight:(id)data
 {
-    MA_QUICK_ASSERT(NO, @"If you want call this method, you must overwrite it. - cellHeight");
+    MA_ASSERT(NO, @"If you want call this method, you must overwrite it. - cellHeight");
     return 0.0f;
 }
 

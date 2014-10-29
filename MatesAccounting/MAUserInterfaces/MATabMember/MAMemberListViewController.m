@@ -77,7 +77,7 @@ typedef enum {
         MAFriendListViewController *frientList = segue.destinationViewController;
         [frientList setGroup:self.group];
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
+        MA_ASSERT(NO, @"Wrong segue identifier! (MAMemberListViewController)");
     }
 }
 
@@ -113,7 +113,7 @@ typedef enum {
             return self.modifiedUnselectedMembers;
         }
         default: {
-            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
+            MA_ASSERT(NO, @"MAMemberListViewController unknow section(arrayInSection)");
             break;
         }
     }
@@ -226,7 +226,7 @@ typedef enum {
 
         case MemberListSectionOfSelected: {
             if (indexPath.row >= memberList.count) {
-                MA_QUICK_ASSERT(NO, @"member list out of bounds!");
+                MA_ASSERT(NO, @"member list out of bounds!");
                 return;
             }
             MFriend *member = [memberList objectAtIndex:indexPath.row];
@@ -244,7 +244,7 @@ typedef enum {
         }
 
         default: {
-            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(didSelectRowAtIndexPath)");
+            MA_ASSERT(NO, @"MAMemberListViewController unknow section(didSelectRowAtIndexPath)");
             break;
         }
     }
@@ -267,7 +267,7 @@ typedef enum {
             break;
         }
         default: {
-            MA_QUICK_ASSERT(NO, @"MAMemberListViewController unknow section(viewForHeaderInSection)");
+            MA_ASSERT(NO, @"MAMemberListViewController unknow section(viewForHeaderInSection)");
             break;
         }
     }

@@ -91,7 +91,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
 
 - (BOOL)changeGroup:(MGroup *)group
 {
-    MA_QUICK_ASSERT(group, @"change new group should not be nil! - changeGroup");
+    MA_ASSERT(group, @"change new group should not be nil! - changeGroup");
     if (!group) {
         return NO;
     }
@@ -113,7 +113,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     }
 
     MGroup *group = [MACommonPersistent createObject:NSStringFromClass([MGroup class])];
-    MA_QUICK_ASSERT(group, @"Assert group == nil");
+    MA_ASSERT(group, @"Assert group == nil");
     NSDate *currentData = [NSDate date];
     group.createDate = currentData;
     group.updateDate = currentData;
@@ -135,7 +135,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     group.groupName = name;
     group.updateDate = [NSDate date];
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
-    MA_QUICK_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
+    MA_ASSERT(isSucceed, @"editAndSaveGroup result is nil! - editAndSaveGroup");
     [self groupInfoDidChanged:group];
 
     return group;
@@ -153,13 +153,13 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
     }
 
     RMemberToGroup *memberToGroup = [MACommonPersistent createObject:NSStringFromClass([RMemberToGroup class])];
-    MA_QUICK_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
+    MA_ASSERT(memberToGroup, @"Assert memberToGroup == nil");
 
     memberToGroup.createDate = [NSDate date];
     memberToGroup.member = mFriend;
     memberToGroup.group = group;
     if (![[MAContextAPI sharedAPI] saveContextData]) {
-        MA_QUICK_ASSERT(NO, @"Update failed.");
+        MA_ASSERT(NO, @"Update failed.");
         [MACommonPersistent deleteObject:memberToGroup];
         [[MAContextAPI sharedAPI] saveContextData];
         return nil;
@@ -172,7 +172,7 @@ NSString * const kCurrentGroupID = @"kCurrentGroupID";
 - (void)removeFriend:(MFriend *)mFriend fromGroup:(MGroup *)group onComplete:(MACommonCallBackBlock)onComplete onFailed:(MACommonCallBackBlock)onFailed;
 {
     NSSet *relationships = [group.relationshipToMember filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", @"member", mFriend]];
-    MA_QUICK_ASSERT(relationships.count > 0, @"Assert memberToGroup == nil");
+    MA_ASSERT(relationships.count > 0, @"Assert memberToGroup == nil");
 
     RMemberToGroup *memberToGroup = relationships.allObjects.firstObject;
     [memberToGroup refreshMemberTotalFee];

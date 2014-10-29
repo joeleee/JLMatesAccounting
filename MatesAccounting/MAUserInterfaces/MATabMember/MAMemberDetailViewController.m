@@ -76,7 +76,7 @@ typedef enum {
         MAMemberAccountListViewController *accountList = segue.destinationViewController;
         [accountList setMember:self.mFriend];
     } else {
-        MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
+        MA_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
 }
 
@@ -119,7 +119,7 @@ typedef enum {
             break;
         }
         default:
-            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
     }
 
@@ -251,7 +251,7 @@ typedef enum {
         }
 
         default: {
-            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
         }
     }
@@ -308,7 +308,7 @@ typedef enum {
             break;
         }
         default: {
-            MA_QUICK_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
+            MA_ASSERT(NO, @"Wrong row number in table view, infoOfRow!");
             break;
         }
     }
@@ -387,7 +387,7 @@ typedef enum {
         }
         [alert show];
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
+        MA_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
     }
 }
 
@@ -414,7 +414,7 @@ typedef enum {
 - (IBAction)didAccountButtonTapped:(id)sender
 {
     if (!self.mFriend) {
-        MA_QUICK_ASSERT(NO, @"self.mFriend is nil!");
+        MA_ASSERT(NO, @"self.mFriend is nil!");
         return;
     }
 

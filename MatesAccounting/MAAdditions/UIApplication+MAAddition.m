@@ -12,14 +12,14 @@
 
 - (MAAppDelegate *)appDelegate
 {
-    MA_QUICK_ASSERT([self.delegate isKindOfClass:MAAppDelegate.class], @"Application delegate is not MAAppDelegate.class");
+    MA_ASSERT([self.delegate isKindOfClass:MAAppDelegate.class], @"Application delegate is not MAAppDelegate.class");
     return self.delegate;
 }
 
 - (MARootNavigationController *)rootNavigationController
 {
     id rootNavigationController = [[self.delegate window] rootViewController];
-    MA_QUICK_ASSERT([rootNavigationController isKindOfClass:MARootNavigationController.class], @"Root NavigationController is not MARootNavigationController.class");
+    MA_ASSERT([rootNavigationController isKindOfClass:MARootNavigationController.class], @"Root NavigationController is not MARootNavigationController.class");
 
     return rootNavigationController;
 }
@@ -27,7 +27,7 @@
 - (MARootTabBarController *)rootTabBarController
 {
     id rootTabBarController = [[self rootNavigationController] viewControllers][0];
-    MA_QUICK_ASSERT([rootTabBarController isKindOfClass:MARootTabBarController.class], @"Root TabBarController is not MARootTabBarController.class");
+    MA_ASSERT([rootTabBarController isKindOfClass:MARootTabBarController.class], @"Root TabBarController is not MARootTabBarController.class");
 
     return rootTabBarController;
 }

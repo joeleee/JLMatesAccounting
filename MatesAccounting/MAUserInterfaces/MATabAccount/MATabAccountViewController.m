@@ -95,11 +95,11 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         MAccount *account = indexPath.row < accountList.count ? accountList[indexPath.row] : nil;
         [accountDetail setAccount:account];
     } else if ([segue.identifier isEqualToString:kSegueTabAccountToNewAccount]) {
-        MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MA_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAAccountDetailViewController *accountDetail = [segue.destinationViewController viewControllers][0];
         [accountDetail setGroup:MACurrentGroup];
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
+        MA_ASSERT(NO, @"Wrong segue in [MATabAccountViewController prepareForSegue: sender:] !");
     }
 }
 
@@ -186,7 +186,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     } else if (((section - 1) < self.sectionedAccountList.count)) {
         return kTabAccountListSectionHeaderHeight;
     } else {
-        MA_QUICK_ASSERT(NO, @"Out of bound!");
+        MA_ASSERT(NO, @"Out of bound!");
         return 0;
     }
 }
@@ -212,7 +212,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         }
     } else {
         [headerView reuseWithHeaderTitle:@""];
-        MA_QUICK_ASSERT(NO, @"Out of bound!");
+        MA_ASSERT(NO, @"Out of bound!");
     }
     return headerView;
 }

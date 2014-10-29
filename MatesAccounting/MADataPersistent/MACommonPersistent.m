@@ -20,7 +20,7 @@
 
     id object = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:moContext];
 
-    MA_QUICK_ASSERT(object, @"Assert object == nil");
+    MA_ASSERT(object, @"Assert object == nil");
 
     return object;
 }
@@ -42,7 +42,7 @@
 
 + (NSArray *)fetchObjectsWithRequest:(NSFetchRequest *)request
 {
-    MA_QUICK_ASSERT(request, @"Assert request == nil");
+    MA_ASSERT(request, @"Assert request == nil");
     if (!request) {
         return nil;
     }
@@ -56,7 +56,7 @@
 
 + (NSArray *)fetchObjectsWithEntityName:(NSString *)entityName
 {
-    MA_QUICK_ASSERT(0 < entityName.length, @"Assert request == nil");
+    MA_ASSERT(0 < entityName.length, @"Assert request == nil");
     if (0 >= entityName.length) {
         return nil;
     }

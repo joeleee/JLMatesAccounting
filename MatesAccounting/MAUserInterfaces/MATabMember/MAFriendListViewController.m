@@ -61,11 +61,11 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kSegueFriendListToCreateMember]) {
-        MA_QUICK_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
+        MA_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
         [memberDetail setFriend:nil];
     } else {
-        MA_QUICK_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
+        MA_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
 }
 
@@ -121,7 +121,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"%@ %s wrong indexPath.");
+    MA_ASSERT(indexPath.row < self.friendList.count, @"%@ %s wrong indexPath.");
     MAFriendListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAFriendListCell className]];
     [cell reuseCellWithData:self.friendList[indexPath.row]];
 
@@ -166,7 +166,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
-        MA_QUICK_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
+        MA_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
         MFriend *mFriend = self.friendList[indexPath.row];
         [FriendManager deleteFriend:mFriend onComplete:^(id result, NSError *error) {
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];

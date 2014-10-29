@@ -93,7 +93,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     MAAccountSettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
 
-    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
     [cell reuseCellWithData:self.settlementList[indexPath.row]];
 
     return cell;
@@ -101,13 +101,13 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
     return [MAAccountSettlementCell cellHeight:self.settlementList[indexPath.row]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_QUICK_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
 
     MAAccountSettlement *settlement = self.settlementList[indexPath.row];
     NSString *actionTitle = [NSString stringWithFormat:@"%@ needs to pay %@ back %@ to settle this accounts", settlement.fromMember.name, settlement.toMember.name, settlement.fee];
@@ -122,7 +122,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (0 == buttonIndex) {
-        MA_QUICK_ASSERT(self.settlementList.count > actionSheet.tag, @"Array out of bounds!");
+        MA_ASSERT(self.settlementList.count > actionSheet.tag, @"Array out of bounds!");
         MAAccountSettlement *settlement = self.settlementList[actionSheet.tag];
         if ([settlement.fee isEqualToNumber:[NSDecimalNumber notANumber]]) {
             settlement.fee = DecimalZero;

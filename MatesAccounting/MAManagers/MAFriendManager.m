@@ -115,7 +115,7 @@
     }
 
     MFriend *member = [MACommonPersistent createObject:NSStringFromClass([MFriend class])];
-    MA_QUICK_ASSERT(member, @"Assert member == nil");
+    MA_ASSERT(member, @"Assert member == nil");
 
     NSDate *currentData = [NSDate date];
     member.name = name;
@@ -128,7 +128,7 @@
     member.updateDate = currentData;
 
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
-    MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
+    MA_ASSERT(isSucceed, @"Update friend failed");
 
     [self friendDidCreated:member];
 
@@ -154,7 +154,7 @@
     mFriend.birthday = birthday;
     mFriend.updateDate = [NSDate date];
     BOOL isSucceed = [[MAContextAPI sharedAPI] saveContextData];
-    MA_QUICK_ASSERT(isSucceed, @"Update friend failed");
+    MA_ASSERT(isSucceed, @"Update friend failed");
 
     [self friendDidChanged:mFriend];
     return isSucceed;
@@ -193,7 +193,7 @@
     }
 
     BOOL isSucceed = [MACommonPersistent deleteObject:mFriend];
-    MA_QUICK_ASSERT(isSucceed, @"Delete friend failed");
+    MA_ASSERT(isSucceed, @"Delete friend failed");
     [self friendDidDeleted];
     MA_INVOKE_BLOCK_SAFELY(onComplete, nil, nil);
 }

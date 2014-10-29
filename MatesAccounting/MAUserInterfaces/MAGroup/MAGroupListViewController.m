@@ -67,7 +67,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
         MAGroupDetailViewController *controller = segue.destinationViewController;
         [controller setGroup:nil];
     } else {
-        MA_QUICK_ASSERT(NO, @"Unknow segue ? MAGroupListViewController");
+        MA_ASSERT(NO, @"Unknow segue ? MAGroupListViewController");
     }
 }
 
@@ -94,7 +94,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     cell.actionDelegate = self;
 
     if (indexPath.row >= [GroupManager myGroups].count) {
-        MA_QUICK_ASSERT(NO, @"index beyond of group list count");
+        MA_ASSERT(NO, @"index beyond of group list count");
         return cell;
     }
 
@@ -107,7 +107,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row >= [GroupManager myGroups].count) {
-        MA_QUICK_ASSERT(NO, @"index beyond of group list count");
+        MA_ASSERT(NO, @"index beyond of group list count");
         return;
     }
 
@@ -131,7 +131,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     if ([cell isKindOfClass:[MAGroupListCell class]]) {
         [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:data];
     } else {
-        MA_QUICK_ASSERT(NO, @"Unknow action? MAGroupListViewController - actionWithData");
+        MA_ASSERT(NO, @"Unknow action? MAGroupListViewController - actionWithData");
     }
 
     return YES;

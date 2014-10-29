@@ -42,7 +42,7 @@
 
 - (void)reuseCellWithData:(id)data
 {
-    MA_QUICK_ASSERT([data isKindOfClass:MAAccountSettlement.class], @"Wrong Type");
+    MA_ASSERT([data isKindOfClass:MAAccountSettlement.class], @"Wrong Type");
     MAAccountSettlement *accountSettlement = data;
     self.payerNameLabel.text = accountSettlement.fromMember.name;
     self.settlementTitleLabel.text = @"should\npay";

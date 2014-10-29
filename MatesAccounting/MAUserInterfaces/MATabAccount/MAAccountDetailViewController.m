@@ -150,7 +150,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             selectedFeeOfMembers = self.editingConsumers;
             memberListViewController.userInfo[kSegueAccountDetailToMemberList] = @(DetailConsumerType);
         } else {
-            MA_QUICK_ASSERT(NO, @"Unknow sender - MAAccountDetailViewController");
+            MA_ASSERT(NO, @"Unknow sender - MAAccountDetailViewController");
         }
         NSMutableOrderedSet *members = [NSMutableOrderedSet orderedSet];
         for (MAFeeOfMember *feeOfMember in selectedFeeOfMembers) {
@@ -158,7 +158,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
         [memberListViewController setGroup:self.group selectedMembers:members.array delegate:self];
     } else {
-        MA_QUICK_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
+        MA_ASSERT(NO, @"Unknow segue - MAAccountDetailViewController");
     }
 }
 
@@ -286,7 +286,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 }
 
                 default:
-                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
+                    MA_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
@@ -329,7 +329,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
 
         default:
-            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
+            MA_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     NSDictionary *info = @{kAccountDetailRowCount : @(rowCount),
@@ -429,7 +429,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
                 }
 
                 default:
-                    MA_QUICK_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
+                    MA_ASSERT(NO, @"Unknow row - MAAccountDetailViewController");
             }
             break;
         }
@@ -462,7 +462,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         }
 
         default:
-            MA_QUICK_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
+            MA_ASSERT(NO, @"Unknow section - MAAccountDetailViewController");
     }
 
     return cell;
@@ -592,16 +592,16 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
     } else if ([cell isKindOfClass:MAAccountDetailDeleteCell.class]) {
         [[MAAlertView alertWithTitle:@"Confirm"
                              message:@"Deleted account can not be recovered."
-                        buttonTitle1:@"Cancel"
+                        buttonTitle1:@"Delete"
                         buttonBlock1:^{
-                        }
-                        buttonTitle2:@"Delete"
-                        buttonBlock2:^{
                             [AccountManager deleteAccount:self.account onComplete:^(id result, NSError *error) {
                                 [self disappear:YES];
                             } onFailed:^(id result, NSError *error) {
                                 [[MAAlertView alertWithTitle:@"Delete Failed" message:error.domain buttonTitle:@"OK" buttonBlock:^{ }] show];
                             }];
+                        }
+                        buttonTitle2:@"Cancel"
+                        buttonBlock2:^{
                         }]
          show];
     }
@@ -631,7 +631,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
         } break;
 
         default: {
-            MA_QUICK_ASSERT(NO, @"Wrong userInfo");
+            MA_ASSERT(NO, @"Wrong userInfo");
         } break;
     }
     [self.tableView reloadData];
@@ -728,7 +728,7 @@ NSString *const  kAccountDetailHeaderTitle = @"kAccountDetailHeaderTitle";
             [self disappear:YES];
         }
     } else {
-        MA_QUICK_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
+        MA_ASSERT(NO, @"Wrong state, (didCancelButtonTaped:)");
     }
 }
 
