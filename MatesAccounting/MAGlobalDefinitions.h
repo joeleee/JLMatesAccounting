@@ -17,8 +17,8 @@
         }                                    \
 }
 
-#define MA_ASSERT(value, message) NSAssert(value, @"MA Assert Wrong - %@ : %s %@", message, __FUNCTION__, [self class])
-#define MA_ASSERT_FAILED() NSAssert(NO, @"MA Assert Failed : %s %@", __FUNCTION__, [self class])
+#define MA_ASSERT(value, message) NSAssert(value, @"MA Assert Wrong - \"%@\" : %s %@", message, __FUNCTION__, [self class])
+#define MA_ASSERT_FAILED(message) NSAssert(NO, @"MA Assert Failed - \"%@\" : %s %@", message, __FUNCTION__, [self class])
 
 #define MALogInfo(...) NSLog(__VA_ARGS__)
 #define MALogError(...) NSLog(__VA_ARGS__)

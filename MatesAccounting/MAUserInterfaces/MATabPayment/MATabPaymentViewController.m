@@ -93,21 +93,31 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     MAAccountSettlementCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAAccountSettlementCell className]];
 
-    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
-    [cell reuseCellWithData:self.settlementList[indexPath.row]];
+    if (self.settlementList.count <= indexPath.row) {
+        MA_ASSERT_FAILED(@"Array out of bounds!");
+        return cell;
+    }
 
+    [cell reuseCellWithData:self.settlementList[indexPath.row]];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    if (self.settlementList.count <= indexPath.row) {
+        MA_ASSERT_FAILED(@"Array out of bounds!");
+        return 0;
+    }
+
     return [MAAccountSettlementCell cellHeight:self.settlementList[indexPath.row]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_ASSERT(self.settlementList.count > indexPath.row, @"Array out of bounds!");
+    if (self.settlementList.count <= indexPath.row) {
+        MA_ASSERT_FAILED(@"Array out of bounds!");
+        return;
+    }
 
     MAAccountSettlement *settlement = self.settlementList[indexPath.row];
     NSString *actionTitle = [NSString stringWithFormat:@"%@ needs to pay %@ back %@ to settle this accounts", settlement.fromMember.name, settlement.toMember.name, settlement.fee];
@@ -122,7 +132,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (0 == buttonIndex) {
-        MA_ASSERT(self.settlementList.count > actionSheet.tag, @"Array out of bounds!");
+        if (self.settlementList.count <= actionSheet.tag) {
+            MA_ASSERT_FAILED(@"Array out of bounds!");
+            return;
+        }
+
         MAAccountSettlement *settlement = self.settlementList[actionSheet.tag];
         if ([settlement.fee isEqualToNumber:[NSDecimalNumber notANumber]]) {
             settlement.fee = DecimalZero;
@@ -136,6 +150,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
         MAccount *account = [[MAAccountManager sharedManager] createAccountWithGroup:MACurrentGroup date:[NSDate date] placeName:nil location:nil detail:detail feeOfMembers:[NSSet setWithObjects:payer, receiver, nil]];
         if (account) {
             [self loadData];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         } else {
             [[MAAlertView alertWithTitle:@"Repayment Failed" message:nil buttonTitle:@"OK" buttonBlock:^{ }] show];
         }
