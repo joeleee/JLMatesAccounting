@@ -69,6 +69,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self.tableView setContentInset:self.tableView.contentInset];
 }
 
 - (void)viewWillAppear:(BOOL)animated

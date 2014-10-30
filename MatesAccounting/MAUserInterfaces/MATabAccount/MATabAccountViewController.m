@@ -63,6 +63,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self.tableView setContentInset:self.tableView.contentInset];
 }
 
 - (void)viewWillAppear:(BOOL)animated
