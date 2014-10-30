@@ -90,6 +90,7 @@
 		D88E3E7B1996745100FA5005 /* RMemberToGroup+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3E7A1996745100FA5005 /* RMemberToGroup+expand.m */; };
 		D88E3EA21996869600FA5005 /* NSString+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E3EA11996869600FA5005 /* NSString+MAAddition.m */; };
 		D89508F71A014DDB00D45361 /* MATabTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89508F61A014DDB00D45361 /* MATabTableView.m */; };
+		D89508FA1A027EF500D45361 /* UITableView+MAAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = D89508F91A027EF500D45361 /* UITableView+MAAddition.m */; };
 		D897ED0E19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D897ED0D19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m */; };
 		D8A64C7419B62F8100ED1E47 /* MACommonPersistent.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A64C7319B62F8100ED1E47 /* MACommonPersistent.m */; };
 		D8B68E2519A63FD500810E64 /* MPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B68E2419A63FD500810E64 /* MPlace.m */; };
@@ -281,6 +282,8 @@
 		D88E3EA11996869600FA5005 /* NSString+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MAAddition.m"; path = "MAAdditions/NSString+MAAddition.m"; sourceTree = "<group>"; };
 		D89508F51A014DDB00D45361 /* MATabTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATabTableView.h; sourceTree = "<group>"; };
 		D89508F61A014DDB00D45361 /* MATabTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATabTableView.m; sourceTree = "<group>"; };
+		D89508F81A027EF500D45361 /* UITableView+MAAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+MAAddition.h"; path = "MAAdditions/UITableView+MAAddition.h"; sourceTree = "<group>"; };
+		D89508F91A027EF500D45361 /* UITableView+MAAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+MAAddition.m"; path = "MAAdditions/UITableView+MAAddition.m"; sourceTree = "<group>"; };
 		D897ED0C19CEC72500210CD8 /* MAMemberAccountListSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAMemberAccountListSectionHeader.h; path = MATabAccountViews/MAMemberAccountListSectionHeader.h; sourceTree = "<group>"; };
 		D897ED0D19CEC72500210CD8 /* MAMemberAccountListSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAMemberAccountListSectionHeader.m; path = MATabAccountViews/MAMemberAccountListSectionHeader.m; sourceTree = "<group>"; };
 		D8A64C7219B62F8100ED1E47 /* MACommonPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACommonPersistent.h; path = MADataPersistent/MACommonPersistent.h; sourceTree = "<group>"; };
@@ -668,6 +671,8 @@
 				D88D00F61999239200E929B7 /* NSDecimalNumber+MAAddition.m */,
 				D868238719AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.h */,
 				D868238819AE2B2C001E3A07 /* NSObject+MAMethodSwizzle.m */,
+				D89508F81A027EF500D45361 /* UITableView+MAAddition.h */,
+				D89508F91A027EF500D45361 /* UITableView+MAAddition.m */,
 			);
 			name = MAAdditions;
 			sourceTree = "<group>";
@@ -951,6 +956,7 @@
 				9BB88C851865679500C16895 /* MAManagerPublicDefinitions.m in Sources */,
 				9BD0E7A018465AB500BA9F2E /* MATabAccountGroupInfoCell.m in Sources */,
 				9BC23110184B27BA005ADD59 /* MAAccountDetailConsumersCell.m in Sources */,
+				D89508FA1A027EF500D45361 /* UITableView+MAAddition.m in Sources */,
 				9B391C9E1835F0D40025A2FB /* MAContextAPI.m in Sources */,
 				9BD0E7B11847AC9F00BA9F2E /* NSObject+MAAddition.m in Sources */,
 				9B25AA1C1853472C008D79B7 /* MAMemberListSectionEmptyCell.m in Sources */,

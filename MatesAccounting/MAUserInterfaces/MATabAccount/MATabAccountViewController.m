@@ -27,6 +27,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 @property (weak, nonatomic) IBOutlet MATabTableView *tableView;
 @property (nonatomic, strong) NSArray *sectionedAccountList;
+@property (nonatomic, assign) BOOL needReloadDataWhenAppear;
 
 @end
 
@@ -39,6 +40,7 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
         [self loadData];
         [GroupManager registerGroupObserver:self];
         [AccountManager registerGroupObserver:self];
+        self.needReloadDataWhenAppear = NO;
     }
 
     return self;
@@ -54,18 +56,13 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
-    self.view.tag = -1;
     [self.tableView setContentInset:self.tableView.contentInset];
+    [self.tableView scrollToFirstRow:NO];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
-    if (-1 == self.view.tag) {
-        self.view.tag = 0;
-        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top)];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,11 +74,21 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
     UIBarButtonItem *addAccountBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAccountNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:addAccountBarItem animated:YES];
+
+    if (self.needReloadDataWhenAppear) {
+        self.needReloadDataWhenAppear = NO;
+        [self loadData];
+        [self.tableView reloadDataWithAnimation:animated];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    if (self.tableView.contentOffset.y < -self.tableView.contentInset.top) {
+        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top) animated:animated];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -248,6 +255,12 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 
 - (void)currentGroupDidSwitched:(MGroup *)group
 {
+    [self.tableView scrollToFirstRow:NO];
+    if (![self isTopViewController]) {
+        self.needReloadDataWhenAppear = YES;
+        return;
+    }
+
     [self loadData];
     [self.tableView reloadData];
 }
@@ -265,6 +278,11 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)accountDidCreated:(MAccount *)account
 {
     if (MACurrentGroup == account.group) {
+        if (![self isTopViewController]) {
+            self.needReloadDataWhenAppear = YES;
+            return;
+        }
+
         [self loadData];
         [self.tableView reloadData];
     }
@@ -273,6 +291,11 @@ NSString * const kSegueTabAccountToNewAccount = @"kSegueTabAccountToNewAccount";
 - (void)accountDidDeletedInGroup:(MGroup *)group
 {
     if (MACurrentGroup == group) {
+        if (![self isTopViewController]) {
+            self.needReloadDataWhenAppear = YES;
+            return;
+        }
+
         [self loadData];
         [self.tableView reloadData];
     }

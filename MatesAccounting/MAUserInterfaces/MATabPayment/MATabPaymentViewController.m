@@ -21,6 +21,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 @property (weak, nonatomic) IBOutlet MATabTableView *tableView;
 @property (nonatomic, strong) NSArray *settlementList;
+@property (nonatomic, assign) BOOL needReloadDataWhenAppear;
 
 @end
 
@@ -33,6 +34,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
         [self loadData];
         [AccountManager registerGroupObserver:self];
         [GroupManager registerGroupObserver:self];
+        self.needReloadDataWhenAppear = NO;
     }
 
     return self;
@@ -48,18 +50,13 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
-    self.view.tag = -1;
     [self.tableView setContentInset:self.tableView.contentInset];
+    [self.tableView scrollToFirstRow:NO];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
-    if (-1 == self.view.tag) {
-        self.view.tag = 0;
-        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top)];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,6 +68,21 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didRefreshNavigationButtonTapped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:refreshBarItem animated:YES];
+
+    if (self.needReloadDataWhenAppear) {
+        self.needReloadDataWhenAppear = NO;
+        [self loadData];
+        [self.tableView reloadDataWithAnimation:animated];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    if (self.tableView.contentOffset.y < -self.tableView.contentInset.top) {
+        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top) animated:animated];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -165,12 +177,22 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)accountDidChanged:(MAccount *)account
 {
+    if (![self isTopViewController]) {
+        self.needReloadDataWhenAppear = YES;
+        return;
+    }
+
     [self loadData];
     [self.tableView reloadData];
 }
 
 - (void)accountDidCreated:(MAccount *)account
 {
+    if (![self isTopViewController]) {
+        self.needReloadDataWhenAppear = YES;
+        return;
+    }
+
     [self loadData];
     [self.tableView reloadData];
 }
@@ -178,6 +200,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)accountDidDeletedInGroup:(MGroup *)group
 {
     if (MACurrentGroup == group) {
+        if (![self isTopViewController]) {
+            self.needReloadDataWhenAppear = YES;
+            return;
+        }
+
         [self loadData];
         [self.tableView reloadData];
     }
@@ -189,6 +216,11 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
 {
     if (group == MACurrentGroup) {
+        if (![self isTopViewController]) {
+            self.needReloadDataWhenAppear = YES;
+            return;
+        }
+
         [self loadData];
         [self.tableView reloadData];
     }
@@ -196,6 +228,12 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 
 - (void)currentGroupDidSwitched:(MGroup *)group
 {
+    [self.tableView scrollToFirstRow:NO];
+    if (![self isTopViewController]) {
+        self.needReloadDataWhenAppear = YES;
+        return;
+    }
+
     [self loadData];
     [self.tableView reloadData];
 }
@@ -211,11 +249,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)didRefreshNavigationButtonTapped:(id)sender
 {
     [self loadData];
-    if (0 < self.tableView.numberOfSections) {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    } else {
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadDataWithAnimation:YES];
 }
 
 @end

@@ -31,6 +31,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 @property (weak, nonatomic) IBOutlet MATabTableView *tableView;
 @property (nonatomic, strong) NSArray *groupToMemberList;
+@property (nonatomic, assign) BOOL needReloadDataWhenAppear;
 
 @end
 
@@ -40,11 +41,11 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-
         [self loadData];
         [GroupManager registerGroupObserver:self];
         [AccountManager registerGroupObserver:self];
         [FriendManager registerFriendObserver:self];
+        self.needReloadDataWhenAppear = NO;
     }
 
     return self;
@@ -61,18 +62,13 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
-    self.view.tag = -1;
     [self.tableView setContentInset:self.tableView.contentInset];
+    [self.tableView scrollToFirstRow:NO];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
-    if (-1 == self.view.tag) {
-        self.view.tag = 0;
-        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top)];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,11 +80,21 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
     UIBarButtonItem *addBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didAddNavigationButtonTaped:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:viewGroupBarItem animated:YES];
     [self.tabBarController.navigationItem setRightBarButtonItem:addBarItem animated:YES];
+
+    if (self.needReloadDataWhenAppear) {
+        self.needReloadDataWhenAppear = NO;
+        [self loadData];
+        [self.tableView reloadDataWithAnimation:animated];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    if (self.tableView.contentOffset.y < -self.tableView.contentInset.top) {
+        [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, -self.tableView.contentInset.top) animated:animated];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -116,21 +122,7 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 
 - (void)loadData
 {
-    NSArray *dataList = [FriendManager currentGroupToMemberRelationships];
-
-    if (self.groupToMemberList.count == dataList.count) {
-        self.groupToMemberList = dataList;
-        [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows]
-                              withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
-
-    } else {
-        self.groupToMemberList = dataList;
-        if (1 == [self.tableView numberOfSections]) {
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-        }
-        [self.tableView reloadData];
-    }
+    self.groupToMemberList = [FriendManager currentGroupToMemberRelationships];
 }
 
 
@@ -194,13 +186,26 @@ NSString * const kSegueTabMemberToFriendList = @"kSegueTabMemberToFriendList";
 - (void)groupMemberDidChanged:(MGroup *)group member:(MFriend *)mFriend isAdd:(BOOL)isAdd
 {
     if (MACurrentGroup == group && !self.tableView.editing) {
+        if (![self isTopViewController]) {
+            self.needReloadDataWhenAppear = YES;
+            return;
+        }
+
         [self loadData];
+        [self.tableView reloadData];
     }
 }
 
 - (void)currentGroupDidSwitched:(MGroup *)group
 {
+    [self.tableView scrollToFirstRow:NO];
+    if (![self isTopViewController]) {
+        self.needReloadDataWhenAppear = YES;
+        return;
+    }
+
     [self loadData];
+    [self.tableView reloadData];
 }
 
 

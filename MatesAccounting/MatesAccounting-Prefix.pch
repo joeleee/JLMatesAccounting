@@ -37,5 +37,7 @@
 #import "MBProgressHUD+MAAddition.h"
 #import "NSString+MAAddition.h"
 #import "NSObject+MAMethodSwizzle.h"
+#import "UITableView+MAAddition.h"
+#import "UIViewController+MAAddition.h"
 
 #endif

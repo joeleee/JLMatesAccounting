@@ -20,4 +20,21 @@
     }
 }
 
+- (BOOL)isTopViewController
+{
+    if (self.presentedViewController) {
+        return NO;
+    }
+
+    if (self.presentingViewController) {
+        if (!self.navigationController) {
+            return YES;
+        } else {
+            return self.navigationController.topViewController == self;
+        }
+    }
+
+    return self.navigationController.topViewController == self;
+}
+
 @end

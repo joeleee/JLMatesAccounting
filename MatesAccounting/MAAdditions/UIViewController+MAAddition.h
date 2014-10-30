@@ -12,4 +12,6 @@
 
 - (void)disappear:(BOOL)animated;
 
+- (BOOL)isTopViewController;
+
 @end
