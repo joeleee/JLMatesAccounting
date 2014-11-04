@@ -63,7 +63,7 @@ typedef enum {
 
     if (self.mFriend) {
         [self setEditing:NO animated:NO];
-        self.title = @"Friend";
+        self.title = self.mFriend.name;
     } else {
         [self setEditing:YES animated:NO];
         self.title = @"Create friend";

@@ -15,10 +15,11 @@
 #import "MAMemberDetailViewController.h"
 #import "MAFriendManager.h"
 #import "MAGroupManager.h"
+#import "MAFriendListAddFromContactCell.h"
 
 NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMember";
 
-@interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MAFriendListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *createFriendBarItem;
@@ -121,20 +122,35 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MA_ASSERT(indexPath.row < self.friendList.count, @"%@ %s wrong indexPath.");
-    MAFriendListCell *cell = [tableView dequeueReusableCellWithIdentifier:[MAFriendListCell className]];
-    [cell reuseCellWithData:self.friendList[indexPath.row]];
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    UITableViewCell *cell;
+    if (indexPath.row == self.friendList.count) {
+        cell = [tableView dequeueReusableCellWithIdentifier:MAFriendListAddFromContactCell.className];
+        [(MAFriendListAddFromContactCell *)cell reuseCellWithData:@"Add friend from contact"];
+        [(MAFriendListAddFromContactCell *)cell setActionDelegate:self];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:MAFriendListCell.className];
+        [(MAFriendListCell *)cell reuseCellWithData:self.friendList[indexPath.row]];
+    }
 
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.friendList.count;
+    return self.friendList.count + 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    if (indexPath.row == self.friendList.count) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+
     if ([self.navigationItem rightBarButtonItem] != self.selectDoneBarItem) {
         [self.navigationItem setRightBarButtonItem:self.selectDoneBarItem animated:YES];
     }
@@ -145,6 +161,12 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    if (indexPath.row == self.friendList.count) {
+        return;
+    }
+
     if (0 >= [[tableView indexPathsForSelectedRows] count]) {
         [self.navigationItem setRightBarButtonItem:self.createFriendBarItem animated:YES];
     }
@@ -155,18 +177,35 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    if (indexPath.row == self.friendList.count) {
+        return NO;
+    }
+
     return YES;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    if (indexPath.row == self.friendList.count) {
+        return UITableViewCellEditingStyleNone;
+    }
+
     return UITableViewCellEditingStyleDelete;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MA_ASSERT(indexPath.row <= self.friendList.count, @"%@ %s wrong indexPath.");
+
+    if (indexPath.row == self.friendList.count) {
+        return;
+    }
+
     if (UITableViewCellEditingStyleDelete == editingStyle) {
-        MA_ASSERT(indexPath.row < self.friendList.count, @"indexPath wrong");
         MFriend *mFriend = self.friendList[indexPath.row];
         [FriendManager deleteFriend:mFriend onComplete:^(id result, NSError *error) {
             self.friendList = [FriendManager allFriendsFilteByGroup:self.group];
@@ -177,6 +216,18 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
             }] show];
         }];
     }
+}
+
+
+#pragma mark - MACellActionDelegate
+
+- (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
+{
+    if ([cell isKindOfClass:MAFriendListAddFromContactCell.class]) {
+        return YES;
+    }
+
+    return NO;
 }
 
 @end
