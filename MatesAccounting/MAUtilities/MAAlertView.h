@@ -10,7 +10,7 @@
 
 typedef void (^MAAlertViewButtonBlock)(void);
 
-@interface MAAlertView : NSObject <UIAlertViewDelegate>
+@interface MAAlertView : NSObject
 
 + (MAAlertView *)alertWithTitle:(NSString *)title
                         message:(NSString *)message

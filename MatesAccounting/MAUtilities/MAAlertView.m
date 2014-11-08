@@ -10,12 +10,14 @@
 
 NSUInteger const maxAlertQueueCount = 18;
 
-@interface MAAlertView ()
+
+@interface MAAlertView () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIAlertView *alertView;
 @property (nonatomic, strong) NSMutableArray *buttonBlocks;
 
 @end
+
 
 @implementation MAAlertView
 
@@ -132,23 +134,9 @@ static NSMutableOrderedSet *currentAlertQueue;
     [self.alertView show];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    MAAlertViewButtonBlock block = nil;
-    if (buttonIndex < self.buttonBlocks.count) {
-        block = self.buttonBlocks[buttonIndex];
-    }
-    if (block) {
-        block();
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    [MAAlertView removeAlertViewFromQueue:self];
-}
 
 #pragma mark - MAAlertView的生命周期控制，防止自己被释放，造成野指针
+
 + (BOOL)addAlertViewToQueue:(MAAlertView *)alertView
 {
     if (!alertView) {
@@ -177,6 +165,30 @@ static NSMutableOrderedSet *currentAlertQueue;
     }
 
     return NO;
+}
+
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    MAAlertViewButtonBlock block = nil;
+    if (buttonIndex < self.buttonBlocks.count) {
+        block = self.buttonBlocks[buttonIndex];
+    }
+    if (block) {
+        block();
+    }
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    [MAAlertView removeAlertViewFromQueue:self];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [MAAlertView removeAlertViewFromQueue:self];
 }
 
 @end
