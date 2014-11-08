@@ -51,10 +51,10 @@
         MALogTestInfo(@"Generating friend %lu", (unsigned long)totalCount);
         unsigned int randomValue = arc4random();
         MFriend *friend = [FriendManager createFriendWithName:[NSString stringWithFormat:@"Friend_%u", randomValue % 1000]
-                                     gender:(randomValue % 2) ? MAGenderFemale : MAGenderMale
-                                phoneNumber:@(randomValue)
-                                      eMail:[NSString stringWithFormat:@"Friend_%u@gmail.boss", randomValue % 1000]
-                                   birthday:[[NSDate date] dateByAddingTimeInterval:-randomValue]];
+                                                       gender:(randomValue % 2) ? MAGenderFemale : MAGenderMale
+                                                  phoneNumber:[@(randomValue) stringValue]
+                                                        eMail:[NSString stringWithFormat:@"Friend_%u@gmail.boss", randomValue % 1000]
+                                                     birthday:[[NSDate date] dateByAddingTimeInterval:-randomValue]];
         MA_ASSERT(friend, @"Create friend failed!");
         [friends addObject:friend];
     }

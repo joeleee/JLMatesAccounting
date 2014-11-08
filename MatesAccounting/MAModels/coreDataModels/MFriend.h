@@ -2,7 +2,7 @@
 //  MFriend.h
 //  MatesAccounting
 //
-//  Created by Joe Lee on 2014-8-11.
+//  Created by Joe Lee on 2014-11-8.
 //  Copyright (c) 2014年 Lee. All rights reserved.
 //
 
@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSNumber * friendID;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * sex;
-@property (nonatomic, retain) NSNumber * telephoneNumber;
+@property (nonatomic, retain) NSString * telephoneNumber;
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSSet *relationshipToAccount;
 @property (nonatomic, retain) NSSet *relationshipToGroup;

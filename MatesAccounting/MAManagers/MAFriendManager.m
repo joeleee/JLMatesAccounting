@@ -105,7 +105,7 @@
 
 - (MFriend *)createFriendWithName:(NSString *)name
                            gender:(MAGenderEnum)gender
-                      phoneNumber:(NSNumber *)phoneNumber
+                      phoneNumber:(NSString *)phoneNumber
                             eMail:(NSString *)eMail
                          birthday:(NSDate *)birthday
 {
@@ -138,7 +138,7 @@
 - (BOOL)editAndSaveFriend:(MFriend *)mFriend
                      name:(NSString *)name
                    gender:(MAGenderEnum)gender
-              phoneNumber:(NSNumber *)phoneNumber
+              phoneNumber:(NSString *)phoneNumber
                     eMail:(NSString *)eMail
                  birthday:(NSDate *)birthday
 {

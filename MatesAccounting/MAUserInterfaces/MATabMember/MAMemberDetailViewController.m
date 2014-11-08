@@ -37,13 +37,6 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *accountButton;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 
-@property (nonatomic, strong) MFriend *mFriend;
-@property (nonatomic, copy) NSString *editingName;
-@property (nonatomic, assign) MAGenderEnum editingGender;
-@property (nonatomic, copy) NSString *editingPhone;
-@property (nonatomic, copy) NSString *editingMail;
-@property (nonatomic, strong) NSDate *editingBirthday;
-
 @end
 
 @implementation MAMemberDetailViewController
@@ -141,7 +134,7 @@ typedef enum {
 {
     self.editingName = self.mFriend.name ? self.mFriend.name : @"";
     self.editingGender = [self.mFriend.sex unsignedIntValue];
-    self.editingPhone = [self.mFriend.telephoneNumber stringValue];
+    self.editingPhone = self.mFriend.telephoneNumber;
     self.editingMail = self.mFriend.eMail ? self.mFriend.eMail : @"";
     self.editingBirthday = self.mFriend.birthday;
 }
@@ -210,7 +203,7 @@ typedef enum {
             if (self.isEditing) {
                 phoneString = self.editingPhone;
             } else {
-                phoneString = [self.mFriend.telephoneNumber stringValue];
+                phoneString = self.mFriend.telephoneNumber;
             }
             NSDictionary *cellInfo = @{kMemberDetailCellTitle:@"Phone",
                                        kMemberDetailCellContent:phoneString ? phoneString : @"",
@@ -337,7 +330,7 @@ typedef enum {
         BOOL updated = [FriendManager editAndSaveFriend:self.mFriend
                                                    name:self.editingName
                                                  gender:self.editingGender
-                                            phoneNumber:@([self.editingPhone longLongValue])
+                                            phoneNumber:self.editingPhone
                                                   eMail:self.editingMail
                                                birthday:self.editingBirthday];
         if (updated) {
@@ -352,7 +345,7 @@ typedef enum {
         // create mode
         self.mFriend = [FriendManager createFriendWithName:self.editingName
                                                     gender:self.editingGender
-                                               phoneNumber:@([self.editingPhone longLongValue])
+                                               phoneNumber:self.editingPhone
                                                      eMail:self.editingMail
                                                   birthday:self.editingBirthday];
         if (self.mFriend) {
@@ -419,13 +412,6 @@ typedef enum {
     }
 
     [self performSegueWithIdentifier:kSegueMemberDetailToAccountList sender:sender];
-}
-
-#pragma mark - Public Method
-
-- (void)setFriend:(MFriend *)mFriend
-{
-    self.mFriend = mFriend;
 }
 
 @end

@@ -2,7 +2,7 @@
 //  MFriend.m
 //  MatesAccounting
 //
-//  Created by Joe Lee on 2014-8-11.
+//  Created by Joe Lee on 2014-11-8.
 //  Copyright (c) 2014年 Lee. All rights reserved.
 //
 

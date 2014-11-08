@@ -48,7 +48,7 @@
 {
     self.member = data;
     self.memberNameLabel.text = self.member.name;
-    self.phoneLabel.text = [self.member.telephoneNumber stringValue];
+    self.phoneLabel.text = self.member.telephoneNumber;
 
     NSArray *relationToMembers = [MACurrentGroup relationshipToMembersByFriend:data];
     if (relationToMembers.count > 0) {

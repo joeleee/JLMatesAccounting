@@ -16,6 +16,12 @@
 #import "MAFriendManager.h"
 #import "MAGroupManager.h"
 #import "MAFriendListAddFromContactCell.h"
+#import "MAAddressBookManager.h"
+
+NSString * const kContactName = @"kContactName";
+NSString * const kContactPhoneNumber = @"kContactPhoneNumber";
+NSString * const kContactEmail = @"kContactEmail";
+NSString * const kContactBirthday = @"kContactBirthday";
 
 NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMember";
 
@@ -64,7 +70,13 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     if ([segue.identifier isEqualToString:kSegueFriendListToCreateMember]) {
         MA_ASSERT(0 < [segue.destinationViewController viewControllers].count, @"present MAAccountDetailViewController error!");
         MAMemberDetailViewController *memberDetail = [segue.destinationViewController viewControllers][0];
-        [memberDetail setFriend:nil];
+        [memberDetail setMFriend:nil];
+        if ([sender isKindOfClass:NSDictionary.class]) {
+            memberDetail.editingName = sender[kContactName];
+            memberDetail.editingPhone = sender[kContactPhoneNumber];
+            memberDetail.editingMail = sender[kContactEmail];
+            memberDetail.editingBirthday = sender[kContactBirthday];
+        }
     } else {
         MA_ASSERT(NO, @"Unknow segue - MAFriendListViewController");
     }
@@ -79,6 +91,53 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
         [self.tableView reloadData];
     }
 }
+
+- (void)didFinishedSelectContactWithName:(NSString *)name phoneNumbers:(NSDictionary *)phoneNumbers emails:(NSDictionary *)emails birthday:(NSDate *)birthday
+{
+    if ([[phoneNumbers allValues] count] > 1) {
+        NSMutableArray *actionTitles = [NSMutableArray array];
+        NSMutableArray *actionBlocks = [NSMutableArray array];
+        __weak typeof(self) weakSelf = self;
+        for (NSString *phoneLabel in [phoneNumbers allKeys]) {
+            NSString *phoneNumber = phoneNumbers[phoneLabel];
+            [actionBlocks addObject:^{
+                [weakSelf didFinishedSelectPhoneNumberWithName:name phoneNumber:phoneNumber emails:emails birthday:birthday];
+            }];
+            [actionTitles addObject:[NSString stringWithFormat:@"%@: %@", phoneLabel, phoneNumber]];
+        }
+        [[MAActionSheet actionSheetWithTitle:@"Select a Phone Number" cancelButtonTitle:nil cancelButtonBlock:nil destructiveButtonTitle:nil destructiveButtonBlock:nil otherButtonTitles:actionTitles otherButtonBlocks:actionBlocks] showInView:self.view];
+    } else {
+        [self didFinishedSelectPhoneNumberWithName:name phoneNumber:[[phoneNumbers allValues] firstObject] emails:emails birthday:birthday];
+    }
+}
+
+- (void)didFinishedSelectPhoneNumberWithName:(NSString *)name phoneNumber:(NSString *)phoneNumber emails:(NSDictionary *)emails birthday:(NSDate *)birthday
+{
+    if ([[emails allValues] count] > 1) {
+        NSMutableArray *actionTitles = [NSMutableArray array];
+        NSMutableArray *actionBlocks = [NSMutableArray array];
+        __weak typeof(self) weakSelf = self;
+        for (NSString *emailLabel in [emails allKeys]) {
+            NSString *email = emails[emailLabel];
+            [actionBlocks addObject:^{
+                NSDictionary *info = @{kContactName: name ? name : @"",
+                                       kContactPhoneNumber: phoneNumber ? phoneNumber : @"",
+                                       kContactEmail: email ? email : @"",
+                                       kContactBirthday: birthday ? birthday : [NSDate date]};
+                [weakSelf performSegueWithIdentifier:kSegueFriendListToCreateMember sender:info];
+            }];
+            [actionTitles addObject:[NSString stringWithFormat:@"%@: %@", emailLabel, email]];
+        }
+        [[MAActionSheet actionSheetWithTitle:@"Select an E-Mail" cancelButtonTitle:nil cancelButtonBlock:nil destructiveButtonTitle:nil destructiveButtonBlock:nil otherButtonTitles:actionTitles otherButtonBlocks:actionBlocks] showInView:self.view];
+    } else {
+        NSDictionary *info = @{kContactName: name ? name : @"",
+                               kContactPhoneNumber: phoneNumber ? phoneNumber : @"",
+                               kContactEmail: [[emails allValues] firstObject] ? [[emails allValues] firstObject] : @"",
+                               kContactBirthday: birthday ? birthday : [NSDate date]};
+        [self performSegueWithIdentifier:kSegueFriendListToCreateMember sender:info];
+    }
+}
+
 
 #pragma mark @property method
 
@@ -127,7 +186,7 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
     UITableViewCell *cell;
     if (indexPath.row == self.friendList.count) {
         cell = [tableView dequeueReusableCellWithIdentifier:MAFriendListAddFromContactCell.className];
-        [(MAFriendListAddFromContactCell *)cell reuseCellWithData:@"Add friend from contact"];
+        [(MAFriendListAddFromContactCell *)cell reuseCellWithData:@"Choose from Address Book"];
         [(MAFriendListAddFromContactCell *)cell setActionDelegate:self];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:MAFriendListCell.className];
@@ -224,9 +283,16 @@ NSString * const kSegueFriendListToCreateMember = @"kSegueFriendListToCreateMemb
 - (BOOL)actionWithData:(id)data cell:(UITableViewCell *)cell type:(NSInteger)type
 {
     if ([cell isKindOfClass:MAFriendListAddFromContactCell.class]) {
+        __weak typeof(self) weakSelf = self;
+        [[MAAddressBookManager sharedManager] selectContactWithController:self onCompletion:^(NSString *name, NSDictionary *phoneNumbers, NSDictionary *emails, NSDate *birthday, NSError *error) {
+            if (error) {
+                return;
+            }
+            [weakSelf didFinishedSelectContactWithName:name phoneNumbers:phoneNumbers emails:emails birthday:birthday];
+        }];
         return YES;
     }
-
+    
     return NO;
 }
 

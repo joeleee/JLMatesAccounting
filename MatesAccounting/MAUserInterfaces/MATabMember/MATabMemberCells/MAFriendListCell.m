@@ -65,7 +65,7 @@
     self.friend = data;
 
     [self.friendNameLabel setText:data.name];
-    [self.phoneNumberLabel setText:[data.telephoneNumber stringValue]];
+    [self.phoneNumberLabel setText:data.telephoneNumber];
     if (0 < data.eMail.length) {
         [self.eMailLabel setText:data.eMail];
     } else {

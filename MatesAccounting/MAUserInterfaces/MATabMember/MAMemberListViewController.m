@@ -72,7 +72,7 @@ typedef enum {
 {
     if ([segue.identifier isEqualToString:kSegueMemberListToMemberDetail]) {
         MAMemberDetailViewController *memberDetail = segue.destinationViewController;
-        [memberDetail setFriend:sender];
+        [memberDetail setMFriend:sender];
     } else if ([segue.identifier isEqualToString:kSegueMemberListToFriendList]) {
         MAFriendListViewController *frientList = segue.destinationViewController;
         [frientList setGroup:self.group];
