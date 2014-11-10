@@ -20,10 +20,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *groupIDLabel;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameTitle;
 @property (weak, nonatomic) IBOutlet UITextField *groupNameTextField;
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *sendEmailButton;
+@property (nonatomic, strong) UIBarButtonItem *updateBarItem;
+@property (nonatomic, strong) UIBarButtonItem *createBarItem;
+@property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 
 @property (nonatomic, strong) MGroup *group;
+@property (nonatomic, assign) BOOL isModified;
+@property (nonatomic, copy) NSString *editingGroupName;
 
 @end
 
@@ -32,6 +36,8 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        self.isModified = YES;
+        self.editingGroupName = nil;
     }
 
     return self;
@@ -41,14 +47,13 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:MA_COLOR_VIEW_BACKGROUND];
+    [self.groupNameTextField addTarget:self action:@selector(groupNameTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 
     self.groupCreateTimeTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
     self.groupCreateTimeLabel.textColor = MA_COLOR_GROUP_GROUP_NAME;
     self.groupIDTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
     self.groupIDLabel.textColor = MA_COLOR_GROUP_GROUP_NAME;
     self.groupNameTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
-
-    self.detailScrollView.contentSize = CGSizeMake(320, self.cancelButton.bottom + 88);
 
     self.groupNameTextField.layer.cornerRadius = 3;
 }
@@ -63,26 +68,74 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
 - (void)refreshView
 {
     if (self.group) {
         [self.groupCreateTimeLabel setText:[self.group.createDate dateToString:@"yyyy-MM-dd HH:mm"]];
         [self.groupIDLabel setText:[self.group.groupID stringValue]];
-        [self.groupNameTextField setText:self.group.groupName];
-        [self.submitButton setTitle:@"Update" forState:UIControlStateNormal];
+        [self.groupNameTextField setText:self.editingGroupName];
+        self.sendEmailButton.hidden = NO;
+        if (self.isModified) {
+            [self.navigationItem setRightBarButtonItem:self.updateBarItem animated:YES];
+            [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
+        }
     } else {
         [self.groupCreateTimeLabel setText:[[NSDate date] dateToString:@"yyyy-MM-dd HH:mm"]];
         [self.groupIDLabel setText:@"Later you can get"];
-        [self.submitButton setTitle:@"Create" forState:UIControlStateNormal];
+        self.sendEmailButton.hidden = YES;
+        [self.navigationItem setRightBarButtonItem:self.createBarItem animated:YES];
+        [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
     }
-    [self.cancelButton setTitle:@"Back" forState:UIControlStateNormal];
 }
 
-#pragma mark - actions
-- (IBAction)submitButtonTaped:(UIButton *)sender
+
+#pragma mark - property
+
+- (UIBarButtonItem *)updateBarItem
 {
-    NSString *newGroupName = [self.groupNameTextField text];
-    if (0 >= newGroupName.length) {
+    if (_updateBarItem) {
+        return _updateBarItem;
+    }
+
+    _updateBarItem = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStyleDone target:self action:@selector(didDoneBarButtonTapped:)];
+    return _updateBarItem;
+}
+
+- (UIBarButtonItem *)createBarItem
+{
+    if (_createBarItem) {
+        return _createBarItem;
+    }
+
+    _createBarItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(didDoneBarButtonTapped:)];
+    return _createBarItem;
+}
+
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (_cancelBarItem) {
+        return _cancelBarItem;
+    }
+
+    _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(didCancelBarButtonTapped:)];
+    return _cancelBarItem;
+}
+
+
+#pragma mark - actions
+
+- (IBAction)didSendEmailButtonTapped:(id)sender
+{
+}
+
+- (void)didDoneBarButtonTapped:(id)sender
+{
+    if (0 >= self.editingGroupName.length) {
         [[MAAlertView alertWithTitle:@"Group name could not be NULL"
                              message:nil
                          buttonTitle:@"Return"
@@ -93,40 +146,67 @@
     }
 
     if (self.group) {
-        [GroupManager editAndSaveGroup:self.group name:newGroupName];
+        [GroupManager editAndSaveGroup:self.group name:self.editingGroupName];
     } else {
-        [GroupManager createGroup:newGroupName];
+        [GroupManager createGroup:self.editingGroupName];
     }
 
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
+    [self disappear:YES];
 }
 
-- (IBAction)cancelButtonTaped:(UIButton *)sender
+- (void)didCancelBarButtonTapped:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^{ }];
+    [self disappear:YES];
 }
 
-- (IBAction)didGroupNameTextFieldBeginEdit:(UITextField *)sender
+- (void)groupNameTextFieldEditingChanged:(UITextField *)textField
+{
+    self.editingGroupName = textField.text;
+
+    if (self.group) {
+        if ([self.editingGroupName isEqualToString:self.group.groupName]) {
+            self.isModified = NO;
+            [self.navigationItem setRightBarButtonItem:nil animated:YES];
+            [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        } else {
+            self.isModified = YES;
+            [self.navigationItem setRightBarButtonItem:self.updateBarItem animated:YES];
+            [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
+        }
+    }
+}
+
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     // TODO: 判断textField是否被键盘遮住
 }
 
-- (IBAction)didGroupNameTextFieldEndEdit:(UITextField *)sender
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // TODO: 判断textField是否被键盘遮住
 }
 
-- (IBAction)groupNameTextFieldDoneTaped:(UITextField *)sender
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    MA_HIDE_KEYBOARD;
+    if (textField.text.length > 0) {
+        MA_HIDE_KEYBOARD;
+        return YES;
+    }
+
+    return NO;
 }
+
 
 #pragma mark - Public Method
 
 - (void)setGroup:(MGroup *)group
 {
     _group = group;
+    self.isModified = NO;
+    self.editingGroupName = _group.groupName;
     [self refreshView];
 }
 

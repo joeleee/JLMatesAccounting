@@ -226,8 +226,7 @@
                     <navigationItem key="navigationItem" title="Groups" id="MMp-5H-wtH"/>
                     <connections>
                         <outlet property="tableView" destination="4BX-dR-NDR" id="aod-gn-jyj"/>
-                        <segue destination="fQb-uw-6sn" kind="modal" identifier="kSegueGroupListToGroupDetail" modalTransitionStyle="partialCurl" id="GEV-e9-Uno"/>
-                        <segue destination="fQb-uw-6sn" kind="modal" identifier="kSegueGroupListToCreateGroup" id="NzF-kh-GnM"/>
+                        <segue destination="fQb-uw-6sn" kind="push" identifier="kSegueGroupListToGroupDetail" id="GEV-e9-Uno"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-nq-l6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -808,7 +807,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k4H-ea-6f4" userLabel="payer">
-                                                            <rect key="frame" x="100" y="48" width="200" height="21"/>
+                                                            <rect key="frame" x="100.00000059604646" y="48" width="200" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
@@ -820,7 +819,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VwW-cd-Uv4" userLabel="money">
-                                                            <rect key="frame" x="214" y="12" width="86" height="21"/>
+                                                            <rect key="frame" x="214.00000059604645" y="12" width="86" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -832,7 +831,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="Eg3-yH-cPt" userLabel="dividing line">
-                                                            <rect key="frame" x="20" y="79" width="300.00000015381846" height="1"/>
+                                                            <rect key="frame" x="20" y="79" width="300.00000059604645" height="1"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
@@ -915,14 +914,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SXV-Gd-8sg">
-                                                    <rect key="frame" x="20" y="15.5" width="51" height="30"/>
+                                                    <rect key="frame" x="20" y="15" width="51" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="12" id="DJa-YP-AdZ">
-                                                    <rect key="frame" x="79" y="15.5" width="221" height="30"/>
+                                                    <rect key="frame" x="79" y="15" width="221" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -988,7 +987,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vmw-RK-Tj1">
-                                                    <rect key="frame" x="20" y="5.5" width="75" height="30"/>
+                                                    <rect key="frame" x="20" y="6" width="75" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1016,7 +1015,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consumers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cnP-wz-5wG">
-                                                    <rect key="frame" x="20" y="5.5" width="75" height="30"/>
+                                                    <rect key="frame" x="20" y="6" width="75" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1044,7 +1043,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uIc-iL-0e4">
-                                                    <rect key="frame" x="20" y="5.5" width="75" height="30"/>
+                                                    <rect key="frame" x="20" y="6" width="75" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1072,14 +1071,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xkB-88-2y3">
-                                                    <rect key="frame" x="20" y="5.5" width="172" height="30"/>
+                                                    <rect key="frame" x="20" y="6" width="172" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="10" id="nyJ-v6-Qyd">
-                                                    <rect key="frame" x="200.00000059604645" y="5.5" width="100" height="30"/>
+                                                    <rect key="frame" x="200.00000123182929" y="6" width="100" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1204,34 +1203,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="218-bM-nsq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                                    <rect key="frame" x="-1" y="0.0" width="320" height="116"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="z8i-XH-iZJ" userLabel="payer">
-                                                            <rect key="frame" x="143" y="48" width="157" height="21"/>
+                                                            <rect key="frame" x="141.99999903425379" y="84" width="158" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ec2-6Q-S39" userLabel="money">
-                                                            <rect key="frame" x="214" y="12" width="86" height="21"/>
+                                                            <rect key="frame" x="213.99999903425379" y="12" width="86" height="32"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AccountDetailAccountDetailAccountDetail" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WQH-to-i4C" userLabel="account detail">
-                                                            <rect key="frame" x="20" y="6" width="186" height="41"/>
+                                                            <rect key="frame" x="20" y="6" width="186" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="IkJ-63-XUC" userLabel="dividing line">
-                                                            <rect key="frame" x="20" y="79" width="300.00000123182929" height="1"/>
+                                                            <rect key="frame" x="20" y="114" width="299.99999903425379" height="2"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111-11-11 11:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="PcE-vR-cq0" userLabel="time">
-                                                            <rect key="frame" x="20" y="48" width="115" height="21"/>
+                                                            <rect key="frame" x="20" y="84.000000447034822" width="115" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="highlightedColor"/>
@@ -1348,7 +1347,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dcT-rm-fD6">
-                                                            <rect key="frame" x="155" y="0.0" width="79.999996168414384" height="80"/>
+                                                            <rect key="frame" x="154.99999616841438" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
@@ -1413,70 +1412,59 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create date:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bSj-Yq-gOQ">
-                                        <rect key="frame" x="7" y="111" width="88" height="30"/>
+                                        <rect key="frame" x="7" y="74" width="88" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group ID:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mhF-pv-JQT">
-                                        <rect key="frame" x="7" y="149" width="88" height="30"/>
+                                        <rect key="frame" x="7" y="112" width="88" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A76-pS-c1D">
-                                        <rect key="frame" x="7" y="187" width="88" height="30"/>
+                                        <rect key="frame" x="7" y="150" width="88" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2011年11月11日" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="Y3i-Y8-W6d">
-                                        <rect key="frame" x="103" y="111" width="197" height="30"/>
+                                        <rect key="frame" x="103" y="74" width="197" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23423412323" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="JT8-tu-gsC">
-                                        <rect key="frame" x="103" y="149" width="197" height="30"/>
+                                        <rect key="frame" x="103" y="112" width="197" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Group need a name" textAlignment="center" minimumFontSize="9" clearButtonMode="whileEditing" id="kWA-OK-l9B">
-                                        <rect key="frame" x="103" y="187" width="197" height="30"/>
+                                        <rect key="frame" x="103" y="150" width="197" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
-                                            <action selector="didGroupNameTextFieldBeginEdit:" destination="fQb-uw-6sn" eventType="editingDidBegin" id="7im-5w-6Ag"/>
-                                            <action selector="didGroupNameTextFieldEndEdit:" destination="fQb-uw-6sn" eventType="editingDidEnd" id="yUB-SB-XGR"/>
-                                            <action selector="groupNameTextFieldDoneTaped:" destination="fQb-uw-6sn" eventType="editingDidEndOnExit" id="rSM-0L-NAC"/>
+                                            <outlet property="delegate" destination="fQb-uw-6sn" id="d0J-3f-MbB"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j8u-0W-WQz">
-                                        <rect key="frame" x="174" y="225" width="80" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="修改">
+                                        <rect key="frame" x="35" y="210" width="250" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Send Group Accounts To Email">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="submitButtonTaped:" destination="fQb-uw-6sn" eventType="touchUpInside" id="gxd-ZH-zty"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mnc-6q-MBa">
-                                        <rect key="frame" x="66" y="225" width="80" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="取消">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancelButtonTaped:" destination="fQb-uw-6sn" eventType="touchUpInside" id="DmI-Dl-Pqf"/>
+                                            <action selector="didSendEmailButtonTapped:" destination="fQb-uw-6sn" eventType="touchUpInside" id="eb7-Ui-Q2F"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1486,10 +1474,10 @@
                                 </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Group Detail" id="Uvw-8E-YcL"/>
                     <connections>
-                        <outlet property="cancelButton" destination="mnc-6q-MBa" id="Onj-8d-uxT"/>
                         <outlet property="detailScrollView" destination="rgE-e3-IC2" id="h2q-ct-9MA"/>
                         <outlet property="groupCreateTimeLabel" destination="Y3i-Y8-W6d" id="nje-Wm-IqH"/>
                         <outlet property="groupCreateTimeTitle" destination="bSj-Yq-gOQ" id="3S0-QZ-tOC"/>
@@ -1497,7 +1485,7 @@
                         <outlet property="groupIDTitle" destination="mhF-pv-JQT" id="o8D-yn-vnU"/>
                         <outlet property="groupNameTextField" destination="kWA-OK-l9B" id="Ikl-pA-Rbz"/>
                         <outlet property="groupNameTitle" destination="A76-pS-c1D" id="P3N-r7-t6D"/>
-                        <outlet property="submitButton" destination="j8u-0W-WQz" id="ewN-MC-Trt"/>
+                        <outlet property="sendEmailButton" destination="j8u-0W-WQz" id="AXp-nL-5y8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WxH-2d-Rwx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1513,7 +1501,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZMe-Ch-sex"/>
         <segue reference="f34-mq-Bgm"/>
-        <segue reference="NzF-kh-GnM"/>
         <segue reference="J0d-fi-SkM"/>
         <segue reference="Bvd-iw-5bp"/>
         <segue reference="atx-wc-fRM"/>

@@ -13,7 +13,6 @@
 #import "MAGroupDetailViewController.h"
 
 NSString * const kSegueGroupListToGroupDetail = @"kSegueGroupListToGroupDetail";
-NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 
 @interface MAGroupListViewController () <UITableViewDataSource, UITableViewDelegate, MACellActionDelegate, MAGroupManagerObserverProtocol>
 
@@ -63,9 +62,6 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
     if ([segue.identifier isEqualToString:kSegueGroupListToGroupDetail]) {
         MAGroupDetailViewController *controller = segue.destinationViewController;
         [controller setGroup:sender];
-    } else if ([segue.identifier isEqualToString:kSegueGroupListToCreateGroup]) {
-        MAGroupDetailViewController *controller = segue.destinationViewController;
-        [controller setGroup:nil];
     } else {
         MA_ASSERT(NO, @"Unknow segue ? MAGroupListViewController");
     }
@@ -122,7 +118,7 @@ NSString * const kSegueGroupListToCreateGroup = @"kSegueGroupListToCreateGroup";
 #pragma mark - action
 - (void)addGroupNavigationButtonTaped:(id)sender
 {
-    [self performSegueWithIdentifier:kSegueGroupListToCreateGroup sender:nil];
+    [self performSegueWithIdentifier:kSegueGroupListToGroupDetail sender:nil];
 }
 
 #pragma mark - MACellActionDelegate
