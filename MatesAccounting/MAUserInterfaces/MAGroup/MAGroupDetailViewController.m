@@ -54,6 +54,14 @@
     self.groupIDTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
     self.groupIDLabel.textColor = MA_COLOR_GROUP_GROUP_NAME;
     self.groupNameTitle.textColor = MA_COLOR_GROUP_GROUP_TITLE;
+    [self.sendEmailButton setTitleColor:MA_COLOR_TABMEMBER_PAYER_NAME forState:UIControlStateNormal];
+    [self.sendEmailButton setBackgroundColor:MA_COLOR_TABACCOUNT_DETAIL_MEMBER_PAY];
+
+    self.sendEmailButton.layer.cornerRadius = 7;
+    self.sendEmailButton.layer.shadowColor = [MA_COLOR_TABACCOUNT_DETAIL_MEMBER_PAY CGColor];
+    self.sendEmailButton.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    self.sendEmailButton.layer.shadowOpacity = 0.2f;
+    self.sendEmailButton.layer.shadowRadius = 1.5f;
 
     self.groupNameTextField.layer.cornerRadius = 3;
 }
@@ -76,6 +84,7 @@
 - (void)refreshView
 {
     if (self.group) {
+        [self setTitle:@"Group Detail"];
         [self.groupCreateTimeLabel setText:[self.group.createDate dateToString:@"yyyy-MM-dd HH:mm"]];
         [self.groupIDLabel setText:[self.group.groupID stringValue]];
         [self.groupNameTextField setText:self.editingGroupName];
@@ -85,6 +94,7 @@
             [self.navigationItem setLeftBarButtonItem:self.cancelBarItem animated:YES];
         }
     } else {
+        [self setTitle:@"New Group"];
         [self.groupCreateTimeLabel setText:[[NSDate date] dateToString:@"yyyy-MM-dd HH:mm"]];
         [self.groupIDLabel setText:@"Later you can get"];
         self.sendEmailButton.hidden = YES;
