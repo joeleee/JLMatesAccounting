@@ -101,6 +101,7 @@
 		D8D5E5D319C48A12003D5FFE /* MAAccountDetailDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D5E5D219C48A12003D5FFE /* MAAccountDetailDeleteCell.m */; };
 		D8D5E5D619C5F645003D5FFE /* MAMemberAccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D5E5D519C5F645003D5FFE /* MAMemberAccountListViewController.m */; };
 		D8E25ABD19927FB9006772B4 /* MAAccountSettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */; };
+		D8E80A6A1A2F17FD00DE091A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E80A691A2F17FD00DE091A /* LaunchScreen.xib */; };
 		D8EC817819A3AE4300AFCD13 /* MGroup+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EC817719A3AE4300AFCD13 /* MGroup+expand.m */; };
 /* End PBXBuildFile section */
 
@@ -307,6 +308,7 @@
 		D8D5E5D519C5F645003D5FFE /* MAMemberAccountListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMemberAccountListViewController.m; sourceTree = "<group>"; };
 		D8E25ABB19927FB9006772B4 /* MAAccountSettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAccountSettlementCell.h; sourceTree = "<group>"; };
 		D8E25ABC19927FB9006772B4 /* MAAccountSettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAccountSettlementCell.m; sourceTree = "<group>"; };
+		D8E80A691A2F17FD00DE091A /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = MAUserInterfaces/LaunchScreen.xib; sourceTree = "<group>"; };
 		D8EC817619A3AE4300AFCD13 /* MGroup+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MGroup+expand.h"; path = "MAModels/MGroup+expand.h"; sourceTree = "<group>"; };
 		D8EC817719A3AE4300AFCD13 /* MGroup+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MGroup+expand.m"; path = "MAModels/MGroup+expand.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -619,6 +621,7 @@
 		9BCAC06118326E52000417FD /* MAUserInterfaces */ = {
 			isa = PBXGroup;
 			children = (
+				D8E80A691A2F17FD00DE091A /* LaunchScreen.xib */,
 				9BCAC07818327097000417FD /* MAInit.storyboard */,
 				9B079B82185D8411003C654B /* MAUserInterfaceBase */,
 				9B391C6B183527CE0025A2FB /* MARootController */,
@@ -849,6 +852,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E80A6A1A2F17FD00DE091A /* LaunchScreen.xib in Resources */,
 				9BCAC07918327097000417FD /* MAInit.storyboard in Resources */,
 				9BCAC03118322997000417FD /* InfoPlist.strings in Resources */,
 				9BCAC03C18322997000417FD /* Images.xcassets in Resources */,
@@ -1140,7 +1144,6 @@
 			baseConfigurationReference = 126FE4C7B547E5213B9D238D /* Pods-MatesAccounting.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1150,7 +1153,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1160,7 +1163,6 @@
 			baseConfigurationReference = CE2DBCA6235A4E1685E06D85 /* Pods-MatesAccounting.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1170,7 +1172,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
