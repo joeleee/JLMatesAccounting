@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TOM-cp-105">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TOM-cp-105">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -1203,34 +1203,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="218-bM-nsq">
-                                                    <rect key="frame" x="-1" y="0.0" width="320" height="116"/>
+                                                    <rect key="frame" x="-1" y="0.0" width="320" height="153"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="z8i-XH-iZJ" userLabel="payer">
-                                                            <rect key="frame" x="141.99999903425379" y="84" width="158" height="20"/>
+                                                            <rect key="frame" x="141.99999903425379" y="121" width="158" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ec2-6Q-S39" userLabel="money">
-                                                            <rect key="frame" x="213.99999903425379" y="12" width="86" height="32"/>
+                                                            <rect key="frame" x="213.99999903425379" y="12" width="86" height="43"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AccountDetailAccountDetailAccountDetail" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WQH-to-i4C" userLabel="account detail">
-                                                            <rect key="frame" x="20" y="6" width="186" height="60"/>
+                                                            <rect key="frame" x="20" y="6" width="186" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="IkJ-63-XUC" userLabel="dividing line">
-                                                            <rect key="frame" x="20" y="114" width="299.99999903425379" height="2"/>
+                                                            <rect key="frame" x="20" y="151" width="299.99999903425379" height="2"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111-11-11 11:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="PcE-vR-cq0" userLabel="time">
-                                                            <rect key="frame" x="20" y="84.000000447034822" width="115" height="20"/>
+                                                            <rect key="frame" x="20" y="121.00000013307083" width="115" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="highlightedColor"/>
@@ -1499,10 +1499,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZMe-Ch-sex"/>
-        <segue reference="f34-mq-Bgm"/>
-        <segue reference="J0d-fi-SkM"/>
+        <segue reference="Col-92-NOr"/>
         <segue reference="Bvd-iw-5bp"/>
+        <segue reference="J0d-fi-SkM"/>
         <segue reference="atx-wc-fRM"/>
+        <segue reference="f34-mq-Bgm"/>
     </inferredMetricsTieBreakers>
 </document>

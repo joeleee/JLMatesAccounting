@@ -9,14 +9,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="210" height="283"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="Ra0-x6-eO4">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="-8" width="210" height="299"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014年 Lee. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
+                    <rect key="frame" x="20" y="252" width="170" height="20.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.14858973610000001" green="0.63685771079999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -26,7 +26,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MatesAccounting" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="140" width="441" height="43"/>
+                    <rect key="frame" x="20" y="5" width="170" height="43"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                     <color key="textColor" red="0.14889192450706357" green="0.63561022795832778" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,9 +51,35 @@
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="widthClass=regular"/>
-            <variation key="heightClass=regular-widthClass=regular"/>
-            <point key="canvasLocation" x="262" y="283.5"/>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="ARD-2v-0By"/>
+                    <include reference="Lc0-r7-lgl"/>
+                    <include reference="Tpf-VK-rXj"/>
+                    <include reference="YWe-4b-WOn"/>
+                    <include reference="Kid-kn-2rF"/>
+                    <include reference="Koa-jz-hwk"/>
+                    <include reference="fvb-Df-36g"/>
+                    <include reference="Kzo-t9-V3l"/>
+                    <include reference="MfP-vx-nX0"/>
+                    <include reference="ZEH-qu-HZ9"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <include reference="ARD-2v-0By"/>
+                    <include reference="Lc0-r7-lgl"/>
+                    <include reference="Tpf-VK-rXj"/>
+                    <include reference="YWe-4b-WOn"/>
+                    <include reference="Kid-kn-2rF"/>
+                    <include reference="Koa-jz-hwk"/>
+                    <include reference="fvb-Df-36g"/>
+                    <include reference="Kzo-t9-V3l"/>
+                    <include reference="MfP-vx-nX0"/>
+                    <include reference="ZEH-qu-HZ9"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="127" y="184.5"/>
         </view>
     </objects>
     <resources>
