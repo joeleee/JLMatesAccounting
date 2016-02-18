@@ -59,7 +59,7 @@ static NSMutableOrderedSet *currentActionSheetQueue;
                 destructiveButtonBlock:destructiveButtonBlock
                           buttonTitle1:buttonTitle1
                           buttonBlock1:buttonBlock1
-                          buttonTitle2:buttonBlock2
+                          buttonTitle2:buttonTitle2
                           buttonBlock2:buttonBlock2];
 }
 

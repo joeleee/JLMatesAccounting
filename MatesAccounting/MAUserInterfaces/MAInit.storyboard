@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TOM-cp-105">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TOM-cp-105">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Root Navigation Controller-->
@@ -96,7 +96,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" systemItem="contacts" id="ELa-oR-qlG"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Members" id="ELa-oR-qlG"/>
                     <navigationItem key="navigationItem" title="Members" id="WbJ-Ka-1qu"/>
                     <connections>
                         <outlet property="tableView" destination="wTx-39-uXO" id="r7f-iz-Vod"/>
@@ -125,10 +125,10 @@
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAGroupListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAGroupListCell" id="oxT-V5-fRl" customClass="MAGroupListCell">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oxT-V5-fRl" id="cv6-ID-Ltf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="J5Q-u3-eSa">
@@ -512,9 +512,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAFriendListAddFromContactCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAFriendListAddFromContactCell" rowHeight="80" id="2Uq-AD-P7x" customClass="MAFriendListAddFromContactCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="166" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Uq-AD-P7x" id="iKW-bx-MwP">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view autoresizesSubviews="NO" contentMode="scaleToFill" id="BdJ-SE-aZe">
@@ -807,7 +808,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k4H-ea-6f4" userLabel="payer">
-                                                            <rect key="frame" x="100.00000059604646" y="48" width="200" height="21"/>
+                                                            <rect key="frame" x="100" y="48" width="200" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
@@ -819,7 +820,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VwW-cd-Uv4" userLabel="money">
-                                                            <rect key="frame" x="214.00000059604645" y="12" width="86" height="21"/>
+                                                            <rect key="frame" x="214" y="12" width="86" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -831,7 +832,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="Eg3-yH-cPt" userLabel="dividing line">
-                                                            <rect key="frame" x="20" y="79" width="300.00000059604645" height="1"/>
+                                                            <rect key="frame" x="20" y="79" width="300" height="1"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
@@ -860,8 +861,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" systemItem="mostViewed" id="vCq-zP-JxM"/>
-                    <navigationItem key="navigationItem" title="Accounts" id="obn-s3-ydX">
+                    <tabBarItem key="tabBarItem" tag="1" title="Accountings" id="vCq-zP-JxM"/>
+                    <navigationItem key="navigationItem" title="Accountings" id="obn-s3-ydX">
                         <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="tTc-vL-Mm8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DFX-MW-koR"/>
                     </navigationItem>
@@ -1078,7 +1079,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="10" id="nyJ-v6-Qyd">
-                                                    <rect key="frame" x="200.00000123182929" y="6" width="100" height="30"/>
+                                                    <rect key="frame" x="200" y="6" width="100" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1196,10 +1197,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MAMemberAccountListCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="MAMemberAccountListCell" id="Jru-fq-cK2" customClass="MAMemberAccountListCell">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jru-fq-cK2" id="k5Q-pj-zZW">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="218-bM-nsq">
@@ -1207,13 +1208,13 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款人：李某某" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="z8i-XH-iZJ" userLabel="payer">
-                                                            <rect key="frame" x="141.99999903425379" y="121" width="158" height="20"/>
+                                                            <rect key="frame" x="142" y="121" width="158" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321.41" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ec2-6Q-S39" userLabel="money">
-                                                            <rect key="frame" x="213.99999903425379" y="12" width="86" height="43"/>
+                                                            <rect key="frame" x="214" y="12" width="86" height="43"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1225,12 +1226,12 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="IkJ-63-XUC" userLabel="dividing line">
-                                                            <rect key="frame" x="20" y="151" width="299.99999903425379" height="2"/>
+                                                            <rect key="frame" x="20" y="151" width="300" height="2"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111-11-11 11:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="PcE-vR-cq0" userLabel="time">
-                                                            <rect key="frame" x="20" y="121.00000013307083" width="115" height="20"/>
+                                                            <rect key="frame" x="20" y="121" width="115" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="highlightedColor"/>
@@ -1302,7 +1303,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="4" systemItem="more" id="XQb-cB-Oiv"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="Settings" id="XQb-cB-Oiv"/>
                     <navigationItem key="navigationItem" title="More" id="Deu-QI-GqQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qw0-5f-EgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1347,7 +1348,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="dcT-rm-fD6">
-                                                            <rect key="frame" x="154.99999616841438" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="155" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
@@ -1387,8 +1388,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" systemItem="downloads" id="5Dy-ck-WJw"/>
-                    <navigationItem key="navigationItem" title="Pay Settlement" id="bus-QQ-4Sg"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Debt" id="5Dy-ck-WJw"/>
+                    <navigationItem key="navigationItem" title="Debt list" id="bus-QQ-4Sg"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="NeZ-Qk-UT2" id="Ob6-Wm-Ma9"/>
@@ -1493,16 +1494,11 @@
             <point key="canvasLocation" x="585" y="-25"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="llC-v5-bXO"/>
+        <segue reference="H6b-eb-bSk"/>
+        <segue reference="Qp4-1k-UgR"/>
         <segue reference="Col-92-NOr"/>
-        <segue reference="Bvd-iw-5bp"/>
-        <segue reference="J0d-fi-SkM"/>
-        <segue reference="atx-wc-fRM"/>
-        <segue reference="f34-mq-Bgm"/>
+        <segue reference="ahX-16-mo4"/>
     </inferredMetricsTieBreakers>
 </document>

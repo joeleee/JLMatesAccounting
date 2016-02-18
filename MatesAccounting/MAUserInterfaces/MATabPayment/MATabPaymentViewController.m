@@ -63,7 +63,7 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tabBarController setTitle:@"Pay Settlement"];
+    [self.tabBarController setTitle:@"Debt List"];
 
     UIBarButtonItem *viewGroupBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(viewGroupNavigationButtonTaped:)];
     UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didRefreshNavigationButtonTapped:)];
@@ -136,8 +136,8 @@ NSString * const kSegueTabPaymentToGroupList = @"kSegueTabPaymentToGroupList";
     }
 
     MAAccountSettlement *settlement = self.settlementList[indexPath.row];
-    NSString *actionTitle = [NSString stringWithFormat:@"%@ needs to pay %@ back %@ to settle this accounts", settlement.fromMember.name, settlement.toMember.name, settlement.fee];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Repayment", nil];
+    NSString *actionTitle = [NSString stringWithFormat:@"%@ needs to pay %@ %@ to pay off the debt", settlement.fromMember.name, settlement.toMember.name, settlement.fee];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionTitle delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Liquidation of Debt", nil];
     actionSheet.tag = indexPath.row;
     [actionSheet showInView:self.view];
 }
